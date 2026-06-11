@@ -62,7 +62,7 @@ export default function App() {
               <span className="tabular">{ALL.length}</span> substances
             </span>
             <a
-              href="https://github.com/dogeisbae"
+              href="https://github.com/KoshkiKode/pharmasim"
               target="_blank"
               rel="noreferrer"
               className="rounded-md p-1.5 text-ink-faint transition-colors hover:text-ink"
@@ -135,7 +135,7 @@ export default function App() {
         <div className="mx-auto max-w-[1400px] px-4 py-5 text-[11px] leading-relaxed text-ink-faint sm:px-6">
           PharmaSim · deterministic in-browser pharmacokinetics (R = 1/(1−e^(−kτ))) and a rule-based
           interaction engine. PK values are standard published reference figures; entries marked
-          “approx. PK” are estimates. Built by dogeisbae · MIT licensed. Not medical advice.
+          “approx. PK” are estimates. Built by KoshkiKode · MIT licensed. Not medical advice.
         </div>
       </footer>
     </div>

@@ -256,7 +256,7 @@ export function SubstanceCard({
         </div>
         <div className="h-36 w-full" data-testid={`chart-${s.id}`}>
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={pk.series} margin={{ top: 6, right: 8, left: -18, bottom: 0 }}>
+            <AreaChart data={pk.series} margin={{ top: 6, right: 10, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id={`grad-${s.id}`} x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor={accent} stopOpacity={0.45} />
@@ -266,19 +266,22 @@ export function SubstanceCard({
               <CartesianGrid stroke="#1e2c44" strokeDasharray="2 4" vertical={false} />
               <XAxis
                 dataKey="hour"
+                type="number"
+                domain={['dataMin', 'dataMax']}
                 tickFormatter={(h) => (h >= 48 ? `${Math.round(h / 24)}d` : `${Math.round(h)}h`)}
                 stroke="#5f708a"
                 tick={{ fontSize: 10 }}
                 tickLine={false}
                 axisLine={{ stroke: '#1e2c44' }}
-                minTickGap={24}
+                minTickGap={36}
               />
               <YAxis
                 stroke="#5f708a"
                 tick={{ fontSize: 10 }}
                 tickLine={false}
                 axisLine={false}
-                width={34}
+                width={40}
+                tickFormatter={(v: number) => v.toFixed(2)}
               />
               <RTooltip
                 contentStyle={{

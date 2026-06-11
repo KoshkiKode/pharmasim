@@ -146,7 +146,7 @@ export function PatientPanel({ patient, onChange }: Props) {
       </div>
 
       {/* Liver / Kidney */}
-      <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-4">
+      <div className="mt-4 grid grid-cols-1 gap-y-4">
         <div>
           <Label info={FIELD_INFO.liver}>Liver health</Label>
           <SegOrgan
@@ -208,7 +208,7 @@ function SegOrgan({
           type="button"
           onClick={() => onChange(o.value)}
           className={
-            'rounded-md border px-1 py-1.5 text-[11px] font-medium transition-colors ' +
+            'rounded-md border px-1 py-1.5 text-center text-[11px] font-medium leading-none transition-colors ' +
             (value === o.value
               ? o.value === 'normal'
                 ? 'border-sev-minor/50 bg-sev-minor/10 text-sev-minor'
