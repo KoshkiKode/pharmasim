@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Pill, ShieldAlert, Github } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { Pill, ShieldAlert, Github, Trash2 } from 'lucide-react';
 import { Logo } from './components/Logo';
 import { PatientPanel } from './components/PatientPanel';
 import { SubstanceSearch } from './components/SubstanceSearch';
@@ -9,6 +9,7 @@ import type { Substance } from './data/types';
 import { substances as ALL } from './data/substances';
 import type { PatientProfile, RegimenConfig } from './lib/pharmacokinetics';
 import { defaultRegimen, type AddedSubstance } from './lib/state';
+import { clearSession, loadSession, saveSession } from './lib/persistence';
 
 const DEFAULT_PATIENT: PatientProfile = {
   ageYears: 35,
@@ -23,8 +24,15 @@ const DEFAULT_PATIENT: PatientProfile = {
 };
 
 export default function App() {
-  const [patient, setPatient] = useState<PatientProfile>(DEFAULT_PATIENT);
-  const [added, setAdded] = useState<AddedSubstance[]>([]);
+  const [{ patient: initialPatient, added: initialAdded }] = useState(() =>
+    loadSession(DEFAULT_PATIENT),
+  );
+  const [patient, setPatient] = useState<PatientProfile>(initialPatient);
+  const [added, setAdded] = useState<AddedSubstance[]>(initialAdded);
+
+  useEffect(() => {
+    saveSession(patient, added);
+  }, [patient, added]);
 
   const addedIds = useMemo(() => new Set(added.map((a) => a.substance.id)), [added]);
   const activeSubstances = useMemo(() => added.map((a) => a.substance), [added]);
@@ -41,14 +49,23 @@ export default function App() {
     setAdded((prev) =>
       prev.map((a) => (a.substance.id === id ? { ...a, advancedOpen: !a.advancedOpen } : a)),
     );
+  const clearAll = () => {
+    setAdded([]);
+    clearSession();
+  };
 
   return (
     <div className="min-h-screen bg-bg text-ink">
       {/* Top bar */}
-      <header className="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur">
+      <header
+        className="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur"
+        style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+      >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-3 sm:px-6">
           <div className="flex items-center gap-2.5 text-ink">
-            <Logo size={26} />
+            <span className="shrink-0">
+              <Logo size={26} />
+            </span>
             <div className="leading-none">
               <span className="block text-sm font-semibold tracking-tight">PharmaSim</span>
               <span className="block text-[10px] uppercase tracking-[0.16em] text-ink-faint">
@@ -97,6 +114,23 @@ export default function App() {
         {/* Center: substances */}
         <div className="space-y-4">
           <SubstanceSearch addedIds={addedIds} onAdd={addSubstance} />
+
+          {added.length > 0 && (
+            <div className="flex items-center justify-between px-0.5">
+              <span className="text-xs text-ink-muted">
+                <span className="tabular font-semibold text-ink">{added.length}</span> substance
+                {added.length === 1 ? '' : 's'} active
+              </span>
+              <button
+                type="button"
+                onClick={clearAll}
+                className="inline-flex items-center gap-1.5 rounded-md border border-border px-2 py-1 text-xs font-medium text-ink-muted transition-colors hover:border-sev-contra/50 hover:text-sev-contra"
+                data-testid="clear-all"
+              >
+                <Trash2 className="h-3.5 w-3.5" /> Clear all
+              </button>
+            </div>
+          )}
 
           {added.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border bg-bg-panel/50 px-6 py-16 text-center">

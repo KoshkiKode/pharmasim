@@ -22,7 +22,8 @@
 - **Tailwind CSS v3** — clinical dark-first design system, teal accent, monospace numerics.
 - **lucide-react** — icons. **Recharts** — plasma-concentration visualizations.
 - **vite-plugin-pwa** — installable, offline-capable Progressive Web App.
-- **Tauri v2** — native desktop builds for Windows, macOS, and Linux.
+- **Tauri v2** — native builds for Windows, macOS, Linux, **Android**, and **iOS**.
+- **Vitest** — unit tests for the PK engine, interaction engine, and substance-database validation.
 
 ## Getting started
 
@@ -38,9 +39,14 @@ npm run dev        # start the Vite dev server at http://localhost:5173
 | `npm run dev`       | Start the Vite dev server (port 5173).        |
 | `npm run build`     | Type-check (`tsc -b`) and build to `dist/`.   |
 | `npm run preview`   | Preview the production build locally.         |
-| `npm run typecheck` | Type-check only (`tsc --noEmit`).             |
+| `npm run typecheck` | Type-check the whole project (`tsc -b`).      |
+| `npm test`          | Run the Vitest unit + data-validation suite.  |
 | `npm run tauri:dev` | Run the Tauri desktop app in dev mode.        |
 | `npm run tauri:build` | Build native desktop bundles.               |
+| `npm run tauri:android:dev` | Run the Android app on an emulator/device. |
+| `npm run tauri:android:build` | Build Android APK / AAB bundles.   |
+| `npm run tauri:ios:dev` | Run the iOS app on a simulator/device.    |
+| `npm run tauri:ios:build` | Build iOS app bundles (macOS only).     |
 
 ## Build targets
 
@@ -80,19 +86,51 @@ npm run tauri:build    # produce native installers/bundles in src-tauri/target/r
 
 The desktop build runs `npm run build` first (configured via `beforeBuildCommand`) and packages the static `dist/` output into a native window.
 
+### 4. Tauri v2 mobile (Android / iOS)
+
+The mobile projects live under `src-tauri/gen/` and are **generated** from
+`tauri.conf.json` (they are git-ignored — initialise them locally or in CI).
+
+**Android** (buildable on Windows / macOS / Linux):
+
+- Android SDK + platform-tools, an NDK (e.g. `ndk;27.1.12297006`), and JDK 17.
+- Set `ANDROID_HOME` and `NDK_HOME`, and add the Rust targets:
+  `rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android`.
+
+```bash
+npm run tauri android init     # generate src-tauri/gen/android (once)
+npm run tauri:android:dev      # run on a connected device / emulator
+npm run tauri:android:build    # build APK / AAB in src-tauri/gen/android/app/build/outputs
+```
+
+**iOS** (macOS + Xcode only):
+
+```bash
+rustup target add aarch64-apple-ios aarch64-apple-ios-sim
+npm run tauri ios init         # generate src-tauri/gen/ios (once)
+npm run tauri:ios:dev          # run on a simulator / device
+npm run tauri:ios:build        # build app bundle (requires an Apple signing team)
+```
+
+The CI [`Mobile` workflow](.github/workflows/mobile.yml) builds a debug Android
+APK on every push and smoke-builds the iOS core on macOS. iOS is also covered by
+the PWA — open the site in Safari and choose **Add to Home Screen** for an
+installable, offline-capable app without the App Store.
+
 ## Project structure
 
 ```
 pharmasim/
 ├── public/icons/          # PWA icons + SVG logo
 ├── src/
-│   ├── data/              # substance database (351) + type definitions
-│   ├── lib/               # pharmacokinetics + interactions engines, app state
+│   ├── data/              # substance database (351) + types + validation
+│   ├── lib/               # pharmacokinetics + interactions engines, state, persistence
 │   ├── components/        # PatientPanel, SubstanceSearch, SubstanceCard, ResultsPanel, …
 │   ├── App.tsx
 │   └── main.tsx
-├── src-tauri/             # Tauri v2 desktop config + Rust source + icons
-├── .github/workflows/     # CI (typecheck + build) and release (tauri-action)
+├── src-tauri/             # Tauri v2 config + Rust source + icons (+ generated gen/)
+├── docs/adding-substances.md  # how to add chemicals/substances safely
+├── .github/workflows/     # CI (typecheck + test + build), mobile, and release
 └── dist/                  # production build output (generated)
 ```
 
