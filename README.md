@@ -10,7 +10,7 @@
 
 ## What it does
 
-- **Substance library** of **351** entries spanning pharmaceuticals, research chemicals, supplements, herbs, and common substances — each tagged with pharmacological properties.
+- **Substance library** of **618** entries spanning pharmaceuticals, research chemicals, supplements, herbs, and common substances — each tagged with pharmacological properties.
 - **Patient profile model** — age, weight, height, body-fat %, tolerance, hydration, and liver / kidney / CYP-metabolizer status drive a clearance model that adjusts pharmacokinetics per individual.
 - **Pharmacokinetics engine** — Bateman-function absorption curves, single-dose vs. steady-state daily-dosing superposition, accumulation ratio, effective half-life, and time-to-steady-state, all adjusted by the patient profile.
 - **Interaction engine** — rule-based detection of serotonin syndrome, CNS/respiratory depression, CYP inhibition/induction, QT prolongation, bleeding risk, MAOI + sympathomimetic crises, anticholinergic burden, hepatotoxicity, and nephrotoxicity, with severity grading (minor → contraindicated).
@@ -123,7 +123,7 @@ installable, offline-capable app without the App Store.
 pharmasim/
 ├── public/icons/          # PWA icons + SVG logo
 ├── src/
-│   ├── data/              # substance database (351) + types + validation
+│   ├── data/              # substance database (618) + types + validation
 │   ├── lib/               # pharmacokinetics + interactions engines, state, persistence
 │   ├── components/        # PatientPanel, SubstanceSearch, SubstanceCard, ResultsPanel, …
 │   ├── App.tsx

@@ -165,7 +165,10 @@ export default function App() {
         </div>
       </main>
 
-      <footer className="border-t border-border">
+      <footer
+        className="border-t border-border"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      >
         <div className="mx-auto max-w-[1400px] px-4 py-5 text-[11px] leading-relaxed text-ink-faint sm:px-6">
           PharmaSim · deterministic in-browser pharmacokinetics (R = 1/(1−e^(−kτ))) and a rule-based
           interaction engine. PK values are standard published reference figures; entries marked
