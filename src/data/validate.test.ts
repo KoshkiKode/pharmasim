@@ -23,7 +23,7 @@ describe('substance database', () => {
   });
 
   it('has a meaningful number of entries', () => {
-    expect(substances.length).toBeGreaterThan(300);
+    expect(substances.length).toBeGreaterThan(700);
   });
 
   it('has globally unique ids', () => {

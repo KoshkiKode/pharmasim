@@ -1,15 +1,32 @@
-import { useMemo } from 'react';
-import { ShieldAlert, Activity, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { ShieldAlert, Activity, AlertTriangle, CheckCircle2, FileText } from 'lucide-react';
 import type { Substance } from '@/data/types';
+import type { PatientProfile } from '@/lib/pharmacokinetics';
 import {
   computeInteractions,
   computeBodySystemImpact,
   SEVERITY_META,
   severityRank,
 } from '@/lib/interactions';
+import { computeConditionWarnings } from '@/lib/conditionWarnings';
+import { SummaryModal } from './SummaryModal';
 
-export function ResultsPanel({ substances }: { substances: Substance[] }) {
+export function ResultsPanel({
+  substances,
+  patient,
+  addedRegimens,
+}: {
+  substances: Substance[];
+  patient: PatientProfile;
+  addedRegimens: { substance: Substance; regimen: any }[];
+}) {
+  const [summaryOpen, setSummaryOpen] = useState(false);
+
   const interactions = useMemo(() => computeInteractions(substances), [substances]);
+  const conditionWarnings = useMemo(
+    () => computeConditionWarnings(substances, patient.conditions, patient.liver, patient.kidney),
+    [substances, patient.conditions, patient.liver, patient.kidney]
+  );
   const systems = useMemo(() => computeBodySystemImpact(substances), [substances]);
 
   const worst = interactions[0];
@@ -21,10 +38,107 @@ export function ResultsPanel({ substances }: { substances: Substance[] }) {
 
   return (
     <div className="space-y-4">
+      {/* Export Clinical Summary Button */}
+      <button
+        type="button"
+        onClick={() => setSummaryOpen(true)}
+        className="w-full flex items-center justify-center gap-2 rounded-xl border border-border bg-bg-panel py-2.5 text-xs font-semibold text-accent hover:bg-accent/5 hover:text-ink transition-colors shadow-panel"
+        data-testid="btn-export-summary"
+      >
+        <FileText className="h-4 w-4" /> Export Clinical Summary
+      </button>
+
+      {/* Clinical Warnings / Contraindications */}
+      <section
+        className="rounded-xl border border-border bg-bg-panel shadow-panel"
+        aria-label="Clinical warnings"
+      >
+        <header className="flex items-center justify-between border-b border-border px-4 py-3">
+          <div className="flex items-center gap-2">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-red-500/10 text-red-400">
+              <ShieldAlert className="h-4 w-4" />
+            </span>
+            <h2 className="text-sm font-semibold text-ink">Clinical Warnings</h2>
+          </div>
+          {conditionWarnings.length > 0 && (
+            <span
+              className="rounded-full px-2 py-0.5 text-xs font-semibold border"
+              style={{
+                color: conditionWarnings.some(w => w.isLifeThreatening) ? '#f87171' : '#fb923c',
+                borderColor: conditionWarnings.some(w => w.isLifeThreatening) ? 'rgba(248,113,113,0.3)' : 'rgba(251,146,60,0.3)',
+                background: conditionWarnings.some(w => w.isLifeThreatening) ? 'rgba(248,113,113,0.1)' : 'rgba(251,146,60,0.1)',
+              }}
+              data-testid="condition-warning-count"
+            >
+              {conditionWarnings.some(w => w.isLifeThreatening) ? 'CRITICAL' : `${conditionWarnings.length} alert(s)`}
+            </span>
+          )}
+        </header>
+
+        <div className="p-3">
+          {substances.length === 0 ? (
+            <Empty text="Add substances to check clinical warnings." />
+          ) : conditionWarnings.length === 0 ? (
+            <div
+              className="flex items-center gap-2 rounded-lg bg-green-500/5 px-3 py-3 text-sm text-green-400 border border-green-500/10"
+              data-testid="no-condition-warnings"
+            >
+              <CheckCircle2 className="h-4 w-4" />
+              No clinical contraindications detected for active conditions.
+            </div>
+          ) : (
+            <ul className="space-y-2 max-h-72 overflow-y-auto scroll-thin pr-1" data-testid="condition-warning-list">
+              {conditionWarnings.map((w) => {
+                const meta = SEVERITY_META[w.severity];
+                const isLifeThreatening = w.isLifeThreatening;
+                return (
+                  <li
+                    key={w.id}
+                    className={`rounded-lg border p-3 ${isLifeThreatening ? 'bg-red-500/5 border-red-500/20' : 'bg-bg-inset'}`}
+                    style={{ borderColor: isLifeThreatening ? undefined : meta.ring }}
+                    data-testid={`condition-warning-${w.id}`}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className="inline-block h-2 w-2 rounded-full"
+                            style={{ background: isLifeThreatening ? '#f87171' : meta.color }}
+                          />
+                          <h3 className="text-xs font-bold text-ink truncate">{w.title}</h3>
+                        </div>
+                        <p className="mt-0.5 text-[10px] text-ink-muted">
+                          {w.conditionName} {w.substanceName ? `· ${w.substanceName}` : ''}
+                          {w.substanceNames && ` · Combination: ${w.substanceNames.join(' + ')}`}
+                        </p>
+                      </div>
+                      <span
+                        className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide"
+                        style={{ color: isLifeThreatening ? '#f87171' : meta.color, background: isLifeThreatening ? 'rgba(248,113,113,0.12)' : meta.bg }}
+                      >
+                        {isLifeThreatening ? 'CRITICAL' : meta.label}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-xs leading-relaxed text-ink-muted">{w.mechanism}</p>
+                    <p className="mt-1.5 flex items-start gap-1.5 text-xs leading-relaxed text-ink">
+                      <AlertTriangle
+                        className="mt-0.5 h-3 w-3 shrink-0"
+                        style={{ color: isLifeThreatening ? '#f87171' : meta.color }}
+                      />
+                      <span>{w.recommendation}</span>
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      </section>
+
       {/* Interactions */}
       <section
         className="rounded-xl border border-border bg-bg-panel shadow-panel"
-        aria-label="Drug interactions"
+        aria-label="Drug drug interactions"
       >
         <header className="flex items-center justify-between border-b border-border px-4 py-3">
           <div className="flex items-center gap-2">
@@ -74,7 +188,7 @@ export function ResultsPanel({ substances }: { substances: Substance[] }) {
                     ),
                 )}
               </div>
-              <ul className="space-y-2" data-testid="interaction-list">
+              <ul className="space-y-2 max-h-96 overflow-y-auto scroll-thin pr-1" data-testid="interaction-list">
                 {interactions.map((i) => {
                   const meta = SEVERITY_META[i.severity];
                   return (
@@ -162,6 +276,15 @@ export function ResultsPanel({ substances }: { substances: Substance[] }) {
           )}
         </div>
       </section>
+
+      {/* Summary Modal */}
+      <SummaryModal
+        isOpen={summaryOpen}
+        onClose={() => setSummaryOpen(false)}
+        patient={patient}
+        substances={substances}
+        addedRegimens={addedRegimens}
+      />
     </div>
   );
 }

@@ -1,6 +1,8 @@
+import { useState, useMemo, useRef, useEffect } from 'react';
 import type { PatientProfile, MetabolizerStatus, OrganHealth } from '@/lib/pharmacokinetics';
 import { InfoTooltip } from './InfoTooltip';
-import { User } from 'lucide-react';
+import { User, Search, Plus, X } from 'lucide-react';
+import { conditions as ALL_CONDITIONS } from '@/data/conditions';
 
 interface Props {
   patient: PatientProfile;
@@ -43,6 +45,29 @@ const organOptions: { value: OrganHealth; label: string }[] = [
 ];
 
 export function PatientPanel({ patient, onChange }: Props) {
+  const [condQuery, setCondQuery] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const condRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (condRef.current && !condRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, []);
+
+  const filteredConditions = useMemo(() => {
+    const q = condQuery.trim().toLowerCase();
+    return ALL_CONDITIONS.filter(
+      (c) =>
+        !patient.conditions.includes(c.id) &&
+        (c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q) || c.description.toLowerCase().includes(q))
+    );
+  }, [condQuery, patient.conditions]);
+
   const set = <K extends keyof PatientProfile>(key: K, value: PatientProfile[K]) =>
     onChange({ ...patient, [key]: value });
 
@@ -186,6 +211,91 @@ export function PatientPanel({ patient, onChange }: Props) {
             </button>
           ))}
         </div>
+      </div>
+
+      {/* Preexisting Conditions */}
+      <div ref={condRef} className="mt-5 border-t border-border pt-4">
+        <Label info="Selecting preexisting conditions enables the clinical warning engine to check for drug-condition contraindications and combined life-threatening risks.">
+          Preexisting Conditions
+        </Label>
+        
+        {/* Search input */}
+        <div className="relative mt-2">
+          <div className="flex items-center gap-2 rounded-lg border border-border bg-bg-inset px-2.5 py-1.5 focus-within:border-accent/60 focus-within:ring-1 focus-within:ring-accent/40">
+            <Search className="h-3.5 w-3.5 text-ink-faint" />
+            <input
+              type="text"
+              placeholder="Search medical conditions..."
+              value={condQuery}
+              onChange={(e) => {
+                setCondQuery(e.target.value);
+                setDropdownOpen(true);
+              }}
+              onFocus={() => setDropdownOpen(true)}
+              className="w-full bg-transparent text-xs text-ink placeholder:text-ink-faint focus:outline-none"
+              data-testid="input-condition-search"
+            />
+          </div>
+
+          {dropdownOpen && (
+            <ul className="scroll-thin absolute z-40 mt-1 max-h-48 w-full overflow-y-auto rounded-lg border border-border bg-bg-raised p-1 shadow-panel" data-testid="condition-dropdown">
+              {filteredConditions.length === 0 ? (
+                <li className="px-2 py-3 text-center text-xs text-ink-faint">
+                  {condQuery.trim() ? 'No conditions match.' : 'Type to search...'}
+                </li>
+              ) : (
+                filteredConditions.map((c) => (
+                  <li key={c.id}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        set('conditions', [...patient.conditions, c.id]);
+                        setCondQuery('');
+                        setDropdownOpen(false);
+                      }}
+                      className="flex w-full items-center justify-between rounded px-2.5 py-1.5 text-left text-xs text-ink hover:bg-accent/10 hover:text-accent"
+                      data-testid={`add-condition-${c.id}`}
+                    >
+                      <div>
+                        <span className="font-medium">{c.name}</span>
+                        <span className="block text-[10px] text-ink-faint">{c.category}</span>
+                      </div>
+                      <Plus className="h-3 w-3 text-accent" />
+                    </button>
+                  </li>
+                ))
+              )}
+            </ul>
+          )}
+        </div>
+
+        {/* Selected Conditions Pills */}
+        {patient.conditions.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5" data-testid="selected-conditions">
+            {patient.conditions.map((id) => {
+              const cond = ALL_CONDITIONS.find((c) => c.id === id);
+              if (!cond) return null;
+              return (
+                <span
+                  key={id}
+                  className="inline-flex items-center gap-1 rounded bg-accent/10 border border-accent/30 px-1.5 py-0.5 text-[11px] font-medium text-accent"
+                  data-testid={`condition-badge-${id}`}
+                >
+                  {cond.name}
+                  <button
+                    type="button"
+                    onClick={() => set('conditions', patient.conditions.filter((x) => x !== id))}
+                    className="rounded-full hover:bg-accent/20 p-0.5 text-accent hover:text-ink-muted"
+                    aria-label={`Remove ${cond.name}`}
+                    data-testid={`remove-condition-${id}`}
+                  >
+                    <X className="h-2.5 w-2.5" />
+                  </button>
+                </span>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

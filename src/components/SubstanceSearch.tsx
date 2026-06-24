@@ -79,7 +79,7 @@ export function SubstanceSearch({ addedIds, onAdd }: Props) {
               setOpen(false);
             }
           }}
-          placeholder="Search 350+ substances by generic or brand name…"
+          placeholder="Search 700+ substances by generic or brand name…"
           className="w-full bg-transparent text-sm text-ink placeholder:text-ink-faint focus:outline-none"
           data-testid="input-substance-search"
           aria-label="Search substances"
@@ -132,7 +132,7 @@ export function SubstanceSearch({ addedIds, onAdd }: Props) {
                       )}
                     </span>
                     <span className="block truncate text-xs text-ink-muted">
-                      {s.drugClass} · {CATEGORY_LABELS[s.category]}
+                      <span className="font-semibold text-accent/80">{s.drugClass}</span> · {CATEGORY_LABELS[s.category]}
                     </span>
                   </span>
                   {added ? (

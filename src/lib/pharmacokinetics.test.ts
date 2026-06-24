@@ -36,6 +36,7 @@ const healthy: PatientProfile = {
   kidney: 'normal',
   hydrationPct: 50,
   metabolizer: 'normal',
+  conditions: [],
 };
 
 const acute: RegimenConfig = {

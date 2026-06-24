@@ -41,6 +41,8 @@ export function SubstanceCard({
   const { substance: s, regimen } = item;
   const pk = computePK(patient, s, regimen);
   const accent = CATEGORY_COLOR[s.category];
+  const liverImpaired = patient.liver !== 'normal' || patient.conditions?.includes('liver-cirrhosis');
+  const kidneyImpaired = patient.kidney !== 'normal' || patient.conditions?.includes('ckd');
 
   const set = <K extends keyof RegimenConfig>(key: K, value: RegimenConfig[K]) =>
     onRegimenChange({ ...regimen, [key]: value });
@@ -314,6 +316,78 @@ export function SubstanceCard({
           </ResponsiveContainer>
         </div>
       </div>
+
+      {/* Clinical & Safety Parameters */}
+      {(s.pregnancyCategory || s.lactationWarning || (s.foodInteractions && s.foodInteractions.length > 0) || (liverImpaired && s.hepaticDosingWarning) || (kidneyImpaired && s.renalDosingWarning)) && (
+        <div className="border-t border-border bg-bg-inset/30 p-4 space-y-3 text-xs" data-testid={`safety-section-${s.id}`}>
+          <div className="flex items-center justify-between">
+            <h4 className="text-[10px] font-semibold uppercase tracking-wider text-ink-faint">Clinical Safety</h4>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2.5">
+            {/* Pregnancy and Lactation */}
+            {(s.pregnancyCategory || s.lactationWarning) && (
+              <div className="flex flex-wrap items-start gap-2 rounded-lg bg-bg-panel/50 border border-border/50 p-2">
+                {s.pregnancyCategory && (
+                  <div className="flex items-center gap-1.5 shrink-0" data-testid={`pregnancy-${s.pregnancyCategory}`}>
+                    <span className="text-[10px] text-ink-muted font-medium">Pregnancy:</span>
+                    <span className={`inline-flex items-center justify-center rounded px-1.5 py-0.5 text-[10px] font-bold ${
+                      s.pregnancyCategory === 'A' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
+                      s.pregnancyCategory === 'B' ? 'bg-teal-500/10 text-teal-400 border border-teal-500/20' :
+                      s.pregnancyCategory === 'C' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
+                      s.pregnancyCategory === 'D' ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20' :
+                      'bg-rose-500/10 text-rose-400 border border-rose-500/20 font-extrabold'
+                    }`} title={`Pregnancy Category ${s.pregnancyCategory}`}>
+                      Cat {s.pregnancyCategory}
+                    </span>
+                  </div>
+                )}
+                {s.lactationWarning && (
+                  <div className="text-[11px] text-ink-muted leading-relaxed" data-testid="lactation-warning">
+                    <span className="font-medium text-ink-faint">Lactation:</span> {s.lactationWarning}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Food & Beverage Interactions */}
+            {s.foodInteractions && s.foodInteractions.length > 0 && (
+              <div className="rounded-lg bg-bg-panel/50 border border-border/50 p-2" data-testid="food-interactions">
+                <span className="block text-[10px] text-ink-muted font-medium mb-1">Food / Dietary Interactions:</span>
+                <ul className="list-disc pl-4 space-y-0.5 text-[11px] text-ink-muted">
+                  {s.foodInteractions.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Organ Impairment Warnings */}
+            {((liverImpaired && s.hepaticDosingWarning) || (kidneyImpaired && s.renalDosingWarning)) && (
+              <div className="space-y-2">
+                {liverImpaired && s.hepaticDosingWarning && (
+                  <div className="flex items-start gap-2 rounded-lg bg-sev-moderate/5 border border-sev-moderate/20 p-2 text-[11px] text-ink" data-testid="hepatic-dosing-warning">
+                    <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sev-moderate" />
+                    <div>
+                      <span className="font-semibold text-sev-moderate text-xs">Hepatic Caution:</span>{' '}
+                      <span className="text-ink-muted">{s.hepaticDosingWarning}</span>
+                    </div>
+                  </div>
+                )}
+                {kidneyImpaired && s.renalDosingWarning && (
+                  <div className="flex items-start gap-2 rounded-lg bg-sev-moderate/5 border border-sev-moderate/20 p-2 text-[11px] text-ink" data-testid="renal-dosing-warning">
+                    <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sev-moderate" />
+                    <div>
+                      <span className="font-semibold text-sev-moderate text-xs">Renal Caution:</span>{' '}
+                      <span className="text-ink-muted">{s.renalDosingWarning}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {s.warnings && s.warnings.length > 0 && (
         <div className="flex items-start gap-2 border-t border-border bg-sev-moderate/5 px-4 py-2.5">

@@ -15,6 +15,7 @@ export interface PatientProfile {
   kidney: OrganHealth;
   hydrationPct: number; // 0..100, 50 = euhydrated
   metabolizer: MetabolizerStatus;
+  conditions: string[]; // preexisting condition IDs
 }
 
 export interface RegimenConfig {
@@ -72,20 +73,40 @@ export function clearanceMultiplier(
     substance.bodySystems.some((s) => /hepat|liver/i.test(s));
   const renallyCleared = substance.bodySystems.some((s) => /renal|kidney/i.test(s));
 
+  const liverImpaired = patient.liver === 'impaired' || patient.conditions?.includes('liver-cirrhosis');
+  const liverReduced = patient.liver === 'reduced';
+  const kidneyImpaired = patient.kidney === 'impaired' || patient.conditions?.includes('ckd');
+  const kidneyReduced = patient.kidney === 'reduced';
+
   // Hepatic function
   if (hepaticallyCleared) {
-    const hep = patient.liver === 'impaired' ? 0.45 : patient.liver === 'reduced' ? 0.7 : 1;
-    if (hep !== 1) factors.push({ label: 'Hepatic function', effect: hep });
+    const hep = liverImpaired ? 0.45 : liverReduced ? 0.7 : 1;
+    if (hep !== 1) {
+      factors.push({ 
+        label: liverImpaired && patient.conditions?.includes('liver-cirrhosis') ? 'Liver Cirrhosis' : 'Hepatic function', 
+        effect: hep 
+      });
+    }
   }
 
   // Renal function
   if (renallyCleared) {
-    const ren = patient.kidney === 'impaired' ? 0.4 : patient.kidney === 'reduced' ? 0.7 : 1;
-    if (ren !== 1) factors.push({ label: 'Renal function', effect: ren });
+    const ren = kidneyImpaired ? 0.4 : kidneyReduced ? 0.7 : 1;
+    if (ren !== 1) {
+      factors.push({ 
+        label: kidneyImpaired && patient.conditions?.includes('ckd') ? 'Chronic Kidney Disease' : 'Renal function', 
+        effect: ren 
+      });
+    }
   } else {
     // Even non-renal drugs have some renal contribution
-    const ren = patient.kidney === 'impaired' ? 0.85 : patient.kidney === 'reduced' ? 0.95 : 1;
-    if (ren !== 1) factors.push({ label: 'Renal contribution', effect: ren });
+    const ren = kidneyImpaired ? 0.85 : kidneyReduced ? 0.95 : 1;
+    if (ren !== 1) {
+      factors.push({ 
+        label: kidneyImpaired && patient.conditions?.includes('ckd') ? 'CKD contribution' : 'Renal contribution', 
+        effect: ren 
+      });
+    }
   }
 
   // CYP metabolizer phenotype (only relevant if CYP-metabolised)

@@ -80,6 +80,13 @@ export interface Substance {
   tags?: SubstanceTag[];
   /** True when PK values are approximate / poorly characterised. */
   approximate?: boolean;
+
+  // New clinical and safety properties
+  pregnancyCategory?: 'A' | 'B' | 'C' | 'D' | 'X';
+  lactationWarning?: string;
+  foodInteractions?: string[];
+  renalDosingWarning?: string;
+  hepaticDosingWarning?: string;
 }
 
 /**
@@ -107,3 +114,10 @@ export type SubstanceTag =
   | 'gaba-ergic'
   | 'dopaminergic'
   | 'alcohol';
+
+export interface PreexistingCondition {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+}

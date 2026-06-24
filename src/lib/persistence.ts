@@ -37,7 +37,11 @@ export function loadSession(
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return { patient: fallbackPatient, added: [] };
     const parsed = JSON.parse(raw) as Partial<PersistedState>;
-    const patient = { ...fallbackPatient, ...(parsed.patient ?? {}) };
+    const patient: PatientProfile = {
+      ...fallbackPatient,
+      ...(parsed.patient ?? {}),
+      conditions: parsed.patient?.conditions ?? [],
+    };
     const added: AddedSubstance[] = [];
     for (const entry of parsed.added ?? []) {
       const substance = byId.get(entry.id);

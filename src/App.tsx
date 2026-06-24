@@ -21,6 +21,7 @@ const DEFAULT_PATIENT: PatientProfile = {
   kidney: 'normal',
   hydrationPct: 50,
   metabolizer: 'normal',
+  conditions: [],
 };
 
 export default function App() {
@@ -161,7 +162,7 @@ export default function App() {
 
         {/* Right: results */}
         <div className="lg:sticky lg:top-[104px] lg:self-start">
-          <ResultsPanel substances={activeSubstances} />
+          <ResultsPanel substances={activeSubstances} patient={patient} addedRegimens={added} />
         </div>
       </main>
 
