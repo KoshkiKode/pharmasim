@@ -8,8 +8,6 @@
   "scripts": {
     "dev": "npm run dev -w apps/desktop-web",
     "build": "npm run build -w apps/desktop-web",
-    "desktop": "npm run build -w apps/desktop-web && npm run start -w apps/desktop-app",
-    "desktop:make": "npm run build -w apps/desktop-web && npm run make -w apps/desktop-app",
     "mobile": "npm run start -w apps/mobile",
     "bench": "npm run bench -w packages/engine",
     "test:stress": "npm run test:stress -w packages/engine"

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { theme } from './src/theme';
 
 // Screen Imports
@@ -10,7 +10,7 @@ import { SubstanceSearchScreen } from './src/screens/SubstanceSearchScreen';
 import { TimelineScreen } from './src/screens/TimelineScreen';
 import { ResultsScreen } from './src/screens/ResultsScreen';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
