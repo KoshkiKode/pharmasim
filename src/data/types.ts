@@ -87,6 +87,11 @@ export interface Substance {
   foodInteractions?: string[];
   renalDosingWarning?: string;
   hepaticDosingWarning?: string;
+
+  // Advanced PK properties
+  bioavailability: number; // Fraction 0..1
+  vdLKg: number; // Volume of distribution (L/kg)
+  proteinBindingPct?: number; // 0..100
 }
 
 /**

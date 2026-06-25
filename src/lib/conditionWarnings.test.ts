@@ -15,6 +15,8 @@ function mk(tags: SubstanceTag[], extra: Partial<Substance> = {}): Substance {
     mechanism: 'test',
     bodySystems: ['CNS'],
     tags,
+    bioavailability: 0.7,
+    vdLKg: 1.0,
     ...extra,
   };
 }

@@ -41,7 +41,10 @@ export function SummaryModal({ isOpen, onClose, patient, substances, addedRegime
     report += `- Tolerance Level: ${patient.tolerance}%\n`;
     report += `- Hepatic Clearance: ${patient.liver.toUpperCase()}\n`;
     report += `- Renal Clearance: ${patient.kidney.toUpperCase()}\n`;
-    report += `- CYP Metabolizer Status: ${patient.metabolizer.toUpperCase()}\n`;
+    const geneticsStr = Object.entries(patient.genetics)
+      .map(([cyp, pheno]) => `${cyp}: ${pheno}`)
+      .join(', ');
+    report += `- CYP Metabolizer Status: ${geneticsStr || 'Normal'}\n`;
     
     const condNames = patient.conditions
       .map((id) => ALL_CONDITIONS.find((c) => c.id === id)?.name)
@@ -219,7 +222,7 @@ export function SummaryModal({ isOpen, onClose, patient, substances, addedRegime
                 <li className="flex justify-between">
                   <span className="text-ink-muted print:text-gray-600">CYP Metabolizer:</span>
                   <span className="font-semibold capitalize text-ink print:text-black">
-                    {patient.metabolizer}
+                    {Object.entries(patient.genetics).map(([cyp, pheno]) => `${cyp} ${pheno}`).join(', ') || 'Normal'}
                   </span>
                 </li>
                 <li className="border-t border-border pt-1.5 mt-1.5 print:border-gray-200">

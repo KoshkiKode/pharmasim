@@ -12,6 +12,7 @@ import { defaultRegimen, type AddedSubstance } from './lib/state';
 import { clearSession, loadSession, saveSession } from './lib/persistence';
 
 const DEFAULT_PATIENT: PatientProfile = {
+  biologicalSex: 'M',
   ageYears: 35,
   weightKg: 75,
   heightCm: 175,
@@ -20,7 +21,7 @@ const DEFAULT_PATIENT: PatientProfile = {
   liver: 'normal',
   kidney: 'normal',
   hydrationPct: 50,
-  metabolizer: 'normal',
+  genetics: {},
   conditions: [],
 };
 

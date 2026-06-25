@@ -15,6 +15,8 @@ const base: Substance = {
   routes: ['oral'],
   mechanism: 'Does a thing.',
   bodySystems: ['CNS'],
+  bioavailability: 0.7,
+  vdLKg: 1.0,
 };
 
 describe('substance database', () => {
@@ -23,7 +25,7 @@ describe('substance database', () => {
   });
 
   it('has a meaningful number of entries', () => {
-    expect(substances.length).toBeGreaterThan(700);
+    expect(substances.length).toBeGreaterThan(880);
   });
 
   it('has globally unique ids', () => {

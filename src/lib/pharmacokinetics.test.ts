@@ -24,9 +24,12 @@ const drug: Substance = {
   mechanism: 'test',
   bodySystems: ['Hepatic'],
   cypMetabolism: ['CYP3A4'],
+  bioavailability: 0.7,
+  vdLKg: 1.0,
 };
 
 const healthy: PatientProfile = {
+  biologicalSex: 'M',
   ageYears: 35,
   weightKg: 70,
   heightCm: 175,
@@ -35,7 +38,7 @@ const healthy: PatientProfile = {
   liver: 'normal',
   kidney: 'normal',
   hydrationPct: 50,
-  metabolizer: 'normal',
+  genetics: {},
   conditions: [],
 };
 
@@ -81,23 +84,24 @@ describe('clearanceMultiplier', () => {
   });
 
   it('speeds clearance for rapid CYP metabolizers', () => {
-    const rapid = { ...healthy, metabolizer: 'rapid' as const };
+    const rapid = { ...healthy, genetics: { 'CYP3A4': 'rapid' as const } };
     expect(clearanceMultiplier(rapid, drug).multiplier).toBeGreaterThan(1);
   });
 });
 
 describe('computePK', () => {
-  it('produces a normalised single-dose curve in acute mode', () => {
+  it('produces an estimated single-dose plasma curve in acute mode', () => {
     const pk = computePK(healthy, drug, acute);
     expect(pk.series.length).toBeGreaterThan(0);
-    expect(pk.peakConcentration).toBeCloseTo(1, 1);
+    expect(pk.peakConcentration).toBeGreaterThan(0); // real mg/L
     expect(pk.series[0].concentration).toBeLessThan(pk.peakConcentration);
   });
 
-  it('accumulates above a single dose in daily mode', () => {
-    const pk = computePK(healthy, drug, { ...acute, mode: 'daily' });
-    expect(pk.accumulationRatio).toBeGreaterThan(1);
-    expect(pk.peakConcentration).toBeGreaterThan(1);
+  it('accumulates above a single dose peak in daily mode', () => {
+    const pkAcute = computePK(healthy, drug, acute);
+    const pkDaily = computePK(healthy, drug, { ...acute, mode: 'daily' });
+    expect(pkDaily.accumulationRatio).toBeGreaterThan(1);
+    expect(pkDaily.peakConcentration).toBeGreaterThan(pkAcute.peakConcentration);
   });
 
   it('reduces perceived effect as tolerance rises', () => {

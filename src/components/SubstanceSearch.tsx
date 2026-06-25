@@ -79,7 +79,7 @@ export function SubstanceSearch({ addedIds, onAdd }: Props) {
               setOpen(false);
             }
           }}
-          placeholder="Search 700+ substances by generic or brand name…"
+          placeholder="Search 890+ substances by generic or brand name…"
           className="w-full bg-transparent text-sm text-ink placeholder:text-ink-faint focus:outline-none"
           data-testid="input-substance-search"
           aria-label="Search substances"

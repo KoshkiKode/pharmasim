@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
-import type { PatientProfile, MetabolizerStatus, OrganHealth } from '@/lib/pharmacokinetics';
+import type { PatientProfile, MetabolizerPhenotype, OrganHealth } from '@/lib/pharmacokinetics';
 import { InfoTooltip } from './InfoTooltip';
 import { User, Search, Plus, X } from 'lucide-react';
 import { conditions as ALL_CONDITIONS } from '@/data/conditions';
@@ -84,6 +84,22 @@ export function PatientPanel({ patient, onChange }: Props) {
       </header>
 
       <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+        {/* Sex */}
+        <div className="col-span-2 sm:col-span-1">
+          <Label info="Biological sex affects volume of distribution and creatinine clearance (females typically have ~85% the clearance of males of the same age/weight).">Biological sex</Label>
+          <div className="grid grid-cols-2 gap-2" data-testid="select-sex">
+            <button
+              type="button"
+              onClick={() => set('biologicalSex', 'M')}
+              className={'rounded-lg border px-2 py-1.5 text-xs font-medium transition-colors ' + (patient.biologicalSex === 'M' ? 'border-accent/60 bg-accent/10 text-accent' : 'border-border bg-bg-inset text-ink-muted hover:border-border hover:text-ink')}
+            >Male</button>
+            <button
+              type="button"
+              onClick={() => set('biologicalSex', 'F')}
+              className={'rounded-lg border px-2 py-1.5 text-xs font-medium transition-colors ' + (patient.biologicalSex === 'F' ? 'border-accent/60 bg-accent/10 text-accent' : 'border-border bg-bg-inset text-ink-muted hover:border-border hover:text-ink')}
+            >Female</button>
+          </div>
+        </div>
         {/* Age */}
         <div>
           <Label info={FIELD_INFO.age}>Age (years)</Label>
@@ -190,26 +206,38 @@ export function PatientPanel({ patient, onChange }: Props) {
         </div>
       </div>
 
-      {/* Metabolizer */}
-      <div className="mt-4">
-        <Label info={FIELD_INFO.metabolizer}>CYP metabolizer status</Label>
-        <div className="grid grid-cols-3 gap-2" data-testid="select-metabolizer">
-          {(['poor', 'normal', 'rapid'] as MetabolizerStatus[]).map((m) => (
-            <button
-              key={m}
-              type="button"
-              onClick={() => set('metabolizer', m)}
-              className={
-                'rounded-lg border px-2 py-1.5 text-xs font-medium capitalize transition-colors ' +
-                (patient.metabolizer === m
-                  ? 'border-accent/60 bg-accent/10 text-accent'
-                  : 'border-border bg-bg-inset text-ink-muted hover:border-border hover:text-ink')
-              }
-              data-testid={`metabolizer-${m}`}
-            >
-              {m}
-            </button>
-          ))}
+      {/* Pharmacogenomics */}
+      <div className="mt-5 border-t border-border pt-4">
+        <Label info={FIELD_INFO.metabolizer}>Pharmacogenomics (CYP450)</Label>
+        <div className="mt-2 space-y-2">
+          {['CYP2D6', 'CYP3A4', 'CYP2C19', 'CYP2C9', 'CYP1A2'].map((cyp) => {
+            const current = patient.genetics[cyp] || 'normal';
+            return (
+              <div key={cyp} className="flex items-center justify-between text-xs">
+                <span className="font-medium text-ink-muted w-16">{cyp}</span>
+                <div className="flex gap-1">
+                  {(['poor', 'normal', 'rapid', 'ultrarapid'] as MetabolizerPhenotype[]).map((m) => (
+                    <button
+                      key={m}
+                      type="button"
+                      onClick={() =>
+                        set('genetics', { ...patient.genetics, [cyp]: m })
+                      }
+                      className={
+                        'rounded border px-1.5 py-1 text-[10px] capitalize transition-colors ' +
+                        (current === m
+                          ? 'border-accent/60 bg-accent/10 text-accent font-medium'
+                          : 'border-border bg-bg-inset text-ink-muted hover:border-border hover:text-ink')
+                      }
+                      data-testid={`genetics-${cyp}-${m}`}
+                    >
+                      {m === 'ultrarapid' ? 'Ultra' : m}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

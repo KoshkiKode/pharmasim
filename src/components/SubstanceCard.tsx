@@ -253,7 +253,7 @@ export function SubstanceCard({
           </span>
           <InfoTooltip
             label="Plasma concentration chart"
-            text="Relative plasma concentration over time (normalised to a single-dose peak). In daily mode, repeated doses accumulate toward steady state. Clearance is adjusted for this patient's organ function, age, weight, hydration and CYP phenotype."
+            text="Estimated plasma concentration over time (mg/L). In daily mode, repeated doses accumulate toward steady state. Clearance is physiologically adjusted via Cockcroft-Gault (Age, Weight, Sex), alongside Hydration and CYP modifiers. Vd and Bioavailability are factored in."
           />
         </div>
         <div className="h-36 w-full" data-testid={`chart-${s.id}`}>
@@ -294,7 +294,7 @@ export function SubstanceCard({
                 }}
                 labelStyle={{ color: '#9fb0c8' }}
                 labelFormatter={(h) => `t = ${h} h`}
-                formatter={(v: number) => [v.toFixed(3), 'rel. conc.']}
+                formatter={(v: number) => [v.toFixed(3), 'mg/L']}
               />
               {regimen.mode === 'daily' && pk.steadyStateTrough > 0 && (
                 <ReferenceLine

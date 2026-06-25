@@ -9,6 +9,7 @@ import {
   severityRank,
 } from '@/lib/interactions';
 import { computeConditionWarnings } from '@/lib/conditionWarnings';
+import { computeRiskScores, getRiskLevel } from '@/lib/riskScoring';
 import { SummaryModal } from './SummaryModal';
 
 export function ResultsPanel({
@@ -28,6 +29,7 @@ export function ResultsPanel({
     [substances, patient.conditions, patient.liver, patient.kidney]
   );
   const systems = useMemo(() => computeBodySystemImpact(substances), [substances]);
+  const riskScores = useMemo(() => computeRiskScores(substances), [substances]);
 
   const worst = interactions[0];
   const counts = useMemo(() => {
@@ -134,6 +136,28 @@ export function ResultsPanel({
           )}
         </div>
       </section>
+
+      {/* Polypharmacy Risk Scoring */}
+      {substances.length > 1 && (
+        <section
+          className="rounded-xl border border-border bg-bg-panel shadow-panel"
+          aria-label="Polypharmacy Risk"
+        >
+          <header className="flex items-center justify-between border-b border-border px-4 py-3">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+                <Activity className="h-4 w-4" />
+              </span>
+              <h2 className="text-sm font-semibold text-ink">Polypharmacy Toxicity Risk</h2>
+            </div>
+          </header>
+          <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <RiskMeter label="Anticholinergic Burden" score={riskScores.anticholinergicBurden} />
+            <RiskMeter label="Serotonin Toxicity" score={riskScores.serotoninBurden} />
+            <RiskMeter label="QT Prolongation" score={riskScores.qtProlongationRisk} />
+          </div>
+        </section>
+      )}
 
       {/* Interactions */}
       <section
@@ -290,6 +314,24 @@ export function ResultsPanel({
 }
 
 export { severityRank };
+
+function RiskMeter({ label, score }: { label: string; score: number }) {
+  const level = getRiskLevel(score);
+  const colorClass = 
+    level === 'high' ? 'text-red-500 bg-red-500/10 border-red-500/20' : 
+    level === 'moderate' ? 'text-orange-500 bg-orange-500/10 border-orange-500/20' : 
+    'text-green-500 bg-green-500/10 border-green-500/20';
+
+  return (
+    <div className={`flex flex-col gap-1 p-3 rounded-lg border ${colorClass}`}>
+      <span className="text-[10px] uppercase font-bold tracking-wider opacity-80">{label}</span>
+      <div className="flex items-baseline gap-2">
+        <span className="text-2xl font-black">{score}</span>
+        <span className="text-xs font-semibold uppercase">{level}</span>
+      </div>
+    </div>
+  );
+}
 
 function Empty({ text }: { text: string }) {
   return (

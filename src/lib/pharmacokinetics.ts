@@ -1,11 +1,12 @@
 import type { Substance } from '@/data/types';
 
-export type MetabolizerStatus = 'poor' | 'normal' | 'rapid';
+export type MetabolizerPhenotype = 'poor' | 'normal' | 'rapid' | 'ultrarapid';
 export type OrganHealth = 'impaired' | 'reduced' | 'normal';
 export type DosingMode = 'acute' | 'daily';
 export type Frequency = 'QD' | 'BID' | 'TID' | 'QID';
 
 export interface PatientProfile {
+  biologicalSex: 'M' | 'F';
   ageYears: number;
   weightKg: number;
   heightCm: number;
@@ -14,7 +15,7 @@ export interface PatientProfile {
   liver: OrganHealth;
   kidney: OrganHealth;
   hydrationPct: number; // 0..100, 50 = euhydrated
-  metabolizer: MetabolizerStatus;
+  genetics: Record<string, MetabolizerPhenotype>; // map of CYP enzyme to phenotype
   conditions: string[]; // preexisting condition IDs
 }
 
@@ -65,6 +66,7 @@ export function daysToSteadyState(halfLifeHours: number): number {
 export function clearanceMultiplier(
   patient: PatientProfile,
   substance: Substance,
+  activeSubstances: Substance[] = []
 ): { multiplier: number; factors: { label: string; effect: number }[] } {
   const factors: { label: string; effect: number }[] = [];
 
@@ -89,31 +91,79 @@ export function clearanceMultiplier(
     }
   }
 
-  // Renal function
+  // Renal function (Physiologically-based Cockcroft-Gault)
+  let scr = 1.0;
+  if (kidneyImpaired) scr = 2.5;
+  else if (kidneyReduced) scr = 1.6;
+  
+  let crcl = ((140 - patient.ageYears) * patient.weightKg) / (72 * scr);
+  if (patient.biologicalSex === 'F') crcl *= 0.85;
+
+  const renalFactor = Math.max(0.1, Math.min(1.4, crcl / 100)); // normalized to typical 100 mL/min
+
   if (renallyCleared) {
-    const ren = kidneyImpaired ? 0.4 : kidneyReduced ? 0.7 : 1;
-    if (ren !== 1) {
-      factors.push({ 
-        label: kidneyImpaired && patient.conditions?.includes('ckd') ? 'Chronic Kidney Disease' : 'Renal function', 
-        effect: ren 
+    if (Math.abs(renalFactor - 1) > 0.05) {
+      factors.push({
+        label: kidneyImpaired && patient.conditions?.includes('ckd') ? `CrCl ${Math.round(crcl)} mL/min (CKD)` : `Renal Clearance (${Math.round(crcl)} mL/min)`,
+        effect: renalFactor
       });
     }
   } else {
-    // Even non-renal drugs have some renal contribution
-    const ren = kidneyImpaired ? 0.85 : kidneyReduced ? 0.95 : 1;
-    if (ren !== 1) {
-      factors.push({ 
-        label: kidneyImpaired && patient.conditions?.includes('ckd') ? 'CKD contribution' : 'Renal contribution', 
-        effect: ren 
+    // Non-renal drugs still have minor renal contribution
+    const minorRenalFactor = 1 - (1 - renalFactor) * 0.15;
+    if (Math.abs(minorRenalFactor - 1) > 0.02) {
+      factors.push({
+        label: 'Renal contribution',
+        effect: minorRenalFactor
       });
     }
   }
 
-  // CYP metabolizer phenotype (only relevant if CYP-metabolised)
-  if ((substance.cypMetabolism?.length ?? 0) > 0) {
-    const met =
-      patient.metabolizer === 'poor' ? 0.55 : patient.metabolizer === 'rapid' ? 1.6 : 1;
-    if (met !== 1) factors.push({ label: 'CYP metabolizer', effect: met });
+  // CYP metabolizer phenotype + Drug-Drug Interactions
+  const cypMetabolism = substance.cypMetabolism || [];
+  if (cypMetabolism.length > 0) {
+    let combinedCypEffect = 1;
+    let labelParts: string[] = [];
+
+    for (const cyp of cypMetabolism) {
+      let enzymeEffect = 1;
+      
+      // Genetic effect
+      const phenotype = patient.genetics?.[cyp] || 'normal';
+      if (phenotype === 'poor') enzymeEffect *= 0.3;
+      else if (phenotype === 'rapid') enzymeEffect *= 1.5;
+      else if (phenotype === 'ultrarapid') enzymeEffect *= 2.0;
+      
+      if (phenotype !== 'normal') {
+        labelParts.push(`${cyp} ${phenotype}`);
+      }
+
+      // Interaction effect (inhibitors/inducers)
+      let isInhibited = false;
+      let isInduced = false;
+      for (const other of activeSubstances) {
+        if (other.id === substance.id) continue;
+        if (other.cypInhibits?.includes(cyp)) isInhibited = true;
+        if (other.cypInduces?.includes(cyp)) isInduced = true;
+      }
+      
+      if (isInhibited && isInduced) {
+        // Competitive effects roughly cancel out or are unpredictable
+        labelParts.push(`${cyp} (inhibited + induced)`);
+      } else if (isInhibited) {
+        enzymeEffect *= 0.25; // strong clearance reduction
+        labelParts.push(`${cyp} Inhibited`);
+      } else if (isInduced) {
+        enzymeEffect *= 2.5; // strong clearance increase
+        labelParts.push(`${cyp} Induced`);
+      }
+
+      combinedCypEffect *= enzymeEffect;
+    }
+
+    if (labelParts.length > 0) {
+      factors.push({ label: labelParts.join(', '), effect: combinedCypEffect });
+    }
   }
 
   // Age — clearance declines roughly with age in elderly
@@ -138,15 +188,18 @@ export function clearanceMultiplier(
 }
 
 /** Patient-adjusted effective half-life (hours). */
-export function effectiveHalfLife(patient: PatientProfile, substance: Substance): number {
-  const { multiplier } = clearanceMultiplier(patient, substance);
-  // half-life is inversely proportional to clearance
+export function effectiveHalfLife(
+  patient: PatientProfile, 
+  substance: Substance,
+  activeSubstances: Substance[] = []
+): number {
+  const { multiplier } = clearanceMultiplier(patient, substance, activeSubstances);
   return substance.halfLifeHours / multiplier;
 }
 
 export interface PlasmaPoint {
   hour: number;
-  concentration: number; // relative units (fraction of a single-dose peak)
+  concentration: number; // actual plasma concentration (mg/L)
 }
 
 export interface PKResult {
@@ -174,8 +227,9 @@ export function computePK(
   patient: PatientProfile,
   substance: Substance,
   regimen: RegimenConfig,
+  activeSubstances: Substance[] = []
 ): PKResult {
-  const { multiplier, factors } = clearanceMultiplier(patient, substance);
+  const { multiplier, factors } = clearanceMultiplier(patient, substance, activeSubstances);
   const tHalf = substance.halfLifeHours / multiplier;
   const k = Math.log(2) / tHalf;
   // absorption rate constant — assume fast oral absorption (tmax ~1h)
@@ -188,15 +242,20 @@ export function computePK(
   const tol = regimen.toleranceOverride ?? patient.tolerance;
   const toleranceScalar = Math.max(0.2, 1 - (tol / 100) * 0.8);
 
-  // Single-dose unit concentration (Bateman function), normalised to peak = 1.
+  // Pharmacokinetic Parameters
+  const f = substance.bioavailability;
+  const Vd = substance.vdLKg * patient.weightKg;
+
+  // Real concentration function (mg/L) -> C(t) = (Dose * F / Vd) * (ka / (ka - k)) * (e^-kt - e^-kat)
+  // For 'daily' mode, Dose is dailyDoseMg / (24/tau)
+  const dose = regimen.mode === 'acute' ? regimen.doseMg : (regimen.dailyDoseMg * tau) / 24;
+  const doseMultiplier = (dose * f) / Vd;
+
   const unitDose = (t: number): number => {
     if (t < 0) return 0;
-    if (Math.abs(ka - k) < 1e-6) return k * t * Math.exp(-k * t);
-    return (ka / (ka - k)) * (Math.exp(-k * t) - Math.exp(-ka * t));
+    if (Math.abs(ka - k) < 1e-6) return doseMultiplier * k * t * Math.exp(-k * t);
+    return doseMultiplier * (ka / (ka - k)) * (Math.exp(-k * t) - Math.exp(-ka * t));
   };
-  // find peak of unit curve for normalisation
-  const tmax = Math.abs(ka - k) < 1e-6 ? 1 / k : Math.log(ka / k) / (ka - k);
-  const unitPeak = unitDose(tmax) || 1;
 
   const series: PlasmaPoint[] = [];
   let horizonHours: number;
@@ -219,14 +278,14 @@ export function computePK(
     const t = i * dt;
     let c = 0;
     for (const dtm of doseTimes) {
-      if (dtm <= t) c += unitDose(t - dtm) / unitPeak;
+      if (dtm <= t) c += unitDose(t - dtm);
     }
     if (c > peak) peak = c;
     series.push({ hour: Math.round(t * 10) / 10, concentration: Math.round(c * 1000) / 1000 });
   }
 
-  // steady-state trough estimate (relative)
-  const ssTrough = regimen.mode === 'daily' ? Math.exp(-k * tau) * R : 0;
+  // steady-state trough estimate
+  const ssTrough = regimen.mode === 'daily' ? peak * Math.exp(-k * tau) : 0;
 
   return {
     substanceId: substance.id,
