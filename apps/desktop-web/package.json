@@ -1,0 +1,47 @@
+{
+  "name": "pharmasim",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "PharmaSim — Drug Interaction Simulator. Client-side pharmacokinetics & drug-interaction sandbox.",
+  "author": "Dylan Moore (KoshkiKode LLC)",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "tauri:android:dev": "tauri android dev",
+    "tauri:android:build": "tauri android build",
+    "tauri:ios:dev": "tauri ios dev",
+    "tauri:ios:build": "tauri ios build",
+    "tauri:icons": "tauri icon public/icons/icon-512.png",
+    "pipeline": "node scripts/verify-pipeline.cjs"
+  },
+  "dependencies": {
+    "@pharmasim/engine": "*",
+    "lucide-react": "^0.439.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.12.7"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.1.0",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.3",
+    "vite-plugin-pwa": "^0.20.5",
+    "vitest": "^2.1.8"
+  }
+}
