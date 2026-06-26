@@ -28,7 +28,7 @@ export function SubstanceSearchScreen({ navigation }: any) {
         renderItem={({ item }) => (
           <Card 
             style={[styles.card, { backgroundColor: theme.colors.surfaceVariant }]}
-            onPress={() => navigation.navigate('Timeline', { substanceId: item.id })}
+            onPress={() => navigation.navigate('Timeline', { newSubstanceId: item.id })}
           >
             <Card.Title 
               title={item.name} 

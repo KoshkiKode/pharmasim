@@ -290,7 +290,7 @@ export interface BodySystemImpact {
 export function computeBodySystemImpact(substances: Substance[]): BodySystemImpact[] {
   const map = new Map<string, Set<string>>();
   for (const s of substances) {
-    for (const sys of s.bodySystems) {
+    for (const sys of s.bodySystems ?? []) {
       const key = sys.trim();
       if (!map.has(key)) map.set(key, new Set());
       map.get(key)!.add(s.name);

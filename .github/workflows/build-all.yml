@@ -1,0 +1,139 @@
+name: Build Cross-Platform Binaries
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [created]
+
+jobs:
+  # 1. iOS and Android via Expo Application Services (EAS)
+  mobile-builds:
+    name: Build iOS and Android (EAS)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Android (AAB)
+        run: eas build --platform android --profile production --non-interactive
+        working-directory: ./apps/mobile
+
+      - name: Build iOS (IPA)
+        run: eas build --platform ios --profile production --non-interactive
+        working-directory: ./apps/mobile
+
+  # 2. macOS Native App
+  macos-build:
+    name: Build macOS DMG
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Pods
+        run: cd macos && pod install
+        working-directory: ./apps/DesktopNative
+
+      - name: Build and Package macOS App
+        run: ./build-macos.sh
+        working-directory: ./apps/DesktopNative
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macOS-DMG
+          path: apps/DesktopNative/dist/*.dmg
+
+  # 3. Windows Native App
+  windows-build:
+    name: Build Windows MSIX
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Windows App
+        run: ./build-windows.ps1 -Configuration Release -Platform x64
+        working-directory: ./apps/DesktopNative
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Windows-MSIX
+          path: apps/DesktopNative/windows/AppPackages/
+
+  # 4. Linux Tauri App
+  linux-build:
+    name: Build Linux AppImage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+
+      - name: Install WebKit and build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.0-dev \
+              build-essential \
+              curl \
+              wget \
+              file \
+              libssl-dev \
+              libgtk-3-dev \
+              libayatana-appindicator3-dev \
+              librsvg2-dev
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: Build Linux AppImage
+        run: ./build-linux.sh
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Linux-AppImage
+          path: apps/desktop-web/src-tauri/target/release/bundle/appimage/*.AppImage

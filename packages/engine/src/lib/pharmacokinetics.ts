@@ -100,8 +100,8 @@ export function clearanceMultiplier(
 
   const hepaticallyCleared =
     (substance.cypMetabolism?.length ?? 0) > 0 ||
-    substance.bodySystems.some((s) => /hepat|liver/i.test(s));
-  const renallyCleared = substance.bodySystems.some((s) => /renal|kidney/i.test(s));
+    (substance.bodySystems ?? []).some((s) => /hepat|liver/i.test(s));
+  const renallyCleared = (substance.bodySystems ?? []).some((s) => /renal|kidney/i.test(s));
   const patientConditions = (patient.conditions || []).map(id => conditions.find(c => c.id === id)).filter((c): c is NonNullable<typeof c> => c !== undefined);
   
   let forcedLiver = patient.liver;

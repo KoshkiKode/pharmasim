@@ -46,6 +46,20 @@ export default function App() {
     if (addedIds.has(s.id)) return;
     setAdded((prev) => [...prev, { substance: s, regimen: defaultRegimen(s), advancedOpen: false }]);
   };
+  const loadPreset = (substanceIds: string[]) => {
+    const list: AddedSubstance[] = [];
+    for (const id of substanceIds) {
+      const substance = ALL.find((s) => s.id === id);
+      if (substance) {
+        list.push({
+          substance,
+          regimen: defaultRegimen(substance),
+          advancedOpen: false,
+        });
+      }
+    }
+    setAdded(list);
+  };
   const removeSubstance = (id: string) =>
     setAdded((prev) => prev.filter((a) => a.substance.id !== id));
   const updateRegimen = (id: string, r: RegimenConfig) =>
@@ -55,8 +69,10 @@ export default function App() {
       prev.map((a) => (a.substance.id === id ? { ...a, advancedOpen: !a.advancedOpen } : a)),
     );
   const clearAll = () => {
-    setAdded([]);
-    clearSession();
+    if (added.length === 0 || window.confirm('Are you sure you want to clear all active substances?')) {
+      setAdded([]);
+      clearSession();
+    }
   };
 
   return (
@@ -147,6 +163,37 @@ export default function App() {
           {/* Center: substances */}
           <div className="space-y-4">
             <SubstanceSearch addedIds={addedIds} onAdd={addSubstance} />
+
+            <div className="flex flex-wrap items-center gap-1.5 px-0.5 text-[11px]">
+              <span className="text-ink-faint font-medium mr-1 select-none">Quick Presets:</span>
+              <button
+                type="button"
+                onClick={() => loadPreset(['fentanyl', 'alprazolam', 'ethanol'])}
+                className="rounded border border-red-500/25 bg-red-500/5 px-2 py-0.5 font-medium text-red-400 hover:bg-red-500/10 transition-colors"
+                title="CNS Depressant Combo: Opioid + Benzodiazepine + Alcohol (High Overdose Risk)"
+                data-testid="preset-cns-overload"
+              >
+                CNS Depressant Overload ⚠️
+              </button>
+              <button
+                type="button"
+                onClick={() => loadPreset(['mdma', 'phenelzine'])}
+                className="rounded border border-red-500/25 bg-red-500/5 px-2 py-0.5 font-medium text-red-400 hover:bg-red-500/10 transition-colors"
+                title="Serotonergic Combo: MDMA + MAOI (Lethal Serotonin Syndrome Risk)"
+                data-testid="preset-serotonin-risk"
+              >
+                Serotonin Syndrome Risk ⚠️
+              </button>
+              <button
+                type="button"
+                onClick={() => loadPreset(['ibuprofen', 'acetaminophen'])}
+                className="rounded border border-green-500/25 bg-green-500/5 px-2 py-0.5 font-medium text-green-400 hover:bg-green-500/10 transition-colors"
+                title="Safe Clinical Combo: NSAID + Acetaminophen (Low Risk Synergy)"
+                data-testid="preset-safe-combo"
+              >
+                Pain Management (Safe) ✓
+              </button>
+            </div>
 
             {added.length > 0 && (
               <div className="flex items-center justify-between px-0.5">

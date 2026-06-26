@@ -14,6 +14,26 @@ export function SubstanceSearch({ addedIds, onAdd }: Props) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    function handleGlobalKeyDown(e: KeyboardEvent) {
+      if (
+        e.key === '/' &&
+        document.activeElement !== inputRef.current &&
+        !(
+          document.activeElement instanceof HTMLInputElement ||
+          document.activeElement instanceof HTMLTextAreaElement ||
+          document.activeElement?.getAttribute('contenteditable') === 'true'
+        )
+      ) {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    }
+    document.addEventListener('keydown', handleGlobalKeyDown);
+    return () => document.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -59,6 +79,7 @@ export function SubstanceSearch({ addedIds, onAdd }: Props) {
       <div className="flex items-center gap-2 rounded-xl border border-border bg-bg-inset px-3 py-2.5 focus-within:border-accent/60 focus-within:ring-1 focus-within:ring-accent/40">
         <Search className="h-4 w-4 shrink-0 text-ink-faint" />
         <input
+          ref={inputRef}
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
@@ -79,7 +100,7 @@ export function SubstanceSearch({ addedIds, onAdd }: Props) {
               setOpen(false);
             }
           }}
-          placeholder={`Search ${substances.length.toLocaleString()} substances by generic or brand name…`}
+          placeholder={`Search ${substances.length.toLocaleString()} substances (Press '/' to focus)…`}
           className="w-full bg-transparent text-sm text-ink placeholder:text-ink-faint focus:outline-none"
           data-testid="input-substance-search"
           aria-label="Search substances"

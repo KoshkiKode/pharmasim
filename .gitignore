@@ -34,3 +34,20 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Binaries directory
+binaries/
+
+# Scratch and patch scripts
+test_import.js
+test_parse_toplevel.js
+fix_infinite_recursion.js
+patch_codegen.js
+patch_componentsUtils_debug.js
+patch_getTypeAnnotationForArray.js
+patch_parser_sed.js
+patch_screens_properly.js
+apps/mobile/test_parse_toplevel.js
+packages/engine/src/data/fix_substances.js
+
+

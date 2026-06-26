@@ -7,9 +7,15 @@ import type { Substance } from './types';
 const _rawSubstances: any[] = [
   {
     "id": "fentanyl",
-    "toxicity": { "toxicConcentrationMgL": 0.003, "lethalConcentrationMgL": 0.005 },
+    "toxicity": {
+      "toxicConcentrationMgL": 0.003,
+      "lethalConcentrationMgL": 0.005
+    },
     "bindingAffinities": {
-      "MOR": { "kiNm": 1.16, "intrinsicActivity": 1.0 }
+      "MOR": {
+        "kiNm": 1.16,
+        "intrinsicActivity": 1
+      }
     },
     "name": "Fentanyl",
     "brandNames": [
@@ -69,7 +75,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "IV",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4"
@@ -152,7 +158,7 @@ const _rawSubstances: any[] = [
       0.01
     ],
     "routes": [
-      "nasal",
+      "intranasal",
       "IV"
     ],
     "cypMetabolism": [
@@ -193,7 +199,7 @@ const _rawSubstances: any[] = [
       0.015
     ],
     "routes": [
-      "nasal",
+      "intranasal",
       "IV"
     ],
     "cypMetabolism": [
@@ -237,8 +243,7 @@ const _rawSubstances: any[] = [
       15
     ],
     "routes": [
-      "nasal",
-      "smoked"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP2D6"
@@ -281,7 +286,7 @@ const _rawSubstances: any[] = [
       200
     ],
     "routes": [
-      "nasal",
+      "intranasal",
       "oral"
     ],
     "cypMetabolism": [
@@ -352,7 +357,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Desomorphine is classified as a research-chemical belonging to the Opioid class. Fast-acting mu-opioid agonist. It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered intravenously."
   },
   {
-    "id": "jwh_018",
+    "id": "jwh-018",
     "name": "JWH-018",
     "brandNames": [
       "Spice",
@@ -367,7 +372,7 @@ const _rawSubstances: any[] = [
       5
     ],
     "routes": [
-      "smoked"
+      "oral"
     ],
     "cypMetabolism": [
       "CYP2C9",
@@ -409,7 +414,6 @@ const _rawSubstances: any[] = [
       1000
     ],
     "routes": [
-      "smoked",
       "oral"
     ],
     "mechanism": "Complex mixture of phytocannabinoids.",
@@ -452,7 +456,6 @@ const _rawSubstances: any[] = [
       100
     ],
     "routes": [
-      "smoked",
       "oral"
     ],
     "mechanism": "Natural latex containing morphinan alkaloids.",
@@ -487,7 +490,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Opium Poppy is classified as a plant-herb belonging to the Opioid Latex class. Natural latex containing morphinan alkaloids. It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered via smoked or orally."
   },
   {
-    "id": "coca_leaves",
+    "id": "coca-leaves",
     "name": "Coca Leaves",
     "brandNames": [
       "Erythroxylum coca"
@@ -501,8 +504,7 @@ const _rawSubstances: any[] = [
       10000
     ],
     "routes": [
-      "oral",
-      "buccal"
+      "oral"
     ],
     "mechanism": "Leaves containing cocaine and other alkaloids.",
     "bodySystems": [
@@ -541,8 +543,7 @@ const _rawSubstances: any[] = [
       25
     ],
     "routes": [
-      "oral",
-      "smoked"
+      "oral"
     ],
     "cypMetabolism": [
       "CYP2C9",
@@ -740,7 +741,7 @@ const _rawSubstances: any[] = [
       100
     ],
     "routes": [
-      "nasal",
+      "intranasal",
       "IV"
     ],
     "cypMetabolism": [
@@ -770,7 +771,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Cocaine, also known as Coke, is a central nervous system (CNS) stimulant and tropane alkaloid, derived primarily from the leaves of two coca species native to South America: Erythroxylum coca and E. novogranatense. The leaves are processed into cocaine paste, a crude mixture of coca alkaloids, from which cocaine base is isolated and then converted to cocaine hydrochloride. Although total synthesis is possible, it is complex and not used for production. Historically, cocaine was a standard topica... It is often sought out recreationally due to its stimulant and cardiotoxic properties, and is typically administered via nasal or intravenously."
   },
   {
-    "id": "st_johns_wort",
+    "id": "st-johns-wort",
     "name": "St. John's Wort",
     "brandNames": [
       "Hypericum perforatum"
@@ -1003,7 +1004,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Ginkgo Biloba is classified as a plant-herb belonging to the Nootropic class. PAF receptor antagonism, MAO inhibition, antioxidant. This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
   },
   {
-    "id": "ayahuasca_dmt",
+    "id": "ayahuasca-dmt",
     "name": "N,N-DMT (Ayahuasca)",
     "brandNames": [
       "Psychotria viridis"
@@ -1041,7 +1042,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "N,N-DMT (Ayahuasca) is classified as a plant-herb belonging to the Classic Psychedelic class. 5-HT2A agonist. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally."
   },
   {
-    "id": "ayahuasca_maoi",
+    "id": "ayahuasca-maoi",
     "name": "Harmine / Harmaline",
     "brandNames": [
       "Banisteriopsis caapi"
@@ -1153,7 +1154,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Mescaline is classified as a plant-herb belonging to the Phenethylamine Psychedelic class. 5-HT2A and 5-HT2C agonist. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally."
   },
   {
-    "id": "2c_b",
+    "id": "2c-b",
     "name": "2C-B",
     "brandNames": [],
     "category": "research-chemical",
@@ -1166,7 +1167,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "MAO"
@@ -1187,7 +1188,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "2C-B is classified as a research-chemical belonging to the Phenethylamine class. 5-HT2A partial agonist. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "1p_lsd",
+    "id": "1p-lsd",
     "name": "1P-LSD",
     "brandNames": [],
     "category": "research-chemical",
@@ -1219,7 +1220,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "1P-LSD is classified as a research-chemical belonging to the Lysergamide class. Prodrug to LSD; 5-HT2A agonist. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally."
   },
   {
-    "id": "4_aco_dmt",
+    "id": "4-aco-dmt",
     "name": "4-AcO-DMT",
     "brandNames": [
       "O-Acetylpsilocin"
@@ -1266,7 +1267,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1333,7 +1334,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "mechanism": "Cycloprolylglycine prodrug, increases NGF and BDNF.",
     "bodySystems": [
@@ -1347,7 +1348,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Noopept is classified as a supplement belonging to the Peptide Nootropic class. Cycloprolylglycine prodrug, increases NGF and BDNF. This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
   },
   {
-    "id": "bpc_157",
+    "id": "bpc-157",
     "name": "BPC-157",
     "brandNames": [
       "Bepecin"
@@ -1390,7 +1391,7 @@ const _rawSubstances: any[] = [
       1
     ],
     "routes": [
-      "nasal",
+      "intranasal",
       "SC"
     ],
     "mechanism": "ACTH analog, increases BDNF/NGF.",
@@ -1405,7 +1406,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Semax is classified as a research-chemical belonging to the Peptide class. ACTH analog, increases BDNF/NGF. It is often sought out recreationally due to its  properties, and is typically administered via nasal or via SC."
   },
   {
-    "id": "rc_synth_1",
+    "id": "rc-synth-1",
     "name": "Synthetic RC-1",
     "brandNames": [],
     "category": "research-chemical",
@@ -1418,7 +1419,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1447,7 +1448,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-1 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_2",
+    "id": "rc-synth-2",
     "name": "Synthetic RC-2",
     "brandNames": [],
     "category": "research-chemical",
@@ -1460,7 +1461,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1489,7 +1490,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-2 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_3",
+    "id": "rc-synth-3",
     "name": "Synthetic RC-3",
     "brandNames": [],
     "category": "research-chemical",
@@ -1502,7 +1503,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1531,7 +1532,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-3 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_4",
+    "id": "rc-synth-4",
     "name": "Synthetic RC-4",
     "brandNames": [],
     "category": "research-chemical",
@@ -1544,7 +1545,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1573,7 +1574,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-4 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_5",
+    "id": "rc-synth-5",
     "name": "Synthetic RC-5",
     "brandNames": [],
     "category": "research-chemical",
@@ -1586,7 +1587,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1615,7 +1616,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-5 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_6",
+    "id": "rc-synth-6",
     "name": "Synthetic RC-6",
     "brandNames": [],
     "category": "research-chemical",
@@ -1628,7 +1629,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1657,7 +1658,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-6 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_7",
+    "id": "rc-synth-7",
     "name": "Synthetic RC-7",
     "brandNames": [],
     "category": "research-chemical",
@@ -1670,7 +1671,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1699,7 +1700,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-7 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_8",
+    "id": "rc-synth-8",
     "name": "Synthetic RC-8",
     "brandNames": [],
     "category": "research-chemical",
@@ -1712,7 +1713,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1741,7 +1742,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-8 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_9",
+    "id": "rc-synth-9",
     "name": "Synthetic RC-9",
     "brandNames": [],
     "category": "research-chemical",
@@ -1754,7 +1755,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1783,7 +1784,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-9 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_10",
+    "id": "rc-synth-10",
     "name": "Synthetic RC-10",
     "brandNames": [],
     "category": "research-chemical",
@@ -1796,7 +1797,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1825,7 +1826,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-10 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_11",
+    "id": "rc-synth-11",
     "name": "Synthetic RC-11",
     "brandNames": [],
     "category": "research-chemical",
@@ -1838,7 +1839,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1867,7 +1868,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-11 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_12",
+    "id": "rc-synth-12",
     "name": "Synthetic RC-12",
     "brandNames": [],
     "category": "research-chemical",
@@ -1880,7 +1881,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1909,7 +1910,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-12 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_13",
+    "id": "rc-synth-13",
     "name": "Synthetic RC-13",
     "brandNames": [],
     "category": "research-chemical",
@@ -1922,7 +1923,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1951,7 +1952,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-13 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_14",
+    "id": "rc-synth-14",
     "name": "Synthetic RC-14",
     "brandNames": [],
     "category": "research-chemical",
@@ -1964,7 +1965,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -1993,7 +1994,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-14 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_15",
+    "id": "rc-synth-15",
     "name": "Synthetic RC-15",
     "brandNames": [],
     "category": "research-chemical",
@@ -2006,7 +2007,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2035,7 +2036,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-15 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_16",
+    "id": "rc-synth-16",
     "name": "Synthetic RC-16",
     "brandNames": [],
     "category": "research-chemical",
@@ -2048,7 +2049,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2077,7 +2078,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-16 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_17",
+    "id": "rc-synth-17",
     "name": "Synthetic RC-17",
     "brandNames": [],
     "category": "research-chemical",
@@ -2090,7 +2091,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2119,7 +2120,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-17 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_18",
+    "id": "rc-synth-18",
     "name": "Synthetic RC-18",
     "brandNames": [],
     "category": "research-chemical",
@@ -2132,7 +2133,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2161,7 +2162,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-18 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_19",
+    "id": "rc-synth-19",
     "name": "Synthetic RC-19",
     "brandNames": [],
     "category": "research-chemical",
@@ -2174,7 +2175,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2203,7 +2204,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-19 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_20",
+    "id": "rc-synth-20",
     "name": "Synthetic RC-20",
     "brandNames": [],
     "category": "research-chemical",
@@ -2216,7 +2217,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2245,7 +2246,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-20 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_21",
+    "id": "rc-synth-21",
     "name": "Synthetic RC-21",
     "brandNames": [],
     "category": "research-chemical",
@@ -2258,7 +2259,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2287,7 +2288,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-21 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_22",
+    "id": "rc-synth-22",
     "name": "Synthetic RC-22",
     "brandNames": [],
     "category": "research-chemical",
@@ -2300,7 +2301,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2329,7 +2330,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-22 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_23",
+    "id": "rc-synth-23",
     "name": "Synthetic RC-23",
     "brandNames": [],
     "category": "research-chemical",
@@ -2342,7 +2343,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2371,7 +2372,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-23 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_24",
+    "id": "rc-synth-24",
     "name": "Synthetic RC-24",
     "brandNames": [],
     "category": "research-chemical",
@@ -2384,7 +2385,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2413,7 +2414,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-24 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_25",
+    "id": "rc-synth-25",
     "name": "Synthetic RC-25",
     "brandNames": [],
     "category": "research-chemical",
@@ -2426,7 +2427,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2455,7 +2456,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-25 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_26",
+    "id": "rc-synth-26",
     "name": "Synthetic RC-26",
     "brandNames": [],
     "category": "research-chemical",
@@ -2468,7 +2469,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2497,7 +2498,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-26 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_27",
+    "id": "rc-synth-27",
     "name": "Synthetic RC-27",
     "brandNames": [],
     "category": "research-chemical",
@@ -2510,7 +2511,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2539,7 +2540,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-27 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_28",
+    "id": "rc-synth-28",
     "name": "Synthetic RC-28",
     "brandNames": [],
     "category": "research-chemical",
@@ -2552,7 +2553,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2581,7 +2582,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-28 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_29",
+    "id": "rc-synth-29",
     "name": "Synthetic RC-29",
     "brandNames": [],
     "category": "research-chemical",
@@ -2594,7 +2595,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2623,7 +2624,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-29 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_30",
+    "id": "rc-synth-30",
     "name": "Synthetic RC-30",
     "brandNames": [],
     "category": "research-chemical",
@@ -2636,7 +2637,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2665,7 +2666,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-30 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_31",
+    "id": "rc-synth-31",
     "name": "Synthetic RC-31",
     "brandNames": [],
     "category": "research-chemical",
@@ -2678,7 +2679,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2707,7 +2708,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-31 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_32",
+    "id": "rc-synth-32",
     "name": "Synthetic RC-32",
     "brandNames": [],
     "category": "research-chemical",
@@ -2720,7 +2721,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2749,7 +2750,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-32 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_33",
+    "id": "rc-synth-33",
     "name": "Synthetic RC-33",
     "brandNames": [],
     "category": "research-chemical",
@@ -2762,7 +2763,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2791,7 +2792,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-33 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_34",
+    "id": "rc-synth-34",
     "name": "Synthetic RC-34",
     "brandNames": [],
     "category": "research-chemical",
@@ -2804,7 +2805,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2833,7 +2834,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-34 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_35",
+    "id": "rc-synth-35",
     "name": "Synthetic RC-35",
     "brandNames": [],
     "category": "research-chemical",
@@ -2846,7 +2847,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2875,7 +2876,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-35 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_36",
+    "id": "rc-synth-36",
     "name": "Synthetic RC-36",
     "brandNames": [],
     "category": "research-chemical",
@@ -2888,7 +2889,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2917,7 +2918,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-36 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_37",
+    "id": "rc-synth-37",
     "name": "Synthetic RC-37",
     "brandNames": [],
     "category": "research-chemical",
@@ -2930,7 +2931,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -2959,7 +2960,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-37 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_38",
+    "id": "rc-synth-38",
     "name": "Synthetic RC-38",
     "brandNames": [],
     "category": "research-chemical",
@@ -2972,7 +2973,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3001,7 +3002,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-38 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_39",
+    "id": "rc-synth-39",
     "name": "Synthetic RC-39",
     "brandNames": [],
     "category": "research-chemical",
@@ -3014,7 +3015,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3043,7 +3044,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-39 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_40",
+    "id": "rc-synth-40",
     "name": "Synthetic RC-40",
     "brandNames": [],
     "category": "research-chemical",
@@ -3056,7 +3057,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3085,7 +3086,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-40 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_41",
+    "id": "rc-synth-41",
     "name": "Synthetic RC-41",
     "brandNames": [],
     "category": "research-chemical",
@@ -3098,7 +3099,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3127,7 +3128,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-41 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_42",
+    "id": "rc-synth-42",
     "name": "Synthetic RC-42",
     "brandNames": [],
     "category": "research-chemical",
@@ -3140,7 +3141,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3169,7 +3170,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-42 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_43",
+    "id": "rc-synth-43",
     "name": "Synthetic RC-43",
     "brandNames": [],
     "category": "research-chemical",
@@ -3182,7 +3183,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3211,7 +3212,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-43 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_44",
+    "id": "rc-synth-44",
     "name": "Synthetic RC-44",
     "brandNames": [],
     "category": "research-chemical",
@@ -3224,7 +3225,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3253,7 +3254,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-44 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_45",
+    "id": "rc-synth-45",
     "name": "Synthetic RC-45",
     "brandNames": [],
     "category": "research-chemical",
@@ -3266,7 +3267,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3295,7 +3296,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-45 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_46",
+    "id": "rc-synth-46",
     "name": "Synthetic RC-46",
     "brandNames": [],
     "category": "research-chemical",
@@ -3308,7 +3309,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3337,7 +3338,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-46 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_47",
+    "id": "rc-synth-47",
     "name": "Synthetic RC-47",
     "brandNames": [],
     "category": "research-chemical",
@@ -3350,7 +3351,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3379,7 +3380,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-47 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_48",
+    "id": "rc-synth-48",
     "name": "Synthetic RC-48",
     "brandNames": [],
     "category": "research-chemical",
@@ -3392,7 +3393,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3421,7 +3422,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-48 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_49",
+    "id": "rc-synth-49",
     "name": "Synthetic RC-49",
     "brandNames": [],
     "category": "research-chemical",
@@ -3434,7 +3435,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3463,7 +3464,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-49 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_50",
+    "id": "rc-synth-50",
     "name": "Synthetic RC-50",
     "brandNames": [],
     "category": "research-chemical",
@@ -3476,7 +3477,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3505,7 +3506,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-50 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_51",
+    "id": "rc-synth-51",
     "name": "Synthetic RC-51",
     "brandNames": [],
     "category": "research-chemical",
@@ -3518,7 +3519,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3547,7 +3548,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-51 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_52",
+    "id": "rc-synth-52",
     "name": "Synthetic RC-52",
     "brandNames": [],
     "category": "research-chemical",
@@ -3560,7 +3561,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3589,7 +3590,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-52 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_53",
+    "id": "rc-synth-53",
     "name": "Synthetic RC-53",
     "brandNames": [],
     "category": "research-chemical",
@@ -3602,7 +3603,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3631,7 +3632,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-53 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_54",
+    "id": "rc-synth-54",
     "name": "Synthetic RC-54",
     "brandNames": [],
     "category": "research-chemical",
@@ -3644,7 +3645,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3673,7 +3674,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-54 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_55",
+    "id": "rc-synth-55",
     "name": "Synthetic RC-55",
     "brandNames": [],
     "category": "research-chemical",
@@ -3686,7 +3687,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3715,7 +3716,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-55 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_56",
+    "id": "rc-synth-56",
     "name": "Synthetic RC-56",
     "brandNames": [],
     "category": "research-chemical",
@@ -3728,7 +3729,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3757,7 +3758,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-56 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_57",
+    "id": "rc-synth-57",
     "name": "Synthetic RC-57",
     "brandNames": [],
     "category": "research-chemical",
@@ -3770,7 +3771,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3799,7 +3800,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-57 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_58",
+    "id": "rc-synth-58",
     "name": "Synthetic RC-58",
     "brandNames": [],
     "category": "research-chemical",
@@ -3812,7 +3813,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3841,7 +3842,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-58 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_59",
+    "id": "rc-synth-59",
     "name": "Synthetic RC-59",
     "brandNames": [],
     "category": "research-chemical",
@@ -3854,7 +3855,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3883,7 +3884,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-59 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_60",
+    "id": "rc-synth-60",
     "name": "Synthetic RC-60",
     "brandNames": [],
     "category": "research-chemical",
@@ -3896,7 +3897,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3925,7 +3926,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-60 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_61",
+    "id": "rc-synth-61",
     "name": "Synthetic RC-61",
     "brandNames": [],
     "category": "research-chemical",
@@ -3938,7 +3939,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -3967,7 +3968,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-61 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_62",
+    "id": "rc-synth-62",
     "name": "Synthetic RC-62",
     "brandNames": [],
     "category": "research-chemical",
@@ -3980,7 +3981,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4009,7 +4010,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-62 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_63",
+    "id": "rc-synth-63",
     "name": "Synthetic RC-63",
     "brandNames": [],
     "category": "research-chemical",
@@ -4022,7 +4023,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4051,7 +4052,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-63 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_64",
+    "id": "rc-synth-64",
     "name": "Synthetic RC-64",
     "brandNames": [],
     "category": "research-chemical",
@@ -4064,7 +4065,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4093,7 +4094,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-64 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_65",
+    "id": "rc-synth-65",
     "name": "Synthetic RC-65",
     "brandNames": [],
     "category": "research-chemical",
@@ -4106,7 +4107,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4135,7 +4136,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-65 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_66",
+    "id": "rc-synth-66",
     "name": "Synthetic RC-66",
     "brandNames": [],
     "category": "research-chemical",
@@ -4148,7 +4149,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4177,7 +4178,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-66 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_67",
+    "id": "rc-synth-67",
     "name": "Synthetic RC-67",
     "brandNames": [],
     "category": "research-chemical",
@@ -4190,7 +4191,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4219,7 +4220,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-67 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_68",
+    "id": "rc-synth-68",
     "name": "Synthetic RC-68",
     "brandNames": [],
     "category": "research-chemical",
@@ -4232,7 +4233,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4261,7 +4262,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-68 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_69",
+    "id": "rc-synth-69",
     "name": "Synthetic RC-69",
     "brandNames": [],
     "category": "research-chemical",
@@ -4274,7 +4275,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4303,7 +4304,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-69 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_70",
+    "id": "rc-synth-70",
     "name": "Synthetic RC-70",
     "brandNames": [],
     "category": "research-chemical",
@@ -4316,7 +4317,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4345,7 +4346,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-70 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_71",
+    "id": "rc-synth-71",
     "name": "Synthetic RC-71",
     "brandNames": [],
     "category": "research-chemical",
@@ -4358,7 +4359,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4387,7 +4388,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-71 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_72",
+    "id": "rc-synth-72",
     "name": "Synthetic RC-72",
     "brandNames": [],
     "category": "research-chemical",
@@ -4400,7 +4401,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4429,7 +4430,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-72 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_73",
+    "id": "rc-synth-73",
     "name": "Synthetic RC-73",
     "brandNames": [],
     "category": "research-chemical",
@@ -4442,7 +4443,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4471,7 +4472,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-73 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_74",
+    "id": "rc-synth-74",
     "name": "Synthetic RC-74",
     "brandNames": [],
     "category": "research-chemical",
@@ -4484,7 +4485,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4513,7 +4514,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-74 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_75",
+    "id": "rc-synth-75",
     "name": "Synthetic RC-75",
     "brandNames": [],
     "category": "research-chemical",
@@ -4526,7 +4527,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4555,7 +4556,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-75 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_76",
+    "id": "rc-synth-76",
     "name": "Synthetic RC-76",
     "brandNames": [],
     "category": "research-chemical",
@@ -4568,7 +4569,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4597,7 +4598,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-76 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_77",
+    "id": "rc-synth-77",
     "name": "Synthetic RC-77",
     "brandNames": [],
     "category": "research-chemical",
@@ -4610,7 +4611,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4639,7 +4640,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-77 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_78",
+    "id": "rc-synth-78",
     "name": "Synthetic RC-78",
     "brandNames": [],
     "category": "research-chemical",
@@ -4652,7 +4653,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4681,7 +4682,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-78 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_79",
+    "id": "rc-synth-79",
     "name": "Synthetic RC-79",
     "brandNames": [],
     "category": "research-chemical",
@@ -4694,7 +4695,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4723,7 +4724,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-79 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_80",
+    "id": "rc-synth-80",
     "name": "Synthetic RC-80",
     "brandNames": [],
     "category": "research-chemical",
@@ -4736,7 +4737,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4765,7 +4766,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-80 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_81",
+    "id": "rc-synth-81",
     "name": "Synthetic RC-81",
     "brandNames": [],
     "category": "research-chemical",
@@ -4778,7 +4779,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4807,7 +4808,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-81 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_82",
+    "id": "rc-synth-82",
     "name": "Synthetic RC-82",
     "brandNames": [],
     "category": "research-chemical",
@@ -4820,7 +4821,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4849,7 +4850,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-82 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_83",
+    "id": "rc-synth-83",
     "name": "Synthetic RC-83",
     "brandNames": [],
     "category": "research-chemical",
@@ -4862,7 +4863,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4891,7 +4892,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-83 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_84",
+    "id": "rc-synth-84",
     "name": "Synthetic RC-84",
     "brandNames": [],
     "category": "research-chemical",
@@ -4904,7 +4905,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4933,7 +4934,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-84 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_85",
+    "id": "rc-synth-85",
     "name": "Synthetic RC-85",
     "brandNames": [],
     "category": "research-chemical",
@@ -4946,7 +4947,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -4975,7 +4976,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-85 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_86",
+    "id": "rc-synth-86",
     "name": "Synthetic RC-86",
     "brandNames": [],
     "category": "research-chemical",
@@ -4988,7 +4989,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5017,7 +5018,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-86 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_87",
+    "id": "rc-synth-87",
     "name": "Synthetic RC-87",
     "brandNames": [],
     "category": "research-chemical",
@@ -5030,7 +5031,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5059,7 +5060,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-87 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_88",
+    "id": "rc-synth-88",
     "name": "Synthetic RC-88",
     "brandNames": [],
     "category": "research-chemical",
@@ -5072,7 +5073,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5101,7 +5102,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-88 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_89",
+    "id": "rc-synth-89",
     "name": "Synthetic RC-89",
     "brandNames": [],
     "category": "research-chemical",
@@ -5114,7 +5115,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5143,7 +5144,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-89 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_90",
+    "id": "rc-synth-90",
     "name": "Synthetic RC-90",
     "brandNames": [],
     "category": "research-chemical",
@@ -5156,7 +5157,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5185,7 +5186,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-90 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_91",
+    "id": "rc-synth-91",
     "name": "Synthetic RC-91",
     "brandNames": [],
     "category": "research-chemical",
@@ -5198,7 +5199,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5227,7 +5228,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-91 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_92",
+    "id": "rc-synth-92",
     "name": "Synthetic RC-92",
     "brandNames": [],
     "category": "research-chemical",
@@ -5240,7 +5241,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5269,7 +5270,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-92 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_93",
+    "id": "rc-synth-93",
     "name": "Synthetic RC-93",
     "brandNames": [],
     "category": "research-chemical",
@@ -5282,7 +5283,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5311,7 +5312,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-93 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_94",
+    "id": "rc-synth-94",
     "name": "Synthetic RC-94",
     "brandNames": [],
     "category": "research-chemical",
@@ -5324,7 +5325,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5353,7 +5354,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-94 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_95",
+    "id": "rc-synth-95",
     "name": "Synthetic RC-95",
     "brandNames": [],
     "category": "research-chemical",
@@ -5366,7 +5367,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5395,7 +5396,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-95 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_96",
+    "id": "rc-synth-96",
     "name": "Synthetic RC-96",
     "brandNames": [],
     "category": "research-chemical",
@@ -5408,7 +5409,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5437,7 +5438,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-96 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_97",
+    "id": "rc-synth-97",
     "name": "Synthetic RC-97",
     "brandNames": [],
     "category": "research-chemical",
@@ -5450,7 +5451,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5479,7 +5480,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-97 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_98",
+    "id": "rc-synth-98",
     "name": "Synthetic RC-98",
     "brandNames": [],
     "category": "research-chemical",
@@ -5492,7 +5493,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5521,7 +5522,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-98 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_99",
+    "id": "rc-synth-99",
     "name": "Synthetic RC-99",
     "brandNames": [],
     "category": "research-chemical",
@@ -5534,7 +5535,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5563,7 +5564,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-99 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_100",
+    "id": "rc-synth-100",
     "name": "Synthetic RC-100",
     "brandNames": [],
     "category": "research-chemical",
@@ -5576,7 +5577,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5605,7 +5606,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-100 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_101",
+    "id": "rc-synth-101",
     "name": "Synthetic RC-101",
     "brandNames": [],
     "category": "research-chemical",
@@ -5618,7 +5619,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5647,7 +5648,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-101 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_102",
+    "id": "rc-synth-102",
     "name": "Synthetic RC-102",
     "brandNames": [],
     "category": "research-chemical",
@@ -5660,7 +5661,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5689,7 +5690,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-102 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_103",
+    "id": "rc-synth-103",
     "name": "Synthetic RC-103",
     "brandNames": [],
     "category": "research-chemical",
@@ -5702,7 +5703,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5731,7 +5732,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-103 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_104",
+    "id": "rc-synth-104",
     "name": "Synthetic RC-104",
     "brandNames": [],
     "category": "research-chemical",
@@ -5744,7 +5745,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5773,7 +5774,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-104 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_105",
+    "id": "rc-synth-105",
     "name": "Synthetic RC-105",
     "brandNames": [],
     "category": "research-chemical",
@@ -5786,7 +5787,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5815,7 +5816,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-105 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_106",
+    "id": "rc-synth-106",
     "name": "Synthetic RC-106",
     "brandNames": [],
     "category": "research-chemical",
@@ -5828,7 +5829,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5857,7 +5858,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-106 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_107",
+    "id": "rc-synth-107",
     "name": "Synthetic RC-107",
     "brandNames": [],
     "category": "research-chemical",
@@ -5870,7 +5871,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5899,7 +5900,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-107 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_108",
+    "id": "rc-synth-108",
     "name": "Synthetic RC-108",
     "brandNames": [],
     "category": "research-chemical",
@@ -5912,7 +5913,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5941,7 +5942,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-108 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_109",
+    "id": "rc-synth-109",
     "name": "Synthetic RC-109",
     "brandNames": [],
     "category": "research-chemical",
@@ -5954,7 +5955,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -5983,7 +5984,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-109 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_110",
+    "id": "rc-synth-110",
     "name": "Synthetic RC-110",
     "brandNames": [],
     "category": "research-chemical",
@@ -5996,7 +5997,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6025,7 +6026,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-110 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_111",
+    "id": "rc-synth-111",
     "name": "Synthetic RC-111",
     "brandNames": [],
     "category": "research-chemical",
@@ -6038,7 +6039,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6067,7 +6068,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-111 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_112",
+    "id": "rc-synth-112",
     "name": "Synthetic RC-112",
     "brandNames": [],
     "category": "research-chemical",
@@ -6080,7 +6081,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6109,7 +6110,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-112 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_113",
+    "id": "rc-synth-113",
     "name": "Synthetic RC-113",
     "brandNames": [],
     "category": "research-chemical",
@@ -6122,7 +6123,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6151,7 +6152,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-113 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_114",
+    "id": "rc-synth-114",
     "name": "Synthetic RC-114",
     "brandNames": [],
     "category": "research-chemical",
@@ -6164,7 +6165,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6193,7 +6194,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-114 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_115",
+    "id": "rc-synth-115",
     "name": "Synthetic RC-115",
     "brandNames": [],
     "category": "research-chemical",
@@ -6206,7 +6207,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6235,7 +6236,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-115 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_116",
+    "id": "rc-synth-116",
     "name": "Synthetic RC-116",
     "brandNames": [],
     "category": "research-chemical",
@@ -6248,7 +6249,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6277,7 +6278,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-116 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_117",
+    "id": "rc-synth-117",
     "name": "Synthetic RC-117",
     "brandNames": [],
     "category": "research-chemical",
@@ -6290,7 +6291,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6319,7 +6320,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-117 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_118",
+    "id": "rc-synth-118",
     "name": "Synthetic RC-118",
     "brandNames": [],
     "category": "research-chemical",
@@ -6332,7 +6333,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6361,7 +6362,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-118 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_119",
+    "id": "rc-synth-119",
     "name": "Synthetic RC-119",
     "brandNames": [],
     "category": "research-chemical",
@@ -6374,7 +6375,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6403,7 +6404,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-119 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_120",
+    "id": "rc-synth-120",
     "name": "Synthetic RC-120",
     "brandNames": [],
     "category": "research-chemical",
@@ -6416,7 +6417,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6445,7 +6446,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-120 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_121",
+    "id": "rc-synth-121",
     "name": "Synthetic RC-121",
     "brandNames": [],
     "category": "research-chemical",
@@ -6458,7 +6459,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6487,7 +6488,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-121 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_122",
+    "id": "rc-synth-122",
     "name": "Synthetic RC-122",
     "brandNames": [],
     "category": "research-chemical",
@@ -6500,7 +6501,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6529,7 +6530,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-122 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_123",
+    "id": "rc-synth-123",
     "name": "Synthetic RC-123",
     "brandNames": [],
     "category": "research-chemical",
@@ -6542,7 +6543,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6571,7 +6572,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-123 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_124",
+    "id": "rc-synth-124",
     "name": "Synthetic RC-124",
     "brandNames": [],
     "category": "research-chemical",
@@ -6584,7 +6585,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6613,7 +6614,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-124 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_125",
+    "id": "rc-synth-125",
     "name": "Synthetic RC-125",
     "brandNames": [],
     "category": "research-chemical",
@@ -6626,7 +6627,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6655,7 +6656,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-125 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_126",
+    "id": "rc-synth-126",
     "name": "Synthetic RC-126",
     "brandNames": [],
     "category": "research-chemical",
@@ -6668,7 +6669,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6697,7 +6698,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-126 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_127",
+    "id": "rc-synth-127",
     "name": "Synthetic RC-127",
     "brandNames": [],
     "category": "research-chemical",
@@ -6710,7 +6711,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6739,7 +6740,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-127 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_128",
+    "id": "rc-synth-128",
     "name": "Synthetic RC-128",
     "brandNames": [],
     "category": "research-chemical",
@@ -6752,7 +6753,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6781,7 +6782,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-128 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_129",
+    "id": "rc-synth-129",
     "name": "Synthetic RC-129",
     "brandNames": [],
     "category": "research-chemical",
@@ -6794,7 +6795,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6823,7 +6824,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-129 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_130",
+    "id": "rc-synth-130",
     "name": "Synthetic RC-130",
     "brandNames": [],
     "category": "research-chemical",
@@ -6836,7 +6837,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6865,7 +6866,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-130 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_131",
+    "id": "rc-synth-131",
     "name": "Synthetic RC-131",
     "brandNames": [],
     "category": "research-chemical",
@@ -6878,7 +6879,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6907,7 +6908,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-131 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_132",
+    "id": "rc-synth-132",
     "name": "Synthetic RC-132",
     "brandNames": [],
     "category": "research-chemical",
@@ -6920,7 +6921,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6949,7 +6950,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-132 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_133",
+    "id": "rc-synth-133",
     "name": "Synthetic RC-133",
     "brandNames": [],
     "category": "research-chemical",
@@ -6962,7 +6963,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -6991,7 +6992,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-133 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_134",
+    "id": "rc-synth-134",
     "name": "Synthetic RC-134",
     "brandNames": [],
     "category": "research-chemical",
@@ -7004,7 +7005,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7033,7 +7034,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-134 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_135",
+    "id": "rc-synth-135",
     "name": "Synthetic RC-135",
     "brandNames": [],
     "category": "research-chemical",
@@ -7046,7 +7047,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7075,7 +7076,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-135 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_136",
+    "id": "rc-synth-136",
     "name": "Synthetic RC-136",
     "brandNames": [],
     "category": "research-chemical",
@@ -7088,7 +7089,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7117,7 +7118,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-136 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_137",
+    "id": "rc-synth-137",
     "name": "Synthetic RC-137",
     "brandNames": [],
     "category": "research-chemical",
@@ -7130,7 +7131,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7159,7 +7160,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-137 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_138",
+    "id": "rc-synth-138",
     "name": "Synthetic RC-138",
     "brandNames": [],
     "category": "research-chemical",
@@ -7172,7 +7173,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7201,7 +7202,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-138 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_139",
+    "id": "rc-synth-139",
     "name": "Synthetic RC-139",
     "brandNames": [],
     "category": "research-chemical",
@@ -7214,7 +7215,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7243,7 +7244,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-139 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_140",
+    "id": "rc-synth-140",
     "name": "Synthetic RC-140",
     "brandNames": [],
     "category": "research-chemical",
@@ -7256,7 +7257,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7285,7 +7286,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-140 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_141",
+    "id": "rc-synth-141",
     "name": "Synthetic RC-141",
     "brandNames": [],
     "category": "research-chemical",
@@ -7298,7 +7299,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7327,7 +7328,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-141 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_142",
+    "id": "rc-synth-142",
     "name": "Synthetic RC-142",
     "brandNames": [],
     "category": "research-chemical",
@@ -7340,7 +7341,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7369,7 +7370,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-142 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_143",
+    "id": "rc-synth-143",
     "name": "Synthetic RC-143",
     "brandNames": [],
     "category": "research-chemical",
@@ -7382,7 +7383,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7411,7 +7412,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-143 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_144",
+    "id": "rc-synth-144",
     "name": "Synthetic RC-144",
     "brandNames": [],
     "category": "research-chemical",
@@ -7424,7 +7425,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7453,7 +7454,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-144 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_145",
+    "id": "rc-synth-145",
     "name": "Synthetic RC-145",
     "brandNames": [],
     "category": "research-chemical",
@@ -7466,7 +7467,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7495,7 +7496,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-145 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_146",
+    "id": "rc-synth-146",
     "name": "Synthetic RC-146",
     "brandNames": [],
     "category": "research-chemical",
@@ -7508,7 +7509,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7537,7 +7538,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-146 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_147",
+    "id": "rc-synth-147",
     "name": "Synthetic RC-147",
     "brandNames": [],
     "category": "research-chemical",
@@ -7550,7 +7551,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7579,7 +7580,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-147 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_148",
+    "id": "rc-synth-148",
     "name": "Synthetic RC-148",
     "brandNames": [],
     "category": "research-chemical",
@@ -7592,7 +7593,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7621,7 +7622,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-148 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_149",
+    "id": "rc-synth-149",
     "name": "Synthetic RC-149",
     "brandNames": [],
     "category": "research-chemical",
@@ -7634,7 +7635,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7663,7 +7664,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-149 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_150",
+    "id": "rc-synth-150",
     "name": "Synthetic RC-150",
     "brandNames": [],
     "category": "research-chemical",
@@ -7676,7 +7677,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7705,7 +7706,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-150 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_151",
+    "id": "rc-synth-151",
     "name": "Synthetic RC-151",
     "brandNames": [],
     "category": "research-chemical",
@@ -7718,7 +7719,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7747,7 +7748,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-151 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_152",
+    "id": "rc-synth-152",
     "name": "Synthetic RC-152",
     "brandNames": [],
     "category": "research-chemical",
@@ -7760,7 +7761,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7789,7 +7790,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-152 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_153",
+    "id": "rc-synth-153",
     "name": "Synthetic RC-153",
     "brandNames": [],
     "category": "research-chemical",
@@ -7802,7 +7803,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7831,7 +7832,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-153 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_154",
+    "id": "rc-synth-154",
     "name": "Synthetic RC-154",
     "brandNames": [],
     "category": "research-chemical",
@@ -7844,7 +7845,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7873,7 +7874,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-154 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_155",
+    "id": "rc-synth-155",
     "name": "Synthetic RC-155",
     "brandNames": [],
     "category": "research-chemical",
@@ -7886,7 +7887,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7915,7 +7916,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-155 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_156",
+    "id": "rc-synth-156",
     "name": "Synthetic RC-156",
     "brandNames": [],
     "category": "research-chemical",
@@ -7928,7 +7929,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7957,7 +7958,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-156 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_157",
+    "id": "rc-synth-157",
     "name": "Synthetic RC-157",
     "brandNames": [],
     "category": "research-chemical",
@@ -7970,7 +7971,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -7999,7 +8000,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-157 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_158",
+    "id": "rc-synth-158",
     "name": "Synthetic RC-158",
     "brandNames": [],
     "category": "research-chemical",
@@ -8012,7 +8013,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8041,7 +8042,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-158 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_159",
+    "id": "rc-synth-159",
     "name": "Synthetic RC-159",
     "brandNames": [],
     "category": "research-chemical",
@@ -8054,7 +8055,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8083,7 +8084,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-159 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_160",
+    "id": "rc-synth-160",
     "name": "Synthetic RC-160",
     "brandNames": [],
     "category": "research-chemical",
@@ -8096,7 +8097,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8125,7 +8126,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-160 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_161",
+    "id": "rc-synth-161",
     "name": "Synthetic RC-161",
     "brandNames": [],
     "category": "research-chemical",
@@ -8138,7 +8139,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8167,7 +8168,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-161 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_162",
+    "id": "rc-synth-162",
     "name": "Synthetic RC-162",
     "brandNames": [],
     "category": "research-chemical",
@@ -8180,7 +8181,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8209,7 +8210,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-162 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_163",
+    "id": "rc-synth-163",
     "name": "Synthetic RC-163",
     "brandNames": [],
     "category": "research-chemical",
@@ -8222,7 +8223,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8251,7 +8252,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-163 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_164",
+    "id": "rc-synth-164",
     "name": "Synthetic RC-164",
     "brandNames": [],
     "category": "research-chemical",
@@ -8264,7 +8265,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8293,7 +8294,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-164 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_165",
+    "id": "rc-synth-165",
     "name": "Synthetic RC-165",
     "brandNames": [],
     "category": "research-chemical",
@@ -8306,7 +8307,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8335,7 +8336,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-165 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_166",
+    "id": "rc-synth-166",
     "name": "Synthetic RC-166",
     "brandNames": [],
     "category": "research-chemical",
@@ -8348,7 +8349,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8377,7 +8378,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-166 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_167",
+    "id": "rc-synth-167",
     "name": "Synthetic RC-167",
     "brandNames": [],
     "category": "research-chemical",
@@ -8390,7 +8391,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8419,7 +8420,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-167 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_168",
+    "id": "rc-synth-168",
     "name": "Synthetic RC-168",
     "brandNames": [],
     "category": "research-chemical",
@@ -8432,7 +8433,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8461,7 +8462,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-168 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_169",
+    "id": "rc-synth-169",
     "name": "Synthetic RC-169",
     "brandNames": [],
     "category": "research-chemical",
@@ -8474,7 +8475,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8503,7 +8504,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-169 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_170",
+    "id": "rc-synth-170",
     "name": "Synthetic RC-170",
     "brandNames": [],
     "category": "research-chemical",
@@ -8516,7 +8517,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8545,7 +8546,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-170 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_171",
+    "id": "rc-synth-171",
     "name": "Synthetic RC-171",
     "brandNames": [],
     "category": "research-chemical",
@@ -8558,7 +8559,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8587,7 +8588,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-171 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_172",
+    "id": "rc-synth-172",
     "name": "Synthetic RC-172",
     "brandNames": [],
     "category": "research-chemical",
@@ -8600,7 +8601,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8629,7 +8630,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-172 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_173",
+    "id": "rc-synth-173",
     "name": "Synthetic RC-173",
     "brandNames": [],
     "category": "research-chemical",
@@ -8642,7 +8643,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8671,7 +8672,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-173 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_174",
+    "id": "rc-synth-174",
     "name": "Synthetic RC-174",
     "brandNames": [],
     "category": "research-chemical",
@@ -8684,7 +8685,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8713,7 +8714,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-174 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_175",
+    "id": "rc-synth-175",
     "name": "Synthetic RC-175",
     "brandNames": [],
     "category": "research-chemical",
@@ -8726,7 +8727,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8755,7 +8756,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-175 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_176",
+    "id": "rc-synth-176",
     "name": "Synthetic RC-176",
     "brandNames": [],
     "category": "research-chemical",
@@ -8768,7 +8769,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8797,7 +8798,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-176 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_177",
+    "id": "rc-synth-177",
     "name": "Synthetic RC-177",
     "brandNames": [],
     "category": "research-chemical",
@@ -8810,7 +8811,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8839,7 +8840,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-177 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_178",
+    "id": "rc-synth-178",
     "name": "Synthetic RC-178",
     "brandNames": [],
     "category": "research-chemical",
@@ -8852,7 +8853,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8881,7 +8882,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-178 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_179",
+    "id": "rc-synth-179",
     "name": "Synthetic RC-179",
     "brandNames": [],
     "category": "research-chemical",
@@ -8894,7 +8895,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8923,7 +8924,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-179 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_180",
+    "id": "rc-synth-180",
     "name": "Synthetic RC-180",
     "brandNames": [],
     "category": "research-chemical",
@@ -8936,7 +8937,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -8965,7 +8966,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-180 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_181",
+    "id": "rc-synth-181",
     "name": "Synthetic RC-181",
     "brandNames": [],
     "category": "research-chemical",
@@ -8978,7 +8979,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9007,7 +9008,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-181 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_182",
+    "id": "rc-synth-182",
     "name": "Synthetic RC-182",
     "brandNames": [],
     "category": "research-chemical",
@@ -9020,7 +9021,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9049,7 +9050,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-182 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_183",
+    "id": "rc-synth-183",
     "name": "Synthetic RC-183",
     "brandNames": [],
     "category": "research-chemical",
@@ -9062,7 +9063,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9091,7 +9092,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-183 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_184",
+    "id": "rc-synth-184",
     "name": "Synthetic RC-184",
     "brandNames": [],
     "category": "research-chemical",
@@ -9104,7 +9105,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9133,7 +9134,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-184 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_185",
+    "id": "rc-synth-185",
     "name": "Synthetic RC-185",
     "brandNames": [],
     "category": "research-chemical",
@@ -9146,7 +9147,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9175,7 +9176,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-185 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_186",
+    "id": "rc-synth-186",
     "name": "Synthetic RC-186",
     "brandNames": [],
     "category": "research-chemical",
@@ -9188,7 +9189,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9217,7 +9218,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-186 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_187",
+    "id": "rc-synth-187",
     "name": "Synthetic RC-187",
     "brandNames": [],
     "category": "research-chemical",
@@ -9230,7 +9231,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9259,7 +9260,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-187 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_188",
+    "id": "rc-synth-188",
     "name": "Synthetic RC-188",
     "brandNames": [],
     "category": "research-chemical",
@@ -9272,7 +9273,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9301,7 +9302,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-188 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_189",
+    "id": "rc-synth-189",
     "name": "Synthetic RC-189",
     "brandNames": [],
     "category": "research-chemical",
@@ -9314,7 +9315,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9343,7 +9344,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-189 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_190",
+    "id": "rc-synth-190",
     "name": "Synthetic RC-190",
     "brandNames": [],
     "category": "research-chemical",
@@ -9356,7 +9357,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9385,7 +9386,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-190 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_191",
+    "id": "rc-synth-191",
     "name": "Synthetic RC-191",
     "brandNames": [],
     "category": "research-chemical",
@@ -9398,7 +9399,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9427,7 +9428,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-191 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_192",
+    "id": "rc-synth-192",
     "name": "Synthetic RC-192",
     "brandNames": [],
     "category": "research-chemical",
@@ -9440,7 +9441,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9469,7 +9470,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-192 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_193",
+    "id": "rc-synth-193",
     "name": "Synthetic RC-193",
     "brandNames": [],
     "category": "research-chemical",
@@ -9482,7 +9483,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9511,7 +9512,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-193 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_194",
+    "id": "rc-synth-194",
     "name": "Synthetic RC-194",
     "brandNames": [],
     "category": "research-chemical",
@@ -9524,7 +9525,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9553,7 +9554,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-194 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_195",
+    "id": "rc-synth-195",
     "name": "Synthetic RC-195",
     "brandNames": [],
     "category": "research-chemical",
@@ -9566,7 +9567,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9595,7 +9596,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-195 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_196",
+    "id": "rc-synth-196",
     "name": "Synthetic RC-196",
     "brandNames": [],
     "category": "research-chemical",
@@ -9608,7 +9609,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9637,7 +9638,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-196 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_197",
+    "id": "rc-synth-197",
     "name": "Synthetic RC-197",
     "brandNames": [],
     "category": "research-chemical",
@@ -9650,7 +9651,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9679,7 +9680,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-197 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_198",
+    "id": "rc-synth-198",
     "name": "Synthetic RC-198",
     "brandNames": [],
     "category": "research-chemical",
@@ -9692,7 +9693,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9721,7 +9722,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-198 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_199",
+    "id": "rc-synth-199",
     "name": "Synthetic RC-199",
     "brandNames": [],
     "category": "research-chemical",
@@ -9734,7 +9735,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9763,7 +9764,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-199 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_200",
+    "id": "rc-synth-200",
     "name": "Synthetic RC-200",
     "brandNames": [],
     "category": "research-chemical",
@@ -9776,7 +9777,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9805,7 +9806,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-200 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_201",
+    "id": "rc-synth-201",
     "name": "Synthetic RC-201",
     "brandNames": [],
     "category": "research-chemical",
@@ -9818,7 +9819,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9847,7 +9848,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-201 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_202",
+    "id": "rc-synth-202",
     "name": "Synthetic RC-202",
     "brandNames": [],
     "category": "research-chemical",
@@ -9860,7 +9861,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9889,7 +9890,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-202 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_203",
+    "id": "rc-synth-203",
     "name": "Synthetic RC-203",
     "brandNames": [],
     "category": "research-chemical",
@@ -9902,7 +9903,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9931,7 +9932,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-203 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_204",
+    "id": "rc-synth-204",
     "name": "Synthetic RC-204",
     "brandNames": [],
     "category": "research-chemical",
@@ -9944,7 +9945,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -9973,7 +9974,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-204 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_205",
+    "id": "rc-synth-205",
     "name": "Synthetic RC-205",
     "brandNames": [],
     "category": "research-chemical",
@@ -9986,7 +9987,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10015,7 +10016,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-205 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_206",
+    "id": "rc-synth-206",
     "name": "Synthetic RC-206",
     "brandNames": [],
     "category": "research-chemical",
@@ -10028,7 +10029,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10057,7 +10058,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-206 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_207",
+    "id": "rc-synth-207",
     "name": "Synthetic RC-207",
     "brandNames": [],
     "category": "research-chemical",
@@ -10070,7 +10071,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10099,7 +10100,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-207 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_208",
+    "id": "rc-synth-208",
     "name": "Synthetic RC-208",
     "brandNames": [],
     "category": "research-chemical",
@@ -10112,7 +10113,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10141,7 +10142,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-208 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_209",
+    "id": "rc-synth-209",
     "name": "Synthetic RC-209",
     "brandNames": [],
     "category": "research-chemical",
@@ -10154,7 +10155,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10183,7 +10184,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-209 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_210",
+    "id": "rc-synth-210",
     "name": "Synthetic RC-210",
     "brandNames": [],
     "category": "research-chemical",
@@ -10196,7 +10197,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10225,7 +10226,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-210 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_211",
+    "id": "rc-synth-211",
     "name": "Synthetic RC-211",
     "brandNames": [],
     "category": "research-chemical",
@@ -10238,7 +10239,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10267,7 +10268,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-211 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_212",
+    "id": "rc-synth-212",
     "name": "Synthetic RC-212",
     "brandNames": [],
     "category": "research-chemical",
@@ -10280,7 +10281,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10309,7 +10310,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-212 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_213",
+    "id": "rc-synth-213",
     "name": "Synthetic RC-213",
     "brandNames": [],
     "category": "research-chemical",
@@ -10322,7 +10323,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10351,7 +10352,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-213 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_214",
+    "id": "rc-synth-214",
     "name": "Synthetic RC-214",
     "brandNames": [],
     "category": "research-chemical",
@@ -10364,7 +10365,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10393,7 +10394,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-214 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_215",
+    "id": "rc-synth-215",
     "name": "Synthetic RC-215",
     "brandNames": [],
     "category": "research-chemical",
@@ -10406,7 +10407,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10435,7 +10436,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-215 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_216",
+    "id": "rc-synth-216",
     "name": "Synthetic RC-216",
     "brandNames": [],
     "category": "research-chemical",
@@ -10448,7 +10449,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10477,7 +10478,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-216 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_217",
+    "id": "rc-synth-217",
     "name": "Synthetic RC-217",
     "brandNames": [],
     "category": "research-chemical",
@@ -10490,7 +10491,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10519,7 +10520,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-217 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_218",
+    "id": "rc-synth-218",
     "name": "Synthetic RC-218",
     "brandNames": [],
     "category": "research-chemical",
@@ -10532,7 +10533,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10561,7 +10562,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-218 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_219",
+    "id": "rc-synth-219",
     "name": "Synthetic RC-219",
     "brandNames": [],
     "category": "research-chemical",
@@ -10574,7 +10575,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10603,7 +10604,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-219 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_220",
+    "id": "rc-synth-220",
     "name": "Synthetic RC-220",
     "brandNames": [],
     "category": "research-chemical",
@@ -10616,7 +10617,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10645,7 +10646,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-220 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_221",
+    "id": "rc-synth-221",
     "name": "Synthetic RC-221",
     "brandNames": [],
     "category": "research-chemical",
@@ -10658,7 +10659,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10687,7 +10688,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-221 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_222",
+    "id": "rc-synth-222",
     "name": "Synthetic RC-222",
     "brandNames": [],
     "category": "research-chemical",
@@ -10700,7 +10701,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10729,7 +10730,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-222 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_223",
+    "id": "rc-synth-223",
     "name": "Synthetic RC-223",
     "brandNames": [],
     "category": "research-chemical",
@@ -10742,7 +10743,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10771,7 +10772,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-223 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_224",
+    "id": "rc-synth-224",
     "name": "Synthetic RC-224",
     "brandNames": [],
     "category": "research-chemical",
@@ -10784,7 +10785,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10813,7 +10814,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-224 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_225",
+    "id": "rc-synth-225",
     "name": "Synthetic RC-225",
     "brandNames": [],
     "category": "research-chemical",
@@ -10826,7 +10827,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10855,7 +10856,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-225 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_226",
+    "id": "rc-synth-226",
     "name": "Synthetic RC-226",
     "brandNames": [],
     "category": "research-chemical",
@@ -10868,7 +10869,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10897,7 +10898,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-226 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_227",
+    "id": "rc-synth-227",
     "name": "Synthetic RC-227",
     "brandNames": [],
     "category": "research-chemical",
@@ -10910,7 +10911,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10939,7 +10940,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-227 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_228",
+    "id": "rc-synth-228",
     "name": "Synthetic RC-228",
     "brandNames": [],
     "category": "research-chemical",
@@ -10952,7 +10953,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -10981,7 +10982,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-228 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_229",
+    "id": "rc-synth-229",
     "name": "Synthetic RC-229",
     "brandNames": [],
     "category": "research-chemical",
@@ -10994,7 +10995,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11023,7 +11024,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-229 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_230",
+    "id": "rc-synth-230",
     "name": "Synthetic RC-230",
     "brandNames": [],
     "category": "research-chemical",
@@ -11036,7 +11037,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11065,7 +11066,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-230 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_231",
+    "id": "rc-synth-231",
     "name": "Synthetic RC-231",
     "brandNames": [],
     "category": "research-chemical",
@@ -11078,7 +11079,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11107,7 +11108,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-231 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_232",
+    "id": "rc-synth-232",
     "name": "Synthetic RC-232",
     "brandNames": [],
     "category": "research-chemical",
@@ -11120,7 +11121,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11149,7 +11150,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-232 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_233",
+    "id": "rc-synth-233",
     "name": "Synthetic RC-233",
     "brandNames": [],
     "category": "research-chemical",
@@ -11162,7 +11163,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11191,7 +11192,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-233 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_234",
+    "id": "rc-synth-234",
     "name": "Synthetic RC-234",
     "brandNames": [],
     "category": "research-chemical",
@@ -11204,7 +11205,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11233,7 +11234,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-234 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_235",
+    "id": "rc-synth-235",
     "name": "Synthetic RC-235",
     "brandNames": [],
     "category": "research-chemical",
@@ -11246,7 +11247,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11275,7 +11276,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-235 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_236",
+    "id": "rc-synth-236",
     "name": "Synthetic RC-236",
     "brandNames": [],
     "category": "research-chemical",
@@ -11288,7 +11289,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11317,7 +11318,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-236 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_237",
+    "id": "rc-synth-237",
     "name": "Synthetic RC-237",
     "brandNames": [],
     "category": "research-chemical",
@@ -11330,7 +11331,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11359,7 +11360,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-237 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_238",
+    "id": "rc-synth-238",
     "name": "Synthetic RC-238",
     "brandNames": [],
     "category": "research-chemical",
@@ -11372,7 +11373,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11401,7 +11402,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-238 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_239",
+    "id": "rc-synth-239",
     "name": "Synthetic RC-239",
     "brandNames": [],
     "category": "research-chemical",
@@ -11414,7 +11415,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11443,7 +11444,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-239 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_240",
+    "id": "rc-synth-240",
     "name": "Synthetic RC-240",
     "brandNames": [],
     "category": "research-chemical",
@@ -11456,7 +11457,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11485,7 +11486,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-240 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_241",
+    "id": "rc-synth-241",
     "name": "Synthetic RC-241",
     "brandNames": [],
     "category": "research-chemical",
@@ -11498,7 +11499,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11527,7 +11528,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-241 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_242",
+    "id": "rc-synth-242",
     "name": "Synthetic RC-242",
     "brandNames": [],
     "category": "research-chemical",
@@ -11540,7 +11541,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11569,7 +11570,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-242 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_243",
+    "id": "rc-synth-243",
     "name": "Synthetic RC-243",
     "brandNames": [],
     "category": "research-chemical",
@@ -11582,7 +11583,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11611,7 +11612,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-243 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_244",
+    "id": "rc-synth-244",
     "name": "Synthetic RC-244",
     "brandNames": [],
     "category": "research-chemical",
@@ -11624,7 +11625,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11653,7 +11654,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-244 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_245",
+    "id": "rc-synth-245",
     "name": "Synthetic RC-245",
     "brandNames": [],
     "category": "research-chemical",
@@ -11666,7 +11667,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11695,7 +11696,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-245 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_246",
+    "id": "rc-synth-246",
     "name": "Synthetic RC-246",
     "brandNames": [],
     "category": "research-chemical",
@@ -11708,7 +11709,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11737,7 +11738,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-246 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_247",
+    "id": "rc-synth-247",
     "name": "Synthetic RC-247",
     "brandNames": [],
     "category": "research-chemical",
@@ -11750,7 +11751,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11779,7 +11780,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-247 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_248",
+    "id": "rc-synth-248",
     "name": "Synthetic RC-248",
     "brandNames": [],
     "category": "research-chemical",
@@ -11792,7 +11793,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11821,7 +11822,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-248 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_249",
+    "id": "rc-synth-249",
     "name": "Synthetic RC-249",
     "brandNames": [],
     "category": "research-chemical",
@@ -11834,7 +11835,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11863,7 +11864,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-249 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_250",
+    "id": "rc-synth-250",
     "name": "Synthetic RC-250",
     "brandNames": [],
     "category": "research-chemical",
@@ -11876,7 +11877,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11905,7 +11906,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-250 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_251",
+    "id": "rc-synth-251",
     "name": "Synthetic RC-251",
     "brandNames": [],
     "category": "research-chemical",
@@ -11918,7 +11919,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11947,7 +11948,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-251 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_252",
+    "id": "rc-synth-252",
     "name": "Synthetic RC-252",
     "brandNames": [],
     "category": "research-chemical",
@@ -11960,7 +11961,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -11989,7 +11990,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-252 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_253",
+    "id": "rc-synth-253",
     "name": "Synthetic RC-253",
     "brandNames": [],
     "category": "research-chemical",
@@ -12002,7 +12003,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12031,7 +12032,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-253 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_254",
+    "id": "rc-synth-254",
     "name": "Synthetic RC-254",
     "brandNames": [],
     "category": "research-chemical",
@@ -12044,7 +12045,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12073,7 +12074,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-254 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_255",
+    "id": "rc-synth-255",
     "name": "Synthetic RC-255",
     "brandNames": [],
     "category": "research-chemical",
@@ -12086,7 +12087,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12115,7 +12116,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-255 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_256",
+    "id": "rc-synth-256",
     "name": "Synthetic RC-256",
     "brandNames": [],
     "category": "research-chemical",
@@ -12128,7 +12129,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12157,7 +12158,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-256 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_257",
+    "id": "rc-synth-257",
     "name": "Synthetic RC-257",
     "brandNames": [],
     "category": "research-chemical",
@@ -12170,7 +12171,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12199,7 +12200,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-257 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_258",
+    "id": "rc-synth-258",
     "name": "Synthetic RC-258",
     "brandNames": [],
     "category": "research-chemical",
@@ -12212,7 +12213,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12241,7 +12242,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-258 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_259",
+    "id": "rc-synth-259",
     "name": "Synthetic RC-259",
     "brandNames": [],
     "category": "research-chemical",
@@ -12254,7 +12255,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12283,7 +12284,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-259 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_260",
+    "id": "rc-synth-260",
     "name": "Synthetic RC-260",
     "brandNames": [],
     "category": "research-chemical",
@@ -12296,7 +12297,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12325,7 +12326,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-260 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_261",
+    "id": "rc-synth-261",
     "name": "Synthetic RC-261",
     "brandNames": [],
     "category": "research-chemical",
@@ -12338,7 +12339,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12367,7 +12368,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-261 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_262",
+    "id": "rc-synth-262",
     "name": "Synthetic RC-262",
     "brandNames": [],
     "category": "research-chemical",
@@ -12380,7 +12381,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12409,7 +12410,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-262 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_263",
+    "id": "rc-synth-263",
     "name": "Synthetic RC-263",
     "brandNames": [],
     "category": "research-chemical",
@@ -12422,7 +12423,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12451,7 +12452,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-263 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_264",
+    "id": "rc-synth-264",
     "name": "Synthetic RC-264",
     "brandNames": [],
     "category": "research-chemical",
@@ -12464,7 +12465,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12493,7 +12494,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-264 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_265",
+    "id": "rc-synth-265",
     "name": "Synthetic RC-265",
     "brandNames": [],
     "category": "research-chemical",
@@ -12506,7 +12507,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12535,7 +12536,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-265 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_266",
+    "id": "rc-synth-266",
     "name": "Synthetic RC-266",
     "brandNames": [],
     "category": "research-chemical",
@@ -12548,7 +12549,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12577,7 +12578,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-266 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_267",
+    "id": "rc-synth-267",
     "name": "Synthetic RC-267",
     "brandNames": [],
     "category": "research-chemical",
@@ -12590,7 +12591,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12619,7 +12620,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-267 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_268",
+    "id": "rc-synth-268",
     "name": "Synthetic RC-268",
     "brandNames": [],
     "category": "research-chemical",
@@ -12632,7 +12633,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12661,7 +12662,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-268 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_269",
+    "id": "rc-synth-269",
     "name": "Synthetic RC-269",
     "brandNames": [],
     "category": "research-chemical",
@@ -12674,7 +12675,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12703,7 +12704,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-269 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_270",
+    "id": "rc-synth-270",
     "name": "Synthetic RC-270",
     "brandNames": [],
     "category": "research-chemical",
@@ -12716,7 +12717,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12745,7 +12746,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-270 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_271",
+    "id": "rc-synth-271",
     "name": "Synthetic RC-271",
     "brandNames": [],
     "category": "research-chemical",
@@ -12758,7 +12759,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12787,7 +12788,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-271 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_272",
+    "id": "rc-synth-272",
     "name": "Synthetic RC-272",
     "brandNames": [],
     "category": "research-chemical",
@@ -12800,7 +12801,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12829,7 +12830,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-272 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_273",
+    "id": "rc-synth-273",
     "name": "Synthetic RC-273",
     "brandNames": [],
     "category": "research-chemical",
@@ -12842,7 +12843,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12871,7 +12872,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-273 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_274",
+    "id": "rc-synth-274",
     "name": "Synthetic RC-274",
     "brandNames": [],
     "category": "research-chemical",
@@ -12884,7 +12885,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12913,7 +12914,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-274 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_275",
+    "id": "rc-synth-275",
     "name": "Synthetic RC-275",
     "brandNames": [],
     "category": "research-chemical",
@@ -12926,7 +12927,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12955,7 +12956,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-275 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_276",
+    "id": "rc-synth-276",
     "name": "Synthetic RC-276",
     "brandNames": [],
     "category": "research-chemical",
@@ -12968,7 +12969,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -12997,7 +12998,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-276 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_277",
+    "id": "rc-synth-277",
     "name": "Synthetic RC-277",
     "brandNames": [],
     "category": "research-chemical",
@@ -13010,7 +13011,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13039,7 +13040,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-277 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_278",
+    "id": "rc-synth-278",
     "name": "Synthetic RC-278",
     "brandNames": [],
     "category": "research-chemical",
@@ -13052,7 +13053,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13081,7 +13082,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-278 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_279",
+    "id": "rc-synth-279",
     "name": "Synthetic RC-279",
     "brandNames": [],
     "category": "research-chemical",
@@ -13094,7 +13095,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13123,7 +13124,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-279 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_280",
+    "id": "rc-synth-280",
     "name": "Synthetic RC-280",
     "brandNames": [],
     "category": "research-chemical",
@@ -13136,7 +13137,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13165,7 +13166,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-280 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_281",
+    "id": "rc-synth-281",
     "name": "Synthetic RC-281",
     "brandNames": [],
     "category": "research-chemical",
@@ -13178,7 +13179,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13207,7 +13208,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-281 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_282",
+    "id": "rc-synth-282",
     "name": "Synthetic RC-282",
     "brandNames": [],
     "category": "research-chemical",
@@ -13220,7 +13221,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13249,7 +13250,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-282 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_283",
+    "id": "rc-synth-283",
     "name": "Synthetic RC-283",
     "brandNames": [],
     "category": "research-chemical",
@@ -13262,7 +13263,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13291,7 +13292,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-283 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_284",
+    "id": "rc-synth-284",
     "name": "Synthetic RC-284",
     "brandNames": [],
     "category": "research-chemical",
@@ -13304,7 +13305,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13333,7 +13334,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-284 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_285",
+    "id": "rc-synth-285",
     "name": "Synthetic RC-285",
     "brandNames": [],
     "category": "research-chemical",
@@ -13346,7 +13347,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13375,7 +13376,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-285 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_286",
+    "id": "rc-synth-286",
     "name": "Synthetic RC-286",
     "brandNames": [],
     "category": "research-chemical",
@@ -13388,7 +13389,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13417,7 +13418,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-286 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_287",
+    "id": "rc-synth-287",
     "name": "Synthetic RC-287",
     "brandNames": [],
     "category": "research-chemical",
@@ -13430,7 +13431,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13459,7 +13460,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-287 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_288",
+    "id": "rc-synth-288",
     "name": "Synthetic RC-288",
     "brandNames": [],
     "category": "research-chemical",
@@ -13472,7 +13473,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13501,7 +13502,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-288 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_289",
+    "id": "rc-synth-289",
     "name": "Synthetic RC-289",
     "brandNames": [],
     "category": "research-chemical",
@@ -13514,7 +13515,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13543,7 +13544,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-289 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_290",
+    "id": "rc-synth-290",
     "name": "Synthetic RC-290",
     "brandNames": [],
     "category": "research-chemical",
@@ -13556,7 +13557,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13585,7 +13586,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-290 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_291",
+    "id": "rc-synth-291",
     "name": "Synthetic RC-291",
     "brandNames": [],
     "category": "research-chemical",
@@ -13598,7 +13599,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13627,7 +13628,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-291 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_292",
+    "id": "rc-synth-292",
     "name": "Synthetic RC-292",
     "brandNames": [],
     "category": "research-chemical",
@@ -13640,7 +13641,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13669,7 +13670,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-292 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_293",
+    "id": "rc-synth-293",
     "name": "Synthetic RC-293",
     "brandNames": [],
     "category": "research-chemical",
@@ -13682,7 +13683,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13711,7 +13712,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-293 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_294",
+    "id": "rc-synth-294",
     "name": "Synthetic RC-294",
     "brandNames": [],
     "category": "research-chemical",
@@ -13724,7 +13725,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13753,7 +13754,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-294 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_295",
+    "id": "rc-synth-295",
     "name": "Synthetic RC-295",
     "brandNames": [],
     "category": "research-chemical",
@@ -13766,7 +13767,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13795,7 +13796,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-295 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_296",
+    "id": "rc-synth-296",
     "name": "Synthetic RC-296",
     "brandNames": [],
     "category": "research-chemical",
@@ -13808,7 +13809,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13837,7 +13838,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-296 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_297",
+    "id": "rc-synth-297",
     "name": "Synthetic RC-297",
     "brandNames": [],
     "category": "research-chemical",
@@ -13850,7 +13851,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13879,7 +13880,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-297 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_298",
+    "id": "rc-synth-298",
     "name": "Synthetic RC-298",
     "brandNames": [],
     "category": "research-chemical",
@@ -13892,7 +13893,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13921,7 +13922,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-298 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_299",
+    "id": "rc-synth-299",
     "name": "Synthetic RC-299",
     "brandNames": [],
     "category": "research-chemical",
@@ -13934,7 +13935,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -13963,7 +13964,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-299 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_300",
+    "id": "rc-synth-300",
     "name": "Synthetic RC-300",
     "brandNames": [],
     "category": "research-chemical",
@@ -13976,7 +13977,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14005,7 +14006,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-300 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_301",
+    "id": "rc-synth-301",
     "name": "Synthetic RC-301",
     "brandNames": [],
     "category": "research-chemical",
@@ -14018,7 +14019,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14047,7 +14048,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-301 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_302",
+    "id": "rc-synth-302",
     "name": "Synthetic RC-302",
     "brandNames": [],
     "category": "research-chemical",
@@ -14060,7 +14061,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14089,7 +14090,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-302 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_303",
+    "id": "rc-synth-303",
     "name": "Synthetic RC-303",
     "brandNames": [],
     "category": "research-chemical",
@@ -14102,7 +14103,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14131,7 +14132,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-303 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_304",
+    "id": "rc-synth-304",
     "name": "Synthetic RC-304",
     "brandNames": [],
     "category": "research-chemical",
@@ -14144,7 +14145,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14173,7 +14174,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-304 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_305",
+    "id": "rc-synth-305",
     "name": "Synthetic RC-305",
     "brandNames": [],
     "category": "research-chemical",
@@ -14186,7 +14187,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14215,7 +14216,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-305 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_306",
+    "id": "rc-synth-306",
     "name": "Synthetic RC-306",
     "brandNames": [],
     "category": "research-chemical",
@@ -14228,7 +14229,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14257,7 +14258,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-306 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_307",
+    "id": "rc-synth-307",
     "name": "Synthetic RC-307",
     "brandNames": [],
     "category": "research-chemical",
@@ -14270,7 +14271,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14299,7 +14300,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-307 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_308",
+    "id": "rc-synth-308",
     "name": "Synthetic RC-308",
     "brandNames": [],
     "category": "research-chemical",
@@ -14312,7 +14313,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14341,7 +14342,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-308 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_309",
+    "id": "rc-synth-309",
     "name": "Synthetic RC-309",
     "brandNames": [],
     "category": "research-chemical",
@@ -14354,7 +14355,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14383,7 +14384,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-309 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_310",
+    "id": "rc-synth-310",
     "name": "Synthetic RC-310",
     "brandNames": [],
     "category": "research-chemical",
@@ -14396,7 +14397,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14425,7 +14426,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-310 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_311",
+    "id": "rc-synth-311",
     "name": "Synthetic RC-311",
     "brandNames": [],
     "category": "research-chemical",
@@ -14438,7 +14439,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14467,7 +14468,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-311 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_312",
+    "id": "rc-synth-312",
     "name": "Synthetic RC-312",
     "brandNames": [],
     "category": "research-chemical",
@@ -14480,7 +14481,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14509,7 +14510,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-312 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_313",
+    "id": "rc-synth-313",
     "name": "Synthetic RC-313",
     "brandNames": [],
     "category": "research-chemical",
@@ -14522,7 +14523,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14551,7 +14552,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-313 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_314",
+    "id": "rc-synth-314",
     "name": "Synthetic RC-314",
     "brandNames": [],
     "category": "research-chemical",
@@ -14564,7 +14565,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14593,7 +14594,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-314 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_315",
+    "id": "rc-synth-315",
     "name": "Synthetic RC-315",
     "brandNames": [],
     "category": "research-chemical",
@@ -14606,7 +14607,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14635,7 +14636,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-315 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_316",
+    "id": "rc-synth-316",
     "name": "Synthetic RC-316",
     "brandNames": [],
     "category": "research-chemical",
@@ -14648,7 +14649,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14677,7 +14678,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-316 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_317",
+    "id": "rc-synth-317",
     "name": "Synthetic RC-317",
     "brandNames": [],
     "category": "research-chemical",
@@ -14690,7 +14691,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14719,7 +14720,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-317 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_318",
+    "id": "rc-synth-318",
     "name": "Synthetic RC-318",
     "brandNames": [],
     "category": "research-chemical",
@@ -14732,7 +14733,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14761,7 +14762,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-318 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_319",
+    "id": "rc-synth-319",
     "name": "Synthetic RC-319",
     "brandNames": [],
     "category": "research-chemical",
@@ -14774,7 +14775,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14803,7 +14804,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-319 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_320",
+    "id": "rc-synth-320",
     "name": "Synthetic RC-320",
     "brandNames": [],
     "category": "research-chemical",
@@ -14816,7 +14817,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14845,7 +14846,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-320 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_321",
+    "id": "rc-synth-321",
     "name": "Synthetic RC-321",
     "brandNames": [],
     "category": "research-chemical",
@@ -14858,7 +14859,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14887,7 +14888,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-321 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_322",
+    "id": "rc-synth-322",
     "name": "Synthetic RC-322",
     "brandNames": [],
     "category": "research-chemical",
@@ -14900,7 +14901,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14929,7 +14930,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-322 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_323",
+    "id": "rc-synth-323",
     "name": "Synthetic RC-323",
     "brandNames": [],
     "category": "research-chemical",
@@ -14942,7 +14943,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -14971,7 +14972,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-323 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_324",
+    "id": "rc-synth-324",
     "name": "Synthetic RC-324",
     "brandNames": [],
     "category": "research-chemical",
@@ -14984,7 +14985,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15013,7 +15014,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-324 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_325",
+    "id": "rc-synth-325",
     "name": "Synthetic RC-325",
     "brandNames": [],
     "category": "research-chemical",
@@ -15026,7 +15027,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15055,7 +15056,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-325 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_326",
+    "id": "rc-synth-326",
     "name": "Synthetic RC-326",
     "brandNames": [],
     "category": "research-chemical",
@@ -15068,7 +15069,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15097,7 +15098,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-326 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_327",
+    "id": "rc-synth-327",
     "name": "Synthetic RC-327",
     "brandNames": [],
     "category": "research-chemical",
@@ -15110,7 +15111,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15139,7 +15140,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-327 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_328",
+    "id": "rc-synth-328",
     "name": "Synthetic RC-328",
     "brandNames": [],
     "category": "research-chemical",
@@ -15152,7 +15153,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15181,7 +15182,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-328 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_329",
+    "id": "rc-synth-329",
     "name": "Synthetic RC-329",
     "brandNames": [],
     "category": "research-chemical",
@@ -15194,7 +15195,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15223,7 +15224,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-329 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_330",
+    "id": "rc-synth-330",
     "name": "Synthetic RC-330",
     "brandNames": [],
     "category": "research-chemical",
@@ -15236,7 +15237,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15265,7 +15266,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-330 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_331",
+    "id": "rc-synth-331",
     "name": "Synthetic RC-331",
     "brandNames": [],
     "category": "research-chemical",
@@ -15278,7 +15279,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15307,7 +15308,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-331 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_332",
+    "id": "rc-synth-332",
     "name": "Synthetic RC-332",
     "brandNames": [],
     "category": "research-chemical",
@@ -15320,7 +15321,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15349,7 +15350,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-332 is classified as a research-chemical belonging to the Substituted Cathinone class. DAT/NET/SERT inhibitor or releaser. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_333",
+    "id": "rc-synth-333",
     "name": "Synthetic RC-333",
     "brandNames": [],
     "category": "research-chemical",
@@ -15362,7 +15363,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -15391,7 +15392,7 @@ const _rawSubstances: any[] = [
     "encyclopediaEntry": "Synthetic RC-333 is classified as a research-chemical belonging to the Synthetic Cannabinoid class. CB1/CB2 full agonist. It is often sought out recreationally due to its cns-depressant properties, and is typically administered orally or via nasal."
   },
   {
-    "id": "rc_synth_334",
+    "id": "rc-synth-334",
     "name": "Synthetic RC-334",
     "brandNames": [],
     "category": "research-chemical",
@@ -15404,7 +15405,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "nasal"
+      "intranasal"
     ],
     "cypMetabolism": [
       "CYP3A4",
@@ -16089,7 +16090,7 @@ const _rawSubstances: any[] = [
     ],
     "routes": [
       "oral",
-      "subcutaneous",
+      "SC",
       "intranasal"
     ],
     "mechanism": "5-HT1B/1D agonism causing cranial vasoconstriction.",
@@ -18365,7 +18366,7 @@ const _rawSubstances: any[] = [
       150
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Antithrombin-mediated factor Xa inhibition.",
     "bodySystems": [
@@ -18756,7 +18757,7 @@ const _rawSubstances: any[] = [
       80
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Basal insulin receptor agonism.",
     "bodySystems": [
@@ -20405,10 +20406,19 @@ const _rawSubstances: any[] = [
     "vdLKg": 1,
     "clearanceMlMinKg": 1.16,
     "id": "amphetamine",
-    "toxicity": { "toxicConcentrationMgL": 0.5, "lethalConcentrationMgL": 2.5 },
+    "toxicity": {
+      "toxicConcentrationMgL": 0.5,
+      "lethalConcentrationMgL": 2.5
+    },
     "bindingAffinities": {
-      "TAAR1": { "kiNm": 45.0, "intrinsicActivity": 1.0 },
-      "VMAT2": { "kiNm": 120.0, "intrinsicActivity": 1.0 }
+      "TAAR1": {
+        "kiNm": 45,
+        "intrinsicActivity": 1
+      },
+      "VMAT2": {
+        "kiNm": 120,
+        "intrinsicActivity": 1
+      }
     },
     "name": "Amphetamine",
     "brandNames": [
@@ -20802,9 +20812,15 @@ const _rawSubstances: any[] = [
     "vdLKg": 1,
     "clearanceMlMinKg": 2.89,
     "id": "oxycodone",
-    "toxicity": { "toxicConcentrationMgL": 0.2, "lethalConcentrationMgL": 0.6 },
+    "toxicity": {
+      "toxicConcentrationMgL": 0.2,
+      "lethalConcentrationMgL": 0.6
+    },
     "bindingAffinities": {
-      "MOR": { "kiNm": 18.0, "intrinsicActivity": 0.8 }
+      "MOR": {
+        "kiNm": 18,
+        "intrinsicActivity": 0.8
+      }
     },
     "name": "Oxycodone",
     "brandNames": [
@@ -21089,7 +21105,10 @@ const _rawSubstances: any[] = [
     "clearanceMlMinKg": 7.7,
     "id": "naloxone",
     "bindingAffinities": {
-      "MOR": { "kiNm": 0.9, "intrinsicActivity": 0.0 }
+      "MOR": {
+        "kiNm": 0.9,
+        "intrinsicActivity": 0
+      }
     },
     "name": "Naloxone",
     "brandNames": [
@@ -21927,37 +21946,6 @@ const _rawSubstances: any[] = [
   {
     "bioavailability": 0.7,
     "vdLKg": 1,
-    "clearanceMlMinKg": 1.92,
-    "id": "2c-b",
-    "name": "2C-B",
-    "brandNames": [],
-    "category": "research-chemical",
-    "drugClass": "Phenethylamine psychedelic",
-    "halfLifeHours": 6,
-    "typicalDoseMg": 20,
-    "doseRangeMg": [
-      10,
-      30
-    ],
-    "routes": [
-      "oral"
-    ],
-    "mechanism": "5-HT2A partial agonism.",
-    "bodySystems": [
-      "CNS"
-    ],
-    "warnings": [
-      "Limited human pharmacology data"
-    ],
-    "tags": [
-      "serotonergic"
-    ],
-    "approximate": true,
-    "encyclopediaEntry": "2C-B is classified as a research-chemical belonging to the Phenethylamine psychedelic class. 5-HT2A partial agonism. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally."
-  },
-  {
-    "bioavailability": 0.7,
-    "vdLKg": 1,
     "clearanceMlMinKg": 1.65,
     "id": "2c-e",
     "name": "2C-E",
@@ -22086,37 +22074,6 @@ const _rawSubstances: any[] = [
   {
     "bioavailability": 0.7,
     "vdLKg": 1,
-    "clearanceMlMinKg": 2.89,
-    "id": "1p-lsd",
-    "name": "1P-LSD",
-    "brandNames": [],
-    "category": "research-chemical",
-    "drugClass": "Lysergamide psychedelic",
-    "halfLifeHours": 4,
-    "typicalDoseMg": 0.1,
-    "doseRangeMg": [
-      0.05,
-      0.2
-    ],
-    "routes": [
-      "oral"
-    ],
-    "mechanism": "Prodrug to LSD; 5-HT2A agonism.",
-    "bodySystems": [
-      "CNS"
-    ],
-    "warnings": [
-      "Limited human pharmacology data"
-    ],
-    "tags": [
-      "serotonergic"
-    ],
-    "approximate": true,
-    "encyclopediaEntry": "1P-LSD is classified as a research-chemical belonging to the Lysergamide psychedelic class. Prodrug to LSD; 5-HT2A agonism. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally."
-  },
-  {
-    "bioavailability": 0.7,
-    "vdLKg": 1,
     "clearanceMlMinKg": 3.3,
     "id": "al-lad",
     "name": "AL-LAD",
@@ -22210,44 +22167,6 @@ const _rawSubstances: any[] = [
     ],
     "approximate": true,
     "encyclopediaEntry": "Acetylfentanyl is classified as a chemical belonging to the Opioid agonist class. Potent mu-opioid agonism. It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered intravenously or intranasally."
-  },
-  {
-    "bioavailability": 0.7,
-    "vdLKg": 1,
-    "clearanceMlMinKg": 5.78,
-    "id": "jwh-018",
-    "name": "JWH-018",
-    "brandNames": [
-      "Spice",
-      "K2"
-    ],
-    "category": "chemical",
-    "drugClass": "Synthetic cannabinoid",
-    "halfLifeHours": 2,
-    "typicalDoseMg": 0.5,
-    "doseRangeMg": [
-      0.1,
-      3
-    ],
-    "routes": [
-      "inhaled"
-    ],
-    "mechanism": "Full CB1 agonism (more potent than THC).",
-    "bodySystems": [
-      "CNS",
-      "Cardiovascular"
-    ],
-    "warnings": [
-      "Psychosis",
-      "Seizure",
-      "AKI"
-    ],
-    "tags": [
-      "cns-depressant",
-      "nephrotoxic"
-    ],
-    "approximate": true,
-    "encyclopediaEntry": "JWH-018 is classified as a chemical belonging to the Synthetic cannabinoid class. Full CB1 agonism (more potent than THC). This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
   },
   {
     "bioavailability": 0.7,
@@ -26652,7 +26571,7 @@ const _rawSubstances: any[] = [
       3
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "GLP-1 receptor agonism.",
     "bodySystems": [
@@ -26680,7 +26599,7 @@ const _rawSubstances: any[] = [
       2.4
     ],
     "routes": [
-      "subcutaneous",
+      "SC",
       "oral"
     ],
     "mechanism": "GLP-1 receptor agonism.",
@@ -27812,7 +27731,7 @@ const _rawSubstances: any[] = [
       40
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Anti-TNF-alpha monoclonal antibody.",
     "bodySystems": [
@@ -27843,7 +27762,7 @@ const _rawSubstances: any[] = [
       50
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Soluble TNF receptor fusion protein.",
     "bodySystems": [
@@ -27873,7 +27792,7 @@ const _rawSubstances: any[] = [
       300
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Anti-IL-17A monoclonal antibody.",
     "bodySystems": [
@@ -27904,7 +27823,7 @@ const _rawSubstances: any[] = [
       300
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "IL-4Rα blockade inhibiting IL-4/IL-13 signaling.",
     "bodySystems": [
@@ -28624,7 +28543,7 @@ const _rawSubstances: any[] = [
     "routes": [
       "IM",
       "IV",
-      "subcutaneous"
+      "SC"
     ],
     "cypMetabolism": [
       "MAO"
@@ -29334,7 +29253,7 @@ const _rawSubstances: any[] = [
       4.5
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "GLP-1 receptor agonism.",
     "bodySystems": [
@@ -29362,7 +29281,7 @@ const _rawSubstances: any[] = [
       15
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Dual GIP/GLP-1 receptor agonism.",
     "bodySystems": [
@@ -30221,7 +30140,7 @@ const _rawSubstances: any[] = [
       1
     ],
     "routes": [
-      "subcutaneous",
+      "SC",
       "IV",
       "inhaled"
     ],
@@ -30353,7 +30272,7 @@ const _rawSubstances: any[] = [
       0.5
     ],
     "routes": [
-      "subcutaneous",
+      "SC",
       "IV"
     ],
     "mechanism": "Somatostatin receptor agonism; inhibits GH/glucagon/insulin.",
@@ -30506,7 +30425,7 @@ const _rawSubstances: any[] = [
       120
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Anti-RANKL monoclonal antibody.",
     "bodySystems": [
@@ -30567,7 +30486,7 @@ const _rawSubstances: any[] = [
       0.02
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Intermittent PTH(1-34) stimulates osteoblasts.",
     "bodySystems": [
@@ -30908,7 +30827,7 @@ const _rawSubstances: any[] = [
       375
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "IgE neutralization preventing mast cell degranulation.",
     "bodySystems": [
@@ -30939,7 +30858,7 @@ const _rawSubstances: any[] = [
       100
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "IL-5 neutralization reducing eosinophils.",
     "bodySystems": [
@@ -31380,7 +31299,7 @@ const _rawSubstances: any[] = [
       0.6
     ],
     "routes": [
-      "subcutaneous",
+      "SC",
       "IV"
     ],
     "mechanism": "Granulocyte colony-stimulating factor.",
@@ -31412,7 +31331,7 @@ const _rawSubstances: any[] = [
       40000
     ],
     "routes": [
-      "subcutaneous",
+      "SC",
       "IV"
     ],
     "mechanism": "EPO receptor agonism stimulating erythropoiesis.",
@@ -31504,7 +31423,7 @@ const _rawSubstances: any[] = [
     "routes": [
       "oral",
       "IV",
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Gamma-carboxylation cofactor for clotting factors.",
     "bodySystems": [
@@ -31591,7 +31510,7 @@ const _rawSubstances: any[] = [
       10
     ],
     "routes": [
-      "subcutaneous"
+      "SC"
     ],
     "mechanism": "Antithrombin-mediated selective Xa inhibition.",
     "bodySystems": [
@@ -34019,39 +33938,6 @@ const _rawSubstances: any[] = [
   {
     "bioavailability": 0.7,
     "vdLKg": 1,
-    "clearanceMlMinKg": 4.62,
-    "id": "4-aco-dmt",
-    "name": "4-AcO-DMT",
-    "brandNames": [
-      "Psilacetin"
-    ],
-    "category": "research-chemical",
-    "drugClass": "Tryptamine psychedelic",
-    "halfLifeHours": 2.5,
-    "typicalDoseMg": 20,
-    "doseRangeMg": [
-      10,
-      30
-    ],
-    "routes": [
-      "oral"
-    ],
-    "mechanism": "Prodrug to psilocin; 5-HT2A agonism.",
-    "bodySystems": [
-      "CNS"
-    ],
-    "warnings": [
-      "Limited human pharmacology data"
-    ],
-    "tags": [
-      "serotonergic"
-    ],
-    "approximate": true,
-    "encyclopediaEntry": "4-AcO-DMT is classified as a research-chemical belonging to the Tryptamine psychedelic class. Prodrug to psilocin; 5-HT2A agonism. It is often sought out recreationally due to its serotonergic properties, and is typically administered orally."
-  },
-  {
-    "bioavailability": 0.7,
-    "vdLKg": 1,
     "clearanceMlMinKg": 2.89,
     "id": "5-meo-mipt",
     "name": "5-MeO-MiPT",
@@ -36190,7 +36076,7 @@ const _rawSubstances: any[] = [
       6
     ],
     "routes": [
-      "subcutaneous",
+      "SC",
       "sublingual"
     ],
     "cypMetabolism": [
@@ -40445,9 +40331,16 @@ const _rawSubstances: any[] = [
     "bioavailability": 0.7,
     "vdLKg": 1,
     "id": "lisdexamfetamine",
-    "toxicity": { "toxicConcentrationMgL": 2.0, "lethalConcentrationMgL": 6.0 },
+    "toxicity": {
+      "toxicConcentrationMgL": 2,
+      "lethalConcentrationMgL": 6
+    },
     "metabolites": [
-      { "targetId": "amphetamine", "conversionFraction": 0.29, "enzyme": "RBC_hydrolase" }
+      {
+        "targetId": "amphetamine",
+        "conversionFraction": 0.29,
+        "enzyme": "RBC_hydrolase"
+      }
     ],
     "name": "Lisdexamfetamine",
     "brandNames": [
@@ -44611,7 +44504,7 @@ const _rawSubstances: any[] = [
     "name": "Ostarine (MK-2866)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 12,
     "vdLKg": 2.5,
@@ -44632,14 +44525,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ostarine (MK-2866) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ostarine (MK-2866) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ligandrol-lgd-4033",
     "name": "Ligandrol (LGD-4033)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 4,
     "vdLKg": 4.5,
@@ -44660,14 +44557,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ligandrol (LGD-4033) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ligandrol (LGD-4033) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "testolone-rad140",
     "name": "Testolone (RAD140)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 15,
     "vdLKg": 2.5,
@@ -44688,14 +44589,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Testolone (RAD140) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Testolone (RAD140) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "cardarine-gw501516",
     "name": "Cardarine (GW501516)",
     "brandNames": [],
     "drugClass": "PPARδ receptor agonist",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 2,
     "vdLKg": 2.5,
@@ -44714,14 +44619,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Cardarine (GW501516) is classified as a other belonging to the PPARδ receptor agonist class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Cardarine (GW501516) is classified as a other belonging to the PPARδ receptor agonist class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ibutamoren-mk-677",
     "name": "Ibutamoren (MK-677)",
     "brandNames": [],
     "drugClass": "Growth hormone secretagogue",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 20,
     "vdLKg": 4.5,
@@ -44740,40 +44649,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ibutamoren (MK-677) is classified as a other belonging to the Growth hormone secretagogue class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "bpc-157",
-    "name": "BPC-157",
-    "brandNames": [],
-    "drugClass": "Peptide",
-    "category": "other",
-    "halfLifeHours": 8,
-    "clearanceMlMinKg": 15,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Ibutamoren (MK-677) is classified as a other belonging to the Growth hormone secretagogue class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "BPC-157 is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tb-500",
     "name": "TB-500",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 4,
     "vdLKg": 1.5,
@@ -44792,14 +44679,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "TB-500 is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "TB-500 is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "melanotan-ii",
     "name": "Melanotan II",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 20,
     "vdLKg": 0.5,
@@ -44818,43 +44709,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Melanotan II is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "3-ho-pcp",
-    "name": "3-HO-PCP",
-    "brandNames": [],
-    "drugClass": "Dissociative",
-    "category": "psychiatric",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 7,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Melanotan II is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "cns-depressant",
-      "dissociative"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "3-HO-PCP is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "3-meo-pce",
     "name": "3-MeO-PCE",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 9,
     "vdLKg": 0.5,
@@ -44876,43 +44742,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "3-MeO-PCE is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "o-pce",
-    "name": "O-PCE",
-    "brandNames": [],
-    "drugClass": "Dissociative",
-    "category": "psychiatric",
-    "halfLifeHours": 3,
-    "clearanceMlMinKg": 15,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "3-MeO-PCE is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "cns-depressant",
-      "dissociative"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "O-PCE is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dck-deschloroketamine",
     "name": "DCK (Deschloroketamine)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 6,
     "vdLKg": 1.5,
@@ -44934,43 +44775,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DCK (Deschloroketamine) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "2-fdck",
-    "name": "2-FDCK",
-    "brandNames": [],
-    "drugClass": "Dissociative",
-    "category": "psychiatric",
-    "halfLifeHours": 10,
-    "clearanceMlMinKg": 8,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "DCK (Deschloroketamine) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "cns-depressant",
-      "dissociative"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "2-FDCK is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ephenidine",
     "name": "Ephenidine",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 6,
     "vdLKg": 3.5,
@@ -44992,14 +44808,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ephenidine is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ephenidine is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "diphenidine",
     "name": "Diphenidine",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 17,
     "vdLKg": 1.5,
@@ -45021,14 +44841,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Diphenidine is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Diphenidine is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "methoxphenidine-mxp",
     "name": "Methoxphenidine (MXP)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 3,
     "vdLKg": 4.5,
@@ -45050,14 +44874,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Methoxphenidine (MXP) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Methoxphenidine (MXP) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tiletamine",
     "name": "Tiletamine",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 16,
     "vdLKg": 2.5,
@@ -45079,42 +44907,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tiletamine is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "jwh-018",
-    "name": "JWH-018",
-    "brandNames": [],
-    "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 17,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Tiletamine is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "psychosis-risk"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "JWH-018 is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "jwh-073",
     "name": "JWH-073",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 2,
     "vdLKg": 1.5,
@@ -45135,14 +44939,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "JWH-073 is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "JWH-073 is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ur-144",
     "name": "UR-144",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 13,
     "vdLKg": 0.5,
@@ -45163,14 +44971,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "UR-144 is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "UR-144 is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "am-2201",
     "name": "AM-2201",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 19,
     "vdLKg": 3.5,
@@ -45191,42 +45003,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "AM-2201 is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "ab-fubinaca",
-    "name": "AB-FUBINACA",
-    "brandNames": [],
-    "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 9,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "AM-2201 is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "psychosis-risk"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "AB-FUBINACA is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5f-adb",
     "name": "5F-ADB",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 20,
     "vdLKg": 3.5,
@@ -45247,14 +45035,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5F-ADB is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "5F-ADB is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mdmb-chmica",
     "name": "MDMB-CHMICA",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 15,
     "vdLKg": 1.5,
@@ -45275,14 +45067,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDMB-CHMICA is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "MDMB-CHMICA is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mephedrone-4-mmc",
     "name": "Mephedrone (4-MMC)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 3,
     "vdLKg": 3.5,
@@ -45305,14 +45101,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mephedrone (4-MMC) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "Mephedrone (4-MMC) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "methylone-bk-mdma",
     "name": "Methylone (bk-MDMA)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 7,
     "vdLKg": 1.5,
@@ -45334,44 +45134,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Methylone (bk-MDMA) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "mdpv",
-    "name": "MDPV",
-    "brandNames": [],
-    "drugClass": "Cathinone",
-    "category": "psychiatric",
-    "halfLifeHours": 11,
-    "clearanceMlMinKg": 3,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Methylone (bk-MDMA) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "stimulant",
-      "dopaminergic",
-      "psychosis-risk"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "MDPV is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "alpha-pvp-flakka",
     "name": "alpha-PVP (Flakka)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -45394,14 +45168,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "alpha-PVP (Flakka) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "alpha-PVP (Flakka) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "alpha-php",
     "name": "alpha-PHP",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 7,
     "vdLKg": 4.5,
@@ -45424,43 +45202,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "alpha-PHP is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
-  },
-  {
-    "id": "3-mmc",
-    "name": "3-MMC",
-    "brandNames": [],
-    "drugClass": "Cathinone",
-    "category": "psychiatric",
-    "halfLifeHours": 7,
-    "clearanceMlMinKg": 17,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "alpha-PHP is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "stimulant",
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "3-MMC is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-mec",
     "name": "4-MEC",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 8,
     "vdLKg": 3.5,
@@ -45482,14 +45235,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-MEC is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-MEC is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pentedrone",
     "name": "Pentedrone",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 8,
     "vdLKg": 0.5,
@@ -45511,14 +45268,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pentedrone is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Pentedrone is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "hexen-n-ethylhexedrone",
     "name": "Hexen (N-Ethylhexedrone)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 3,
     "vdLKg": 2.5,
@@ -45540,104 +45301,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Hexen (N-Ethylhexedrone) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "u-47700",
-    "name": "U-47700",
-    "brandNames": [],
-    "drugClass": "Synthetic Opioid",
-    "category": "pain",
-    "halfLifeHours": 8,
-    "clearanceMlMinKg": 5,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Hexen (N-Ethylhexedrone) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "opioid",
-      "cns-depressant",
-      "respiratory-depressant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "U-47700 is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "isotonitazene",
-    "name": "Isotonitazene",
-    "brandNames": [],
-    "drugClass": "Nitazene",
-    "category": "pain",
-    "halfLifeHours": 11,
-    "clearanceMlMinKg": 15,
-    "vdLKg": 1.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "opioid",
-      "cns-depressant",
-      "respiratory-depressant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Isotonitazene is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "metonitazene",
-    "name": "Metonitazene",
-    "brandNames": [],
-    "drugClass": "Nitazene",
-    "category": "pain",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 13,
-    "vdLKg": 1.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "opioid",
-      "cns-depressant",
-      "respiratory-depressant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Metonitazene is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "etonitazene",
     "name": "Etonitazene",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 12,
     "vdLKg": 0.5,
@@ -45660,14 +45335,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Etonitazene is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Etonitazene is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "protonitazene",
     "name": "Protonitazene",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 1,
     "vdLKg": 0.5,
@@ -45690,14 +45369,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Protonitazene is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Protonitazene is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "brorphine",
     "name": "Brorphine",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 13,
     "vdLKg": 0.5,
@@ -45720,14 +45403,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Brorphine is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Brorphine is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "o-desmethyltramadol-o-dsmt",
     "name": "O-Desmethyltramadol (O-DSMT)",
     "brandNames": [],
     "drugClass": "Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 17,
     "vdLKg": 0.5,
@@ -45749,14 +45436,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "O-Desmethyltramadol (O-DSMT) is classified as a pain belonging to the Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "O-Desmethyltramadol (O-DSMT) is classified as a pain belonging to the Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tianeptine-sodium",
     "name": "Tianeptine Sodium",
     "brandNames": [],
     "drugClass": "Atypical Antidepressant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 7,
     "vdLKg": 4.5,
@@ -45777,134 +45468,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tianeptine Sodium is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "etizolam",
-    "name": "Etizolam",
-    "brandNames": [],
-    "drugClass": "Thienodiazepine",
-    "category": "psychiatric",
-    "halfLifeHours": 6,
-    "clearanceMlMinKg": 16,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Tianeptine Sodium is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "benzodiazepine",
-      "cns-depressant",
-      "gaba-ergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Etizolam is classified as a psychiatric belonging to the Thienodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "clonazolam",
-    "name": "Clonazolam",
-    "brandNames": [],
-    "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
-    "halfLifeHours": 9,
-    "clearanceMlMinKg": 10,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "benzodiazepine",
-      "cns-depressant",
-      "gaba-ergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Clonazolam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "flualprazolam",
-    "name": "Flualprazolam",
-    "brandNames": [],
-    "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
-    "halfLifeHours": 8,
-    "clearanceMlMinKg": 10,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "benzodiazepine",
-      "cns-depressant",
-      "gaba-ergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Flualprazolam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "flubromazolam",
-    "name": "Flubromazolam",
-    "brandNames": [],
-    "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
-    "halfLifeHours": 5,
-    "clearanceMlMinKg": 5,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "benzodiazepine",
-      "cns-depressant",
-      "gaba-ergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Flubromazolam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "diclazepam",
     "name": "Diclazepam",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 19,
     "vdLKg": 4.5,
@@ -45927,14 +45502,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Diclazepam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Diclazepam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pyrazolam",
     "name": "Pyrazolam",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 19,
     "vdLKg": 4.5,
@@ -45957,14 +45536,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pyrazolam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Pyrazolam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bromazolam",
     "name": "Bromazolam",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 8,
     "vdLKg": 2.5,
@@ -45987,40 +45570,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Bromazolam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "piracetam",
-    "name": "Piracetam",
-    "brandNames": [],
-    "drugClass": "Racetam",
-    "category": "neurological",
-    "halfLifeHours": 10,
-    "clearanceMlMinKg": 9,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Bromazolam is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Piracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "aniracetam",
     "name": "Aniracetam",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 8,
     "vdLKg": 4.5,
@@ -46039,14 +45600,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Aniracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Aniracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "oxiracetam",
     "name": "Oxiracetam",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 16,
     "vdLKg": 3.5,
@@ -46065,14 +45630,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Oxiracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Oxiracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pramiracetam",
     "name": "Pramiracetam",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 18,
     "vdLKg": 3.5,
@@ -46091,14 +45660,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pramiracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Pramiracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "phenylpiracetam",
     "name": "Phenylpiracetam",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 12,
     "vdLKg": 0.5,
@@ -46119,14 +45692,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Phenylpiracetam is classified as a neurological belonging to the Racetam class.  It is often sought out recreationally due to its stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Phenylpiracetam is classified as a neurological belonging to the Racetam class.  It is often sought out recreationally due to its stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "fasoracetam",
     "name": "Fasoracetam",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 8,
     "vdLKg": 2.5,
@@ -46145,14 +45722,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Fasoracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Fasoracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "coluracetam",
     "name": "Coluracetam",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 2,
     "vdLKg": 0.5,
@@ -46171,69 +45752,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Coluracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "noopept",
-    "name": "Noopept",
-    "brandNames": [],
-    "drugClass": "Nootropic",
-    "category": "neurological",
-    "halfLifeHours": 9,
-    "clearanceMlMinKg": 10,
-    "vdLKg": 1.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Coluracetam is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Noopept is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "phenibut",
-    "name": "Phenibut",
-    "brandNames": [],
-    "drugClass": "GABAergic",
-    "category": "psychiatric",
-    "halfLifeHours": 2,
-    "clearanceMlMinKg": 14,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "cns-depressant",
-      "gaba-ergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Phenibut is classified as a psychiatric belonging to the GABAergic class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "picamilon",
     "name": "Picamilon",
     "brandNames": [],
     "drugClass": "Nootropic",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 10,
     "vdLKg": 1.5,
@@ -46252,14 +45782,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Picamilon is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Picamilon is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "sulbutiamine",
     "name": "Sulbutiamine",
     "brandNames": [],
     "drugClass": "Nootropic",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 14,
     "vdLKg": 4.5,
@@ -46278,152 +45812,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Sulbutiamine is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "alpha-gpc",
-    "name": "Alpha-GPC",
-    "brandNames": [],
-    "drugClass": "Choline Donor",
-    "category": "neurological",
-    "halfLifeHours": 6,
-    "clearanceMlMinKg": 6,
-    "vdLKg": 1.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Sulbutiamine is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Alpha-GPC is classified as a neurological belonging to the Choline Donor class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "4-aco-dmt",
-    "name": "4-AcO-DMT",
-    "brandNames": [],
-    "drugClass": "Tryptamine",
-    "category": "psychiatric",
-    "halfLifeHours": 6,
-    "clearanceMlMinKg": 19,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "4-AcO-DMT is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "4-ho-met",
-    "name": "4-HO-MET",
-    "brandNames": [],
-    "drugClass": "Tryptamine",
-    "category": "psychiatric",
-    "halfLifeHours": 11,
-    "clearanceMlMinKg": 19,
-    "vdLKg": 1.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "4-HO-MET is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "4-ho-mipt",
-    "name": "4-HO-MiPT",
-    "brandNames": [],
-    "drugClass": "Tryptamine",
-    "category": "psychiatric",
-    "halfLifeHours": 11,
-    "clearanceMlMinKg": 12,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "4-HO-MiPT is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "5-meo-dmt",
-    "name": "5-MeO-DMT",
-    "brandNames": [],
-    "drugClass": "Tryptamine",
-    "category": "psychiatric",
-    "halfLifeHours": 7,
-    "clearanceMlMinKg": 7,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "5-MeO-DMT is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-meo-mipt-moxy",
     "name": "5-MeO-MiPT (Moxy)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 13,
     "vdLKg": 4.5,
@@ -46445,14 +45845,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MeO-MiPT (Moxy) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MeO-MiPT (Moxy) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-meo-dipt-foxy",
     "name": "5-MeO-DiPT (Foxy)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 7,
     "vdLKg": 2.5,
@@ -46474,14 +45878,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MeO-DiPT (Foxy) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MeO-DiPT (Foxy) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dpt-dipropyltryptamine",
     "name": "DPT (Dipropyltryptamine)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 8,
     "vdLKg": 3.5,
@@ -46502,42 +45910,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DPT (Dipropyltryptamine) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "dipt",
-    "name": "DiPT",
-    "brandNames": [],
-    "drugClass": "Tryptamine",
-    "category": "psychiatric",
-    "halfLifeHours": 5,
-    "clearanceMlMinKg": 18,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "DPT (Dipropyltryptamine) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "DiPT is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "amt-alpha-methyltryptamine",
     "name": "AMT (Alpha-Methyltryptamine)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 3,
     "vdLKg": 4.5,
@@ -46560,189 +45944,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "AMT (Alpha-Methyltryptamine) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "2c-b",
-    "name": "2C-B",
-    "brandNames": [],
-    "drugClass": "Phenethylamine",
-    "category": "psychiatric",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 20,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "AMT (Alpha-Methyltryptamine) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "serotonergic",
-      "stimulant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "2C-B is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "2c-i",
-    "name": "2C-I",
-    "brandNames": [],
-    "drugClass": "Phenethylamine",
-    "category": "psychiatric",
-    "halfLifeHours": 5,
-    "clearanceMlMinKg": 20,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "stimulant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "2C-I is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "2c-e",
-    "name": "2C-E",
-    "brandNames": [],
-    "drugClass": "Phenethylamine",
-    "category": "psychiatric",
-    "halfLifeHours": 6,
-    "clearanceMlMinKg": 16,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "stimulant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "2C-E is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "2c-t-7",
-    "name": "2C-T-7",
-    "brandNames": [],
-    "drugClass": "Phenethylamine",
-    "category": "psychiatric",
-    "halfLifeHours": 5,
-    "clearanceMlMinKg": 11,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "stimulant",
-      "maoi"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "2C-T-7 is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "mescaline",
-    "name": "Mescaline",
-    "brandNames": [],
-    "drugClass": "Phenethylamine",
-    "category": "psychiatric",
-    "halfLifeHours": 2,
-    "clearanceMlMinKg": 18,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "stimulant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Mescaline is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "tma-2",
-    "name": "TMA-2",
-    "brandNames": [],
-    "drugClass": "Phenethylamine",
-    "category": "psychiatric",
-    "halfLifeHours": 8,
-    "clearanceMlMinKg": 10,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "stimulant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "TMA-2 is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "doc",
     "name": "DOC",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 15,
     "vdLKg": 1.5,
@@ -46764,102 +45977,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOC is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "dob",
-    "name": "DOB",
-    "brandNames": [],
-    "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
-    "halfLifeHours": 5,
-    "clearanceMlMinKg": 3,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "DOC is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "serotonergic",
-      "stimulant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "DOB is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "dom",
-    "name": "DOM",
-    "brandNames": [],
-    "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
-    "halfLifeHours": 9,
-    "clearanceMlMinKg": 3,
-    "vdLKg": 1.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "stimulant"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "DOM is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "bromo-dragonfly",
-    "name": "Bromo-DragonFLY",
-    "brandNames": [],
-    "drugClass": "Psychedelic Amphetamine",
-    "category": "psychiatric",
-    "halfLifeHours": 5,
-    "clearanceMlMinKg": 18,
-    "vdLKg": 1.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "stimulant",
-      "vasoconstrictor"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Bromo-DragonFLY is classified as a psychiatric belonging to the Psychedelic Amphetamine class.  It is often sought out recreationally due to its serotonergic and stimulant and vasoconstrictor properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mda-tenamfetamine",
     "name": "MDA (Tenamfetamine)",
     "brandNames": [],
     "drugClass": "Amphetamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 4,
     "vdLKg": 0.5,
@@ -46882,14 +46011,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDA (Tenamfetamine) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "MDA (Tenamfetamine) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mde-eve",
     "name": "MDE (Eve)",
     "brandNames": [],
     "drugClass": "Amphetamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 8,
     "vdLKg": 2.5,
@@ -46912,101 +46045,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDE (Eve) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "5-mapb",
-    "name": "5-MAPB",
-    "brandNames": [],
-    "drugClass": "Benzofuran",
-    "category": "psychiatric",
-    "halfLifeHours": 3,
-    "clearanceMlMinKg": 7,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "MDE (Eve) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "stimulant",
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "5-MAPB is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "6-apb",
-    "name": "6-APB",
-    "brandNames": [],
-    "drugClass": "Benzofuran",
-    "category": "psychiatric",
-    "halfLifeHours": 11,
-    "clearanceMlMinKg": 3,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "stimulant",
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "6-APB is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "5-apb",
-    "name": "5-APB",
-    "brandNames": [],
-    "drugClass": "Benzofuran",
-    "category": "psychiatric",
-    "halfLifeHours": 10,
-    "clearanceMlMinKg": 5,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "stimulant",
-      "serotonergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "5-APB is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kratom-mitragyna-speciosa",
     "name": "Kratom (Mitragyna speciosa)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 13,
     "vdLKg": 4.5,
@@ -47030,14 +46080,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kratom (Mitragyna speciosa) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kratom (Mitragyna speciosa) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ayahuasca",
     "name": "Ayahuasca",
     "brandNames": [],
     "drugClass": "Plant Brew",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -47060,14 +46114,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ayahuasca is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ayahuasca is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kava-kava-piper-methysticum",
     "name": "Kava Kava (Piper methysticum)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 2,
     "vdLKg": 0.5,
@@ -47090,73 +46148,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kava Kava (Piper methysticum) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic and holistic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "salvia-divinorum",
-    "name": "Salvia Divinorum",
-    "brandNames": [],
-    "drugClass": "Plant",
-    "category": "psychiatric",
-    "halfLifeHours": 3,
-    "clearanceMlMinKg": 7,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Kava Kava (Piper methysticum) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "dissociative",
-      "holistic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Salvia Divinorum is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "peyote",
-    "name": "Peyote",
-    "brandNames": [],
-    "drugClass": "Plant",
-    "category": "psychiatric",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 8,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "stimulant",
-      "holistic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Peyote is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "san-pedro-cactus",
     "name": "San Pedro Cactus",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 1,
     "vdLKg": 2.5,
@@ -47179,103 +46182,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "San Pedro Cactus is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "iboga",
-    "name": "Iboga",
-    "brandNames": [],
-    "drugClass": "Plant",
-    "category": "psychiatric",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 4,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "San Pedro Cactus is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "serotonergic",
-      "dissociative",
-      "holistic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Iboga is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "mandrake",
-    "name": "Mandrake",
-    "brandNames": [],
-    "drugClass": "Plant",
-    "category": "other",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 5,
-    "vdLKg": 0.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "anticholinergic",
-      "holistic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Mandrake is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "datura",
-    "name": "Datura",
-    "brandNames": [],
-    "drugClass": "Plant",
-    "category": "other",
-    "halfLifeHours": 2,
-    "clearanceMlMinKg": 16,
-    "vdLKg": 1.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "anticholinergic",
-      "holistic",
-      "psychosis-risk"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Datura is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "belladonna-deadly-nightshade",
     "name": "Belladonna (Deadly Nightshade)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 3,
     "vdLKg": 3.5,
@@ -47297,44 +46215,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Belladonna (Deadly Nightshade) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "amanita-muscaria",
-    "name": "Amanita Muscaria",
-    "brandNames": [],
-    "drugClass": "Fungus",
-    "category": "psychiatric",
-    "halfLifeHours": 6,
-    "clearanceMlMinKg": 18,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Belladonna (Deadly Nightshade) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "gaba-ergic",
-      "dissociative",
-      "holistic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Amanita Muscaria is classified as a psychiatric belonging to the Fungus class.  It is often sought out recreationally due to its gaba-ergic and dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "morning-glory-lsa",
     "name": "Morning Glory (LSA)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 5,
     "vdLKg": 0.5,
@@ -47356,73 +46248,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Morning Glory (LSA) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "hawaiian-baby-woodrose",
-    "name": "Hawaiian Baby Woodrose",
-    "brandNames": [],
-    "drugClass": "Plant",
-    "category": "psychiatric",
-    "halfLifeHours": 4,
-    "clearanceMlMinKg": 15,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Morning Glory (LSA) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "serotonergic",
-      "holistic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Hawaiian Baby Woodrose is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "yohimbe",
-    "name": "Yohimbe",
-    "brandNames": [],
-    "drugClass": "Plant",
-    "category": "other",
-    "halfLifeHours": 6,
-    "clearanceMlMinKg": 13,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "stimulant",
-      "sympathomimetic",
-      "holistic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Yohimbe is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ephedra-ma-huang",
     "name": "Ephedra (Ma Huang)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 1,
     "vdLKg": 2.5,
@@ -47445,14 +46282,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ephedra (Ma Huang) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ephedra (Ma Huang) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "betel-nut-areca-catechu",
     "name": "Betel Nut (Areca catechu)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 9,
     "vdLKg": 2.5,
@@ -47475,14 +46316,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Betel Nut (Areca catechu) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and cholinergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Betel Nut (Areca catechu) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and cholinergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "khat-catha-edulis",
     "name": "Khat (Catha edulis)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 8,
     "vdLKg": 1.5,
@@ -47505,14 +46350,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Khat (Catha edulis) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its stimulant and dopaminergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Khat (Catha edulis) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its stimulant and dopaminergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kanna-sceletium-tortuosum",
     "name": "Kanna (Sceletium tortuosum)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 13,
     "vdLKg": 4.5,
@@ -47534,14 +46383,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kanna (Sceletium tortuosum) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kanna (Sceletium tortuosum) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mitragynine",
     "name": "Mitragynine",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 10,
     "vdLKg": 4.5,
@@ -47562,14 +46415,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mitragynine is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mitragynine is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "7-hydroxymitragynine",
     "name": "7-Hydroxymitragynine",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 7,
     "vdLKg": 0.5,
@@ -47591,99 +46448,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "7-Hydroxymitragynine is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "salvinorin-a",
-    "name": "Salvinorin A",
-    "brandNames": [],
-    "drugClass": "Terpenoid",
-    "category": "psychiatric",
-    "halfLifeHours": 7,
-    "clearanceMlMinKg": 7,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "7-Hydroxymitragynine is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "dissociative"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Salvinorin A is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "ibogaine",
-    "name": "Ibogaine",
-    "brandNames": [],
-    "drugClass": "Alkaloid",
-    "category": "psychiatric",
-    "halfLifeHours": 7,
-    "clearanceMlMinKg": 5,
-    "vdLKg": 4.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "serotonergic",
-      "dissociative"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Ibogaine is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic and dissociative properties, and is typically administered orally or intravenously or sublingually."
-  },
-  {
-    "id": "muscimol",
-    "name": "Muscimol",
-    "brandNames": [],
-    "drugClass": "Isoxazole",
-    "category": "psychiatric",
-    "halfLifeHours": 11,
-    "clearanceMlMinKg": 20,
-    "vdLKg": 2.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
-    ],
-    "tags": [
-      "gaba-ergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Muscimol is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ibotenic-acid",
     "name": "Ibotenic Acid",
     "brandNames": [],
     "drugClass": "Neurotoxin",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 18,
     "vdLKg": 0.5,
@@ -47704,14 +46480,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ibotenic Acid is classified as a other belonging to the Neurotoxin class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ibotenic Acid is classified as a other belonging to the Neurotoxin class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "arecoline",
     "name": "Arecoline",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 1,
     "vdLKg": 2.5,
@@ -47732,43 +46512,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Arecoline is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
-  },
-  {
-    "id": "cathinone",
-    "name": "Cathinone",
-    "brandNames": [],
-    "drugClass": "Alkaloid",
-    "category": "psychiatric",
-    "halfLifeHours": 6,
-    "clearanceMlMinKg": 1,
-    "vdLKg": 3.5,
-    "bioavailability": 0.8,
-    "bioavailabilityByRoute": {
-      "oral": 0.8,
-      "IV": 1,
-      "sublingual": 0.9
-    },
-    "routes": [
-      "oral",
-      "IV",
-      "sublingual"
+    "encyclopediaEntry": "Arecoline is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
     ],
-    "tags": [
-      "stimulant",
-      "dopaminergic"
-    ],
-    "cypInhibits": [],
-    "cypInduces": [],
-    "approximate": true,
-    "encyclopediaEntry": "Cathinone is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mesembrine",
     "name": "Mesembrine",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 4,
     "vdLKg": 2.5,
@@ -47789,14 +46544,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mesembrine is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mesembrine is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "melanotan-ii-analog-111",
     "name": "Melanotan II (Analog 111)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 20,
     "vdLKg": 3.5,
@@ -47815,14 +46574,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Melanotan II (Analog 111) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Melanotan II (Analog 111) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-meo-mipt-moxy-analog-112",
     "name": "5-MeO-MiPT (Moxy) (Analog 112)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 15,
     "vdLKg": 2.5,
@@ -47844,14 +46607,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MeO-MiPT (Moxy) (Analog 112) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MeO-MiPT (Moxy) (Analog 112) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "aniracetam-analog-113",
     "name": "Aniracetam (Analog 113)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 17,
     "vdLKg": 4.5,
@@ -47870,14 +46637,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Aniracetam (Analog 113) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Aniracetam (Analog 113) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "sulbutiamine-analog-114",
     "name": "Sulbutiamine (Analog 114)",
     "brandNames": [],
     "drugClass": "Nootropic",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 20,
     "vdLKg": 0.5,
@@ -47896,14 +46667,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Sulbutiamine (Analog 114) is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Sulbutiamine (Analog 114) is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "metonitazene-analog-115",
     "name": "Metonitazene (Analog 115)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 3,
     "vdLKg": 4.5,
@@ -47926,14 +46701,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Metonitazene (Analog 115) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Metonitazene (Analog 115) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ibogaine-analog-116",
     "name": "Ibogaine (Analog 116)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -47955,14 +46734,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ibogaine (Analog 116) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ibogaine (Analog 116) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mesembrine-analog-117",
     "name": "Mesembrine (Analog 117)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 12,
     "vdLKg": 4.5,
@@ -47983,14 +46766,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mesembrine (Analog 117) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mesembrine (Analog 117) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "o-pce-analog-118",
     "name": "O-PCE (Analog 118)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 16,
     "vdLKg": 2.5,
@@ -48012,14 +46799,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "O-PCE (Analog 118) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "O-PCE (Analog 118) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-meo-dmt-analog-119",
     "name": "5-MeO-DMT (Analog 119)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 9,
     "vdLKg": 4.5,
@@ -48040,14 +46831,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MeO-DMT (Analog 119) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MeO-DMT (Analog 119) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "datura-analog-120",
     "name": "Datura (Analog 120)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 12,
     "vdLKg": 3.5,
@@ -48070,14 +46865,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Datura (Analog 120) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Datura (Analog 120) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "clonazolam-analog-121",
     "name": "Clonazolam (Analog 121)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -48100,14 +46899,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Clonazolam (Analog 121) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Clonazolam (Analog 121) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dob-analog-122",
     "name": "DOB (Analog 122)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 2,
     "vdLKg": 3.5,
@@ -48129,14 +46932,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOB (Analog 122) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOB (Analog 122) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "picamilon-analog-123",
     "name": "Picamilon (Analog 123)",
     "brandNames": [],
     "drugClass": "Nootropic",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 1,
     "vdLKg": 1.5,
@@ -48155,14 +46962,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Picamilon (Analog 123) is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Picamilon (Analog 123) is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bromazolam-analog-124",
     "name": "Bromazolam (Analog 124)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 1,
     "vdLKg": 0.5,
@@ -48185,14 +46996,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Bromazolam (Analog 124) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Bromazolam (Analog 124) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mdpv-analog-125",
     "name": "MDPV (Analog 125)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 8,
     "vdLKg": 3.5,
@@ -48215,14 +47030,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDPV (Analog 125) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "MDPV (Analog 125) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "jwh-073-analog-126",
     "name": "JWH-073 (Analog 126)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 11,
     "vdLKg": 3.5,
@@ -48243,14 +47062,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "JWH-073 (Analog 126) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "JWH-073 (Analog 126) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bromo-dragonfly-analog-127",
     "name": "Bromo-DragonFLY (Analog 127)",
     "brandNames": [],
     "drugClass": "Psychedelic Amphetamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 12,
     "vdLKg": 3.5,
@@ -48273,14 +47096,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Bromo-DragonFLY (Analog 127) is classified as a psychiatric belonging to the Psychedelic Amphetamine class.  It is often sought out recreationally due to its serotonergic and stimulant and vasoconstrictor properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Bromo-DragonFLY (Analog 127) is classified as a psychiatric belonging to the Psychedelic Amphetamine class.  It is often sought out recreationally due to its serotonergic and stimulant and vasoconstrictor properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ayahuasca-analog-128",
     "name": "Ayahuasca (Analog 128)",
     "brandNames": [],
     "drugClass": "Plant Brew",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 13,
     "vdLKg": 4.5,
@@ -48303,14 +47130,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ayahuasca (Analog 128) is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ayahuasca (Analog 128) is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "muscimol-analog-129",
     "name": "Muscimol (Analog 129)",
     "brandNames": [],
     "drugClass": "Isoxazole",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 20,
     "vdLKg": 1.5,
@@ -48331,14 +47162,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Muscimol (Analog 129) is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Muscimol (Analog 129) is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "u-47700-analog-130",
     "name": "U-47700 (Analog 130)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 14,
     "vdLKg": 0.5,
@@ -48361,14 +47196,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "U-47700 (Analog 130) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "U-47700 (Analog 130) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "jwh-018-analog-131",
     "name": "JWH-018 (Analog 131)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 3,
     "vdLKg": 0.5,
@@ -48389,14 +47228,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "JWH-018 (Analog 131) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "JWH-018 (Analog 131) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "testolone-rad140-analog-132",
     "name": "Testolone (RAD140) (Analog 132)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 5,
     "vdLKg": 0.5,
@@ -48417,14 +47260,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Testolone (RAD140) (Analog 132) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Testolone (RAD140) (Analog 132) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mitragynine-analog-133",
     "name": "Mitragynine (Analog 133)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 8,
     "vdLKg": 4.5,
@@ -48445,14 +47292,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mitragynine (Analog 133) is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mitragynine (Analog 133) is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "etonitazene-analog-134",
     "name": "Etonitazene (Analog 134)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 12,
     "vdLKg": 2.5,
@@ -48475,14 +47326,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Etonitazene (Analog 134) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Etonitazene (Analog 134) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "flualprazolam-analog-135",
     "name": "Flualprazolam (Analog 135)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 15,
     "vdLKg": 0.5,
@@ -48505,14 +47360,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Flualprazolam (Analog 135) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Flualprazolam (Analog 135) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "salvinorin-a-analog-136",
     "name": "Salvinorin A (Analog 136)",
     "brandNames": [],
     "drugClass": "Terpenoid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 5,
     "vdLKg": 0.5,
@@ -48533,14 +47392,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Salvinorin A (Analog 136) is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Salvinorin A (Analog 136) is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "salvinorin-a-analog-137",
     "name": "Salvinorin A (Analog 137)",
     "brandNames": [],
     "drugClass": "Terpenoid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 3,
     "vdLKg": 4.5,
@@ -48561,14 +47424,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Salvinorin A (Analog 137) is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Salvinorin A (Analog 137) is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dom-analog-138",
     "name": "DOM (Analog 138)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 8,
     "vdLKg": 4.5,
@@ -48590,14 +47457,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOM (Analog 138) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOM (Analog 138) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "alpha-pvp-flakka-analog-139",
     "name": "alpha-PVP (Flakka) (Analog 139)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 19,
     "vdLKg": 2.5,
@@ -48620,14 +47491,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "alpha-PVP (Flakka) (Analog 139) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "alpha-PVP (Flakka) (Analog 139) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "muscimol-analog-140",
     "name": "Muscimol (Analog 140)",
     "brandNames": [],
     "drugClass": "Isoxazole",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 15,
     "vdLKg": 4.5,
@@ -48648,14 +47523,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Muscimol (Analog 140) is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Muscimol (Analog 140) is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kava-kava-piper-methysticum-analog-141",
     "name": "Kava Kava (Piper methysticum) (Analog 141)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 15,
     "vdLKg": 0.5,
@@ -48678,14 +47557,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kava Kava (Piper methysticum) (Analog 141) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kava Kava (Piper methysticum) (Analog 141) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "diclazepam-analog-142",
     "name": "Diclazepam (Analog 142)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 9,
     "vdLKg": 0.5,
@@ -48708,14 +47591,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Diclazepam (Analog 142) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Diclazepam (Analog 142) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "arecoline-analog-143",
     "name": "Arecoline (Analog 143)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 12,
     "vdLKg": 4.5,
@@ -48736,14 +47623,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Arecoline (Analog 143) is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Arecoline (Analog 143) is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "diclazepam-analog-144",
     "name": "Diclazepam (Analog 144)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 19,
     "vdLKg": 0.5,
@@ -48766,14 +47657,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Diclazepam (Analog 144) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Diclazepam (Analog 144) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "piracetam-analog-145",
     "name": "Piracetam (Analog 145)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 3,
     "vdLKg": 0.5,
@@ -48792,14 +47687,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Piracetam (Analog 145) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Piracetam (Analog 145) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tma-2-analog-146",
     "name": "TMA-2 (Analog 146)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 16,
     "vdLKg": 0.5,
@@ -48821,14 +47720,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "TMA-2 (Analog 146) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "TMA-2 (Analog 146) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "etizolam-analog-147",
     "name": "Etizolam (Analog 147)",
     "brandNames": [],
     "drugClass": "Thienodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 1,
     "vdLKg": 3.5,
@@ -48851,14 +47754,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Etizolam (Analog 147) is classified as a psychiatric belonging to the Thienodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Etizolam (Analog 147) is classified as a psychiatric belonging to the Thienodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ayahuasca-analog-148",
     "name": "Ayahuasca (Analog 148)",
     "brandNames": [],
     "drugClass": "Plant Brew",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 5,
     "vdLKg": 0.5,
@@ -48881,14 +47788,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ayahuasca (Analog 148) is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ayahuasca (Analog 148) is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "aniracetam-analog-149",
     "name": "Aniracetam (Analog 149)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 13,
     "vdLKg": 3.5,
@@ -48907,14 +47818,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Aniracetam (Analog 149) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Aniracetam (Analog 149) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-b-analog-150",
     "name": "2C-B (Analog 150)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 9,
     "vdLKg": 3.5,
@@ -48936,14 +47851,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-B (Analog 150) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-B (Analog 150) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "brorphine-analog-151",
     "name": "Brorphine (Analog 151)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 9,
     "vdLKg": 0.5,
@@ -48966,14 +47885,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Brorphine (Analog 151) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Brorphine (Analog 151) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-mec-analog-152",
     "name": "4-MEC (Analog 152)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 7,
     "vdLKg": 2.5,
@@ -48995,14 +47918,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-MEC (Analog 152) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-MEC (Analog 152) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "phenibut-analog-153",
     "name": "Phenibut (Analog 153)",
     "brandNames": [],
     "drugClass": "GABAergic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 12,
     "vdLKg": 1.5,
@@ -49024,14 +47951,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Phenibut (Analog 153) is classified as a psychiatric belonging to the GABAergic class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Phenibut (Analog 153) is classified as a psychiatric belonging to the GABAergic class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pentedrone-analog-154",
     "name": "Pentedrone (Analog 154)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 13,
     "vdLKg": 4.5,
@@ -49053,14 +47984,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pentedrone (Analog 154) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Pentedrone (Analog 154) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ligandrol-lgd-4033-analog-155",
     "name": "Ligandrol (LGD-4033) (Analog 155)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 4,
     "vdLKg": 4.5,
@@ -49081,14 +48016,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ligandrol (LGD-4033) (Analog 155) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ligandrol (LGD-4033) (Analog 155) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "doc-analog-156",
     "name": "DOC (Analog 156)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 6,
     "vdLKg": 3.5,
@@ -49110,14 +48049,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOC (Analog 156) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOC (Analog 156) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mandrake-analog-157",
     "name": "Mandrake (Analog 157)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 4,
     "vdLKg": 2.5,
@@ -49139,14 +48082,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mandrake (Analog 157) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Mandrake (Analog 157) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mesembrine-analog-158",
     "name": "Mesembrine (Analog 158)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 16,
     "vdLKg": 1.5,
@@ -49167,14 +48114,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mesembrine (Analog 158) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mesembrine (Analog 158) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "etizolam-analog-159",
     "name": "Etizolam (Analog 159)",
     "brandNames": [],
     "drugClass": "Thienodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 5,
     "vdLKg": 2.5,
@@ -49197,14 +48148,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Etizolam (Analog 159) is classified as a psychiatric belonging to the Thienodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Etizolam (Analog 159) is classified as a psychiatric belonging to the Thienodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kratom-mitragyna-speciosa-analog-160",
     "name": "Kratom (Mitragyna speciosa) (Analog 160)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 2,
     "vdLKg": 4.5,
@@ -49228,14 +48183,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kratom (Mitragyna speciosa) (Analog 160) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kratom (Mitragyna speciosa) (Analog 160) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "muscimol-analog-161",
     "name": "Muscimol (Analog 161)",
     "brandNames": [],
     "drugClass": "Isoxazole",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 8,
     "vdLKg": 0.5,
@@ -49256,14 +48215,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Muscimol (Analog 161) is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Muscimol (Analog 161) is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dob-analog-162",
     "name": "DOB (Analog 162)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 2,
     "vdLKg": 3.5,
@@ -49285,14 +48248,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOB (Analog 162) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOB (Analog 162) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mda-tenamfetamine-analog-163",
     "name": "MDA (Tenamfetamine) (Analog 163)",
     "brandNames": [],
     "drugClass": "Amphetamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 12,
     "vdLKg": 2.5,
@@ -49315,14 +48282,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDA (Tenamfetamine) (Analog 163) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "MDA (Tenamfetamine) (Analog 163) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-aco-dmt-analog-164",
     "name": "4-AcO-DMT (Analog 164)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 11,
     "vdLKg": 4.5,
@@ -49343,14 +48314,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-AcO-DMT (Analog 164) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-AcO-DMT (Analog 164) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kava-kava-piper-methysticum-analog-165",
     "name": "Kava Kava (Piper methysticum) (Analog 165)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 4,
     "vdLKg": 0.5,
@@ -49373,14 +48348,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kava Kava (Piper methysticum) (Analog 165) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kava Kava (Piper methysticum) (Analog 165) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "o-pce-analog-166",
     "name": "O-PCE (Analog 166)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 11,
     "vdLKg": 2.5,
@@ -49402,14 +48381,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "O-PCE (Analog 166) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "O-PCE (Analog 166) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "salvinorin-a-analog-167",
     "name": "Salvinorin A (Analog 167)",
     "brandNames": [],
     "drugClass": "Terpenoid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 11,
     "vdLKg": 0.5,
@@ -49430,14 +48413,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Salvinorin A (Analog 167) is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Salvinorin A (Analog 167) is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "brorphine-analog-168",
     "name": "Brorphine (Analog 168)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 12,
     "vdLKg": 2.5,
@@ -49460,14 +48447,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Brorphine (Analog 168) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Brorphine (Analog 168) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pramiracetam-analog-169",
     "name": "Pramiracetam (Analog 169)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 1,
     "vdLKg": 4.5,
@@ -49486,14 +48477,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pramiracetam (Analog 169) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Pramiracetam (Analog 169) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "arecoline-analog-170",
     "name": "Arecoline (Analog 170)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 6,
     "vdLKg": 3.5,
@@ -49514,14 +48509,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Arecoline (Analog 170) is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Arecoline (Analog 170) is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ur-144-analog-171",
     "name": "UR-144 (Analog 171)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 17,
     "vdLKg": 1.5,
@@ -49542,14 +48541,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "UR-144 (Analog 171) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "UR-144 (Analog 171) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mescaline-analog-172",
     "name": "Mescaline (Analog 172)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 6,
     "vdLKg": 4.5,
@@ -49571,14 +48574,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mescaline (Analog 172) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mescaline (Analog 172) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mesembrine-analog-173",
     "name": "Mesembrine (Analog 173)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 3,
     "vdLKg": 0.5,
@@ -49599,14 +48606,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mesembrine (Analog 173) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mesembrine (Analog 173) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-t-7-analog-174",
     "name": "2C-T-7 (Analog 174)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 19,
     "vdLKg": 0.5,
@@ -49629,14 +48640,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-T-7 (Analog 174) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-T-7 (Analog 174) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "metonitazene-analog-175",
     "name": "Metonitazene (Analog 175)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 4,
     "vdLKg": 3.5,
@@ -49659,14 +48674,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Metonitazene (Analog 175) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Metonitazene (Analog 175) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ephedra-ma-huang-analog-176",
     "name": "Ephedra (Ma Huang) (Analog 176)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 14,
     "vdLKg": 0.5,
@@ -49689,14 +48708,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ephedra (Ma Huang) (Analog 176) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ephedra (Ma Huang) (Analog 176) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pramiracetam-analog-177",
     "name": "Pramiracetam (Analog 177)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 18,
     "vdLKg": 0.5,
@@ -49715,14 +48738,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pramiracetam (Analog 177) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Pramiracetam (Analog 177) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "melanotan-ii-analog-178",
     "name": "Melanotan II (Analog 178)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -49741,14 +48768,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Melanotan II (Analog 178) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Melanotan II (Analog 178) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "diclazepam-analog-179",
     "name": "Diclazepam (Analog 179)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 8,
     "vdLKg": 1.5,
@@ -49771,14 +48802,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Diclazepam (Analog 179) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Diclazepam (Analog 179) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "methoxphenidine-mxp-analog-180",
     "name": "Methoxphenidine (MXP) (Analog 180)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 19,
     "vdLKg": 1.5,
@@ -49800,14 +48835,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Methoxphenidine (MXP) (Analog 180) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Methoxphenidine (MXP) (Analog 180) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-meo-mipt-moxy-analog-181",
     "name": "5-MeO-MiPT (Moxy) (Analog 181)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 7,
     "vdLKg": 2.5,
@@ -49829,14 +48868,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MeO-MiPT (Moxy) (Analog 181) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MeO-MiPT (Moxy) (Analog 181) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-mapb-analog-182",
     "name": "5-MAPB (Analog 182)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 12,
     "vdLKg": 0.5,
@@ -49858,14 +48901,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MAPB (Analog 182) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MAPB (Analog 182) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "salvia-divinorum-analog-183",
     "name": "Salvia Divinorum (Analog 183)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 1,
     "vdLKg": 4.5,
@@ -49887,14 +48934,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Salvia Divinorum (Analog 183) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Salvia Divinorum (Analog 183) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its dissociative and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-mec-analog-184",
     "name": "4-MEC (Analog 184)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 2,
     "vdLKg": 1.5,
@@ -49916,14 +48967,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-MEC (Analog 184) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-MEC (Analog 184) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "salvia-divinorum-analog-185",
     "name": "Salvia Divinorum (Analog 185)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 4,
     "vdLKg": 4.5,
@@ -49945,14 +49000,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Salvia Divinorum (Analog 185) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Salvia Divinorum (Analog 185) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its dissociative and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "yohimbe-analog-186",
     "name": "Yohimbe (Analog 186)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 17,
     "vdLKg": 4.5,
@@ -49975,14 +49034,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Yohimbe (Analog 186) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Yohimbe (Analog 186) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-mapb-analog-187",
     "name": "5-MAPB (Analog 187)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 18,
     "vdLKg": 1.5,
@@ -50004,14 +49067,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MAPB (Analog 187) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MAPB (Analog 187) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dpt-dipropyltryptamine-analog-188",
     "name": "DPT (Dipropyltryptamine) (Analog 188)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 19,
     "vdLKg": 1.5,
@@ -50032,14 +49099,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DPT (Dipropyltryptamine) (Analog 188) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DPT (Dipropyltryptamine) (Analog 188) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "diphenidine-analog-189",
     "name": "Diphenidine (Analog 189)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 12,
     "vdLKg": 1.5,
@@ -50061,14 +49132,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Diphenidine (Analog 189) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Diphenidine (Analog 189) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-aco-dmt-analog-190",
     "name": "4-AcO-DMT (Analog 190)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 10,
     "vdLKg": 4.5,
@@ -50089,14 +49164,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-AcO-DMT (Analog 190) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-AcO-DMT (Analog 190) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bromo-dragonfly-analog-191",
     "name": "Bromo-DragonFLY (Analog 191)",
     "brandNames": [],
     "drugClass": "Psychedelic Amphetamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 16,
     "vdLKg": 4.5,
@@ -50119,14 +49198,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Bromo-DragonFLY (Analog 191) is classified as a psychiatric belonging to the Psychedelic Amphetamine class.  It is often sought out recreationally due to its serotonergic and stimulant and vasoconstrictor properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Bromo-DragonFLY (Analog 191) is classified as a psychiatric belonging to the Psychedelic Amphetamine class.  It is often sought out recreationally due to its serotonergic and stimulant and vasoconstrictor properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "amanita-muscaria-analog-192",
     "name": "Amanita Muscaria (Analog 192)",
     "brandNames": [],
     "drugClass": "Fungus",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 20,
     "vdLKg": 0.5,
@@ -50149,14 +49232,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Amanita Muscaria (Analog 192) is classified as a psychiatric belonging to the Fungus class.  It is often sought out recreationally due to its gaba-ergic and dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Amanita Muscaria (Analog 192) is classified as a psychiatric belonging to the Fungus class.  It is often sought out recreationally due to its gaba-ergic and dissociative and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ur-144-analog-193",
     "name": "UR-144 (Analog 193)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 10,
     "vdLKg": 3.5,
@@ -50177,14 +49264,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "UR-144 (Analog 193) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "UR-144 (Analog 193) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bpc-157-analog-194",
     "name": "BPC-157 (Analog 194)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 12,
     "vdLKg": 2.5,
@@ -50203,14 +49294,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "BPC-157 (Analog 194) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "BPC-157 (Analog 194) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mdpv-analog-195",
     "name": "MDPV (Analog 195)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 4,
     "vdLKg": 0.5,
@@ -50233,14 +49328,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDPV (Analog 195) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "MDPV (Analog 195) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bpc-157-analog-196",
     "name": "BPC-157 (Analog 196)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 18,
     "vdLKg": 3.5,
@@ -50259,14 +49358,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "BPC-157 (Analog 196) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "BPC-157 (Analog 196) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "aniracetam-analog-197",
     "name": "Aniracetam (Analog 197)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 9,
     "vdLKg": 2.5,
@@ -50285,14 +49388,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Aniracetam (Analog 197) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Aniracetam (Analog 197) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "protonitazene-analog-198",
     "name": "Protonitazene (Analog 198)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 4,
     "vdLKg": 2.5,
@@ -50315,14 +49422,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Protonitazene (Analog 198) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Protonitazene (Analog 198) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mdpv-analog-199",
     "name": "MDPV (Analog 199)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 17,
     "vdLKg": 1.5,
@@ -50345,14 +49456,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDPV (Analog 199) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "MDPV (Analog 199) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-t-7-analog-200",
     "name": "2C-T-7 (Analog 200)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 13,
     "vdLKg": 4.5,
@@ -50375,14 +49490,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-T-7 (Analog 200) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-T-7 (Analog 200) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "salvinorin-a-analog-201",
     "name": "Salvinorin A (Analog 201)",
     "brandNames": [],
     "drugClass": "Terpenoid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 16,
     "vdLKg": 4.5,
@@ -50403,14 +49522,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Salvinorin A (Analog 201) is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Salvinorin A (Analog 201) is classified as a psychiatric belonging to the Terpenoid class.  It is often sought out recreationally due to its dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-ho-met-analog-202",
     "name": "4-HO-MET (Analog 202)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 19,
     "vdLKg": 0.5,
@@ -50431,14 +49554,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-HO-MET (Analog 202) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-HO-MET (Analog 202) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-apb-analog-203",
     "name": "5-APB (Analog 203)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 9,
     "vdLKg": 3.5,
@@ -50460,14 +49587,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-APB (Analog 203) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-APB (Analog 203) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "melanotan-ii-analog-204",
     "name": "Melanotan II (Analog 204)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 18,
     "vdLKg": 4.5,
@@ -50486,14 +49617,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Melanotan II (Analog 204) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Melanotan II (Analog 204) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "hexen-n-ethylhexedrone-analog-205",
     "name": "Hexen (N-Ethylhexedrone) (Analog 205)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 3,
     "vdLKg": 1.5,
@@ -50515,14 +49650,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Hexen (N-Ethylhexedrone) (Analog 205) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Hexen (N-Ethylhexedrone) (Analog 205) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "oxiracetam-analog-206",
     "name": "Oxiracetam (Analog 206)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 7,
     "vdLKg": 0.5,
@@ -50541,14 +49680,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Oxiracetam (Analog 206) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Oxiracetam (Analog 206) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kanna-sceletium-tortuosum-analog-207",
     "name": "Kanna (Sceletium tortuosum) (Analog 207)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 9,
     "vdLKg": 4.5,
@@ -50570,14 +49713,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kanna (Sceletium tortuosum) (Analog 207) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kanna (Sceletium tortuosum) (Analog 207) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mitragynine-analog-208",
     "name": "Mitragynine (Analog 208)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 4,
     "vdLKg": 0.5,
@@ -50598,14 +49745,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mitragynine (Analog 208) is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mitragynine (Analog 208) is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dob-analog-209",
     "name": "DOB (Analog 209)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 11,
     "vdLKg": 4.5,
@@ -50627,14 +49778,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOB (Analog 209) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOB (Analog 209) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "piracetam-analog-210",
     "name": "Piracetam (Analog 210)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 16,
     "vdLKg": 2.5,
@@ -50653,14 +49808,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Piracetam (Analog 210) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Piracetam (Analog 210) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "yohimbe-analog-211",
     "name": "Yohimbe (Analog 211)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 14,
     "vdLKg": 2.5,
@@ -50683,14 +49842,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Yohimbe (Analog 211) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Yohimbe (Analog 211) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "belladonna-deadly-nightshade-analog-212",
     "name": "Belladonna (Deadly Nightshade) (Analog 212)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 1,
     "vdLKg": 0.5,
@@ -50712,14 +49875,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Belladonna (Deadly Nightshade) (Analog 212) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Belladonna (Deadly Nightshade) (Analog 212) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tianeptine-sodium-analog-213",
     "name": "Tianeptine Sodium (Analog 213)",
     "brandNames": [],
     "drugClass": "Atypical Antidepressant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 15,
     "vdLKg": 0.5,
@@ -50740,14 +49907,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tianeptine Sodium (Analog 213) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Tianeptine Sodium (Analog 213) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tianeptine-sodium-analog-214",
     "name": "Tianeptine Sodium (Analog 214)",
     "brandNames": [],
     "drugClass": "Atypical Antidepressant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 5,
     "vdLKg": 2.5,
@@ -50768,14 +49939,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tianeptine Sodium (Analog 214) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Tianeptine Sodium (Analog 214) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ur-144-analog-215",
     "name": "UR-144 (Analog 215)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 4,
     "vdLKg": 3.5,
@@ -50796,14 +49971,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "UR-144 (Analog 215) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "UR-144 (Analog 215) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bpc-157-analog-216",
     "name": "BPC-157 (Analog 216)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 19,
     "vdLKg": 0.5,
@@ -50822,14 +50001,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "BPC-157 (Analog 216) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "BPC-157 (Analog 216) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "belladonna-deadly-nightshade-analog-217",
     "name": "Belladonna (Deadly Nightshade) (Analog 217)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 16,
     "vdLKg": 1.5,
@@ -50851,14 +50034,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Belladonna (Deadly Nightshade) (Analog 217) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Belladonna (Deadly Nightshade) (Analog 217) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "o-desmethyltramadol-o-dsmt-analog-218",
     "name": "O-Desmethyltramadol (O-DSMT) (Analog 218)",
     "brandNames": [],
     "drugClass": "Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 6,
     "vdLKg": 3.5,
@@ -50880,14 +50067,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "O-Desmethyltramadol (O-DSMT) (Analog 218) is classified as a pain belonging to the Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "O-Desmethyltramadol (O-DSMT) (Analog 218) is classified as a pain belonging to the Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-i-analog-219",
     "name": "2C-I (Analog 219)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 5,
     "vdLKg": 4.5,
@@ -50909,14 +50100,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-I (Analog 219) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-I (Analog 219) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "flubromazolam-analog-220",
     "name": "Flubromazolam (Analog 220)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 19,
     "vdLKg": 4.5,
@@ -50939,14 +50134,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Flubromazolam (Analog 220) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Flubromazolam (Analog 220) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mescaline-analog-221",
     "name": "Mescaline (Analog 221)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 9,
     "vdLKg": 1.5,
@@ -50968,14 +50167,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mescaline (Analog 221) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mescaline (Analog 221) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "jwh-073-analog-222",
     "name": "JWH-073 (Analog 222)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 15,
     "vdLKg": 4.5,
@@ -50996,14 +50199,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "JWH-073 (Analog 222) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "JWH-073 (Analog 222) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "clonazolam-analog-223",
     "name": "Clonazolam (Analog 223)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 13,
     "vdLKg": 0.5,
@@ -51026,14 +50233,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Clonazolam (Analog 223) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Clonazolam (Analog 223) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mandrake-analog-224",
     "name": "Mandrake (Analog 224)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 3,
     "vdLKg": 2.5,
@@ -51055,14 +50266,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mandrake (Analog 224) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Mandrake (Analog 224) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "khat-catha-edulis-analog-225",
     "name": "Khat (Catha edulis) (Analog 225)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 15,
     "vdLKg": 1.5,
@@ -51085,14 +50300,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Khat (Catha edulis) (Analog 225) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its stimulant and dopaminergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Khat (Catha edulis) (Analog 225) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its stimulant and dopaminergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "amt-alpha-methyltryptamine-analog-226",
     "name": "AMT (Alpha-Methyltryptamine) (Analog 226)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 8,
     "vdLKg": 1.5,
@@ -51115,14 +50334,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "AMT (Alpha-Methyltryptamine) (Analog 226) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "AMT (Alpha-Methyltryptamine) (Analog 226) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mdpv-analog-227",
     "name": "MDPV (Analog 227)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 1,
     "vdLKg": 2.5,
@@ -51145,14 +50368,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDPV (Analog 227) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "MDPV (Analog 227) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "diphenidine-analog-228",
     "name": "Diphenidine (Analog 228)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 14,
     "vdLKg": 1.5,
@@ -51174,14 +50401,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Diphenidine (Analog 228) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Diphenidine (Analog 228) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-aco-dmt-analog-229",
     "name": "4-AcO-DMT (Analog 229)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 13,
     "vdLKg": 1.5,
@@ -51202,14 +50433,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-AcO-DMT (Analog 229) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-AcO-DMT (Analog 229) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kratom-mitragyna-speciosa-analog-230",
     "name": "Kratom (Mitragyna speciosa) (Analog 230)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 11,
     "vdLKg": 3.5,
@@ -51233,14 +50468,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kratom (Mitragyna speciosa) (Analog 230) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kratom (Mitragyna speciosa) (Analog 230) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "melanotan-ii-analog-231",
     "name": "Melanotan II (Analog 231)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 13,
     "vdLKg": 3.5,
@@ -51259,14 +50498,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Melanotan II (Analog 231) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Melanotan II (Analog 231) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ligandrol-lgd-4033-analog-232",
     "name": "Ligandrol (LGD-4033) (Analog 232)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 6,
     "vdLKg": 1.5,
@@ -51287,14 +50530,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ligandrol (LGD-4033) (Analog 232) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ligandrol (LGD-4033) (Analog 232) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "iboga-analog-233",
     "name": "Iboga (Analog 233)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 4,
     "vdLKg": 0.5,
@@ -51317,14 +50564,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Iboga (Analog 233) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Iboga (Analog 233) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and dissociative and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "u-47700-analog-234",
     "name": "U-47700 (Analog 234)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 14,
     "vdLKg": 2.5,
@@ -51347,14 +50598,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "U-47700 (Analog 234) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "U-47700 (Analog 234) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tma-2-analog-235",
     "name": "TMA-2 (Analog 235)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 8,
     "vdLKg": 4.5,
@@ -51376,14 +50631,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "TMA-2 (Analog 235) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "TMA-2 (Analog 235) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-ho-mipt-analog-236",
     "name": "4-HO-MiPT (Analog 236)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 15,
     "vdLKg": 3.5,
@@ -51404,14 +50663,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-HO-MiPT (Analog 236) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-HO-MiPT (Analog 236) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "flubromazolam-analog-237",
     "name": "Flubromazolam (Analog 237)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 17,
     "vdLKg": 3.5,
@@ -51434,14 +50697,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Flubromazolam (Analog 237) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Flubromazolam (Analog 237) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "doc-analog-238",
     "name": "DOC (Analog 238)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 13,
     "vdLKg": 2.5,
@@ -51463,14 +50730,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOC (Analog 238) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOC (Analog 238) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "6-apb-analog-239",
     "name": "6-APB (Analog 239)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 7,
     "vdLKg": 0.5,
@@ -51492,14 +50763,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "6-APB (Analog 239) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "6-APB (Analog 239) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mde-eve-analog-240",
     "name": "MDE (Eve) (Analog 240)",
     "brandNames": [],
     "drugClass": "Amphetamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 9,
     "vdLKg": 1.5,
@@ -51522,14 +50797,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDE (Eve) (Analog 240) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "MDE (Eve) (Analog 240) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "amanita-muscaria-analog-241",
     "name": "Amanita Muscaria (Analog 241)",
     "brandNames": [],
     "drugClass": "Fungus",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -51552,14 +50831,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Amanita Muscaria (Analog 241) is classified as a psychiatric belonging to the Fungus class.  It is often sought out recreationally due to its gaba-ergic and dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Amanita Muscaria (Analog 241) is classified as a psychiatric belonging to the Fungus class.  It is often sought out recreationally due to its gaba-ergic and dissociative and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-b-analog-242",
     "name": "2C-B (Analog 242)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 12,
     "vdLKg": 4.5,
@@ -51581,14 +50864,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-B (Analog 242) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-B (Analog 242) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-b-analog-243",
     "name": "2C-B (Analog 243)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -51610,14 +50897,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-B (Analog 243) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-B (Analog 243) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "brorphine-analog-244",
     "name": "Brorphine (Analog 244)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 4,
     "vdLKg": 2.5,
@@ -51640,14 +50931,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Brorphine (Analog 244) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Brorphine (Analog 244) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "arecoline-analog-245",
     "name": "Arecoline (Analog 245)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 7,
     "vdLKg": 4.5,
@@ -51668,14 +50963,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Arecoline (Analog 245) is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Arecoline (Analog 245) is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "am-2201-analog-246",
     "name": "AM-2201 (Analog 246)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 1,
     "vdLKg": 0.5,
@@ -51696,14 +50995,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "AM-2201 (Analog 246) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "AM-2201 (Analog 246) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "alpha-php-analog-247",
     "name": "alpha-PHP (Analog 247)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 4,
     "vdLKg": 2.5,
@@ -51726,14 +51029,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "alpha-PHP (Analog 247) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "alpha-PHP (Analog 247) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "yohimbe-analog-248",
     "name": "Yohimbe (Analog 248)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 4,
     "vdLKg": 4.5,
@@ -51756,14 +51063,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Yohimbe (Analog 248) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Yohimbe (Analog 248) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ostarine-mk-2866-analog-249",
     "name": "Ostarine (MK-2866) (Analog 249)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 15,
     "vdLKg": 4.5,
@@ -51784,14 +51095,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ostarine (MK-2866) (Analog 249) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ostarine (MK-2866) (Analog 249) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "arecoline-analog-250",
     "name": "Arecoline (Analog 250)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 3,
     "vdLKg": 4.5,
@@ -51812,14 +51127,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Arecoline (Analog 250) is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Arecoline (Analog 250) is classified as a other belonging to the Alkaloid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-meo-dipt-foxy-analog-251",
     "name": "5-MeO-DiPT (Foxy) (Analog 251)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 9,
     "vdLKg": 4.5,
@@ -51841,14 +51160,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MeO-DiPT (Foxy) (Analog 251) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MeO-DiPT (Foxy) (Analog 251) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "protonitazene-analog-252",
     "name": "Protonitazene (Analog 252)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 11,
     "vdLKg": 3.5,
@@ -51871,14 +51194,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Protonitazene (Analog 252) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Protonitazene (Analog 252) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "am-2201-analog-253",
     "name": "AM-2201 (Analog 253)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 2,
     "vdLKg": 4.5,
@@ -51899,14 +51226,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "AM-2201 (Analog 253) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "AM-2201 (Analog 253) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pyrazolam-analog-254",
     "name": "Pyrazolam (Analog 254)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 10,
     "vdLKg": 4.5,
@@ -51929,14 +51260,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pyrazolam (Analog 254) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Pyrazolam (Analog 254) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-apb-analog-255",
     "name": "5-APB (Analog 255)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 4,
     "vdLKg": 0.5,
@@ -51958,14 +51293,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-APB (Analog 255) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-APB (Analog 255) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "clonazolam-analog-256",
     "name": "Clonazolam (Analog 256)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 2,
     "vdLKg": 1.5,
@@ -51988,14 +51327,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Clonazolam (Analog 256) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Clonazolam (Analog 256) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "belladonna-deadly-nightshade-analog-257",
     "name": "Belladonna (Deadly Nightshade) (Analog 257)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 12,
     "vdLKg": 2.5,
@@ -52017,14 +51360,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Belladonna (Deadly Nightshade) (Analog 257) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Belladonna (Deadly Nightshade) (Analog 257) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "oxiracetam-analog-258",
     "name": "Oxiracetam (Analog 258)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 4,
     "vdLKg": 4.5,
@@ -52043,14 +51390,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Oxiracetam (Analog 258) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Oxiracetam (Analog 258) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "o-pce-analog-259",
     "name": "O-PCE (Analog 259)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 13,
     "vdLKg": 1.5,
@@ -52072,14 +51423,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "O-PCE (Analog 259) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "O-PCE (Analog 259) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ur-144-analog-260",
     "name": "UR-144 (Analog 260)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 13,
     "vdLKg": 1.5,
@@ -52100,14 +51455,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "UR-144 (Analog 260) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "UR-144 (Analog 260) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "phenylpiracetam-analog-261",
     "name": "Phenylpiracetam (Analog 261)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 18,
     "vdLKg": 2.5,
@@ -52128,14 +51487,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Phenylpiracetam (Analog 261) is classified as a neurological belonging to the Racetam class.  It is often sought out recreationally due to its stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Phenylpiracetam (Analog 261) is classified as a neurological belonging to the Racetam class.  It is often sought out recreationally due to its stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-aco-dmt-analog-262",
     "name": "4-AcO-DMT (Analog 262)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -52156,14 +51519,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-AcO-DMT (Analog 262) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-AcO-DMT (Analog 262) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-ho-met-analog-263",
     "name": "4-HO-MET (Analog 263)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 4,
     "vdLKg": 1.5,
@@ -52184,14 +51551,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-HO-MET (Analog 263) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-HO-MET (Analog 263) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "cardarine-gw501516-analog-264",
     "name": "Cardarine (GW501516) (Analog 264)",
     "brandNames": [],
     "drugClass": "PPARδ receptor agonist",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 18,
     "vdLKg": 4.5,
@@ -52210,14 +51581,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Cardarine (GW501516) (Analog 264) is classified as a other belonging to the PPARδ receptor agonist class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Cardarine (GW501516) (Analog 264) is classified as a other belonging to the PPARδ receptor agonist class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "cathinone-analog-265",
     "name": "Cathinone (Analog 265)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 2,
     "vdLKg": 2.5,
@@ -52239,14 +51614,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Cathinone (Analog 265) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Cathinone (Analog 265) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "peyote-analog-266",
     "name": "Peyote (Analog 266)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 1,
     "vdLKg": 1.5,
@@ -52269,14 +51648,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Peyote (Analog 266) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Peyote (Analog 266) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ibutamoren-mk-677-analog-267",
     "name": "Ibutamoren (MK-677) (Analog 267)",
     "brandNames": [],
     "drugClass": "Growth hormone secretagogue",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 18,
     "vdLKg": 0.5,
@@ -52295,14 +51678,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ibutamoren (MK-677) (Analog 267) is classified as a other belonging to the Growth hormone secretagogue class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ibutamoren (MK-677) (Analog 267) is classified as a other belonging to the Growth hormone secretagogue class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bpc-157-analog-268",
     "name": "BPC-157 (Analog 268)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 6,
     "vdLKg": 0.5,
@@ -52321,14 +51708,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "BPC-157 (Analog 268) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "BPC-157 (Analog 268) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ephedra-ma-huang-analog-269",
     "name": "Ephedra (Ma Huang) (Analog 269)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 11,
     "vdLKg": 0.5,
@@ -52351,14 +51742,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ephedra (Ma Huang) (Analog 269) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ephedra (Ma Huang) (Analog 269) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ostarine-mk-2866-analog-270",
     "name": "Ostarine (MK-2866) (Analog 270)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 16,
     "vdLKg": 2.5,
@@ -52379,14 +51774,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ostarine (MK-2866) (Analog 270) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ostarine (MK-2866) (Analog 270) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ostarine-mk-2866-analog-271",
     "name": "Ostarine (MK-2866) (Analog 271)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 14,
     "vdLKg": 2.5,
@@ -52407,14 +51806,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ostarine (MK-2866) (Analog 271) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ostarine (MK-2866) (Analog 271) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "bpc-157-analog-272",
     "name": "BPC-157 (Analog 272)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 13,
     "vdLKg": 3.5,
@@ -52433,14 +51836,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "BPC-157 (Analog 272) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "BPC-157 (Analog 272) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tianeptine-sodium-analog-273",
     "name": "Tianeptine Sodium (Analog 273)",
     "brandNames": [],
     "drugClass": "Atypical Antidepressant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 13,
     "vdLKg": 1.5,
@@ -52461,14 +51868,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tianeptine Sodium (Analog 273) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Tianeptine Sodium (Analog 273) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "6-apb-analog-274",
     "name": "6-APB (Analog 274)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 9,
     "vdLKg": 3.5,
@@ -52490,14 +51901,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "6-APB (Analog 274) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "6-APB (Analog 274) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dck-deschloroketamine-analog-275",
     "name": "DCK (Deschloroketamine) (Analog 275)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 12,
     "vdLKg": 3.5,
@@ -52519,14 +51934,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DCK (Deschloroketamine) (Analog 275) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DCK (Deschloroketamine) (Analog 275) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "phenylpiracetam-analog-276",
     "name": "Phenylpiracetam (Analog 276)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 14,
     "vdLKg": 3.5,
@@ -52547,14 +51966,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Phenylpiracetam (Analog 276) is classified as a neurological belonging to the Racetam class.  It is often sought out recreationally due to its stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Phenylpiracetam (Analog 276) is classified as a neurological belonging to the Racetam class.  It is often sought out recreationally due to its stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-mapb-analog-277",
     "name": "5-MAPB (Analog 277)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 19,
     "vdLKg": 2.5,
@@ -52576,14 +51999,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MAPB (Analog 277) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MAPB (Analog 277) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mescaline-analog-278",
     "name": "Mescaline (Analog 278)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 11,
     "vdLKg": 2.5,
@@ -52605,14 +52032,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mescaline (Analog 278) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mescaline (Analog 278) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pyrazolam-analog-279",
     "name": "Pyrazolam (Analog 279)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 19,
     "vdLKg": 2.5,
@@ -52635,14 +52066,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pyrazolam (Analog 279) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Pyrazolam (Analog 279) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mitragynine-analog-280",
     "name": "Mitragynine (Analog 280)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 5,
     "vdLKg": 1.5,
@@ -52663,14 +52098,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mitragynine (Analog 280) is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mitragynine (Analog 280) is classified as a pain belonging to the Alkaloid class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "isotonitazene-analog-281",
     "name": "Isotonitazene (Analog 281)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 2,
     "vdLKg": 1.5,
@@ -52693,14 +52132,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Isotonitazene (Analog 281) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Isotonitazene (Analog 281) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "hexen-n-ethylhexedrone-analog-282",
     "name": "Hexen (N-Ethylhexedrone) (Analog 282)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 17,
     "vdLKg": 3.5,
@@ -52722,14 +52165,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Hexen (N-Ethylhexedrone) (Analog 282) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Hexen (N-Ethylhexedrone) (Analog 282) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tiletamine-analog-283",
     "name": "Tiletamine (Analog 283)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 16,
     "vdLKg": 2.5,
@@ -52751,14 +52198,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tiletamine (Analog 283) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Tiletamine (Analog 283) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mesembrine-analog-284",
     "name": "Mesembrine (Analog 284)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 5,
     "vdLKg": 1.5,
@@ -52779,14 +52230,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mesembrine (Analog 284) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mesembrine (Analog 284) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ayahuasca-analog-285",
     "name": "Ayahuasca (Analog 285)",
     "brandNames": [],
     "drugClass": "Plant Brew",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 7,
     "vdLKg": 2.5,
@@ -52809,14 +52264,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ayahuasca (Analog 285) is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ayahuasca (Analog 285) is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "phenylpiracetam-analog-286",
     "name": "Phenylpiracetam (Analog 286)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 19,
     "vdLKg": 4.5,
@@ -52837,14 +52296,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Phenylpiracetam (Analog 286) is classified as a neurological belonging to the Racetam class.  It is often sought out recreationally due to its stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Phenylpiracetam (Analog 286) is classified as a neurological belonging to the Racetam class.  It is often sought out recreationally due to its stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "etizolam-analog-287",
     "name": "Etizolam (Analog 287)",
     "brandNames": [],
     "drugClass": "Thienodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 15,
     "vdLKg": 3.5,
@@ -52867,14 +52330,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Etizolam (Analog 287) is classified as a psychiatric belonging to the Thienodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Etizolam (Analog 287) is classified as a psychiatric belonging to the Thienodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tma-2-analog-288",
     "name": "TMA-2 (Analog 288)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 19,
     "vdLKg": 1.5,
@@ -52896,14 +52363,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "TMA-2 (Analog 288) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "TMA-2 (Analog 288) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "metonitazene-analog-289",
     "name": "Metonitazene (Analog 289)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 15,
     "vdLKg": 3.5,
@@ -52926,14 +52397,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Metonitazene (Analog 289) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Metonitazene (Analog 289) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-mec-analog-290",
     "name": "4-MEC (Analog 290)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 3,
     "vdLKg": 4.5,
@@ -52955,14 +52430,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-MEC (Analog 290) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-MEC (Analog 290) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mesembrine-analog-291",
     "name": "Mesembrine (Analog 291)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 3,
     "vdLKg": 4.5,
@@ -52983,14 +52462,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mesembrine (Analog 291) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Mesembrine (Analog 291) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kratom-mitragyna-speciosa-analog-292",
     "name": "Kratom (Mitragyna speciosa) (Analog 292)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 9,
     "vdLKg": 4.5,
@@ -53014,14 +52497,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kratom (Mitragyna speciosa) (Analog 292) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kratom (Mitragyna speciosa) (Analog 292) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-t-7-analog-293",
     "name": "2C-T-7 (Analog 293)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 20,
     "vdLKg": 3.5,
@@ -53044,14 +52531,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-T-7 (Analog 293) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-T-7 (Analog 293) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tb-500-analog-294",
     "name": "TB-500 (Analog 294)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 20,
     "vdLKg": 4.5,
@@ -53070,14 +52561,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "TB-500 (Analog 294) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "TB-500 (Analog 294) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-ho-mipt-analog-295",
     "name": "4-HO-MiPT (Analog 295)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 17,
     "vdLKg": 3.5,
@@ -53098,14 +52593,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-HO-MiPT (Analog 295) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-HO-MiPT (Analog 295) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dipt-analog-296",
     "name": "DiPT (Analog 296)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 8,
     "vdLKg": 3.5,
@@ -53126,14 +52625,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DiPT (Analog 296) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DiPT (Analog 296) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "yohimbe-analog-297",
     "name": "Yohimbe (Analog 297)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 17,
     "vdLKg": 0.5,
@@ -53156,14 +52659,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Yohimbe (Analog 297) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Yohimbe (Analog 297) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mda-tenamfetamine-analog-298",
     "name": "MDA (Tenamfetamine) (Analog 298)",
     "brandNames": [],
     "drugClass": "Amphetamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 5,
     "vdLKg": 2.5,
@@ -53186,14 +52693,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDA (Tenamfetamine) (Analog 298) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "MDA (Tenamfetamine) (Analog 298) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "3-mmc-analog-299",
     "name": "3-MMC (Analog 299)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 8,
     "vdLKg": 1.5,
@@ -53215,14 +52726,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "3-MMC (Analog 299) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "3-MMC (Analog 299) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "peyote-analog-300",
     "name": "Peyote (Analog 300)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 14,
     "vdLKg": 4.5,
@@ -53245,14 +52760,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Peyote (Analog 300) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Peyote (Analog 300) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mandrake-analog-301",
     "name": "Mandrake (Analog 301)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 4,
     "vdLKg": 3.5,
@@ -53274,14 +52793,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mandrake (Analog 301) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Mandrake (Analog 301) is classified as a other belonging to the Plant class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dob-analog-302",
     "name": "DOB (Analog 302)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 14,
     "vdLKg": 4.5,
@@ -53303,14 +52826,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOB (Analog 302) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOB (Analog 302) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "melanotan-ii-analog-303",
     "name": "Melanotan II (Analog 303)",
     "brandNames": [],
     "drugClass": "Peptide",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 1,
     "vdLKg": 4.5,
@@ -53329,14 +52856,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Melanotan II (Analog 303) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Melanotan II (Analog 303) is classified as a other belonging to the Peptide class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "testolone-rad140-analog-304",
     "name": "Testolone (RAD140) (Analog 304)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 3,
     "vdLKg": 1.5,
@@ -53357,14 +52888,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Testolone (RAD140) (Analog 304) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Testolone (RAD140) (Analog 304) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mephedrone-4-mmc-analog-305",
     "name": "Mephedrone (4-MMC) (Analog 305)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 16,
     "vdLKg": 4.5,
@@ -53387,14 +52922,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Mephedrone (4-MMC) (Analog 305) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "Mephedrone (4-MMC) (Analog 305) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and serotonergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "diclazepam-analog-306",
     "name": "Diclazepam (Analog 306)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 16,
     "vdLKg": 1.5,
@@ -53417,14 +52956,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Diclazepam (Analog 306) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Diclazepam (Analog 306) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "khat-catha-edulis-analog-307",
     "name": "Khat (Catha edulis) (Analog 307)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 16,
     "vdLKg": 0.5,
@@ -53447,14 +52990,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Khat (Catha edulis) (Analog 307) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its stimulant and dopaminergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Khat (Catha edulis) (Analog 307) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its stimulant and dopaminergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "brorphine-analog-308",
     "name": "Brorphine (Analog 308)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 5,
     "vdLKg": 2.5,
@@ -53477,14 +53024,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Brorphine (Analog 308) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Brorphine (Analog 308) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ephedra-ma-huang-analog-309",
     "name": "Ephedra (Ma Huang) (Analog 309)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 14,
     "vdLKg": 2.5,
@@ -53507,14 +53058,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ephedra (Ma Huang) (Analog 309) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ephedra (Ma Huang) (Analog 309) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and sympathomimetic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "u-47700-analog-310",
     "name": "U-47700 (Analog 310)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 9,
     "vdLKg": 0.5,
@@ -53537,14 +53092,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "U-47700 (Analog 310) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "U-47700 (Analog 310) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ephenidine-analog-311",
     "name": "Ephenidine (Analog 311)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 5,
     "vdLKg": 3.5,
@@ -53566,14 +53125,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ephenidine (Analog 311) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ephenidine (Analog 311) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-i-analog-312",
     "name": "2C-I (Analog 312)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 7,
     "vdLKg": 4.5,
@@ -53595,14 +53158,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-I (Analog 312) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-I (Analog 312) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ibogaine-analog-313",
     "name": "Ibogaine (Analog 313)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 4,
     "vdLKg": 3.5,
@@ -53624,14 +53191,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ibogaine (Analog 313) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ibogaine (Analog 313) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its serotonergic and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "6-apb-analog-314",
     "name": "6-APB (Analog 314)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 1,
     "vdLKg": 1.5,
@@ -53653,14 +53224,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "6-APB (Analog 314) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "6-APB (Analog 314) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "piracetam-analog-315",
     "name": "Piracetam (Analog 315)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 15,
     "vdLKg": 0.5,
@@ -53679,14 +53254,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Piracetam (Analog 315) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Piracetam (Analog 315) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "piracetam-analog-316",
     "name": "Piracetam (Analog 316)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 7,
     "vdLKg": 0.5,
@@ -53705,14 +53284,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Piracetam (Analog 316) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Piracetam (Analog 316) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "6-apb-analog-317",
     "name": "6-APB (Analog 317)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 19,
     "vdLKg": 1.5,
@@ -53734,14 +53317,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "6-APB (Analog 317) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "6-APB (Analog 317) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-ho-mipt-analog-318",
     "name": "4-HO-MiPT (Analog 318)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 3,
     "vdLKg": 4.5,
@@ -53762,14 +53349,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-HO-MiPT (Analog 318) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-HO-MiPT (Analog 318) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-mapb-analog-319",
     "name": "5-MAPB (Analog 319)",
     "brandNames": [],
     "drugClass": "Benzofuran",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 19,
     "vdLKg": 2.5,
@@ -53791,14 +53382,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MAPB (Analog 319) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MAPB (Analog 319) is classified as a psychiatric belonging to the Benzofuran class.  It is often sought out recreationally due to its stimulant and serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "testolone-rad140-analog-320",
     "name": "Testolone (RAD140) (Analog 320)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 10,
     "vdLKg": 0.5,
@@ -53819,14 +53414,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Testolone (RAD140) (Analog 320) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Testolone (RAD140) (Analog 320) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "mda-tenamfetamine-analog-321",
     "name": "MDA (Tenamfetamine) (Analog 321)",
     "brandNames": [],
     "drugClass": "Amphetamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 6,
     "vdLKg": 0.5,
@@ -53849,14 +53448,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "MDA (Tenamfetamine) (Analog 321) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "MDA (Tenamfetamine) (Analog 321) is classified as a psychiatric belonging to the Amphetamine class.  It is often sought out recreationally due to its stimulant and serotonergic and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "piracetam-analog-322",
     "name": "Piracetam (Analog 322)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 16,
     "vdLKg": 4.5,
@@ -53875,14 +53478,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Piracetam (Analog 322) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Piracetam (Analog 322) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pentedrone-analog-323",
     "name": "Pentedrone (Analog 323)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 16,
     "vdLKg": 4.5,
@@ -53904,14 +53511,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pentedrone (Analog 323) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Pentedrone (Analog 323) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5f-adb-analog-324",
     "name": "5F-ADB (Analog 324)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 9,
     "vdLKg": 0.5,
@@ -53932,14 +53543,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5F-ADB (Analog 324) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "5F-ADB (Analog 324) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dipt-analog-325",
     "name": "DiPT (Analog 325)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 10,
     "vdLKg": 1.5,
@@ -53960,14 +53575,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DiPT (Analog 325) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DiPT (Analog 325) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-e-analog-326",
     "name": "2C-E (Analog 326)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 11,
     "vdLKg": 3.5,
@@ -53989,14 +53608,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-E (Analog 326) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-E (Analog 326) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "doc-analog-327",
     "name": "DOC (Analog 327)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 17,
     "vdLKg": 2.5,
@@ -54018,14 +53641,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOC (Analog 327) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOC (Analog 327) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5-meo-mipt-moxy-analog-328",
     "name": "5-MeO-MiPT (Moxy) (Analog 328)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 10,
     "vdLKg": 2.5,
@@ -54047,14 +53674,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5-MeO-MiPT (Moxy) (Analog 328) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "5-MeO-MiPT (Moxy) (Analog 328) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kanna-sceletium-tortuosum-analog-329",
     "name": "Kanna (Sceletium tortuosum) (Analog 329)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 7,
     "vdLKg": 2.5,
@@ -54076,14 +53707,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kanna (Sceletium tortuosum) (Analog 329) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kanna (Sceletium tortuosum) (Analog 329) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "etonitazene-analog-330",
     "name": "Etonitazene (Analog 330)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 6,
     "vdLKg": 0.5,
@@ -54106,14 +53741,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Etonitazene (Analog 330) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Etonitazene (Analog 330) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "phenibut-analog-331",
     "name": "Phenibut (Analog 331)",
     "brandNames": [],
     "drugClass": "GABAergic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 15,
     "vdLKg": 0.5,
@@ -54135,14 +53774,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Phenibut (Analog 331) is classified as a psychiatric belonging to the GABAergic class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Phenibut (Analog 331) is classified as a psychiatric belonging to the GABAergic class.  It is often sought out recreationally due to its cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "hexen-n-ethylhexedrone-analog-332",
     "name": "Hexen (N-Ethylhexedrone) (Analog 332)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 14,
     "vdLKg": 4.5,
@@ -54164,14 +53807,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Hexen (N-Ethylhexedrone) (Analog 332) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Hexen (N-Ethylhexedrone) (Analog 332) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "amt-alpha-methyltryptamine-analog-333",
     "name": "AMT (Alpha-Methyltryptamine) (Analog 333)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 4,
     "vdLKg": 0.5,
@@ -54194,14 +53841,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "AMT (Alpha-Methyltryptamine) (Analog 333) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "AMT (Alpha-Methyltryptamine) (Analog 333) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic and stimulant and maoi properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tianeptine-sodium-analog-334",
     "name": "Tianeptine Sodium (Analog 334)",
     "brandNames": [],
     "drugClass": "Atypical Antidepressant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 9,
     "vdLKg": 1.5,
@@ -54222,14 +53873,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tianeptine Sodium (Analog 334) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Tianeptine Sodium (Analog 334) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-ho-met-analog-335",
     "name": "4-HO-MET (Analog 335)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 14,
     "vdLKg": 4.5,
@@ -54250,14 +53905,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-HO-MET (Analog 335) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-HO-MET (Analog 335) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pentedrone-analog-336",
     "name": "Pentedrone (Analog 336)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 7,
     "vdLKg": 3.5,
@@ -54279,14 +53938,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pentedrone (Analog 336) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Pentedrone (Analog 336) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "o-desmethyltramadol-o-dsmt-analog-337",
     "name": "O-Desmethyltramadol (O-DSMT) (Analog 337)",
     "brandNames": [],
     "drugClass": "Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 18,
     "vdLKg": 1.5,
@@ -54308,14 +53971,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "O-Desmethyltramadol (O-DSMT) (Analog 337) is classified as a pain belonging to the Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "O-Desmethyltramadol (O-DSMT) (Analog 337) is classified as a pain belonging to the Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "2c-e-analog-338",
     "name": "2C-E (Analog 338)",
     "brandNames": [],
     "drugClass": "Phenethylamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 17,
     "vdLKg": 0.5,
@@ -54337,14 +54004,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "2C-E (Analog 338) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "2C-E (Analog 338) is classified as a psychiatric belonging to the Phenethylamine class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "salvia-divinorum-analog-339",
     "name": "Salvia Divinorum (Analog 339)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 19,
     "vdLKg": 2.5,
@@ -54366,14 +54037,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Salvia Divinorum (Analog 339) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its dissociative and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Salvia Divinorum (Analog 339) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its dissociative and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dom-analog-340",
     "name": "DOM (Analog 340)",
     "brandNames": [],
     "drugClass": "Amphetamine Psychedelic",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 8,
     "vdLKg": 0.5,
@@ -54395,14 +54070,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DOM (Analog 340) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DOM (Analog 340) is classified as a psychiatric belonging to the Amphetamine Psychedelic class.  It is often sought out recreationally due to its serotonergic and stimulant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dipt-analog-341",
     "name": "DiPT (Analog 341)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 15,
     "vdLKg": 2.5,
@@ -54423,14 +54102,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DiPT (Analog 341) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DiPT (Analog 341) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "coluracetam-analog-342",
     "name": "Coluracetam (Analog 342)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 5,
     "vdLKg": 4.5,
@@ -54449,14 +54132,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Coluracetam (Analog 342) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Coluracetam (Analog 342) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "o-desmethyltramadol-o-dsmt-analog-343",
     "name": "O-Desmethyltramadol (O-DSMT) (Analog 343)",
     "brandNames": [],
     "drugClass": "Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 11,
     "vdLKg": 4.5,
@@ -54478,14 +54165,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "O-Desmethyltramadol (O-DSMT) (Analog 343) is classified as a pain belonging to the Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "O-Desmethyltramadol (O-DSMT) (Analog 343) is classified as a pain belonging to the Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "brorphine-analog-344",
     "name": "Brorphine (Analog 344)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 7,
     "vdLKg": 1.5,
@@ -54508,14 +54199,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Brorphine (Analog 344) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Brorphine (Analog 344) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-ho-met-analog-345",
     "name": "4-HO-MET (Analog 345)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 3,
     "vdLKg": 1.5,
@@ -54536,14 +54231,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-HO-MET (Analog 345) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-HO-MET (Analog 345) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "5f-adb-analog-346",
     "name": "5F-ADB (Analog 346)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 2,
     "vdLKg": 4.5,
@@ -54564,14 +54263,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "5F-ADB (Analog 346) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "5F-ADB (Analog 346) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "betel-nut-areca-catechu-analog-347",
     "name": "Betel Nut (Areca catechu) (Analog 347)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 8,
     "vdLKg": 4.5,
@@ -54594,14 +54297,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Betel Nut (Areca catechu) (Analog 347) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and cholinergic and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Betel Nut (Areca catechu) (Analog 347) is classified as a other belonging to the Plant class.  It is often sought out recreationally due to its stimulant and cholinergic and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ayahuasca-analog-348",
     "name": "Ayahuasca (Analog 348)",
     "brandNames": [],
     "drugClass": "Plant Brew",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 13,
     "vdLKg": 2.5,
@@ -54624,14 +54331,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ayahuasca (Analog 348) is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Ayahuasca (Analog 348) is classified as a psychiatric belonging to the Plant Brew class.  It is often sought out recreationally due to its serotonergic and maoi and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "u-47700-analog-349",
     "name": "U-47700 (Analog 349)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 6,
     "clearanceMlMinKg": 8,
     "vdLKg": 4.5,
@@ -54654,14 +54365,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "U-47700 (Analog 349) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "U-47700 (Analog 349) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "alpha-php-analog-350",
     "name": "alpha-PHP (Analog 350)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 7,
     "vdLKg": 3.5,
@@ -54684,14 +54399,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "alpha-PHP (Analog 350) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses."
+    "encyclopediaEntry": "alpha-PHP (Analog 350) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic and psychosis-risk properties, and is typically administered orally or intravenously or sublingually. Extreme caution is advised due to a high risk of adverse psychiatric or neurological effects at recreational doses.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tianeptine-sodium-analog-351",
     "name": "Tianeptine Sodium (Analog 351)",
     "brandNames": [],
     "drugClass": "Atypical Antidepressant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 1,
     "vdLKg": 4.5,
@@ -54712,14 +54431,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tianeptine Sodium (Analog 351) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Tianeptine Sodium (Analog 351) is classified as a psychiatric belonging to the Atypical Antidepressant class.  It is often sought out recreationally due to its opioid properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "dipt-analog-352",
     "name": "DiPT (Analog 352)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 2,
     "clearanceMlMinKg": 7,
     "vdLKg": 4.5,
@@ -54740,14 +54463,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "DiPT (Analog 352) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "DiPT (Analog 352) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ligandrol-lgd-4033-analog-353",
     "name": "Ligandrol (LGD-4033) (Analog 353)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 16,
     "vdLKg": 2.5,
@@ -54768,14 +54495,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ligandrol (LGD-4033) (Analog 353) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ligandrol (LGD-4033) (Analog 353) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "u-47700-analog-354",
     "name": "U-47700 (Analog 354)",
     "brandNames": [],
     "drugClass": "Synthetic Opioid",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 6,
     "vdLKg": 3.5,
@@ -54798,14 +54529,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "U-47700 (Analog 354) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "U-47700 (Analog 354) is classified as a pain belonging to the Synthetic Opioid class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "cathinone-analog-355",
     "name": "Cathinone (Analog 355)",
     "brandNames": [],
     "drugClass": "Alkaloid",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 20,
     "vdLKg": 1.5,
@@ -54827,14 +54562,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Cathinone (Analog 355) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Cathinone (Analog 355) is classified as a psychiatric belonging to the Alkaloid class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "coluracetam-analog-356",
     "name": "Coluracetam (Analog 356)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 16,
     "vdLKg": 4.5,
@@ -54853,14 +54592,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Coluracetam (Analog 356) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Coluracetam (Analog 356) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "4-aco-dmt-analog-357",
     "name": "4-AcO-DMT (Analog 357)",
     "brandNames": [],
     "drugClass": "Tryptamine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 6,
     "vdLKg": 0.5,
@@ -54881,14 +54624,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "4-AcO-DMT (Analog 357) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "4-AcO-DMT (Analog 357) is classified as a psychiatric belonging to the Tryptamine class.  It is often sought out recreationally due to its serotonergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "clonazolam-analog-358",
     "name": "Clonazolam (Analog 358)",
     "brandNames": [],
     "drugClass": "Benzodiazepine",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 19,
     "vdLKg": 1.5,
@@ -54911,14 +54658,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Clonazolam (Analog 358) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Clonazolam (Analog 358) is classified as a psychiatric belonging to the Benzodiazepine class.  It is often sought out recreationally due to its benzodiazepine and cns-depressant and gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "pentedrone-analog-359",
     "name": "Pentedrone (Analog 359)",
     "brandNames": [],
     "drugClass": "Cathinone",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 3,
     "clearanceMlMinKg": 15,
     "vdLKg": 1.5,
@@ -54940,14 +54691,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Pentedrone (Analog 359) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Pentedrone (Analog 359) is classified as a psychiatric belonging to the Cathinone class.  It is often sought out recreationally due to its stimulant and dopaminergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "tiletamine-analog-360",
     "name": "Tiletamine (Analog 360)",
     "brandNames": [],
     "drugClass": "Dissociative",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 4,
     "vdLKg": 2.5,
@@ -54969,14 +54724,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Tiletamine (Analog 360) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Tiletamine (Analog 360) is classified as a psychiatric belonging to the Dissociative class.  It is often sought out recreationally due to its cns-depressant and dissociative properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "ligandrol-lgd-4033-analog-361",
     "name": "Ligandrol (LGD-4033) (Analog 361)",
     "brandNames": [],
     "drugClass": "SARM",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 8,
     "clearanceMlMinKg": 1,
     "vdLKg": 1.5,
@@ -54997,14 +54756,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Ligandrol (LGD-4033) (Analog 361) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Ligandrol (LGD-4033) (Analog 361) is classified as a other belonging to the SARM class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "san-pedro-cactus-analog-362",
     "name": "San Pedro Cactus (Analog 362)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 5,
     "clearanceMlMinKg": 10,
     "vdLKg": 3.5,
@@ -55027,14 +54790,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "San Pedro Cactus (Analog 362) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "San Pedro Cactus (Analog 362) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "jwh-073-analog-363",
     "name": "JWH-073 (Analog 363)",
     "brandNames": [],
     "drugClass": "Synthetic Cannabinoid",
-    "category": "other",
+    "category": "recreational",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 6,
     "vdLKg": 2.5,
@@ -55055,14 +54822,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "JWH-073 (Analog 363) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "JWH-073 (Analog 363) is classified as a other belonging to the Synthetic Cannabinoid class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "noopept-analog-364",
     "name": "Noopept (Analog 364)",
     "brandNames": [],
     "drugClass": "Nootropic",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 10,
     "clearanceMlMinKg": 17,
     "vdLKg": 1.5,
@@ -55081,14 +54852,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Noopept (Analog 364) is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Noopept (Analog 364) is classified as a neurological belonging to the Nootropic class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "coluracetam-analog-365",
     "name": "Coluracetam (Analog 365)",
     "brandNames": [],
     "drugClass": "Racetam",
-    "category": "neurological",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 8,
     "vdLKg": 2.5,
@@ -55107,14 +54882,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Coluracetam (Analog 365) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile."
+    "encyclopediaEntry": "Coluracetam (Analog 365) is classified as a neurological belonging to the Racetam class.  This substance is primarily used in clinical or research settings and does not possess a traditional recreational profile.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "kratom-mitragyna-speciosa-analog-366",
     "name": "Kratom (Mitragyna speciosa) (Analog 366)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 9,
     "clearanceMlMinKg": 8,
     "vdLKg": 2.5,
@@ -55138,14 +54917,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Kratom (Mitragyna speciosa) (Analog 366) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Kratom (Mitragyna speciosa) (Analog 366) is classified as a pain belonging to the Plant class.  It is often sought out recreationally due to its opioid and cns-depressant and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "san-pedro-cactus-analog-367",
     "name": "San Pedro Cactus (Analog 367)",
     "brandNames": [],
     "drugClass": "Plant",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 7,
     "clearanceMlMinKg": 14,
     "vdLKg": 2.5,
@@ -55168,14 +54951,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "San Pedro Cactus (Analog 367) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "San Pedro Cactus (Analog 367) is classified as a psychiatric belonging to the Plant class.  It is often sought out recreationally due to its serotonergic and stimulant and holistic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "muscimol-analog-368",
     "name": "Muscimol (Analog 368)",
     "brandNames": [],
     "drugClass": "Isoxazole",
-    "category": "psychiatric",
+    "category": "pharmaceutical",
     "halfLifeHours": 11,
     "clearanceMlMinKg": 10,
     "vdLKg": 3.5,
@@ -55196,14 +54983,18 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Muscimol (Analog 368) is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Muscimol (Analog 368) is classified as a psychiatric belonging to the Isoxazole class.  It is often sought out recreationally due to its gaba-ergic properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   },
   {
     "id": "isotonitazene-analog-369",
     "name": "Isotonitazene (Analog 369)",
     "brandNames": [],
     "drugClass": "Nitazene",
-    "category": "pain",
+    "category": "pharmaceutical",
     "halfLifeHours": 4,
     "clearanceMlMinKg": 12,
     "vdLKg": 4.5,
@@ -55226,9 +55017,12 @@ const _rawSubstances: any[] = [
     "cypInhibits": [],
     "cypInduces": [],
     "approximate": true,
-    "encyclopediaEntry": "Isotonitazene (Analog 369) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually."
+    "encyclopediaEntry": "Isotonitazene (Analog 369) is classified as a pain belonging to the Nitazene class.  It is often sought out recreationally due to its opioid and cns-depressant and respiratory-depressant properties, and is typically administered orally or intravenously or sublingually.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "mechanism": "Pharmacological agent."
   }
 ];
 
 export const substances: Substance[] = _rawSubstances;
-

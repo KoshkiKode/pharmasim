@@ -72,3 +72,15 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Custom ignores for macOS build
+macos/build_release/
+macos/dist/
+
+# Custom ignores for Windows build
+windows/AppPackages/
+windows/Bundle/
+windows/bin/
+windows/obj/
+windows/x64/
+windows/ARM64/
