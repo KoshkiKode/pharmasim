@@ -6,8 +6,8 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run dev -w apps/desktop-web",
-    "build": "npm run build -w apps/desktop-web",
+    "dev": "npm run start -w apps/mobile",
+    "build": "npm run build -w packages/engine",
     "mobile": "npm run start -w apps/mobile",
     "bench": "npm run bench -w packages/engine",
     "test:stress": "npm run test:stress -w packages/engine",

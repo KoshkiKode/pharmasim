@@ -8,7 +8,7 @@ xcodebuild -workspace DesktopNative.xcworkspace -scheme DesktopNative-macOS -con
 APP_PATH="build_release/Build/Products/Release/DesktopNative.app"
 
 echo "Ensuring macOS AppIcon is present..."
-cp ../../desktop-web/src-tauri/icons/icon.icns "$APP_PATH/Contents/Resources/AppIcon.icns"
+cp icon.icns "$APP_PATH/Contents/Resources/AppIcon.icns"
 
 echo "Checking if create-dmg is installed..."
 if ! command -v create-dmg &> /dev/null; then
@@ -29,7 +29,7 @@ rm -f "dist/PharmaSim-macOS.dmg"
 create-dmg \
   --skip-jenkins \
   --volname "PharmaSim" \
-  --volicon "../../desktop-web/src-tauri/icons/icon.icns" \
+  --volicon "icon.icns" \
   --window-pos 200 120 \
   --window-size 800 400 \
   --icon-size 100 \

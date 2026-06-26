@@ -143,7 +143,7 @@ export function clearanceMultiplier(
   if (kidneyImpaired) scr = 2.5;
   else if (kidneyReduced) scr = 1.6;
   
-  let crcl = ((140 - patient.ageYears) * patient.weightKg) / (72 * scr);
+  let crcl = ((140 - patient.ageYears) * Math.max(0.1, patient.weightKg)) / (72 * scr);
   if (patient.biologicalSex === 'F') crcl *= 0.85;
 
   const renalFactor = Math.max(0.1, Math.min(1.4, crcl / 100)); // normalized to typical 100 mL/min
@@ -354,7 +354,7 @@ export function computeEventPK(
   for (const cond of patientConditions) {
       if (cond.pkModifiers?.vdScalar) conditionVdScalar *= cond.pkModifiers.vdScalar;
   }
-  const Vd = substance.vdLKg * patient.weightKg * conditionVdScalar;
+  const Vd = Math.max(0.01, substance.vdLKg * Math.max(0.1, patient.weightKg) * conditionVdScalar);
 
   // Map each event to a precalculated curve function
   const eventCurves = events.map(ev => {
