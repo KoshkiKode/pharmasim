@@ -55022,6 +55022,288 @@ const _rawSubstances: any[] = [
       "CNS"
     ],
     "mechanism": "Pharmacological agent."
+  },
+  {
+    "id": "pembrolizumab",
+    "name": "Pembrolizumab",
+    "brandNames": [
+      "Keytruda"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Monoclonal Antibody (PD-1 Inhibitor)",
+    "halfLifeHours": 528,
+    "typicalDoseMg": 200,
+    "doseRangeMg": [
+      200,
+      400
+    ],
+    "routes": [
+      "IV"
+    ],
+    "bioavailability": 1,
+    "bioavailabilityByRoute": {
+      "IV": 1
+    },
+    "vdLKg": 0.08,
+    "clearanceMlMinKg": 0.003,
+    "mechanism": "PD-1 receptor blocker, activating T-cells against tumor cells.",
+    "cypMetabolism": [],
+    "bodySystems": [
+      "Immune"
+    ],
+    "warnings": [
+      "Immune-mediated pneumonitis, colitis, hepatitis"
+    ],
+    "tags": [
+      "immunotherapy",
+      "monoclonal-antibody"
+    ],
+    "encyclopediaEntry": "Pembrolizumab is a humanized monoclonal antibody used in cancer immunotherapy. It targets the PD-1 receptor on T-cells, preventing cancer cells from evading immune detection and destroying target tumors."
+  },
+  {
+    "id": "teplizumab",
+    "name": "Teplizumab",
+    "brandNames": [
+      "Tzield"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Anti-CD3 Monoclonal Antibody",
+    "halfLifeHours": 110,
+    "typicalDoseMg": 5,
+    "doseRangeMg": [
+      1,
+      10
+    ],
+    "routes": [
+      "IV"
+    ],
+    "bioavailability": 1,
+    "bioavailabilityByRoute": {
+      "IV": 1
+    },
+    "vdLKg": 0.07,
+    "clearanceMlMinKg": 0.01,
+    "mechanism": "Binds to CD3 on T-cells, slowing autoimmune destruction of pancreatic beta cells.",
+    "bodySystems": [
+      "Immune"
+    ],
+    "warnings": [
+      "Cytokine release syndrome, severe lymphopenia"
+    ],
+    "tags": [
+      "monoclonal-antibody",
+      "immunomodulator"
+    ],
+    "encyclopediaEntry": "Teplizumab is a monoclonal antibody designed to delay the onset of clinical Type 1 Diabetes by modifying T-cell immune responses."
+  },
+  {
+    "id": "bremelanotide",
+    "name": "Bremelanotide (PT-141)",
+    "brandNames": [
+      "Vyleesi"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Melanocortin Agonist",
+    "halfLifeHours": 2.7,
+    "typicalDoseMg": 1.75,
+    "doseRangeMg": [
+      1.25,
+      2.5
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.95,
+    "bioavailabilityByRoute": {
+      "oral": 0.95
+    },
+    "vdLKg": 0.65,
+    "clearanceMlMinKg": 3,
+    "mechanism": "Selective MC3R and MC4R agonist in the CNS, mediating sexual arousal.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "warnings": [
+      "Transient blood pressure elevation, severe nausea"
+    ],
+    "tags": [
+      "peptide",
+      "melanocortin-agonist"
+    ],
+    "encyclopediaEntry": "Bremelanotide (PT-141) is a peptide medication used to treat hypoactive sexual desire disorder in premenopausal women."
+  },
+  {
+    "id": "cjc-1295",
+    "name": "CJC-1295 (without DAC)",
+    "brandNames": [],
+    "category": "research-chemical",
+    "drugClass": "GHRH Analog",
+    "halfLifeHours": 0.5,
+    "typicalDoseMg": 0.1,
+    "doseRangeMg": [
+      0.05,
+      0.2
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.9,
+    "bioavailabilityByRoute": {
+      "oral": 0.9
+    },
+    "vdLKg": 0.15,
+    "clearanceMlMinKg": 3.5,
+    "mechanism": "GHRH receptor agonist, stimulating pituitary release of growth hormone.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "warnings": [
+      "Transient head rush, pituitary fatigue if overused"
+    ],
+    "tags": [
+      "peptide",
+      "growth-hormone-secretagogue"
+    ],
+    "encyclopediaEntry": "CJC-1295 is a synthetic peptide analog of Growth Hormone Releasing Hormone (GHRH) used to stimulate growth hormone release."
+  },
+  {
+    "id": "epitalon",
+    "name": "Epitalon",
+    "brandNames": [
+      "Epithalon"
+    ],
+    "category": "research-chemical",
+    "drugClass": "Tetrapeptide Pineal Regulator",
+    "halfLifeHours": 1,
+    "typicalDoseMg": 5,
+    "doseRangeMg": [
+      1,
+      10
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.9,
+    "bioavailabilityByRoute": {
+      "oral": 0.9
+    },
+    "vdLKg": 0.5,
+    "clearanceMlMinKg": 6,
+    "mechanism": "Putative telomerase activator, regulating pineal melatonin secretion.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "tags": [
+      "peptide",
+      "anti-aging"
+    ],
+    "encyclopediaEntry": "Epitalon is a synthetic tetrapeptide (Ala-Glu-Asp-Gly) based on epithalamin, studied for telomere extension and circadian rhythm regulation."
+  },
+  {
+    "id": "selank",
+    "name": "Selank",
+    "brandNames": [],
+    "category": "research-chemical",
+    "drugClass": "Anxiolytic Peptide",
+    "halfLifeHours": 0.5,
+    "typicalDoseMg": 2,
+    "doseRangeMg": [
+      0.5,
+      4
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.9,
+    "bioavailabilityByRoute": {
+      "oral": 0.9
+    },
+    "vdLKg": 0.4,
+    "clearanceMlMinKg": 9,
+    "mechanism": "Modulates interleukin-6 and monoamine neurotransmitters; exhibits anxiolytic effects.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "tags": [
+      "peptide",
+      "anxiolytic",
+      "nootropic"
+    ],
+    "encyclopediaEntry": "Selank is a synthetic heptapeptide developed by the Institute of Molecular Genetics of the Russian Academy of Sciences. It is used as a nootropic anxiolytic."
+  },
+  {
+    "id": "ghk-cu",
+    "name": "GHK-Cu",
+    "brandNames": [],
+    "category": "supplement",
+    "drugClass": "Copper Peptide",
+    "halfLifeHours": 0.8,
+    "typicalDoseMg": 10,
+    "doseRangeMg": [
+      5,
+      20
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.95,
+    "bioavailabilityByRoute": {
+      "oral": 0.95
+    },
+    "vdLKg": 0.3,
+    "clearanceMlMinKg": 5,
+    "mechanism": "Copper-binding tripeptide that regulates gene expression in collagen synthesis.",
+    "bodySystems": [
+      "CNS"
+    ],
+    "tags": [
+      "peptide",
+      "regenerative"
+    ],
+    "encyclopediaEntry": "GHK-Cu is a naturally occurring copper complex tripeptide found in human plasma, used in anti-aging, wound healing, and tissue regeneration."
+  },
+  {
+    "id": "two-fdck",
+    "name": "2-FDCK (2-Fluorodeschloroketamine)",
+    "brandNames": [],
+    "category": "research-chemical",
+    "drugClass": "Arylcyclohexylamine Dissociative",
+    "halfLifeHours": 3.5,
+    "typicalDoseMg": 50,
+    "doseRangeMg": [
+      20,
+      100
+    ],
+    "routes": [
+      "oral",
+      "sublingual"
+    ],
+    "bioavailability": 0.9,
+    "bioavailabilityByRoute": {
+      "oral": 0.9,
+      "sublingual": 0.9
+    },
+    "vdLKg": 3,
+    "clearanceMlMinKg": 8.5,
+    "mechanism": "NMDA receptor antagonist; dopamine reuptake inhibitor.",
+    "bindingAffinities": {
+      "NMDA": {
+        "kiNm": 1200,
+        "intrinsicActivity": 0
+      }
+    },
+    "bodySystems": [
+      "CNS"
+    ],
+    "warnings": [
+      "Dissociation, bladder irritation in chronic use, motor impairment"
+    ],
+    "tags": [
+      "dissociative",
+      "nmda-antagonist",
+      "anesthetic"
+    ],
+    "encyclopediaEntry": "2-Fluorodeschloroketamine (2-FDCK) is a dissociative anesthetic of the arylcyclohexylamine class. It is a structural analog of ketamine."
   }
 ];
 
