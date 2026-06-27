@@ -28,6 +28,7 @@ Thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
+!apps/DesktopNative/windows/DesktopNative.sln
 *.sw?
 
 # Env
