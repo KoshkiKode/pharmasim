@@ -1,7 +1,7 @@
 {
   "name": "linux-desktop",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.1-alpha",
   "type": "module",
   "description": "PharmaSim — Drug Interaction Simulator. Client-side pharmacokinetics & drug-interaction sandbox.",
   "author": "Dylan Moore (KoshkiKode LLC)",
