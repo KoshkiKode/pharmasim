@@ -55304,6 +55304,337 @@ const _rawSubstances: any[] = [
       "anesthetic"
     ],
     "encyclopediaEntry": "2-Fluorodeschloroketamine (2-FDCK) is a dissociative anesthetic of the arylcyclohexylamine class. It is a structural analog of ketamine."
+  },
+  {
+    "id": "moclobemide",
+    "name": "Moclobemide",
+    "brandNames": [
+      "Aurorix",
+      "Manerix"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "RIMA Antidepressant",
+    "halfLifeHours": 2,
+    "typicalDoseMg": 150,
+    "doseRangeMg": [
+      150,
+      600
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.8,
+    "bioavailabilityByRoute": {
+      "oral": 0.8
+    },
+    "vdLKg": 1.2,
+    "clearanceMlMinKg": 5.5,
+    "mechanism": "Reversible inhibitor of monoamine oxidase A (RIMA), increasing serotonin, norepinephrine, and dopamine.",
+    "cypMetabolism": [
+      "CYP2C19",
+      "CYP2D6"
+    ],
+    "bodySystems": [
+      "CNS"
+    ],
+    "warnings": [
+      "Risk of hypertensive crisis with heavy tyramine foods, serotonin syndrome with SSRIs"
+    ],
+    "tags": [
+      "maoi",
+      "serotonergic",
+      "dopaminergic"
+    ],
+    "encyclopediaEntry": "Moclobemide is a reversible inhibitor of monoamine oxidase A (RIMA) approved in Europe, Canada, and Australia. It treats depression and social anxiety."
+  },
+  {
+    "id": "agomelatine",
+    "name": "Agomelatine",
+    "brandNames": [
+      "Valdoxan",
+      "Thymanax"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Melatonergic Antidepressant",
+    "halfLifeHours": 1.5,
+    "typicalDoseMg": 25,
+    "doseRangeMg": [
+      25,
+      50
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.05,
+    "bioavailabilityByRoute": {
+      "oral": 0.05
+    },
+    "vdLKg": 0.5,
+    "clearanceMlMinKg": 10,
+    "mechanism": "Melatonergic receptor agonist (MT1/MT2) and 5-HT2C antagonist, promoting dopamine and norepinephrine in frontal cortex.",
+    "cypMetabolism": [
+      "CYP1A2",
+      "CYP2C9"
+    ],
+    "bodySystems": [
+      "CNS",
+      "Hepatic"
+    ],
+    "warnings": [
+      "Elevated transaminases, hepatotoxicity (routine liver tests required)"
+    ],
+    "tags": [
+      "antidepressant",
+      "hepatotoxic"
+    ],
+    "encyclopediaEntry": "Agomelatine is a melatonergic antidepressant approved in Europe and Australia. It resynchronizes circadian rhythms and treats major depression."
+  },
+  {
+    "id": "meldonium",
+    "name": "Meldonium",
+    "brandNames": [
+      "Mildronate"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Cardioprotective Metabolic Modulator",
+    "halfLifeHours": 6,
+    "typicalDoseMg": 500,
+    "doseRangeMg": [
+      500,
+      1000
+    ],
+    "routes": [
+      "oral",
+      "IV"
+    ],
+    "bioavailability": 0.78,
+    "bioavailabilityByRoute": {
+      "oral": 0.78,
+      "IV": 1
+    },
+    "vdLKg": 0.8,
+    "clearanceMlMinKg": 2,
+    "mechanism": "Inhibits gamma-butyrobetaine dioxygenase, reducing carnitine synthesis and shifting metabolism to glycolysis.",
+    "bodySystems": [
+      "Cardiovascular"
+    ],
+    "warnings": [
+      "Prohibited by WADA as a performance-enhancing drug"
+    ],
+    "tags": [
+      "cardiovascular",
+      "metabolic-modulator"
+    ],
+    "encyclopediaEntry": "Meldonium (Mildronate) is a cardioprotective metabolic drug approved in Latvia, Russia, and Eastern Europe. It treats coronary artery disease and myocardial infarction."
+  },
+  {
+    "id": "amisulpride",
+    "name": "Amisulpride",
+    "brandNames": [
+      "Solian",
+      "Barhemsys"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Atypical Antipsychotic",
+    "halfLifeHours": 12,
+    "typicalDoseMg": 400,
+    "doseRangeMg": [
+      50,
+      800
+    ],
+    "routes": [
+      "oral",
+      "IV"
+    ],
+    "bioavailability": 0.48,
+    "bioavailabilityByRoute": {
+      "oral": 0.48,
+      "IV": 1
+    },
+    "vdLKg": 5.8,
+    "clearanceMlMinKg": 4.8,
+    "mechanism": "Selective antagonist at D2 and D3 dopamine receptors (autoreceptors at low doses, postsynaptic at high doses).",
+    "bodySystems": [
+      "CNS",
+      "Cardiovascular"
+    ],
+    "warnings": [
+      "Dose-dependent QT prolongation, hyperprolactinemia"
+    ],
+    "tags": [
+      "antipsychotic",
+      "dopaminergic",
+      "qt-prolonging"
+    ],
+    "encyclopediaEntry": "Amisulpride is an atypical antipsychotic approved in Europe, Australia, and Japan for schizophrenia. It selectively antagonizes dopamine autoreceptors at low doses."
+  },
+  {
+    "id": "mianserin",
+    "name": "Mianserin",
+    "brandNames": [
+      "Tolvon",
+      "Lantanon"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Tetracyclic Antidepressant",
+    "halfLifeHours": 20,
+    "typicalDoseMg": 30,
+    "doseRangeMg": [
+      30,
+      90
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.2,
+    "bioavailabilityByRoute": {
+      "oral": 0.2
+    },
+    "vdLKg": 13,
+    "clearanceMlMinKg": 8,
+    "mechanism": "Antagonist at alpha-2 adrenergic, 5-HT2A, 5-HT2C, and H1 histamine receptors.",
+    "cypMetabolism": [
+      "CYP2D6",
+      "CYP3A4"
+    ],
+    "bodySystems": [
+      "CNS"
+    ],
+    "warnings": [
+      "Risk of agranulocytosis (routine blood counts advised), severe sedation"
+    ],
+    "tags": [
+      "antidepressant",
+      "sedative",
+      "cns-depressant"
+    ],
+    "encyclopediaEntry": "Mianserin is a tetracyclic antidepressant approved in Europe and Japan. It has anxiolytic and sedative properties but lacks significant anticholinergic activity."
+  },
+  {
+    "id": "opipramol",
+    "name": "Opipramol",
+    "brandNames": [
+      "Insidon",
+      "Pramolan"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Sigma Agonist Anxiolytic",
+    "halfLifeHours": 10,
+    "typicalDoseMg": 50,
+    "doseRangeMg": [
+      50,
+      200
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.54,
+    "bioavailabilityByRoute": {
+      "oral": 0.54
+    },
+    "vdLKg": 7,
+    "clearanceMlMinKg": 7.5,
+    "mechanism": "High-affinity agonist at sigma-1 and sigma-2 receptors; moderate antagonist at H1 and D2/5-HT2A receptors.",
+    "cypMetabolism": [
+      "CYP2D6"
+    ],
+    "bodySystems": [
+      "CNS"
+    ],
+    "warnings": [
+      "Sedation, mild anticholinergic effects"
+    ],
+    "tags": [
+      "anxiolytic",
+      "sedative",
+      "cns-depressant"
+    ],
+    "encyclopediaEntry": "Opipramol is a tricyclic compound used primarily in Germany and Europe as an anxiolytic. It works as a sigma receptor agonist."
+  },
+  {
+    "id": "cinnarizine",
+    "name": "Cinnarizine",
+    "brandNames": [
+      "Stugeron",
+      "Cinnipir"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Antihistamine / Calcium Antagonist",
+    "halfLifeHours": 4,
+    "typicalDoseMg": 25,
+    "doseRangeMg": [
+      25,
+      75
+    ],
+    "routes": [
+      "oral"
+    ],
+    "bioavailability": 0.75,
+    "bioavailabilityByRoute": {
+      "oral": 0.75
+    },
+    "vdLKg": 5.5,
+    "clearanceMlMinKg": 9,
+    "mechanism": "Antagonist at H1 receptors and blocker of voltage-gated calcium channels, particularly in vestibular apparatus.",
+    "cypMetabolism": [
+      "CYP2D6"
+    ],
+    "bodySystems": [
+      "CNS",
+      "Cardiovascular"
+    ],
+    "warnings": [
+      "Drowsiness, risk of drug-induced parkinsonism in elderly in long-term use"
+    ],
+    "tags": [
+      "antihistamine",
+      "calcium-channel-blocker",
+      "cns-depressant"
+    ],
+    "encyclopediaEntry": "Cinnarizine is an antihistamine and calcium channel blocker approved in Europe/UK to treat motion sickness, vertigo, and Meniere's disease."
+  },
+  {
+    "id": "flupentixol",
+    "name": "Flupentixol",
+    "brandNames": [
+      "Depixol",
+      "Fluanxol"
+    ],
+    "category": "pharmaceutical",
+    "drugClass": "Thioxanthene Antipsychotic",
+    "halfLifeHours": 35,
+    "typicalDoseMg": 3,
+    "doseRangeMg": [
+      1,
+      12
+    ],
+    "routes": [
+      "oral",
+      "IM"
+    ],
+    "bioavailability": 0.4,
+    "bioavailabilityByRoute": {
+      "oral": 0.4
+    },
+    "vdLKg": 15,
+    "clearanceMlMinKg": 6.5,
+    "mechanism": "Antagonist at D1, D2, 5-HT2, and alpha-1 adrenergic receptors; activating properties at low doses.",
+    "cypMetabolism": [
+      "CYP2D6",
+      "CYP3A4"
+    ],
+    "bodySystems": [
+      "CNS"
+    ],
+    "warnings": [
+      "Extrapyramidal side effects, tardive dyskinesia, insomnia at low doses"
+    ],
+    "tags": [
+      "antipsychotic",
+      "dopaminergic",
+      "cns-depressant"
+    ],
+    "encyclopediaEntry": "Flupentixol is a thioxanthene antipsychotic approved in Europe, Canada, and the UK. Low doses are used for depression and anxiety, while high doses treat schizophrenia."
   }
 ];
 
