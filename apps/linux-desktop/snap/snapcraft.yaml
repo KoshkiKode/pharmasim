@@ -1,0 +1,33 @@
+name: pharmasim
+base: core22
+version: '0.1.0'
+summary: Drug Interaction Simulator & Pharmacology Sandbox
+description: |
+  PharmaSim is a client-side pharmacokinetics and drug-interaction sandbox simulation.
+
+grade: stable
+confinement: strict
+
+apps:
+  pharmasim:
+    command: bin/PharmaSim
+    extensions: [gnome]
+    plugs:
+      - x11
+      - wayland
+      - desktop
+      - desktop-legacy
+      - network
+      - opengl
+
+parts:
+  pharmasim:
+    plugin: dump
+    source: ../src-tauri/target/release
+    source-type: local
+    organize:
+      PharmaSim: bin/PharmaSim
+    stage-packages:
+      - libwebkit2gtk-4.0-37
+      - libgtk-3-0
+      - libssl3

@@ -94,3 +94,51 @@ jobs:
           name: Windows-MSIX
           path: apps/DesktopNative/windows/AppPackages/
 
+  # 4. Linux Tauri App
+  linux-build:
+    name: Build Linux Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install WebKit and build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.0-dev \
+              build-essential \
+              curl \
+              wget \
+              file \
+              libssl-dev \
+              libgtk-3-dev \
+              libayatana-appindicator3-dev \
+              librsvg2-dev
+
+      - name: Install JS dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build Linux Binaries (deb & AppImage)
+        run: ./build-linux.sh
+
+      - name: Upload Debian Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: Linux-DEB
+          path: apps/linux-desktop/src-tauri/target/release/bundle/deb/*.deb
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v3
+        with:
+          name: Linux-AppImage
+          path: apps/linux-desktop/src-tauri/target/release/bundle/appimage/*.AppImage
+
+

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=PharmaSim
+Comment=Drug Interaction Simulator & Pharmacology Sandbox
+Exec=PharmaSim
+Icon=com.pharmasim.app
+Categories=Science;Medical;Education;
+Terminal=false

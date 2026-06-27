@@ -1,0 +1,261 @@
+import { useEffect, useMemo, useState } from 'react';
+import { Pill, ShieldAlert, Github, Trash2 } from 'lucide-react';
+import { Logo } from './components/Logo';
+import { PatientPanel } from './components/PatientPanel';
+import { SubstanceSearch } from './components/SubstanceSearch';
+import { SubstanceCard } from './components/SubstanceCard';
+import { ResultsPanel } from './components/ResultsPanel';
+import type { Substance } from '@pharmasim/engine';
+import { substances as ALL } from '@pharmasim/engine';
+import type { PatientProfile, RegimenConfig } from '@pharmasim/engine';
+import { defaultRegimen, type AddedSubstance } from '@pharmasim/engine';
+import { clearSession, loadSession, saveSession } from '@pharmasim/engine';
+
+import { IndexView } from './components/IndexView';
+
+const DEFAULT_PATIENT: PatientProfile = {
+  biologicalSex: 'M',
+  ageYears: 35,
+  weightKg: 75,
+  heightCm: 175,
+  bodyFatPct: 22,
+  tolerance: 0,
+  liver: 'normal',
+  kidney: 'normal',
+  hydrationPct: 50,
+  genetics: {},
+  conditions: [],
+};
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState<'simulation' | 'index'>('simulation');
+  const [{ patient: initialPatient, added: initialAdded }] = useState(() =>
+    loadSession(DEFAULT_PATIENT),
+  );
+  const [patient, setPatient] = useState<PatientProfile>(initialPatient);
+  const [added, setAdded] = useState<AddedSubstance[]>(initialAdded);
+
+  useEffect(() => {
+    saveSession(patient, added);
+  }, [patient, added]);
+
+  const addedIds = useMemo(() => new Set(added.map((a) => a.substance.id)), [added]);
+  const activeSubstances = useMemo(() => added.map((a) => a.substance), [added]);
+
+  const addSubstance = (s: Substance) => {
+    if (addedIds.has(s.id)) return;
+    setAdded((prev) => [...prev, { substance: s, regimen: defaultRegimen(s), advancedOpen: false }]);
+  };
+  const loadPreset = (substanceIds: string[]) => {
+    const list: AddedSubstance[] = [];
+    for (const id of substanceIds) {
+      const substance = ALL.find((s) => s.id === id);
+      if (substance) {
+        list.push({
+          substance,
+          regimen: defaultRegimen(substance),
+          advancedOpen: false,
+        });
+      }
+    }
+    setAdded(list);
+  };
+  const removeSubstance = (id: string) =>
+    setAdded((prev) => prev.filter((a) => a.substance.id !== id));
+  const updateRegimen = (id: string, r: RegimenConfig) =>
+    setAdded((prev) => prev.map((a) => (a.substance.id === id ? { ...a, regimen: r } : a)));
+  const toggleAdvanced = (id: string) =>
+    setAdded((prev) =>
+      prev.map((a) => (a.substance.id === id ? { ...a, advancedOpen: !a.advancedOpen } : a)),
+    );
+  const clearAll = () => {
+    if (added.length === 0 || window.confirm('Are you sure you want to clear all active substances?')) {
+      setAdded([]);
+      clearSession();
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-bg text-ink">
+      {/* Top bar */}
+      <header
+        className="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur"
+        style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+      >
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-3 sm:px-6">
+          <div className="flex items-center gap-2.5 text-ink">
+            <span className="shrink-0">
+              <Logo size={26} />
+            </span>
+            <div className="leading-none">
+              <span className="block text-sm font-semibold tracking-tight">PharmaSim</span>
+              <span className="block text-[10px] uppercase tracking-[0.16em] text-ink-faint">
+                Interaction Simulator
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="hidden items-center gap-1.5 text-xs text-ink-faint sm:flex">
+              <Pill className="h-3.5 w-3.5 text-accent" />
+              <span className="tabular">{ALL.length}</span> substances
+            </span>
+            <a
+              href="https://github.com/KoshkiKode/pharmasim"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-md p-1.5 text-ink-faint transition-colors hover:text-ink"
+              aria-label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* Disclaimer */}
+      <div className="border-b border-sev-moderate/20 bg-sev-moderate/5">
+        <div className="mx-auto flex max-w-[1400px] items-start gap-2 px-4 py-2 sm:px-6">
+          <ShieldAlert className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sev-moderate" />
+          <p className="text-[11px] leading-relaxed text-ink-muted">
+            <span className="font-semibold text-sev-moderate">Educational / simulation use only.</span>{' '}
+            PharmaSim is a pharmacology sandbox. It is <em>not</em> medical advice, not a substitute
+            for a clinician or pharmacist, and must never guide real dosing or drug-combination
+            decisions.
+          </p>
+        </div>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="border-b border-border bg-bg-panel px-4 py-2 sm:px-6">
+        <div className="mx-auto flex max-w-[1400px] gap-4">
+          <button
+            onClick={() => setActiveTab('simulation')}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              activeTab === 'simulation'
+                ? 'bg-accent/10 text-accent'
+                : 'text-ink-muted hover:bg-bg-inset hover:text-ink'
+            }`}
+          >
+            Simulation Hub
+          </button>
+          <button
+            onClick={() => setActiveTab('index')}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              activeTab === 'index'
+                ? 'bg-accent/10 text-accent'
+                : 'text-ink-muted hover:bg-bg-inset hover:text-ink'
+            }`}
+          >
+            Drug Index
+          </button>
+        </div>
+      </div>
+
+      {activeTab === 'index' ? (
+        <IndexView />
+      ) : (
+        <main className="mx-auto grid max-w-[1400px] grid-cols-1 gap-4 px-4 py-5 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)_360px]">
+          {/* Left: patient */}
+          <div className="lg:sticky lg:top-[150px] lg:self-start">
+            <PatientPanel patient={patient} onChange={setPatient} />
+          </div>
+
+          {/* Center: substances */}
+          <div className="space-y-4">
+            <SubstanceSearch addedIds={addedIds} onAdd={addSubstance} />
+
+            <div className="flex flex-wrap items-center gap-1.5 px-0.5 text-[11px]">
+              <span className="text-ink-faint font-medium mr-1 select-none">Quick Presets:</span>
+              <button
+                type="button"
+                onClick={() => loadPreset(['fentanyl', 'alprazolam', 'ethanol'])}
+                className="rounded border border-red-500/25 bg-red-500/5 px-2 py-0.5 font-medium text-red-400 hover:bg-red-500/10 transition-colors"
+                title="CNS Depressant Combo: Opioid + Benzodiazepine + Alcohol (High Overdose Risk)"
+                data-testid="preset-cns-overload"
+              >
+                CNS Depressant Overload ⚠️
+              </button>
+              <button
+                type="button"
+                onClick={() => loadPreset(['mdma', 'phenelzine'])}
+                className="rounded border border-red-500/25 bg-red-500/5 px-2 py-0.5 font-medium text-red-400 hover:bg-red-500/10 transition-colors"
+                title="Serotonergic Combo: MDMA + MAOI (Lethal Serotonin Syndrome Risk)"
+                data-testid="preset-serotonin-risk"
+              >
+                Serotonin Syndrome Risk ⚠️
+              </button>
+              <button
+                type="button"
+                onClick={() => loadPreset(['ibuprofen', 'acetaminophen'])}
+                className="rounded border border-green-500/25 bg-green-500/5 px-2 py-0.5 font-medium text-green-400 hover:bg-green-500/10 transition-colors"
+                title="Safe Clinical Combo: NSAID + Acetaminophen (Low Risk Synergy)"
+                data-testid="preset-safe-combo"
+              >
+                Pain Management (Safe) ✓
+              </button>
+            </div>
+
+            {added.length > 0 && (
+              <div className="flex items-center justify-between px-0.5">
+                <span className="text-xs text-ink-muted">
+                  <span className="tabular font-semibold text-ink">{added.length}</span> substance
+                  {added.length === 1 ? '' : 's'} active
+                </span>
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className="inline-flex items-center gap-1.5 rounded-md border border-border px-2 py-1 text-xs font-medium text-ink-muted transition-colors hover:border-sev-contra/50 hover:text-sev-contra"
+                  data-testid="clear-all"
+                >
+                  <Trash2 className="h-3.5 w-3.5" /> Clear all
+                </button>
+              </div>
+            )}
+
+            {added.length === 0 ? (
+              <div className="rounded-xl border border-dashed border-border bg-bg-panel/50 px-6 py-16 text-center">
+                <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  <Pill className="h-6 w-6" />
+                </span>
+                <h3 className="text-sm font-semibold text-ink">No substances added</h3>
+                <p className="mx-auto mt-1 max-w-xs text-xs leading-relaxed text-ink-muted">
+                  Search above and add a substance. Try “Lexapro”, “tramadol”, or “alcohol”. Add two or
+                  more to see interactions.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4" data-testid="substance-cards">
+                {added.map((item) => (
+                  <SubstanceCard
+                    key={item.substance.id}
+                    item={item}
+                    patient={patient}
+                    onRegimenChange={(r) => updateRegimen(item.substance.id, r)}
+                    onToggleAdvanced={() => toggleAdvanced(item.substance.id)}
+                    onRemove={() => removeSubstance(item.substance.id)}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right: results */}
+          <div className="lg:sticky lg:top-[150px] lg:self-start">
+            <ResultsPanel substances={activeSubstances} patient={patient} addedRegimens={added} />
+          </div>
+        </main>
+      )}
+
+      <footer
+        className="border-t border-border"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      >
+        <div className="mx-auto max-w-[1400px] px-4 py-5 text-[11px] leading-relaxed text-ink-faint sm:px-6">
+          PharmaSim · deterministic in-browser pharmacokinetics (R = 1/(1−e^(−kτ))) and a rule-based
+          interaction engine. PK values are standard published reference figures; entries marked
+          “approx. PK” are estimates. Built by KoshkiKode · MIT licensed. Not medical advice.
+        </div>
+      </footer>
+    </div>
+  );
+}
