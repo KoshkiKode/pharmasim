@@ -1,6 +1,6 @@
 name: pharmasim
 base: core22
-version: '0.1.0'
+version: '0.0.1-alpha'
 summary: Drug Interaction Simulator & Pharmacology Sandbox
 description: |
   PharmaSim is a client-side pharmacokinetics and drug-interaction sandbox simulation.

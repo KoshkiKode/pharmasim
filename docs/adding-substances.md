@@ -8,7 +8,7 @@ rule automatically based on its tags.
 ## 1. Append an entry
 
 Add an object to the `substances` array in
-[`src/data/substances.ts`](../src/data/substances.ts):
+[`src/data/substances.ts`](../packages/engine/src/data/substances.ts):
 
 ```ts
 {
@@ -31,7 +31,7 @@ Add an object to the `substances` array in
 ```
 
 The full field reference lives in
-[`src/data/types.ts`](../src/data/types.ts).
+[`src/data/types.ts`](../packages/engine/src/data/types.ts).
 
 ## 2. Use the canonical vocabularies
 
@@ -43,7 +43,7 @@ build (`tsc -b`) fails on a typo:
 - **`bodySystems`** — values from `BODY_SYSTEMS` (`CNS`, `Hepatic`, …). To
   introduce a brand-new system, add it to `BODY_SYSTEMS` in `types.ts` first.
 - **`tags`** — values from `SubstanceTag`. **This is how interactions work:** the
-  rule engine in [`src/lib/interactions.ts`](../src/lib/interactions.ts) reasons
+  rule engine in [`src/lib/interactions.ts`](../packages/engine/src/lib/interactions.ts) reasons
   over these tags plus the CYP fields. Tag a substance `serotonergic` and it is
   immediately considered by the serotonin-syndrome rule against every other
   serotonergic agent — no per-pair data needed.
@@ -60,7 +60,7 @@ npm run typecheck   # tsc -b — catches union/shape errors
 npm test            # runs the validation + engine test suites
 ```
 
-The test suite runs [`validateSubstances`](../src/data/validate.ts) over the
+The test suite runs [`validateSubstances`](../packages/engine/src/data/validate.ts) over the
 whole library and fails on: duplicate or malformed ids, inverted dose ranges, a
 `typicalDoseMg` outside `doseRangeMg`, a non-positive half-life, or empty
 `routes` / `bodySystems`. In dev (`npm run dev`) the same check runs on load and

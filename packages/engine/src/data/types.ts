@@ -152,12 +152,34 @@ export type SubstanceTag =
   | 'gaba-ergic'
   | 'dopaminergic'
   | 'alcohol'
+  | 'cardiotoxic'
   | 'psychosis-risk'
   | 'dissociative'
   | 'cholinergic'
   | 'excitotoxic'
   | 'vasoconstrictor'
-  | 'holistic';
+  | 'holistic'
+  // Therapeutic-class / mechanistic tags (descriptive; the interaction rule
+  // engine keys on the pharmacodynamic tags above).
+  | 'immunotherapy'
+  | 'monoclonal-antibody'
+  | 'immunomodulator'
+  | 'peptide'
+  | 'melanocortin-agonist'
+  | 'growth-hormone-secretagogue'
+  | 'anti-aging'
+  | 'anxiolytic'
+  | 'nootropic'
+  | 'regenerative'
+  | 'nmda-antagonist'
+  | 'anesthetic'
+  | 'antidepressant'
+  | 'cardiovascular'
+  | 'metabolic-modulator'
+  | 'antipsychotic'
+  | 'sedative'
+  | 'antihistamine'
+  | 'calcium-channel-blocker';
 
 export type ConditionCategory = 'oncology' | 'cardiovascular' | 'neurological' | 'renal' | 'hepatic' | 'respiratory' | 'psychiatric' | 'autoimmune' | 'infectious' | 'endocrine' | 'other';
 export type OrganHealth = 'impaired' | 'reduced' | 'normal';

@@ -21,7 +21,7 @@
     "tauri:ios:dev": "tauri ios dev",
     "tauri:ios:build": "tauri ios build",
     "tauri:icons": "tauri icon public/icons/icon-512.png",
-    "pipeline": "node scripts/verify-pipeline.cjs"
+    "pipeline": "node ../../scripts/verify-pipeline.cjs"
   },
   "dependencies": {
     "@pharmasim/engine": "*",

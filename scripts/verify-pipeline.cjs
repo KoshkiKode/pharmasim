@@ -27,66 +27,36 @@ function logError(msg) {
   console.error(`${colors.red}✗ ${msg}${colors.reset}`);
 }
 
-// Invariants defined in src/data/types.ts
-const VALID_CATEGORIES = new Set([
-  'pharmaceutical',
-  'research-chemical',
-  'chemical',
-  'plant-herb',
-  'recreational',
-  'supplement'
-]);
+// Invariants are parsed from packages/engine/src/data/types.ts so this
+// script can never drift out of sync with the engine's own type system.
+// (The hardcoded copies previously lagged behind — e.g. they were missing
+// six SubstanceTag values that are in active use in substances.ts.)
+function parseUnionValues(typeSource, typeName) {
+  const m = typeSource.match(
+    new RegExp(`export type ${typeName} =\\s*((?:\\s*\\|?\\s*'[^']+'\\s*)+);`)
+  );
+  if (!m) throw new Error(`Could not parse union type ${typeName} from types.ts`);
+  return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
+}
 
-const VALID_BODY_SYSTEMS = new Set([
-  'CNS',
-  'Cardiovascular',
-  'Respiratory',
-  'GI',
-  'Hepatic',
-  'Renal',
-  'Endocrine',
-  'Metabolic',
-  'Musculoskeletal',
-  'Hematologic',
-  'Immune',
-  'Integumentary',
-  'Genitourinary'
-]);
+function parseConstArray(typeSource, constName) {
+  const m = typeSource.match(
+    new RegExp(`export const ${constName} =\\s*\\[([^\\]]+)\\]`)
+  );
+  if (!m) throw new Error(`Could not parse const array ${constName} from types.ts`);
+  return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
+}
 
-const VALID_ROUTES = new Set([
-  'oral',
-  'sublingual',
-  'intranasal',
-  'inhaled',
-  'rectal',
-  'transdermal',
-  'IV',
-  'IM',
-  'SC',
-  'subcutaneous'
-]);
+const TYPES_PATH = path.resolve(__dirname, '../packages/engine/src/data/types.ts');
+if (!fs.existsSync(TYPES_PATH)) {
+  throw new Error(`types.ts not found at ${TYPES_PATH}`);
+}
+const typeSource = fs.readFileSync(TYPES_PATH, 'utf8');
 
-const VALID_TAGS = new Set([
-  'serotonergic',
-  'maoi',
-  'cns-depressant',
-  'respiratory-depressant',
-  'opioid',
-  'benzodiazepine',
-  'qt-prolonging',
-  'anticoagulant',
-  'antiplatelet',
-  'nsaid',
-  'sympathomimetic',
-  'serotonin-releaser',
-  'stimulant',
-  'anticholinergic',
-  'hepatotoxic',
-  'nephrotoxic',
-  'gaba-ergic',
-  'dopaminergic',
-  'alcohol'
-]);
+const VALID_CATEGORIES = new Set(parseUnionValues(typeSource, 'SubstanceCategory'));
+const VALID_BODY_SYSTEMS = new Set(parseConstArray(typeSource, 'BODY_SYSTEMS'));
+const VALID_ROUTES = new Set(parseConstArray(typeSource, 'ROUTES'));
+const VALID_TAGS = new Set(parseUnionValues(typeSource, 'SubstanceTag'));
 
 function runCommand(command, args) {
   return new Promise((resolve, reject) => {
@@ -107,7 +77,7 @@ async function run() {
   // 1. Database integrity
   logStep('Checking Database Integrity');
   try {
-    const substancesPath = path.resolve(__dirname, '../src/data/substances.ts');
+    const substancesPath = path.resolve(__dirname, '../packages/engine/src/data/substances.ts');
     if (!fs.existsSync(substancesPath)) {
       throw new Error(`Substances file not found at ${substancesPath}`);
     }
@@ -199,16 +169,17 @@ async function run() {
   // 2. Tauri Assets Verification
   logStep('Verifying Tauri Cross-Platform Assets');
   try {
+    // Paths are relative to the Tauri app directory, not the repo root.
     const requiredAssets = [
-      'src-tauri/icons/icon.icns',
-      'src-tauri/icons/icon.ico',
-      'src-tauri/icons/icon.png',
-      'src-tauri/icons/32x32.png',
-      'src-tauri/icons/64x64.png',
-      'src-tauri/icons/128x128.png',
-      'src-tauri/icons/128x128@2x.png',
-      'src-tauri/icons/android/mipmap-xhdpi/ic_launcher.png',
-      'src-tauri/icons/ios/AppIcon-60x60@2x.png'
+      'apps/linux-desktop/src-tauri/icons/icon.icns',
+      'apps/linux-desktop/src-tauri/icons/icon.ico',
+      'apps/linux-desktop/src-tauri/icons/icon.png',
+      'apps/linux-desktop/src-tauri/icons/32x32.png',
+      'apps/linux-desktop/src-tauri/icons/64x64.png',
+      'apps/linux-desktop/src-tauri/icons/128x128.png',
+      'apps/linux-desktop/src-tauri/icons/128x128@2x.png',
+      'apps/linux-desktop/src-tauri/icons/android/mipmap-xhdpi/ic_launcher.png',
+      'apps/linux-desktop/src-tauri/icons/ios/AppIcon-60x60@2x.png'
     ];
 
     for (const asset of requiredAssets) {
