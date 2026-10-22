@@ -25,8 +25,9 @@ export function ResultsPanel({
 }) {
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [paywallOpen, setPaywallOpen] = useState(false);
-  const [usageVer, setUsageVer] = useState(0);
-
+  // Only the setter is used: bumping it re-renders so the remaining-free-runs
+  // counter re-reads the usage tracker.
+  const [, setUsageVer] = useState(0);
 
   const interactions = useMemo(() => computeInteractions(substances), [substances]);
   const conditionWarnings = useMemo(
