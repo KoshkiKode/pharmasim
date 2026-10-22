@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Button, Card, TextInput, IconButton, useTheme } from 'react-native-paper';
-import { substances, type DoseEvent, type PatientProfile } from '@pharmasim/engine';
+import { substances, type DoseEvent, type PatientProfile, canRunSimulation, recordSimulationRun, getRemainingFreeRuns, getUsageState } from '@pharmasim/engine';
+import { PaywallModal } from '../components/PaywallModal';
 
 const DEFAULT_PATIENT: PatientProfile = {
   biologicalSex: 'M',
@@ -23,6 +24,9 @@ export function TimelineScreen({ route, navigation }: any) {
   const [events, setEvents] = React.useState<DoseEvent[]>([]);
   const [patient, setPatient] = React.useState<PatientProfile>(DEFAULT_PATIENT);
   const [expandedEvents, setExpandedEvents] = React.useState<Record<string, boolean>>({});
+  const [paywallVisible, setPaywallVisible] = React.useState(false);
+  const [usageVersion, setUsageVersion] = React.useState(0);
+
 
   // When returning from Search screen, add the selected substance
   React.useEffect(() => {
@@ -55,6 +59,18 @@ export function TimelineScreen({ route, navigation }: any) {
       navigation.setParams({ updatedPatient: undefined });
     }
   }, [route.params?.updatedPatient]);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconButton
+          icon="cog"
+          onPress={() => navigation.navigate('Settings')}
+        />
+      ),
+    });
+  }, [navigation]);
+
 
   const removeEvent = (id: string) => {
     setEvents(events.filter(e => e.id !== id));
@@ -319,18 +335,45 @@ export function TimelineScreen({ route, navigation }: any) {
       </ScrollView>
 
       <View style={[styles.footer, { backgroundColor: theme.colors.surface, borderTopColor: theme.colors.outline }]}>
+        {getUsageState().isProUnlocked ? (
+          <Text style={{ textAlign: 'center', marginBottom: 6, color: theme.colors.primary, fontWeight: 'bold' }}>
+            PRO UNLOCKED (Unlimited Runs)
+          </Text>
+        ) : (
+          <Text style={{ textAlign: 'center', marginBottom: 6, color: theme.colors.onSurfaceVariant }}>
+            Free Analyses Remaining: {getRemainingFreeRuns()}
+          </Text>
+        )}
         <Button 
           mode="contained" 
-          onPress={() => navigation.navigate('Results', { events, patient })}
+          onPress={() => {
+            if (canRunSimulation()) {
+              recordSimulationRun();
+              setUsageVersion(v => v + 1);
+              navigation.navigate('Results', { events, patient });
+            } else {
+              setPaywallVisible(true);
+            }
+          }}
           style={styles.runBtn}
           disabled={events.length === 0}
         >
           Run Simulation
         </Button>
       </View>
+
+      <PaywallModal 
+        visible={paywallVisible}
+        onDismiss={() => setPaywallVisible(false)}
+        onSuccess={() => {
+          setPaywallVisible(false);
+          setUsageVersion(v => v + 1);
+        }}
+      />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

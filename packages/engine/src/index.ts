@@ -9,3 +9,5 @@ export * from './lib/conditionWarnings';
 export * from './lib/riskScoring';
 export * from './lib/persistence';
 export * from './lib/state';
+export * from './lib/usageTracker';
+export * from './lib/settings';

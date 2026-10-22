@@ -1,40 +1,46 @@
 import * as React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { NavigationContainer, DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationLightTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { theme } from './src/theme';
+import { darkTheme, lightTheme } from './src/theme';
+import { SettingsProvider, useSettings } from './src/context/SettingsContext';
 
 // Screen Imports
 import { SubstanceSearchScreen } from './src/screens/SubstanceSearchScreen';
 import { TimelineScreen } from './src/screens/TimelineScreen';
 import { ResultsScreen } from './src/screens/ResultsScreen';
 import { PatientProfileScreen } from './src/screens/PatientProfileScreen';
+import { SettingsScreen } from './src/screens/SettingsScreen';
 
 const Stack = createStackNavigator();
 
-const navTheme = {
-  ...NavigationDarkTheme,
-  colors: {
-    ...NavigationDarkTheme.colors,
-    primary: theme.colors.primary,
-    background: theme.colors.background,
-    card: theme.colors.surface,
-    text: theme.colors.onSurface,
-    border: theme.colors.outline,
-    notification: theme.colors.error,
-  },
-};
+function AppContent() {
+  const { isDarkTheme } = useSettings();
+  const activeTheme = isDarkTheme ? darkTheme : lightTheme;
+  const baseNavTheme = isDarkTheme ? NavigationDarkTheme : NavigationLightTheme;
 
-export default function App() {
+  const navTheme = {
+    ...baseNavTheme,
+    colors: {
+      ...baseNavTheme.colors,
+      primary: activeTheme.colors.primary,
+      background: activeTheme.colors.background,
+      card: activeTheme.colors.surface,
+      text: activeTheme.colors.onSurface,
+      border: activeTheme.colors.outline,
+      notification: activeTheme.colors.error,
+    },
+  };
+
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider theme={activeTheme}>
       <NavigationContainer theme={navTheme}>
         <Stack.Navigator 
           initialRouteName="Timeline"
           screenOptions={{
-            headerStyle: { backgroundColor: theme.colors.surface },
-            headerTintColor: theme.colors.onSurface,
-            cardStyle: { backgroundColor: theme.colors.background }
+            headerStyle: { backgroundColor: activeTheme.colors.surface },
+            headerTintColor: activeTheme.colors.onSurface,
+            cardStyle: { backgroundColor: activeTheme.colors.background }
           }}
         >
           <Stack.Screen 
@@ -57,8 +63,22 @@ export default function App() {
             component={PatientProfileScreen} 
             options={{ title: 'Patient Profile' }} 
           />
+          <Stack.Screen 
+            name="Settings" 
+            component={SettingsScreen} 
+            options={{ title: 'Settings' }} 
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
   );
 }
+
+export default function App() {
+  return (
+    <SettingsProvider>
+      <AppContent />
+    </SettingsProvider>
+  );
+}
+

@@ -1,15 +1,26 @@
 import * as React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { TextInput, Button, Card, Text, IconButton, Chip, useTheme, Divider } from 'react-native-paper';
-import { conditions as ALL_CONDITIONS, type PatientProfile, type OrganHealth, type MetabolizerPhenotype } from '@pharmasim/engine';
+import { conditions as ALL_CONDITIONS, type PatientProfile, type OrganHealth, type MetabolizerPhenotype, kgToLbs, lbsToKg, cmToInches, inchesToCm } from '@pharmasim/engine';
+import { useSettings } from '../context/SettingsContext';
 
 export function PatientProfileScreen({ route, navigation }: any) {
   const theme = useTheme();
   const { currentPatient } = route.params;
+  const { settings } = useSettings();
+  const isImperial = settings.unitSystem === 'imperial';
 
   const [patient, setPatient] = React.useState<PatientProfile>(currentPatient);
   const [condQuery, setCondQuery] = React.useState('');
   const [showDropdown, setShowDropdown] = React.useState(false);
+
+  // Local string state for numeric inputs to avoid parsing bugs
+  const [ageStr, setAgeStr] = React.useState(patient.ageYears.toString());
+  const initialWeight = isImperial ? Math.round(kgToLbs(patient.weightKg)) : patient.weightKg;
+  const [weightStr, setWeightStr] = React.useState(initialWeight.toString());
+  const initialHeight = isImperial ? Math.round(cmToInches(patient.heightCm)) : patient.heightCm;
+  const [heightStr, setHeightStr] = React.useState(initialHeight.toString());
+  const [bodyFatStr, setBodyFatStr] = React.useState(patient.bodyFatPct.toString());
 
   const set = <K extends keyof PatientProfile>(key: K, value: PatientProfile[K]) => {
     setPatient(prev => ({ ...prev, [key]: value }));
@@ -24,7 +35,7 @@ export function PatientProfileScreen({ route, navigation }: any) {
         (c.name.toLowerCase().includes(q) ||
           c.category.toLowerCase().includes(q) ||
           c.description.toLowerCase().includes(q))
-    ).slice(0, 10); // Limit to top 10 results for performance
+    ).slice(0, 10);
   }, [condQuery, patient.conditions]);
 
   const addCondition = (id: string) => {
@@ -42,7 +53,22 @@ export function PatientProfileScreen({ route, navigation }: any) {
   };
 
   const handleSave = () => {
-    navigation.navigate('Timeline', { updatedPatient: patient });
+    let weight = parseFloat(weightStr) || patient.weightKg;
+    let height = parseFloat(heightStr) || patient.heightCm;
+
+    if (isImperial) {
+      weight = lbsToKg(weight);
+      height = inchesToCm(height);
+    }
+
+    const updated = {
+      ...patient,
+      ageYears: parseInt(ageStr) || patient.ageYears,
+      weightKg: weight,
+      heightCm: height,
+      bodyFatPct: parseFloat(bodyFatStr) || patient.bodyFatPct,
+    };
+    navigation.navigate('Timeline', { updatedPatient: updated });
   };
 
   const hydrationLabel = (p: number) => {
@@ -88,18 +114,18 @@ export function PatientProfileScreen({ route, navigation }: any) {
               <View style={styles.gridCol}>
                 <TextInput
                   label="Age (yrs)"
-                  value={patient.ageYears.toString()}
+                  value={ageStr}
                   keyboardType="numeric"
-                  onChangeText={val => set('ageYears', Math.max(0, Math.min(120, parseInt(val) || 0)))}
+                  onChangeText={setAgeStr}
                   mode="outlined"
                 />
               </View>
               <View style={[styles.gridCol, { marginLeft: 12 }]}>
                 <TextInput
-                  label="Weight (kg)"
-                  value={patient.weightKg.toString()}
+                  label={isImperial ? "Weight (lbs)" : "Weight (kg)"}
+                  value={weightStr}
                   keyboardType="numeric"
-                  onChangeText={val => set('weightKg', Math.max(1, Math.min(300, parseInt(val) || 0)))}
+                  onChangeText={setWeightStr}
                   mode="outlined"
                 />
               </View>
@@ -107,25 +133,26 @@ export function PatientProfileScreen({ route, navigation }: any) {
             <View style={[styles.grid, { marginTop: 12 }]}>
               <View style={styles.gridCol}>
                 <TextInput
-                  label="Height (cm)"
-                  value={patient.heightCm.toString()}
+                  label={isImperial ? "Height (in)" : "Height (cm)"}
+                  value={heightStr}
                   keyboardType="numeric"
-                  onChangeText={val => set('heightCm', Math.max(50, Math.min(250, parseInt(val) || 0)))}
+                  onChangeText={setHeightStr}
                   mode="outlined"
                 />
               </View>
               <View style={[styles.gridCol, { marginLeft: 12 }]}>
                 <TextInput
                   label="Body Fat (%)"
-                  value={patient.bodyFatPct.toString()}
+                  value={bodyFatStr}
                   keyboardType="numeric"
-                  onChangeText={val => set('bodyFatPct', Math.max(2, Math.min(70, parseInt(val) || 0)))}
+                  onChangeText={setBodyFatStr}
                   mode="outlined"
                 />
               </View>
             </View>
           </Card.Content>
         </Card>
+
 
         {/* Clearance Factors */}
         <Card style={styles.card}>

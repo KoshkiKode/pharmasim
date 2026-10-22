@@ -10,8 +10,9 @@ import {
 } from '@pharmasim/engine';
 import { computeConditionWarnings } from '@pharmasim/engine';
 import { computeRiskScores, getRiskLevel } from '@pharmasim/engine';
-import { computePK, evaluateToxicity, computeReceptorState } from '@pharmasim/engine';
+import { computePK, evaluateToxicity, computeReceptorState, canRunSimulation, recordSimulationRun, getRemainingFreeRuns, getUsageState } from '@pharmasim/engine';
 import { SummaryModal } from './SummaryModal';
+import { PaywallModal } from './PaywallModal';
 
 export function ResultsPanel({
   substances,
@@ -23,6 +24,9 @@ export function ResultsPanel({
   addedRegimens: { substance: Substance; regimen: any }[];
 }) {
   const [summaryOpen, setSummaryOpen] = useState(false);
+  const [paywallOpen, setPaywallOpen] = useState(false);
+  const [usageVer, setUsageVer] = useState(0);
+
 
   const interactions = useMemo(() => computeInteractions(substances), [substances]);
   const conditionWarnings = useMemo(
@@ -66,14 +70,30 @@ export function ResultsPanel({
   return (
     <div className="space-y-4">
       {/* Export Clinical Summary Button */}
-      <button
-        type="button"
-        onClick={() => setSummaryOpen(true)}
-        className="w-full flex items-center justify-center gap-2 rounded-xl border border-border bg-bg-panel py-2.5 text-xs font-semibold text-accent hover:bg-accent/5 hover:text-ink transition-colors shadow-panel"
-        data-testid="btn-export-summary"
-      >
-        <FileText className="h-4 w-4" /> Export Clinical Summary
-      </button>
+      <div className="space-y-1">
+        <button
+          type="button"
+          onClick={() => {
+            if (canRunSimulation()) {
+              recordSimulationRun();
+              setUsageVer((v) => v + 1);
+              setSummaryOpen(true);
+            } else {
+              setPaywallOpen(true);
+            }
+          }}
+          className="w-full flex items-center justify-center gap-2 rounded-xl border border-border bg-bg-panel py-2.5 text-xs font-semibold text-accent hover:bg-accent/5 hover:text-ink transition-colors shadow-panel"
+          data-testid="btn-export-summary"
+        >
+          <FileText className="h-4 w-4" /> Export Clinical Summary
+        </button>
+        <p className="text-[10px] text-center text-ink-faint">
+          {getUsageState().isProUnlocked
+            ? 'PRO UNLOCKED (Unlimited Analyses)'
+            : `Free Analyses Remaining: ${getRemainingFreeRuns()}`}
+        </p>
+      </div>
+
 
       {/* Lethal Toxicity Alerts */}
       {toxAlerts.length > 0 && toxAlerts.some(t => t.status === 'lethal' || t.status === 'toxic') && (
@@ -404,9 +424,20 @@ export function ResultsPanel({
         substances={substances}
         addedRegimens={addedRegimens}
       />
+
+      {/* Paywall Modal */}
+      <PaywallModal
+        isOpen={paywallOpen}
+        onClose={() => setPaywallOpen(false)}
+        onSuccess={() => {
+          setPaywallOpen(false);
+          setUsageVer((v) => v + 1);
+        }}
+      />
     </div>
   );
 }
+
 
 export { severityRank };
 
