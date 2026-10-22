@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -44,10 +44,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -63,7 +63,7 @@ jobs:
         working-directory: ./apps/DesktopNative
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macOS-DMG
           path: apps/DesktopNative/macos/dist/*.dmg
@@ -74,10 +74,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -89,7 +89,7 @@ jobs:
         working-directory: ./apps/DesktopNative
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Windows-MSIX
           path: apps/DesktopNative/windows/AppPackages/
@@ -100,10 +100,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -130,13 +130,13 @@ jobs:
         run: ./build-linux.sh
 
       - name: Upload Debian Package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Linux-DEB
           path: apps/linux-desktop/src-tauri/target/release/bundle/deb/*.deb
 
       - name: Upload AppImage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Linux-AppImage
           path: apps/linux-desktop/src-tauri/target/release/bundle/appimage/*.AppImage
