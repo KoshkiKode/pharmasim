@@ -35,6 +35,10 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Desktop native test
+        working-directory: apps/DesktopNative
+        run: npm test
+
       - name: Build engine
         run: npm run build
 
