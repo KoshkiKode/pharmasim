@@ -56,7 +56,7 @@ npm run dev        # start the Vite dev server at http://localhost:5173
 npm run build
 ```
 
-The build emits a fully static site to `dist/` — host it on any static file server (GitHub Pages, Netlify, S3, Cloudflare Pages, etc.). The Vite `base` is set to `./` so it works from any sub-path.
+The build emits a fully static site to `dist/` — host it on any static file server (Firebase Hosting / Google Cloud, GitHub Pages, Cloudflare Pages, etc.). The Vite `base` is set to `./` so it works from any sub-path.
 
 ### 2. Progressive Web App (PWA)
 
