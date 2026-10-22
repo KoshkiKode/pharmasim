@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "test:stress": "vitest run src/lib/stress.test.ts",
     "bench": "vitest bench src/lib/stress.bench.ts --run"
   },

@@ -19,7 +19,12 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      // The repo root hoists React 19 types for apps/mobile while this app is on
+      // React 18. Pin react's types to this app's own copy so libraries such as
+      // lucide-react and recharts do not see two different @types/react.
+      "react": ["./node_modules/@types/react"],
+      "react/*": ["./node_modules/@types/react/*"]
     }
   },
   "include": ["src"]
