@@ -117,6 +117,16 @@ export function TimelineScreen({ route, navigation }: any) {
 
   return (
     <View style={styles.container}>
+      <Card style={{ margin: 16, marginBottom: 0, backgroundColor: theme.colors.errorContainer }}>
+        <Card.Content>
+          <Text variant="labelLarge" style={{ fontWeight: 'bold', color: theme.colors.onErrorContainer }}>
+            Educational simulation only — not health or medical advice
+          </Text>
+          <Text variant="bodySmall" style={{ color: theme.colors.onErrorContainer, marginTop: 4 }}>
+            Results and examples are estimates. Never use this app for real dosing, treatment, or drug-combination decisions.
+          </Text>
+        </Card.Content>
+      </Card>
       {/* Patient Profile Summary Banner */}
       <Card style={{ margin: 16, marginBottom: 8, backgroundColor: theme.colors.surfaceVariant }}>
         <Card.Content style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -186,7 +196,7 @@ export function TimelineScreen({ route, navigation }: any) {
                 textColor="#4ade80"
                 style={{ borderColor: 'rgba(74,222,128,0.3)', height: 30 }}
               >
-                Pain Management (Safe) ✓
+                Comparison Example (Not Safe-Use Guidance)
               </Button>
             </View>
           </Card.Content>

@@ -5,6 +5,13 @@ chemical is a one-line append — the type system and a validation pass enforce
 correctness, and the interaction engine wires the new entry into every relevant
 rule automatically based on its tags.
 
+> **Safety boundary:** This repository models substances for educational
+> software only. It is not health or medical advice, and entries must not be
+> presented as dosing, treatment, prescribing, or “safe use” guidance. Values
+> may be estimated, incomplete, or wrong. Use fictional/non-identifying data
+> when developing and ask a qualified professional about real-world health
+> decisions.
+
 ## 1. Append an entry
 
 Add an object to the `substances` array in

@@ -7,13 +7,14 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:stress": "vitest run src/lib/stress.test.ts",
-    "bench": "vitest bench src/lib/stress.bench.ts --run"
+    "test": "vitest run --config vitest.config.ts",
+    "test:stress": "vitest run --config vitest.config.ts src/lib/stress.test.ts",
+    "bench": "vitest run --config vitest.config.ts src/lib/stress.bench.ts"
   },
   "devDependencies": {
-    "fast-check": "^4.8.0",
-    "typescript": "^5.5.4",
-    "vitest": "^2.1.8"
+    "fast-check": "^4.10.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5",
+    "vite": "^8.3.5"
   }
 }

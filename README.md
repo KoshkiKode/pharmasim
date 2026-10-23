@@ -2,9 +2,9 @@
 
 **Educational drug-interaction & pharmacokinetics simulator.** PharmaSim is a fully client-side sandbox for exploring how substances behave in the body and how they interact, built for learning and curiosity.
 
-> ⚠️ **DISCLAIMER — NOT MEDICAL ADVICE**
+> ⚠️ **IMPORTANT — EDUCATIONAL SOFTWARE ONLY / NOT HEALTH OR MEDICAL ADVICE**
 >
-> PharmaSim is an **educational simulation only**. It is **not** a medical device, clinical decision tool, or pharmacological reference. The models are simplified approximations and the data may be incomplete or inaccurate. **Do not** use PharmaSim to make any real-world decision about taking, combining, dosing, or avoiding any substance, medication, or drug. Always consult a qualified healthcare professional. The authors accept no liability for any use of this software.
+> PharmaSim is a client-side educational simulation and software project. It is **not** a medical device, clinical decision tool, diagnostic tool, treatment tool, prescribing aid, or pharmacological reference. The models are simplified approximations and the data may be incomplete, outdated, or inaccurate. **Do not** use PharmaSim to make any real-world decision about taking, combining, dosing, stopping, or avoiding any substance, medication, or drug, and do not treat a result, warning, or “low-risk” example as a safety recommendation. For personal health questions, medication decisions, suspected poisoning, or emergencies, contact a qualified healthcare professional or appropriate emergency/poison-control service. Do not enter identifiable health information. The authors accept no liability for use of this software.
 
 ---
 
@@ -16,6 +16,8 @@
 - **Interaction engine** — rule-based detection of serotonin syndrome, CNS/respiratory depression, CYP inhibition/induction, QT prolongation, bleeding risk, MAOI + sympathomimetic crises, anticholinergic burden, hepatotoxicity, and nephrotoxicity, with severity grading (minor → contraindicated).
 - **Body-system impact** summary and **plasma-concentration charts** (Recharts) per substance.
 
+Every patient profile, dose, condition, interaction, warning, and report in the app is a **simulation input or estimate only**. Labels such as “patient,” “clinical,” “contraindication,” and “dose” describe the simulation domain and do not imply that PharmaSim provides healthcare, medical validation, or individualized recommendations.
+
 ## Tech stack
 
 - **Vite** + **React 18** + **TypeScript** (strict) — 100% client-side, no backend.
@@ -25,12 +27,16 @@
 - **Tauri v2** — native builds for Windows, macOS, Linux, **Android**, and **iOS**.
 - **Vitest** — unit tests for the PK engine, interaction engine, and substance-database validation.
 
+The repository tracks the latest published stable dependency releases where the platform ecosystems remain compatible. Native platform dependencies are intentionally kept in their platform-matched release lines; run the validation commands below after changing them.
+
 ## Getting started
 
 ```bash
 npm install
 npm run dev        # start the Vite dev server at http://localhost:5173
 ```
+
+PharmaSim is not health advice. Read the safety notice above before using the app, and use only fictional or non-identifying data.
 
 ### Scripts
 
@@ -121,17 +127,13 @@ installable, offline-capable app without the App Store.
 
 ```
 pharmasim/
-├── public/icons/          # PWA icons + SVG logo
-├── src/
-│   ├── data/              # substance database (618) + types + validation
-│   ├── lib/               # pharmacokinetics + interactions engines, state, persistence
-│   ├── components/        # PatientPanel, SubstanceSearch, SubstanceCard, ResultsPanel, …
-│   ├── App.tsx
-│   └── main.tsx
-├── src-tauri/             # Tauri v2 config + Rust source + icons (+ generated gen/)
+├── packages/engine/       # shared PK, interaction, toxicity, state, and validation engine
+├── apps/linux-desktop/    # Vite + React + Tailwind + Tauri desktop/PWA client
+├── apps/mobile/           # Expo / React Native mobile client
+├── apps/DesktopNative/    # React Native desktop client for macOS/Windows
 ├── docs/adding-substances.md  # how to add chemicals/substances safely
-├── .github/workflows/     # CI (typecheck + test + build), mobile, and release
-└── dist/                  # production build output (generated)
+├── .github/workflows/     # CI, cross-platform builds, mobile, and release workflows
+└── dist/                  # generated production output (not source)
 ```
 
 ## License

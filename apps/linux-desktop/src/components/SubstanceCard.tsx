@@ -392,7 +392,7 @@ export function SubstanceCard({
                 }}
                 labelStyle={{ color: '#9fb0c8' }}
                 labelFormatter={(h) => `t = ${h} h`}
-                formatter={(v: number) => [v.toFixed(3), 'mg/L']}
+                formatter={(v) => [typeof v === 'number' ? v.toFixed(3) : String(v ?? ''), 'mg/L']}
               />
               {regimen.mode === 'daily' && pk.steadyStateTrough > 0 && (
                 <ReferenceLine

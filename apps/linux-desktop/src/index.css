@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 :root {
   color-scheme: dark;
@@ -66,11 +65,23 @@ body {
 /* numeric / select inputs */
 @layer components {
   .numeric-input {
-    @apply tabular w-full rounded-lg border border-border bg-bg-inset px-2.5 py-1.5 text-sm text-ink outline-none transition-colors;
-  }
-  .numeric-input:focus {
-    @apply border-accent/60 ring-1 ring-accent/40;
-  }
+      width: 100%;
+      border: 1px solid #1e2c44;
+      border-radius: 0.5rem;
+      background: #0a111e;
+      padding: 0.375rem 0.625rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      color: #e6edf7;
+      outline: none;
+      transition: color, background-color, border-color, outline-color, box-shadow 150ms ease;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: 'tnum' 1;
+    }
+    .numeric-input:focus {
+      border-color: rgb(45 212 191 / 0.6);
+      box-shadow: 0 0 0 1px rgb(45 212 191 / 0.4);
+    }
 }
 
 /* range slider styling */
