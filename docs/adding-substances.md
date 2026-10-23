@@ -68,10 +68,19 @@ npm test            # runs the validation + engine test suites
 ```
 
 The test suite runs [`validateSubstances`](../packages/engine/src/data/validate.ts) over the
-whole library and fails on: duplicate or malformed ids, inverted dose ranges, a
-`typicalDoseMg` outside `doseRangeMg`, a non-positive half-life, or empty
-`routes` / `bodySystems`. In dev (`npm run dev`) the same check runs on load and
-throws with a readable summary, so a bad entry surfaces immediately.
+whole library and fails on duplicate or malformed ids, inverted dose ranges, a
+`typicalDoseMg` outside `doseRangeMg`, non-finite or invalid advanced PK values,
+invalid route bioavailability, malformed toxicity thresholds, invalid mixture
+ratios, malformed metabolite metadata, invalid receptor affinities, a
+non-positive half-life, or empty `routes` / `bodySystems`. In dev (`npm run dev`)
+the same check runs on load and throws with a readable summary, so a bad entry
+surfaces immediately.
+
+When a profile or regimen comes from a UI or persisted JSON, use the shared
+runtime helpers in [`src/lib/validation.ts`](../packages/engine/src/lib/validation.ts)
+instead of trusting the object shape. They bound numeric values, filter unknown
+conditions and phenotypes, limit custom events, and restore only known
+substances.
 
 > Substances not dosed in milligrams (e.g. inhaled gases) may use `0` for
 > `typicalDoseMg` / `doseRangeMg`.

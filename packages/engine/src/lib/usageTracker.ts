@@ -19,11 +19,19 @@ function getStorage(): UsageState {
     if (typeof localStorage !== 'undefined') {
       const raw = localStorage.getItem(USAGE_STORAGE_KEY);
       if (raw) {
-        return JSON.parse(raw);
+        const parsed = JSON.parse(raw) as Partial<UsageState>;
+        return {
+          runsExecuted:
+            typeof parsed.runsExecuted === 'number' && Number.isFinite(parsed.runsExecuted)
+              ? Math.max(0, Math.floor(parsed.runsExecuted))
+              : 0,
+          isProUnlocked: parsed.isProUnlocked === true,
+          ...(typeof parsed.licenseKey === 'string' ? { licenseKey: parsed.licenseKey } : {}),
+        };
       }
     }
-  } catch {
-    // Ignore storage errors
+  } catch (error) {
+    console.warn('[PharmaSim] Unable to read local usage state.', error);
   }
   return memoryStorage;
 }
@@ -34,8 +42,8 @@ function saveStorage(state: UsageState): void {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(USAGE_STORAGE_KEY, JSON.stringify(state));
     }
-  } catch {
-    // Ignore storage errors
+  } catch (error) {
+    console.warn('[PharmaSim] Unable to save local usage state.', error);
   }
 }
 
@@ -67,7 +75,7 @@ export function recordSimulationRun(): UsageState {
 
 export function unlockPro(licenseKey: string): { success: boolean; message: string } {
   const cleanKey = licenseKey.trim().toUpperCase();
-  if (cleanKey === PRO_LICENSE_KEY_DEMO || cleanKey.startsWith('PRO-')) {
+  if (cleanKey === PRO_LICENSE_KEY_DEMO) {
     const state = getStorage();
     state.isProUnlocked = true;
     state.licenseKey = cleanKey;
