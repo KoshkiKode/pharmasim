@@ -288,6 +288,9 @@ export const ROA_MULTIPLIERS: Record<Route, RouteMultiplier> = {
   oral: { bioavailabilityScalar: 1.0, tmaxHours: 1.5 },
   sublingual: { bioavailabilityScalar: 1.5, tmaxHours: 0.5 },
   intranasal: { bioavailabilityScalar: 1.3, tmaxHours: 0.25 },
+  nasal: { bioavailabilityScalar: 1.3, tmaxHours: 0.25 },
+  smoked: { bioavailabilityScalar: 1.6, tmaxHours: 0.08 },
+  buccal: { bioavailabilityScalar: 1.5, tmaxHours: 0.5 },
   inhaled: { bioavailabilityScalar: 1.6, tmaxHours: 0.08 }, // ~5 minutes
   rectal: { bioavailabilityScalar: 1.3, tmaxHours: 0.75 },
   transdermal: { bioavailabilityScalar: 1.0, tmaxHours: 8.0 },

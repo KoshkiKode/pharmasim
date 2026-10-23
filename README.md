@@ -10,21 +10,25 @@
 
 ## What it does
 
-- **Substance library** of **618** entries spanning pharmaceuticals, research chemicals, supplements, herbs, and common substances — each tagged with pharmacological properties.
+- **Substance library** of **880+** entries spanning pharmaceuticals, research chemicals, supplements, herbs, and common substances — each tagged with pharmacological properties.
 - **Patient profile model** — age, weight, height, body-fat %, tolerance, hydration, and liver / kidney / CYP-metabolizer status drive a clearance model that adjusts pharmacokinetics per individual.
 - **Pharmacokinetics engine** — Bateman-function absorption curves, single-dose vs. steady-state daily-dosing superposition, accumulation ratio, effective half-life, and time-to-steady-state, all adjusted by the patient profile.
-- **Interaction engine** — rule-based detection of serotonin syndrome, CNS/respiratory depression, CYP inhibition/induction, QT prolongation, bleeding risk, MAOI + sympathomimetic crises, anticholinergic burden, hepatotoxicity, and nephrotoxicity, with severity grading (minor → contraindicated).
+- **Interaction engine** — rule-based detection of serotonin syndrome, CNS/respiratory depression, CYP inhibition/induction, QT prolongation, bleeding risk, MAOI + sympathomimetic crises, anticholinergic burden, hepatotoxicity, and nephrotoxicity, with modeled severity grading (minor → contraindicated).
 - **Body-system impact** summary and **plasma-concentration charts** (Recharts) per substance.
+- **Runtime safeguards** — shared validation and sanitization for patient profiles,
+  regimens, custom events, advanced substance fields, and persisted local state.
 
 Every patient profile, dose, condition, interaction, warning, and report in the app is a **simulation input or estimate only**. Labels such as “patient,” “clinical,” “contraindication,” and “dose” describe the simulation domain and do not imply that PharmaSim provides healthcare, medical validation, or individualized recommendations.
 
 ## Tech stack
 
-- **Vite** + **React 18** + **TypeScript** (strict) — 100% client-side, no backend.
-- **Tailwind CSS v3** — clinical dark-first design system, teal accent, monospace numerics.
+- **Vite** + **React 19** + **TypeScript** (strict) — 100% client-side, no backend.
+- **Tailwind CSS v4** — clinical dark-first design system, teal accent, monospace numerics.
 - **lucide-react** — icons. **Recharts** — plasma-concentration visualizations.
 - **vite-plugin-pwa** — installable, offline-capable Progressive Web App.
-- **Tauri v2** — native builds for Windows, macOS, Linux, **Android**, and **iOS**.
+- **Tauri v2** — native builds for Windows, macOS, and Linux. The separate
+  `apps/mobile` Expo client targets Android, iOS, and web; `apps/DesktopNative`
+  targets React Native macOS/Windows.
 - **Vitest** — unit tests for the PK engine, interaction engine, and substance-database validation.
 
 The repository tracks the latest published stable dependency releases where the platform ecosystems remain compatible. Native platform dependencies are intentionally kept in their platform-matched release lines; run the validation commands below after changing them.
@@ -38,35 +42,39 @@ npm run dev        # start the Vite dev server at http://localhost:5173
 
 PharmaSim is not health advice. Read the safety notice above before using the app, and use only fictional or non-identifying data.
 
+See [the roadmap](docs/roadmap.md) for the current capability boundary,
+robustness priorities, and the safety gate for future pill identification.
+
 ### Scripts
 
 | Script              | Description                                   |
 | ------------------- | --------------------------------------------- |
-| `npm run dev`       | Start the Vite dev server (port 5173).        |
-| `npm run build`     | Type-check (`tsc -b`) and build to `dist/`.   |
-| `npm run preview`   | Preview the production build locally.         |
-| `npm run typecheck` | Type-check the whole project (`tsc -b`).      |
-| `npm test`          | Run the Vitest unit + data-validation suite.  |
-| `npm run tauri:dev` | Run the Tauri desktop app in dev mode.        |
-| `npm run tauri:build` | Build native desktop bundles.               |
-| `npm run tauri:android:dev` | Run the Android app on an emulator/device. |
-| `npm run tauri:android:build` | Build Android APK / AAB bundles.   |
-| `npm run tauri:ios:dev` | Run the iOS app on a simulator/device.    |
-| `npm run tauri:ios:build` | Build iOS app bundles (macOS only).     |
+| `npm run dev`       | Start the Expo mobile client.                 |
+| `npm run build`     | Build the shared engine package.              |
+| `npm run typecheck` | Type-check engine, mobile, and Linux desktop. |
+| `npm test`          | Run engine and Linux desktop tests.           |
+| `npm run desktop:linux` | Build the Linux Tauri bundle.             |
+| `npm run mobile`    | Start the Expo mobile client.                 |
+| `npm run bench`     | Run engine benchmark cases.                  |
+| `npm run test:stress` | Run engine stress/property tests.          |
 
 ## Build targets
 
-### 1. Static web app
+### 1. Static web app / Linux desktop client
 
 ```bash
-npm run build
+npm run build -w apps/linux-desktop
 ```
 
-The build emits a fully static site to `dist/` — host it on any static file server (Firebase Hosting / Google Cloud, GitHub Pages, Cloudflare Pages, etc.). The Vite `base` is set to `./` so it works from any sub-path.
+The build emits a fully static site to `apps/linux-desktop/dist/` — host it on
+any static file server (Firebase Hosting / Google Cloud, GitHub Pages,
+Cloudflare Pages, etc.).
 
 ### 2. Progressive Web App (PWA)
 
-The production build (`npm run build`) generates a web manifest and a service worker (via `vite-plugin-pwa`, auto-update). Serving `dist/` over HTTPS makes PharmaSim **installable** and **offline-capable** — install it from a supported browser's address bar or "Add to Home Screen".
+The production build generates a web manifest and service worker via
+`vite-plugin-pwa`. Serving `apps/linux-desktop/dist/` over HTTPS makes PharmaSim
+**installable** and **offline-capable**.
 
 ### 3. Tauri v2 desktop (Windows / macOS / Linux)
 
@@ -86,42 +94,22 @@ PharmaSim ships a Tauri v2 configuration in `src-tauri/`. Building native bundle
 **Develop and build:**
 
 ```bash
-npm run tauri:dev      # launch the desktop app against the dev server
-npm run tauri:build    # produce native installers/bundles in src-tauri/target/release/bundle/
+npm run tauri:dev -w apps/linux-desktop      # launch the desktop app
+npm run tauri:build -w apps/linux-desktop    # produce native installers/bundles
 ```
 
 The desktop build runs `npm run build` first (configured via `beforeBuildCommand`) and packages the static `dist/` output into a native window.
 
-### 4. Tauri v2 mobile (Android / iOS)
+### 4. Expo mobile client (Android / iOS / web)
 
-The mobile projects live under `src-tauri/gen/` and are **generated** from
-`tauri.conf.json` (they are git-ignored — initialise them locally or in CI).
-
-**Android** (buildable on Windows / macOS / Linux):
-
-- Android SDK + platform-tools, an NDK (e.g. `ndk;27.1.12297006`), and JDK 17.
-- Set `ANDROID_HOME` and `NDK_HOME`, and add the Rust targets:
-  `rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android`.
+The mobile client lives in `apps/mobile` and uses Expo/React Native:
 
 ```bash
-npm run tauri android init     # generate src-tauri/gen/android (once)
-npm run tauri:android:dev      # run on a connected device / emulator
-npm run tauri:android:build    # build APK / AAB in src-tauri/gen/android/app/build/outputs
+npm run mobile
 ```
 
-**iOS** (macOS + Xcode only):
-
-```bash
-rustup target add aarch64-apple-ios aarch64-apple-ios-sim
-npm run tauri ios init         # generate src-tauri/gen/ios (once)
-npm run tauri:ios:dev          # run on a simulator / device
-npm run tauri:ios:build        # build app bundle (requires an Apple signing team)
-```
-
-The CI [`Mobile` workflow](.github/workflows/mobile.yml) builds a debug Android
-APK on every push and smoke-builds the iOS core on macOS. iOS is also covered by
-the PWA — open the site in Safari and choose **Add to Home Screen** for an
-installable, offline-capable app without the App Store.
+Use the Expo CLI to select an emulator, device, or web target. Native builds
+require the platform's Android SDK or Xcode toolchain.
 
 ## Project structure
 
@@ -132,8 +120,8 @@ pharmasim/
 ├── apps/mobile/           # Expo / React Native mobile client
 ├── apps/DesktopNative/    # React Native desktop client for macOS/Windows
 ├── docs/adding-substances.md  # how to add chemicals/substances safely
+├── docs/roadmap.md        # capability boundary and prioritized backlog
 ├── .github/workflows/     # CI, cross-platform builds, mobile, and release workflows
-└── dist/                  # generated production output (not source)
 ```
 
 ## License

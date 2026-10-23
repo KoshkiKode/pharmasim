@@ -36,3 +36,16 @@ Run the smoke test:
 ```bash
 npm test -w apps/DesktopNative
 ```
+
+## Scope and current limitations
+
+DesktopNative uses the shared engine, but it is not a clinical application and
+does not provide medical advice, diagnosis, prescribing, dosing, or emergency
+guidance. Use only fictional or non-identifying data. The current project does
+not include pill identification, camera/OCR recognition, barcode lookup, cloud
+sync, or production licensing; those are separate roadmap items with additional
+safety and privacy requirements.
+
+For the repository-wide backlog and validation commands, see
+[`docs/roadmap.md`](../../docs/roadmap.md) and
+[`.agents/task.md`](../../.agents/task.md).

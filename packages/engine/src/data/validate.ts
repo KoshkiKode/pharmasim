@@ -64,6 +64,52 @@ export function validateSubstances(list: Substance[]): ValidationIssue[] {
     if (s.typicalDoseMg !== undefined && s.typicalDoseMg < 0)
       add('typicalDoseMg', `typicalDoseMg must be >= 0 (got ${s.typicalDoseMg})`);
 
+    if (!Number.isFinite(s.bioavailability) || s.bioavailability < 0 || s.bioavailability > 1)
+      add('bioavailability', 'bioavailability must be finite and between 0 and 1');
+    if (!Number.isFinite(s.vdLKg) || s.vdLKg <= 0)
+      add('vdLKg', 'vdLKg must be finite and > 0');
+    if (s.clearanceMlMinKg !== undefined && (!Number.isFinite(s.clearanceMlMinKg) || s.clearanceMlMinKg < 0))
+      add('clearanceMlMinKg', 'clearanceMlMinKg must be finite and >= 0 when present');
+    if (s.proteinBindingPct !== undefined && (!Number.isFinite(s.proteinBindingPct) || s.proteinBindingPct < 0 || s.proteinBindingPct > 100))
+      add('proteinBindingPct', 'proteinBindingPct must be between 0 and 100');
+    for (const [route, value] of Object.entries(s.bioavailabilityByRoute ?? {})) {
+      if (!ROUTE_SET.has(route)) add('bioavailabilityByRoute', `unknown route "${route}"`);
+      if (!Number.isFinite(value) || value < 0 || value > 1)
+        add(`bioavailabilityByRoute.${route}`, 'route bioavailability must be between 0 and 1');
+    }
+    if (s.toxicity) {
+      const { toxicConcentrationMgL, lethalConcentrationMgL } = s.toxicity;
+      if (!Number.isFinite(toxicConcentrationMgL) || toxicConcentrationMgL < 0)
+        add('toxicity.toxicConcentrationMgL', 'toxic threshold must be finite and >= 0');
+      if (!Number.isFinite(lethalConcentrationMgL) || lethalConcentrationMgL < toxicConcentrationMgL)
+        add('toxicity.lethalConcentrationMgL', 'lethal threshold must be finite and >= toxic threshold');
+    }
+    const ingredientIds = new Set<string>();
+    let ingredientRatioTotal = 0;
+    for (const ingredient of s.activeIngredients ?? []) {
+      if (!ingredient.id.trim()) add('activeIngredients', 'ingredient id must not be empty');
+      if (ingredientIds.has(ingredient.id)) add('activeIngredients', `duplicate ingredient "${ingredient.id}"`);
+      ingredientIds.add(ingredient.id);
+      if (!Number.isFinite(ingredient.ratio) || ingredient.ratio < 0 || ingredient.ratio > 1)
+        add(`activeIngredients.${ingredient.id}`, 'ingredient ratio must be between 0 and 1');
+      ingredientRatioTotal += ingredient.ratio;
+    }
+    if (ingredientRatioTotal > 1.000001)
+      add('activeIngredients', `ingredient ratios total ${ingredientRatioTotal.toFixed(4)}, above 1`);
+    for (const [index, metabolite] of (s.metabolites ?? []).entries()) {
+      if (!metabolite.targetId.trim()) add(`metabolites.${index}.targetId`, 'metabolite targetId must not be empty');
+      if (!Number.isFinite(metabolite.conversionFraction) || metabolite.conversionFraction < 0 || metabolite.conversionFraction > 1)
+        add(`metabolites.${index}.conversionFraction`, 'conversion fraction must be between 0 and 1');
+      if (!metabolite.enzyme.trim()) add(`metabolites.${index}.enzyme`, 'metabolite enzyme must not be empty');
+    }
+    for (const [receptor, affinity] of Object.entries(s.bindingAffinities ?? {})) {
+      if (!receptor.trim()) add('bindingAffinities', 'receptor name must not be empty');
+      if (!Number.isFinite(affinity.kiNm) || affinity.kiNm <= 0)
+        add(`bindingAffinities.${receptor}.kiNm`, 'kiNm must be finite and > 0');
+      if (!Number.isFinite(affinity.intrinsicActivity) || affinity.intrinsicActivity < 0 || affinity.intrinsicActivity > 1)
+        add(`bindingAffinities.${receptor}.intrinsicActivity`, 'intrinsic activity must be between 0 and 1');
+    }
+
     // routes
     if (!s.routes?.length) add('routes', 'at least one route is required');
     for (const r of s.routes ?? [])

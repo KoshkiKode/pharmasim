@@ -64,6 +64,7 @@ describe('session persistence', () => {
     ];
 
     saveSession(DEFAULT_PATIENT, added);
+    expect(JSON.parse(localStorageMock.getItem('pharmasim:session:v1')!).version).toBe(1);
     const result = loadSession(DEFAULT_PATIENT);
 
     expect(result.patient).toEqual(DEFAULT_PATIENT);
@@ -81,6 +82,16 @@ describe('session persistence', () => {
 
   it('handles invalid or corrupted JSON in local storage gracefully', () => {
     localStorageMock.setItem('pharmasim:session:v1', '{invalid-json');
+    const result = loadSession(DEFAULT_PATIENT);
+    expect(result.patient).toEqual(DEFAULT_PATIENT);
+    expect(result.added).toEqual([]);
+  });
+
+  it('rejects unsupported saved-state versions', () => {
+    localStorageMock.setItem(
+      'pharmasim:session:v1',
+      JSON.stringify({ version: 99, patient: DEFAULT_PATIENT, added: [] }),
+    );
     const result = loadSession(DEFAULT_PATIENT);
     expect(result.patient).toEqual(DEFAULT_PATIENT);
     expect(result.added).toEqual([]);

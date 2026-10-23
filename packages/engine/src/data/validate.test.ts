@@ -69,4 +69,24 @@ describe('validateSubstances', () => {
     expect(issues.some((i) => i.field === 'routes')).toBe(true);
     expect(issues.some((i) => i.field === 'bodySystems')).toBe(true);
   });
+
+  it('flags malformed advanced simulation fields', () => {
+    const issues = validateSubstances([
+      {
+        ...base,
+        bioavailability: 1.5,
+        vdLKg: 0,
+        toxicity: { toxicConcentrationMgL: 10, lethalConcentrationMgL: 5 },
+        activeIngredients: [{ id: 'a', ratio: 0.8 }, { id: 'b', ratio: 0.4 }],
+        metabolites: [{ targetId: '', conversionFraction: 2, enzyme: '' }],
+        bindingAffinities: { MOR: { kiNm: 0, intrinsicActivity: 2 } },
+      },
+    ]);
+    expect(issues.some((i) => i.field === 'bioavailability')).toBe(true);
+    expect(issues.some((i) => i.field === 'vdLKg')).toBe(true);
+    expect(issues.some((i) => i.field.startsWith('toxicity.'))).toBe(true);
+    expect(issues.some((i) => i.field === 'activeIngredients')).toBe(true);
+    expect(issues.some((i) => i.field.startsWith('metabolites.'))).toBe(true);
+    expect(issues.some((i) => i.field.startsWith('bindingAffinities.'))).toBe(true);
+  });
 });
