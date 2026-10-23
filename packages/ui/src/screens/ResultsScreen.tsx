@@ -3,7 +3,6 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, useTheme, Chip, IconButton } from 'react-native-paper';
 import { 
   substances, 
-  conditions,
   computePK, 
   evaluateToxicity, 
   computeReceptorState, 
@@ -11,7 +10,10 @@ import {
   computeInteractions, 
   computeBodySystemImpact, 
   computeRiskScores, 
-  getRiskLevel, 
+  getRiskLevel,
+  generateMarkdownReport,
+  getToxicityAlertLabel,
+  findSeriesPeak,
   SEVERITY_META 
 } from '@pharmasim/engine';
 
@@ -111,75 +113,16 @@ export function ResultsScreen({ route }: any) {
     return '#34d399';
   };
 
-  const generateMarkdownReport = () => {
-    let report = `# PHARMASIM CLINICAL SUMMARY REPORT\n`;
-    report += `Generated: ${new Date().toLocaleString()}\n\n`;
-
-    report += `## PATIENT PROFILE\n`;
-    report += `- Age: ${patient.ageYears} years\n`;
-    report += `- Sex: ${patient.biologicalSex === 'M' ? 'Male' : 'Female'}\n`;
-    report += `- Weight: ${patient.weightKg} kg | Height: ${patient.heightCm} cm\n`;
-    report += `- Body Fat: ${patient.bodyFatPct}%\n`;
-    report += `- Hydration: ${patient.hydrationPct}%\n`;
-    report += `- Tolerance Level: ${patient.tolerance}%\n`;
-    report += `- Hepatic Clearance: ${patient.liver.toUpperCase()}\n`;
-    report += `- Renal Clearance: ${patient.kidney.toUpperCase()}\n`;
-    const geneticsStr = Object.entries(patient.genetics)
-      .map(([cyp, pheno]) => `${cyp}: ${pheno}`)
-      .join(', ');
-    report += `- CYP Status: ${geneticsStr || 'Normal'}\n`;
-    
-    const condNames = patient.conditions
-      .map((id: string) => conditions.find((c: any) => c.id === id)?.name)
-      .filter(Boolean);
-    report += `- Preexisting Conditions: ${condNames.length > 0 ? condNames.join(', ') : 'None'}\n\n`;
-
-    report += `## ACTIVE SIMULATED SUBSTANCES\n`;
-    pkResults.forEach((pk) => {
-      const sub = substances.find((s) => s.id === pk.substanceId);
-      if (!sub) return;
-      report += `### ${sub.name} (${sub.drugClass})\n`;
-      let peakC = 0;
-      let peakH = 0;
-      for (const pt of pk.series) {
-        if (pt.concentration > peakC) {
-          peakC = pt.concentration;
-          peakH = pt.hour;
-        }
-      }
-      report += `- Peak Concentration: ${peakC.toFixed(2)} mg/L at T+${peakH}h\n`;
-      report += `- Effective Half-life: ${pk.effectiveHalfLifeHours.toFixed(1)}h (Base: ${pk.baseHalfLifeHours.toFixed(1)}h)\n\n`;
+  const buildReport = () =>
+    generateMarkdownReport({
+      patient,
+      entries: pkResults.map((pk) => ({
+        substance: substances.find((s) => s.id === pk.substanceId)!,
+        pk,
+      })),
+      conditionWarnings,
+      interactions,
     });
-
-    report += `## CLINICAL WARNINGS & ALERTS\n`;
-    if (conditionWarnings.length === 0) {
-      report += `No active condition contraindications detected.\n\n`;
-    } else {
-      conditionWarnings.forEach((w: any) => {
-        report += `### [${w.severity.toUpperCase()}] ${w.title}\n`;
-        report += `- Condition: ${w.conditionName}\n`;
-        if (w.substanceName) report += `- Substance: ${w.substanceName}\n`;
-        if (w.substanceNames) report += `- Combination: ${w.substanceNames.join(' + ')}\n`;
-        report += `- Mechanism: ${w.mechanism}\n`;
-        report += `- Recommendation: ${w.recommendation}\n\n`;
-      });
-    }
-
-    report += `## DRUG-DRUG INTERACTIONS\n`;
-    if (interactions.length === 0) {
-      report += `No drug-drug interactions detected.\n\n`;
-    } else {
-      interactions.forEach((i: any) => {
-        report += `### [${i.severity.toUpperCase()}] ${i.title}\n`;
-        report += `- Combination: ${i.substanceNames[0]} + ${i.substanceNames[1]}\n`;
-        report += `- Mechanism: ${i.mechanism}\n`;
-        report += `- Recommendation: ${i.recommendation}\n\n`;
-      });
-    }
-
-    report += `***\nDisclaimer: Educational simulation only. Not health or medical advice, diagnosis, treatment, prescribing, or dosing guidance. Do not use this report for real-world drug decisions.`;
-    return report;
-  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -206,12 +149,12 @@ export function ResultsScreen({ route }: any) {
             left={(props) => <Text style={{ fontSize: 24 }}>⚠️</Text>}
           />
           <Card.Content>
-            {toxAlerts.map((tox, idx) => (
-              <View key={idx} style={styles.alertRow}>
+            {toxAlerts.map((tox) => (
+              <View key={tox.substanceId} style={styles.alertRow}>
                 <View>
                   <Text style={{ color: theme.colors.error, fontWeight: 'bold' }}>{tox.name}</Text>
                   <Text variant="bodySmall" style={{ color: theme.colors.error, opacity: 0.8 }}>
-                    {tox.status === 'lethal' ? 'POTENTIALLY LETHAL OVERDOSE' : 'SEVERE TOXICITY'}
+                    {getToxicityAlertLabel(tox.status)}
                   </Text>
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
@@ -347,14 +290,9 @@ export function ResultsScreen({ route }: any) {
           {pkResults.map(pk => {
             const sub = substances.find(s => s.id === pk.substanceId);
             if (!sub) return null;
-            let peakC = 0;
-            let peakH = 0;
-            for (const pt of pk.series) {
-              if (pt.concentration > peakC) {
-                peakC = pt.concentration;
-                peakH = pt.hour;
-              }
-            }
+            const peak = findSeriesPeak(pk.series);
+            const peakC = peak.concentration;
+            const peakH = peak.hour;
             return (
               <View key={pk.substanceId} style={styles.pkRow}>
                 <View style={styles.pkHeader}>
@@ -482,11 +420,11 @@ export function ResultsScreen({ route }: any) {
         />
         <Card.Content>
           <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginBottom: 12 }}>
-            Long-press the text below to select and copy the full clinical summary report to your clipboard:
+            Long-press the text below to select and copy the full simulation summary report to your clipboard:
           </Text>
           <View style={{ backgroundColor: '#171717', borderRadius: 8, padding: 12, borderWidth: 1, borderColor: '#262626' }}>
             <Text selectable={true} style={{ fontFamily: 'System', fontSize: 11, color: '#e5e5e5', lineHeight: 16 }}>
-              {generateMarkdownReport()}
+              {buildReport()}
             </Text>
           </View>
         </Card.Content>
