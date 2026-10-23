@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-gesture-handler/shared/shadowNodes/react/renderer/components/rngesturehandler_codegen/RNGestureHandlerDetectorShadowNode.cpp b/node_modules/react-native-gesture-handler/shared/shadowNodes/react/renderer/components/rngesturehandler_codegen/RNGestureHandlerDetectorShadowNode.cpp
+index 819a262..7f08f6f 100644
+--- a/node_modules/react-native-gesture-handler/shared/shadowNodes/react/renderer/components/rngesturehandler_codegen/RNGestureHandlerDetectorShadowNode.cpp
++++ b/node_modules/react-native-gesture-handler/shared/shadowNodes/react/renderer/components/rngesturehandler_codegen/RNGestureHandlerDetectorShadowNode.cpp
+@@ -20,7 +20,7 @@ extern const char RNGestureHandlerDetectorComponentName[] =
+ 
+ void RNGestureHandlerDetectorShadowNode::initialize() {
+   // Disable forcing view flattening
+-  ShadowNode::traits_.unset(ShadowNodeTraits::ForceFlattenView);
++  // ShadowNode::traits_.unset(ShadowNodeTraits::ForceFlattenView); // Removed in RN 0.76
+ 
+   // When the detector is cloned and has child nodes, the children should be
+   // cloned as well to ensure they are mutable.

@@ -5,10 +5,17 @@ chemical is a one-line append — the type system and a validation pass enforce
 correctness, and the interaction engine wires the new entry into every relevant
 rule automatically based on its tags.
 
+> **Safety boundary:** This repository models substances for educational
+> software only. It is not health or medical advice, and entries must not be
+> presented as dosing, treatment, prescribing, or “safe use” guidance. Values
+> may be estimated, incomplete, or wrong. Use fictional/non-identifying data
+> when developing and ask a qualified professional about real-world health
+> decisions.
+
 ## 1. Append an entry
 
 Add an object to the `substances` array in
-[`src/data/substances.ts`](../src/data/substances.ts):
+[`src/data/substances.ts`](../packages/engine/src/data/substances.ts):
 
 ```ts
 {
@@ -31,7 +38,7 @@ Add an object to the `substances` array in
 ```
 
 The full field reference lives in
-[`src/data/types.ts`](../src/data/types.ts).
+[`src/data/types.ts`](../packages/engine/src/data/types.ts).
 
 ## 2. Use the canonical vocabularies
 
@@ -43,7 +50,7 @@ build (`tsc -b`) fails on a typo:
 - **`bodySystems`** — values from `BODY_SYSTEMS` (`CNS`, `Hepatic`, …). To
   introduce a brand-new system, add it to `BODY_SYSTEMS` in `types.ts` first.
 - **`tags`** — values from `SubstanceTag`. **This is how interactions work:** the
-  rule engine in [`src/lib/interactions.ts`](../src/lib/interactions.ts) reasons
+  rule engine in [`src/lib/interactions.ts`](../packages/engine/src/lib/interactions.ts) reasons
   over these tags plus the CYP fields. Tag a substance `serotonergic` and it is
   immediately considered by the serotonin-syndrome rule against every other
   serotonergic agent — no per-pair data needed.
@@ -60,11 +67,20 @@ npm run typecheck   # tsc -b — catches union/shape errors
 npm test            # runs the validation + engine test suites
 ```
 
-The test suite runs [`validateSubstances`](../src/data/validate.ts) over the
-whole library and fails on: duplicate or malformed ids, inverted dose ranges, a
-`typicalDoseMg` outside `doseRangeMg`, a non-positive half-life, or empty
-`routes` / `bodySystems`. In dev (`npm run dev`) the same check runs on load and
-throws with a readable summary, so a bad entry surfaces immediately.
+The test suite runs [`validateSubstances`](../packages/engine/src/data/validate.ts) over the
+whole library and fails on duplicate or malformed ids, inverted dose ranges, a
+`typicalDoseMg` outside `doseRangeMg`, non-finite or invalid advanced PK values,
+invalid route bioavailability, malformed toxicity thresholds, invalid mixture
+ratios, malformed metabolite metadata, invalid receptor affinities, a
+non-positive half-life, or empty `routes` / `bodySystems`. In dev (`npm run dev`)
+the same check runs on load and throws with a readable summary, so a bad entry
+surfaces immediately.
+
+When a profile or regimen comes from a UI or persisted JSON, use the shared
+runtime helpers in [`src/lib/validation.ts`](../packages/engine/src/lib/validation.ts)
+instead of trusting the object shape. They bound numeric values, filter unknown
+conditions and phenotypes, limit custom events, and restore only known
+substances.
 
 > Substances not dosed in milligrams (e.g. inhaled gases) may use `0` for
 > `typicalDoseMg` / `doseRangeMg`.
