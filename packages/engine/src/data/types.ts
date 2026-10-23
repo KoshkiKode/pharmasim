@@ -123,6 +123,10 @@ export interface Substance {
   metabolites?: { targetId: string; conversionFraction: number; enzyme: string }[];
   /** Receptor binding affinities. kiNm = Affinity (lower = stronger). intrinsicActivity: 1=full agonist, 0=antagonist, <1=partial */
   bindingAffinities?: Record<string, { kiNm: number; intrinsicActivity: number }>; 
+  /** Molecular mass in g/mol, used to convert mg/L concentrations to nM for
+   * receptor-occupancy math. Falls back to a 350 g/mol small-molecule
+   * approximation when absent. */
+  molarMassGPerMol?: number;
   /** Concentration thresholds for toxicity and death */
   toxicity?: { toxicConcentrationMgL: number; lethalConcentrationMgL: number };
 
