@@ -87,7 +87,7 @@ export function SummaryModal({ isOpen, onClose, patient, substances, addedRegime
       });
     }
 
-    report += `***\nDisclaimer: Educational / simulation use only. Not medical advice.`;
+    report += `***\nDisclaimer: Educational simulation only. Not health or medical advice, diagnosis, treatment, prescribing, or dosing guidance. Do not use this report for real-world drug decisions.`;
     return report;
   };
 
@@ -357,7 +357,7 @@ export function SummaryModal({ isOpen, onClose, patient, substances, addedRegime
 
           {/* Print Disclaimer */}
           <div className="hidden print:block border-t border-gray-300 pt-3 mt-6 text-[9px] text-gray-500 text-center leading-relaxed">
-            <strong>Disclaimer:</strong> Educational and simulation use only. PharmaSim is a sandbox pharmacology simulator. It is not medical advice, not a clinical diagnostic tool, and must never guide real dosing or therapy decisions.
+            <strong>Disclaimer:</strong> Educational simulation only. PharmaSim is not health or medical advice, a clinical diagnostic tool, treatment tool, prescribing aid, or dosing guide. Never use this report for real-world drug decisions.
           </div>
         </div>
 

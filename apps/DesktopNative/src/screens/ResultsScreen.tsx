@@ -177,7 +177,7 @@ export function ResultsScreen({ route }: any) {
       });
     }
 
-    report += `***\nDisclaimer: Educational / simulation use only. Not medical advice.`;
+    report += `***\nDisclaimer: Educational simulation only. Not health or medical advice, diagnosis, treatment, prescribing, or dosing guidance. Do not use this report for real-world drug decisions.`;
     return report;
   };
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Pill, ShieldAlert, Github, Trash2 } from 'lucide-react';
+import { Pill, ShieldAlert, GitFork, Trash2 } from 'lucide-react';
 import { Logo } from './components/Logo';
 import { PatientPanel } from './components/PatientPanel';
 import { SubstanceSearch } from './components/SubstanceSearch';
@@ -106,7 +106,7 @@ export default function App() {
               className="rounded-md p-1.5 text-ink-faint transition-colors hover:text-ink"
               aria-label="GitHub"
             >
-              <Github className="h-4 w-4" />
+              <GitFork className="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -118,9 +118,10 @@ export default function App() {
           <ShieldAlert className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sev-moderate" />
           <p className="text-[11px] leading-relaxed text-ink-muted">
             <span className="font-semibold text-sev-moderate">Educational / simulation use only.</span>{' '}
-            PharmaSim is a pharmacology sandbox. It is <em>not</em> medical advice, not a substitute
-            for a clinician or pharmacist, and must never guide real dosing or drug-combination
-            decisions.
+            PharmaSim is a pharmacology sandbox for education only. It is <em>not</em> health or
+            medical advice, a diagnostic tool, or a substitute for a clinician or pharmacist.
+            Results, warnings, and examples must never guide real dosing, treatment, or
+            drug-combination decisions.
           </p>
         </div>
       </div>
@@ -188,10 +189,10 @@ export default function App() {
                 type="button"
                 onClick={() => loadPreset(['ibuprofen', 'acetaminophen'])}
                 className="rounded border border-green-500/25 bg-green-500/5 px-2 py-0.5 font-medium text-green-400 hover:bg-green-500/10 transition-colors"
-                title="Safe Clinical Combo: NSAID + Acetaminophen (Low Risk Synergy)"
+                title="Educational comparison example: NSAID + acetaminophen (not a safety recommendation)"
                 data-testid="preset-safe-combo"
               >
-                Pain Management (Safe) ✓
+                Comparison Example (Not Safe-Use Guidance)
               </button>
             </div>
 
@@ -253,7 +254,8 @@ export default function App() {
         <div className="mx-auto max-w-[1400px] px-4 py-5 text-[11px] leading-relaxed text-ink-faint sm:px-6">
           PharmaSim · deterministic in-browser pharmacokinetics (R = 1/(1−e^(−kτ))) and a rule-based
           interaction engine. PK values are standard published reference figures; entries marked
-          “approx. PK” are estimates. Built by KoshkiKode · MIT licensed. Not medical advice.
+          “approx. PK” are estimates. Built by KoshkiKode · MIT licensed. Not health or medical
+          advice; never use this app for real dosing, treatment, or drug-combination decisions.
         </div>
       </footer>
     </div>

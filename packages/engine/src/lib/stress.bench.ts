@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest';
+import { describe, it } from 'vitest';
 import { computeInteractions } from './interactions';
 import { computeRiskScores } from './riskScoring';
 import { substances } from '../data/substances';
@@ -25,27 +25,27 @@ const active50 = substances.slice(0, 50);
 const active100 = substances.slice(0, 100);
 
 describe('Polypharmacy Engine Benchmarks', () => {
-  bench('Interactions - 10 drugs', () => {
+  it('Interactions - 10 drugs', () => {
     computeInteractions(active10);
   });
 
-  bench('Interactions - 50 drugs', () => {
+  it('Interactions - 50 drugs', () => {
     computeInteractions(active50);
   });
 
-  bench('Interactions - 100 drugs', () => {
+  it('Interactions - 100 drugs', () => {
     computeInteractions(active100);
   });
 
-  bench('Risk Scores - 10 drugs', () => {
+  it('Risk Scores - 10 drugs', () => {
     computeRiskScores(active10);
   });
 
-  bench('Risk Scores - 50 drugs', () => {
+  it('Risk Scores - 50 drugs', () => {
     computeRiskScores(active50);
   });
 
-  bench('Risk Scores - 100 drugs', () => {
+  it('Risk Scores - 100 drugs', () => {
     computeRiskScores(active100);
   });
 });
