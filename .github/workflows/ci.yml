@@ -29,7 +29,8 @@ jobs:
         run: npm ci
 
       # Builds the engine first (the apps import its compiled output), then
-      # type-checks engine, mobile and desktop.
+      # type-checks engine, Expo mobile, and the Linux desktop client.
+      # (DesktopNative is type-checked separately; see its package scripts.)
       - name: Type check
         run: npm run typecheck
 
