@@ -27,7 +27,7 @@ Every patient profile, dose, condition, interaction, warning, and report in the 
 - **lucide-react** — icons. **Recharts** — plasma-concentration visualizations.
 - **vite-plugin-pwa** — installable, offline-capable Progressive Web App.
 - **Tauri v2** — native builds for Windows, macOS, and Linux. The separate
-  `apps/mobile` Expo client targets Android, iOS, and web; `apps/DesktopNative`
+  `apps/mobile` React Native CLI client targets Android and iOS; `apps/DesktopNative`
   targets React Native macOS/Windows.
 - **Vitest** — unit tests for the PK engine, interaction engine, and substance-database validation.
 
@@ -37,7 +37,7 @@ Dependencies are pinned through the root workspace lockfile; platform-native dep
 
 ```bash
 npm install
-npm run dev        # start the Expo mobile client (Metro / Expo dev tools)
+npm run dev        # start the React Native Metro server
 ```
 
 To run the Linux desktop / web client instead:
@@ -55,12 +55,12 @@ robustness priorities, and the safety gate for future pill identification.
 
 | Script              | Description                                   |
 | ------------------- | --------------------------------------------- |
-| `npm run dev`       | Start the Expo mobile client.                 |
+| `npm run dev`       | Start the React Native Metro server.          |
 | `npm run build`     | Build the shared engine package.              |
 | `npm run typecheck` | Type-check engine, mobile, and Linux desktop. |
 | `npm test`          | Run engine and Linux desktop tests.           |
 | `npm run desktop:linux` | Build the Linux Tauri bundle.             |
-| `npm run mobile`    | Start the Expo mobile client.                 |
+| `npm run mobile`    | Start the React Native Metro server.          |
 | `npm run bench`     | Run engine benchmark cases.                  |
 | `npm run test:stress` | Run engine stress/property tests.          |
 
@@ -106,16 +106,19 @@ npm run tauri:build -w apps/linux-desktop    # produce native installers/bundles
 
 The desktop build runs `npm run build` first (configured via `beforeBuildCommand`) and packages the static `dist/` output into a native window.
 
-### 4. Expo mobile client (Android / iOS / web)
+### 4. React Native mobile client (Android / iOS)
 
-The mobile client lives in `apps/mobile` and uses Expo/React Native:
+The mobile client lives in `apps/mobile` and uses the React Native CLI. Start
+Metro, then launch a platform from another terminal:
 
 ```bash
 npm run mobile
+npm run android -w apps/mobile
+npm run ios -w apps/mobile
 ```
 
-Use the Expo CLI to select an emulator, device, or web target. Native builds
-require the platform's Android SDK or Xcode toolchain.
+Android builds require the Android SDK and Java 17. iOS builds require macOS,
+Xcode, and CocoaPods. Native project files are in `apps/mobile/native`.
 
 ## Project structure
 
@@ -123,7 +126,7 @@ require the platform's Android SDK or Xcode toolchain.
 pharmasim/
 ├── packages/engine/       # shared PK, interaction, toxicity, state, and validation engine
 ├── apps/linux-desktop/    # Vite + React + Tailwind + Tauri desktop/PWA client
-├── apps/mobile/           # Expo / React Native mobile client
+├── apps/mobile/           # React Native CLI client for Android and iOS
 ├── apps/DesktopNative/    # React Native desktop client for macOS/Windows
 ├── docs/adding-substances.md  # how to add chemicals/substances safely
 ├── docs/roadmap.md        # capability boundary and prioritized backlog

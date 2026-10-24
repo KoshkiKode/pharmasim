@@ -23,6 +23,29 @@
     "react-native-gesture-handler": "^3.4.0"
   },
   "overrides": {
-    "@types/react": "~19.3.0"
+    "@types/react": "~19.3.0",
+    "@react-native-community/cli": "20.2.0",
+    "@react-native-community/cli-clean": "20.2.0",
+    "@react-native-community/cli-config": "20.2.0",
+    "@react-native-community/cli-config-android": "20.2.0",
+    "@react-native-community/cli-config-apple": "20.2.0",
+    "@react-native-community/cli-doctor": "20.2.0",
+    "@react-native-community/cli-platform-android": "20.2.0",
+    "@react-native-community/cli-platform-apple": "20.2.0",
+    "@react-native-community/cli-platform-ios": "20.2.0",
+    "@react-native-community/cli-server-api": "20.2.0",
+    "@react-native-community/cli-tools": "20.2.0",
+    "@react-native-community/cli-types": "20.2.0",
+    "fast-xml-parser": "^5.11.2",
+    "react-native-windows": {
+      "@react-native-community/cli": "20.2.0",
+      "@react-native-community/cli-config-android": "20.2.0",
+      "@react-native-community/cli-config-apple": "20.2.0",
+      "@react-native-community/cli-doctor": "20.2.0",
+      "@react-native-community/cli-platform-android": "20.2.0",
+      "@react-native-community/cli-platform-apple": "20.2.0",
+      "@react-native-community/cli-platform-ios": "20.2.0",
+      "fast-xml-parser": "^5.11.2"
+    }
   }
 }

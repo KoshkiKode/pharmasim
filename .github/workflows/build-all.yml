@@ -8,9 +8,9 @@ on:
     types: [created]
 
 jobs:
-  # 1. iOS and Android via Expo Application Services (EAS)
-  mobile-builds:
-    name: Build iOS and Android (EAS)
+  # 1. Android
+  android-build:
+    name: Build Android debug APK
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -20,25 +20,67 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
+          cache: npm
 
-      - name: Setup Expo and EAS
-        uses: expo/expo-github-action@v8
+      - name: Setup Java
+        uses: actions/setup-java@v5
         with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v4.0.4
+
+      - name: Install Android NDK
+        run: sdkmanager "ndk;27.1.12297006"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
-      - name: Build Android (AAB)
-        run: eas build --platform android --profile production --non-interactive
-        working-directory: ./apps/mobile
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
+        working-directory: ./apps/mobile/native/android
 
-      - name: Build iOS (IPA)
-        run: eas build --platform ios --profile production --non-interactive
-        working-directory: ./apps/mobile
+      - name: Upload APK
+        uses: actions/upload-artifact@v5
+        with:
+          name: PharmaSim-Android-debug
+          path: apps/mobile/native/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
 
-  # 2. macOS Native App
+  # 2. iOS simulator build; distribution builds require signing credentials.
+  ios-build:
+    name: Build iOS simulator app
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Install CocoaPods
+        run: pod install
+        working-directory: ./apps/mobile/native/ios
+
+      - name: Build iOS simulator app
+        run: xcodebuild -workspace PharmaSimMobile.xcworkspace -scheme PharmaSimMobile -sdk iphonesimulator -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+        working-directory: ./apps/mobile/native/ios
+
+      - name: Upload iOS simulator app
+        uses: actions/upload-artifact@v5
+        with:
+          name: PharmaSim-iOS-simulator
+          path: apps/mobile/native/ios/build/Build/Products/Debug-iphonesimulator/PharmaSimMobile.app
+          if-no-files-found: error
+
+  # 3. macOS Native App
   macos-build:
     name: Build macOS DMG
     runs-on: macos-latest
@@ -68,7 +110,7 @@ jobs:
           name: macOS-DMG
           path: apps/DesktopNative/macos/dist/*.dmg
 
-  # 3. Windows Native App
+  # 4. Windows Native App
   windows-build:
     name: Build Windows MSIX
     runs-on: windows-latest
@@ -94,7 +136,7 @@ jobs:
           name: Windows-MSIX
           path: apps/DesktopNative/windows/AppPackages/
 
-  # 4. Linux Tauri App
+  # 5. Linux Tauri App
   linux-build:
     name: Build Linux Packages
     runs-on: ubuntu-latest
@@ -140,4 +182,3 @@ jobs:
         with:
           name: Linux-AppImage
           path: apps/linux-desktop/src-tauri/target/release/bundle/appimage/*.AppImage
-
