@@ -1,0 +1,24 @@
+{
+  "name": "@pharmasim/ui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared React Native screens, components, context, and theme used by the Expo mobile app and the DesktopNative macOS/Windows app.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "react-native": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@pharmasim/engine": "*"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-paper": "*"
+  },
+  "devDependencies": {
+    "@types/react": "~19.3.0",
+    "typescript": "~7.0.2"
+  }
+}

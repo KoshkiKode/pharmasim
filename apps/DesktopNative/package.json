@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@pharmasim/engine": "^1.0.0",
+    "@pharmasim/ui": "*",
     "@react-navigation/native": "^7.5.1",
     "@react-navigation/stack": "^7.12.1",
     "react": "19.3.1",
