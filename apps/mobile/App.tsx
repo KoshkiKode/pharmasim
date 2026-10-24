@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer, DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationLightTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -66,7 +66,7 @@ function AppContent() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-      <StatusBar style={isDarkTheme ? 'light' : 'dark'} />
+      <StatusBar barStyle={isDarkTheme ? 'light-content' : 'dark-content'} />
     </PaperProvider>
   );
 }
@@ -78,4 +78,3 @@ export default function App() {
     </SettingsProvider>
   );
 }
-

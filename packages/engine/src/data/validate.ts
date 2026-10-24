@@ -50,18 +50,28 @@ export function validateSubstances(list: Substance[]): ValidationIssue[] {
       add('halfLifeHours', `halfLifeHours must be > 0 (got ${s.halfLifeHours})`);
 
     // dose range / typical dose (0 is allowed for substances not dosed in mg,
-    // e.g. inhaled gases; negative values and inverted ranges are not).
+    // e.g. inhaled gases; negative values, inverted ranges, and NaN are not).
     if (s.doseRangeMg) {
       const [lo, hi] = s.doseRangeMg;
-      if (lo < 0 || hi < 0) add('doseRangeMg', 'dose range values must be >= 0');
-      if (lo > hi) add('doseRangeMg', `dose range is inverted ([${lo}, ${hi}])`);
-      if (s.typicalDoseMg !== undefined && (s.typicalDoseMg < lo || s.typicalDoseMg > hi))
-        add(
-          'typicalDoseMg',
-          `typicalDoseMg ${s.typicalDoseMg} is outside doseRangeMg [${lo}, ${hi}]`,
-        );
+      if (!Number.isFinite(lo) || !Number.isFinite(hi))
+        add('doseRangeMg', 'dose range values must be finite numbers');
+      else {
+        if (lo < 0 || hi < 0) add('doseRangeMg', 'dose range values must be >= 0');
+        if (lo > hi) add('doseRangeMg', `dose range is inverted ([${lo}, ${hi}])`);
+        if (
+          s.typicalDoseMg !== undefined &&
+          Number.isFinite(s.typicalDoseMg) &&
+          (s.typicalDoseMg < lo || s.typicalDoseMg > hi)
+        )
+          add(
+            'typicalDoseMg',
+            `typicalDoseMg ${s.typicalDoseMg} is outside doseRangeMg [${lo}, ${hi}]`,
+          );
+      }
     }
-    if (s.typicalDoseMg !== undefined && s.typicalDoseMg < 0)
+    if (s.typicalDoseMg !== undefined && !Number.isFinite(s.typicalDoseMg))
+      add('typicalDoseMg', 'typicalDoseMg must be a finite number');
+    else if (s.typicalDoseMg !== undefined && s.typicalDoseMg < 0)
       add('typicalDoseMg', `typicalDoseMg must be >= 0 (got ${s.typicalDoseMg})`);
 
     if (!Number.isFinite(s.bioavailability) || s.bioavailability < 0 || s.bioavailability > 1)
@@ -109,6 +119,8 @@ export function validateSubstances(list: Substance[]): ValidationIssue[] {
       if (!Number.isFinite(affinity.intrinsicActivity) || affinity.intrinsicActivity < 0 || affinity.intrinsicActivity > 1)
         add(`bindingAffinities.${receptor}.intrinsicActivity`, 'intrinsic activity must be between 0 and 1');
     }
+    if (s.molarMassGPerMol !== undefined && (!Number.isFinite(s.molarMassGPerMol) || s.molarMassGPerMol <= 0))
+      add('molarMassGPerMol', 'molarMassGPerMol must be finite and > 0');
 
     // routes
     if (!s.routes?.length) add('routes', 'at least one route is required');

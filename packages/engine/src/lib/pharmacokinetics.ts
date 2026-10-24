@@ -305,7 +305,23 @@ export const ROA_MULTIPLIERS: Record<Route, RouteMultiplier> = {
  */
 export function flattenRegimensToEvents(regimen: RegimenConfig, substance: Substance): DoseEvent[] {
   if (regimen.customEvents && regimen.customEvents.length > 0) {
-    return regimen.customEvents;
+    // Callers may bypass sanitizeRegimenConfig (e.g. direct API use or
+    // restored state), so defensively clone, validate, sort, and cap the
+    // timeline here rather than trusting or mutating the caller's array.
+    const MAX_EVENTS = 2000;
+    return regimen.customEvents
+      .filter(
+        (e): e is DoseEvent =>
+          !!e &&
+          typeof e === 'object' &&
+          Number.isFinite(e.administrationHour) &&
+          e.administrationHour >= 0 &&
+          Number.isFinite(e.doseMg) &&
+          e.doseMg >= 0,
+      )
+      .map((e) => ({ ...e, substanceId: substance.id }))
+      .sort((a, b) => a.administrationHour - b.administrationHour)
+      .slice(0, MAX_EVENTS);
   }
   
   const events: DoseEvent[] = [];

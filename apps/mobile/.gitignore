@@ -3,11 +3,7 @@
 # dependencies
 node_modules/
 
-# Expo
-.expo/
 dist/
-web-build/
-expo-env.d.ts
 
 # Native
 .kotlin/
@@ -36,9 +32,15 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# generated native folders
+# Legacy generated folders; tracked bare projects live under native/
 /ios
 /android
+/native/android/.gradle/
+/native/android/build/
+/native/android/app/build/
+/native/ios/Pods/
+/native/ios/build/
+/native/ios/*.xcworkspace/
 
 # local build outputs
 build_release/
