@@ -6,7 +6,8 @@
     "macos": "react-native run-macos",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@pharmasim/engine": "^1.0.0",
