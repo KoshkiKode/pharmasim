@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import type { Substance } from '../data/types';
+import type { DoseEvent, Substance } from '../data/types';
 import {
   accumulationRatio,
   clearanceMultiplier,
   computePK,
   daysToSteadyState,
   effectiveHalfLife,
+  flattenRegimensToEvents,
   formatHours,
   rateConstant,
   tauHours,
@@ -108,6 +109,69 @@ describe('computePK', () => {
     const none = computePK(healthy, drug, acute).toleranceScalar;
     const high = computePK({ ...healthy, tolerance: 100 }, drug, acute).toleranceScalar;
     expect(high).toBeLessThan(none);
+  });
+});
+
+describe('flattenRegimensToEvents custom timeline hardening', () => {
+  const baseEvent: DoseEvent = {
+    id: 'e1',
+    substanceId: 'drug',
+    doseMg: 50,
+    route: 'oral',
+    formulation: 'IR',
+    administrationHour: 4,
+  };
+
+  it('clones, sorts, and reassigns substance ids without mutating the caller array', () => {
+    const input: DoseEvent[] = [
+      { ...baseEvent, id: 'b', administrationHour: 12 },
+      { ...baseEvent, id: 'a', administrationHour: 1 },
+    ];
+    const result = flattenRegimensToEvents({ ...acute, customEvents: input }, drug);
+    expect(result.map((e) => e.id)).toEqual(['a', 'b']);
+    expect(input[0].id).toBe('b'); // caller array untouched
+    expect(result[0]).not.toBe(input[1]); // cloned, not aliased
+  });
+
+  it('drops events with negative or non-finite hours and doses', () => {
+    const input = [
+      baseEvent,
+      { ...baseEvent, id: 'neg-hour', administrationHour: -1 },
+      { ...baseEvent, id: 'nan-hour', administrationHour: Number.NaN },
+      { ...baseEvent, id: 'neg-dose', doseMg: -5 },
+      { ...baseEvent, id: 'inf-dose', doseMg: Number.POSITIVE_INFINITY },
+      null,
+      undefined,
+    ] as unknown as DoseEvent[];
+    const result = flattenRegimensToEvents({ ...acute, customEvents: input }, drug);
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('e1');
+  });
+
+  it('caps runaway custom timelines', () => {
+    const input: DoseEvent[] = Array.from({ length: 5000 }, (_, i) => ({
+      ...baseEvent,
+      id: `e${i}`,
+      administrationHour: i,
+    }));
+    const result = flattenRegimensToEvents({ ...acute, customEvents: input }, drug);
+    expect(result.length).toBeLessThanOrEqual(2000);
+  });
+
+  it('retains the earliest doses when an unsorted timeline exceeds the cap', () => {
+    const input: DoseEvent[] = [
+      ...Array.from({ length: 2000 }, (_, i) => ({
+        ...baseEvent,
+        id: `late-${i}`,
+        administrationHour: 1000 + i,
+      })),
+      { ...baseEvent, id: 'earliest', administrationHour: 1 },
+    ];
+    const result = flattenRegimensToEvents({ ...acute, customEvents: input }, drug);
+    expect(result).toHaveLength(2000);
+    expect(result[0]).toMatchObject({ id: 'earliest', administrationHour: 1 });
+    expect(result[result.length - 1].administrationHour).toBe(2998);
+    expect(input[0].id).toBe('late-0');
   });
 });
 
