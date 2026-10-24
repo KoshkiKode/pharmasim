@@ -21,7 +21,7 @@ export function getSettings(): AppSettings {
     if (typeof localStorage !== 'undefined') {
       const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
       if (raw) {
-        return { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+        return normalizeSettings(JSON.parse(raw));
       }
     }
   } catch {
@@ -30,9 +30,23 @@ export function getSettings(): AppSettings {
   return memoryStorage;
 }
 
+// Persisted values are untrusted: only accept known literal values,
+// falling back to the defaults for anything else.
+function normalizeSettings(candidate: unknown): AppSettings {
+  const source = candidate && typeof candidate === 'object' ? (candidate as Partial<AppSettings>) : {};
+  return {
+    theme: source.theme === 'light' || source.theme === 'dark' || source.theme === 'system'
+      ? source.theme
+      : DEFAULT_SETTINGS.theme,
+    unitSystem: source.unitSystem === 'imperial' || source.unitSystem === 'metric'
+      ? source.unitSystem
+      : DEFAULT_SETTINGS.unitSystem,
+  };
+}
+
 export function saveSettings(settings: Partial<AppSettings>): AppSettings {
   const current = getSettings();
-  const updated = { ...current, ...settings };
+  const updated = normalizeSettings({ ...current, ...settings });
   memoryStorage = updated;
   try {
     if (typeof localStorage !== 'undefined') {

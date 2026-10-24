@@ -1,4 +1,4 @@
-import type { Substance } from '../data/types';
+import type { Substance, SubstanceTag } from '../data/types';
 
 export interface RiskScores {
   anticholinergicBurden: number; // 0-3+ (3 is high risk)
@@ -6,8 +6,8 @@ export interface RiskScores {
   qtProlongationRisk: number;    // 0-3+ (3 is high risk)
 }
 
-function hasTag(s: Substance, tag: string): boolean {
-  return !!s.tags?.includes(tag as any);
+function hasTag(s: Substance, tag: SubstanceTag): boolean {
+  return !!s.tags?.includes(tag);
 }
 
 export function computeRiskScores(substances: Substance[]): RiskScores {
