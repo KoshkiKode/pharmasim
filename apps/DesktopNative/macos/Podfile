@@ -1,14 +1,10 @@
 require_relative '../../../node_modules/react-native-macos/scripts/react_native_pods'
-require_relative '../../../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 prepare_react_native_project!
 
 target 'DesktopNative-macOS' do
-  platform :macos, '11.0'
+  platform :macos, '14.0'
   use_native_modules!
-
-  # Flags change depending on the env values.
-  flags = get_default_flags()
 
   use_react_native!(
     :path => '../../../node_modules/react-native-macos',

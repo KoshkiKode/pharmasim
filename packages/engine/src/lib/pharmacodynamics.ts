@@ -25,29 +25,35 @@ export function computeReceptorState(
       return null;
     }
     
-    // Find concentration at this hour
+    // Find concentration at this hour, clamping to the sampled range
+    // instead of silently reporting zero outside it.
     let concentration = 0;
-    // We assume series is sorted by hour
-    for (let i = 0; i < pk.series.length - 1; i++) {
-      if (pk.series[i].hour <= hour && pk.series[i + 1].hour >= hour) {
-        // Linear interpolation
-        const dt = pk.series[i + 1].hour - pk.series[i].hour;
-        const dc = pk.series[i + 1].concentration - pk.series[i].concentration;
-        const fraction = (hour - pk.series[i].hour) / dt;
-        concentration = pk.series[i].concentration + dc * fraction;
-        break;
+    if (pk.series.length > 0) {
+      const first = pk.series[0];
+      const last = pk.series[pk.series.length - 1];
+      if (hour <= first.hour) {
+        concentration = first.concentration;
+      } else if (hour >= last.hour) {
+        concentration = last.concentration;
+      } else {
+        // We assume series is sorted by hour
+        for (let i = 0; i < pk.series.length - 1; i++) {
+          if (pk.series[i].hour <= hour && pk.series[i + 1].hour >= hour) {
+            // Linear interpolation
+            const dt = pk.series[i + 1].hour - pk.series[i].hour;
+            const dc = pk.series[i + 1].concentration - pk.series[i].concentration;
+            const fraction = (hour - pk.series[i].hour) / dt;
+            concentration = pk.series[i].concentration + dc * fraction;
+            break;
+          }
+        }
       }
-    }
-    
-    // Fallback if exactly at the end
-    if (concentration === 0 && pk.series.length > 0 && pk.series[pk.series.length - 1].hour === hour) {
-        concentration = pk.series[pk.series.length - 1].concentration;
     }
 
     if (concentration <= 0) return null;
 
     // Convert mg/L to nM (approximate average small molecule molar mass = 350 g/mol)
-    const molarMass = (substance as any).molarMass || 350;
+    const molarMass = substance.molarMassGPerMol ?? 350;
     const nM = (concentration / molarMass) * 1000000;
 
     const affinity = substance.bindingAffinities[receptor];

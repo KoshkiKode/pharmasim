@@ -1,11 +1,16 @@
 #!/bin/bash
 set -e
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+echo "Building shared engine..."
+# apps/linux-desktop imports @pharmasim/engine's compiled dist/, which is
+# git-ignored, so it must be built before Tauri bundles the frontend.
+npm run build
+
 echo "Building Linux packages via Tauri..."
 cd apps/linux-desktop
-
-echo "Ensuring dependencies are installed..."
-npm install --legacy-peer-deps
 
 echo "Running Tauri Build..."
 # On Linux, this will generate .deb and .AppImage packages by default.
