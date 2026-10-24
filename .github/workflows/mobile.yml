@@ -56,6 +56,10 @@ jobs:
         run: npm ci
         working-directory: .
 
+      - name: Build shared engine
+        run: npm run build -w packages/engine
+        working-directory: .
+
       - name: Initialise Android project
         run: npm run tauri android init
         env:
