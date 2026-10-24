@@ -15,11 +15,13 @@ robustness roadmap.
   metabolite, and receptor fields.
 - `[x]` Document the current capability boundary and pill-identification design
   gate in [`docs/roadmap.md`](../docs/roadmap.md).
+- `[x]` Extract the byte-identical `apps/mobile/src` and
+  `apps/DesktopNative/src` copies into the shared `@pharmasim/ui` package.
+- `[x]` Replace duplicated report generation and alert formatting in web,
+  mobile, and DesktopNative with shared engine/report helpers
+  (`packages/engine/src/lib/report.ts`), including qualified toxicity wording.
 
 ## Next
-
-- `[ ]` Replace duplicated report generation and alert formatting in web,
-  mobile, and DesktopNative with shared engine/report helpers.
 - `[ ]` Reframe modeled outputs so “safe”, “contraindicated”, “discontinue”,
   and similar terms cannot be mistaken for clinical instructions.
 - `[ ]` Add evidence quality, provenance, approximation, and review-date

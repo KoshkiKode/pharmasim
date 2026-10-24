@@ -10,7 +10,7 @@ import {
 } from '@pharmasim/engine';
 import { computeConditionWarnings } from '@pharmasim/engine';
 import { computeRiskScores, getRiskLevel } from '@pharmasim/engine';
-import { computePK, evaluateToxicity, computeReceptorState, canRunSimulation, recordSimulationRun, getRemainingFreeRuns, getUsageState } from '@pharmasim/engine';
+import { computePK, evaluateToxicity, computeReceptorState, canRunSimulation, recordSimulationRun, getRemainingFreeRuns, getUsageState, getToxicityAlertLabel } from '@pharmasim/engine';
 import { SummaryModal } from './SummaryModal';
 import { PaywallModal } from './PaywallModal';
 
@@ -104,12 +104,12 @@ export function ResultsPanel({
             <h2 className="text-sm font-bold text-red-500 uppercase tracking-widest">Lethal Toxicity Warning</h2>
           </header>
           <div className="p-4 space-y-3">
-            {toxAlerts.filter(t => t.status === 'lethal' || t.status === 'toxic').map((tox, idx) => (
-              <div key={idx} className="flex items-center justify-between bg-black/40 rounded border border-red-500/40 p-3">
+            {toxAlerts.filter(t => t.status === 'lethal' || t.status === 'toxic').map((tox) => (
+              <div key={tox.substanceId} className="flex items-center justify-between bg-black/40 rounded border border-red-500/40 p-3">
                 <div>
                   <div className="text-red-400 font-bold">{tox.name}</div>
                   <div className="text-red-500/70 text-[10px] uppercase font-bold tracking-widest mt-0.5">
-                    {tox.status === 'lethal' ? 'FATAL OVERDOSE EXPECTED' : 'SEVERE TOXICITY'}
+                    {getToxicityAlertLabel(tox.status)}
                   </div>
                 </div>
                 <div className="text-right">

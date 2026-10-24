@@ -12,3 +12,4 @@ export * from './lib/state';
 export * from './lib/usageTracker';
 export * from './lib/settings';
 export * from './lib/validation';
+export * from './lib/report';
