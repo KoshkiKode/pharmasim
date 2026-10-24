@@ -31,13 +31,19 @@ Every patient profile, dose, condition, interaction, warning, and report in the 
   targets React Native macOS/Windows.
 - **Vitest** — unit tests for the PK engine, interaction engine, and substance-database validation.
 
-The repository tracks the latest published stable dependency releases where the platform ecosystems remain compatible. Native platform dependencies are intentionally kept in their platform-matched release lines; run the validation commands below after changing them.
+Dependencies are pinned through the root workspace lockfile; platform-native dependencies are intentionally kept on their platform-matched release lines. Run the validation commands below after changing them.
 
 ## Getting started
 
 ```bash
 npm install
-npm run dev        # start the Vite dev server at http://localhost:5173
+npm run dev        # start the Expo mobile client (Metro / Expo dev tools)
+```
+
+To run the Linux desktop / web client instead:
+
+```bash
+npm run dev -w apps/linux-desktop   # start the Vite dev server at http://localhost:5173
 ```
 
 PharmaSim is not health advice. Read the safety notice above before using the app, and use only fictional or non-identifying data.
@@ -78,7 +84,7 @@ The production build generates a web manifest and service worker via
 
 ### 3. Tauri v2 desktop (Windows / macOS / Linux)
 
-PharmaSim ships a Tauri v2 configuration in `src-tauri/`. Building native bundles requires the Rust toolchain and each platform's native prerequisites.
+PharmaSim ships a Tauri v2 configuration in `apps/linux-desktop/src-tauri/`. Building native bundles requires the Rust toolchain and each platform's native prerequisites.
 
 **Prerequisites (all platforms):**
 

@@ -9,6 +9,14 @@ dist-ssr/
 # Tauri
 src-tauri/target/
 src-tauri/gen/
+**/src-tauri/target/
+**/src-tauri/gen/
+
+# Local AI-agent / editor settings
+.claude/
+
+# Native build output dumps
+build_release/
 
 # Logs
 logs/
