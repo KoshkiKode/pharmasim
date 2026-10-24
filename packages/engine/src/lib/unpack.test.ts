@@ -57,8 +57,9 @@ describe('unpackMixtures', () => {
     // Holistic parent (should have heavy tags stripped)
     expect(result[0].isEntourageHolistic).toBe(true);
     expect(result[0].substance.id).toBe('marijuana');
-    expect(result[0].substance.tags).not.toContain('cns-depressant');
-    expect(result[0].substance.tags).not.toContain('serotonergic');
+    const holisticSubstance = result.find(({ isEntourageHolistic }) => isEntourageHolistic);
+    expect(holisticSubstance?.substance.tags?.includes('cns-depressant')).toBe(false);
+    expect(holisticSubstance?.substance.tags?.includes('serotonergic')).toBe(false);
     expect(result[0].regimen.doseMg).toBe(100);
 
     // THC component
