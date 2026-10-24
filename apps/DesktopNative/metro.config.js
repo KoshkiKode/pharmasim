@@ -4,10 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const exclusionList = require('metro-config/src/defaults/exclusionList');
 
-const rnwPath = fs.realpathSync(
-  path.resolve(require.resolve('react-native-windows/package.json'), '..'),
-);
-
 const workspaceRoot = path.resolve(__dirname, '../..');
 
 /**
@@ -32,13 +28,10 @@ const config = {
       'ios.tsx',
     ],
     blockList: exclusionList([
-      // This stops "npx @react-native-community/cli run-windows" from causing the metro server to crash if its already running
+      // Keep generated Windows project files out of the macOS Metro file map.
       new RegExp(
         `${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`,
       ),
-      // This prevents "npx @react-native-community/cli run-windows" from hitting: EBUSY: resource busy or locked, open msbuild.ProjectImports.zip or other files produced by msbuild
-      new RegExp(`${rnwPath}/build/.*`),
-      new RegExp(`${rnwPath}/target/.*`),
       /.*\.ProjectImports\.zip/,
     ]),
     //

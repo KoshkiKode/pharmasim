@@ -27,8 +27,9 @@ Every patient profile, dose, condition, interaction, warning, and report in the 
 - **lucide-react** — icons. **Recharts** — plasma-concentration visualizations.
 - **vite-plugin-pwa** — installable, offline-capable Progressive Web App.
 - **Tauri v2** — native builds for Windows, macOS, and Linux. The separate
-  `apps/mobile` React Native CLI client targets Android and iOS; `apps/DesktopNative`
-  targets React Native macOS/Windows.
+  `apps/mobile` React Native CLI client targets Android and iOS;
+  `apps/DesktopNative` targets React Native macOS. Windows desktop bundles use
+  the Tauri app.
 - **Vitest** — unit tests for the PK engine, interaction engine, and substance-database validation.
 
 Dependencies are pinned through the root workspace lockfile; platform-native dependencies are intentionally kept on their platform-matched release lines. Run the validation commands below after changing them.
