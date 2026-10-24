@@ -128,10 +128,10 @@ pharmasim/
 ├── packages/engine/       # shared PK, interaction, toxicity, state, and validation engine
 ├── apps/linux-desktop/    # Vite + React + Tailwind + Tauri desktop/PWA client
 ├── apps/mobile/           # React Native CLI client for Android and iOS
-├── apps/DesktopNative/    # React Native desktop client for macOS/Windows
+├── apps/DesktopNative/    # React Native desktop client for macOS
 ├── docs/adding-substances.md  # how to add chemicals/substances safely
 ├── docs/roadmap.md        # capability boundary and prioritized backlog
-├── .github/workflows/     # CI, cross-platform builds, mobile, and release workflows
+├── .github/workflows/     # CI, cross-platform native builds, and tagged release workflows
 ```
 
 ## License

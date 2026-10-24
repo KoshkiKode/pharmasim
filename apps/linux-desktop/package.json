@@ -16,10 +16,6 @@
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build",
-    "tauri:android:dev": "tauri android dev",
-    "tauri:android:build": "tauri android build",
-    "tauri:ios:dev": "tauri ios dev",
-    "tauri:ios:build": "tauri ios build",
     "tauri:icons": "tauri icon public/icons/icon-512.png",
     "pipeline": "node ../../scripts/verify-pipeline.cjs"
   },
