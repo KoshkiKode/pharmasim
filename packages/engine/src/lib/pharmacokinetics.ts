@@ -319,9 +319,9 @@ export function flattenRegimensToEvents(regimen: RegimenConfig, substance: Subst
           Number.isFinite(e.doseMg) &&
           e.doseMg >= 0,
       )
-      .slice(0, MAX_EVENTS)
       .map((e) => ({ ...e, substanceId: substance.id }))
-      .sort((a, b) => a.administrationHour - b.administrationHour);
+      .sort((a, b) => a.administrationHour - b.administrationHour)
+      .slice(0, MAX_EVENTS);
   }
   
   const events: DoseEvent[] = [];

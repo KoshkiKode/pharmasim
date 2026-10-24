@@ -157,6 +157,22 @@ describe('flattenRegimensToEvents custom timeline hardening', () => {
     const result = flattenRegimensToEvents({ ...acute, customEvents: input }, drug);
     expect(result.length).toBeLessThanOrEqual(2000);
   });
+
+  it('retains the earliest doses when an unsorted timeline exceeds the cap', () => {
+    const input: DoseEvent[] = [
+      ...Array.from({ length: 2000 }, (_, i) => ({
+        ...baseEvent,
+        id: `late-${i}`,
+        administrationHour: 1000 + i,
+      })),
+      { ...baseEvent, id: 'earliest', administrationHour: 1 },
+    ];
+    const result = flattenRegimensToEvents({ ...acute, customEvents: input }, drug);
+    expect(result).toHaveLength(2000);
+    expect(result[0]).toMatchObject({ id: 'earliest', administrationHour: 1 });
+    expect(result[result.length - 1].administrationHour).toBe(2998);
+    expect(input[0].id).toBe('late-0');
+  });
 });
 
 describe('formatHours', () => {
