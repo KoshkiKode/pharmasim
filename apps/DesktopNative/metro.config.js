@@ -1,8 +1,6 @@
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
-const fs = require('fs');
 const path = require('path');
-const exclusionList = require('metro-config/src/defaults/exclusionList');
 
 const workspaceRoot = path.resolve(__dirname, '../..');
 
@@ -27,14 +25,6 @@ const config = {
       'ios.ts',
       'ios.tsx',
     ],
-    blockList: exclusionList([
-      // Keep generated Windows project files out of the macOS Metro file map.
-      new RegExp(
-        `${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`,
-      ),
-      /.*\.ProjectImports\.zip/,
-    ]),
-    //
   },
   transformer: {
     getTransformOptions: async () => ({
