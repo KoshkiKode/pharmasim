@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { DoseEvent, Substance } from '../data/types';
+import { PARAMETER_EVIDENCE_UNITS, type DoseEvent, type Substance } from '../data/types';
 import {
   accumulationRatio,
   clearanceMultiplier,
@@ -283,6 +283,87 @@ describe('event-based pharmacokinetics', () => {
         Math.exp(-ka * 24) / (1 - Math.exp(-ka * 24)));
     expect(pk.steadyStateTrough).toBeCloseTo(expected, 8);
   });
+
+  it('reports the periodic minimum at delayed absorption onset, not the higher pre-dose value', () => {
+    const halfLifeHours = 2;
+    const ka = 100;
+    const lagHours = 6;
+    const specific = { ...drug, halfLifeHours, absorptionByRoute: { oral: { kaPerHour: ka, lagHours } } };
+    const pk = computePK(healthy, specific, { ...acute, mode: 'daily' });
+    const k = Math.LN2 / pk.effectiveHalfLifeHours;
+    const denominator = -Math.expm1(-k * 24);
+    const doseMultiplier = 50 * drug.bioavailability / 70;
+    const expected = doseMultiplier * ka / (ka - k) *
+      (Math.exp(-k * 24) / denominator - Math.exp(-ka * 24) / -Math.expm1(-ka * 24));
+    const predose = doseMultiplier * ka / (ka - k) *
+      (Math.exp(-k * (24 - lagHours)) / denominator -
+        Math.exp(-ka * (24 - lagHours)) / -Math.expm1(-ka * 24));
+    expect(pk.steadyStateTrough).toBeCloseTo(expected, 12);
+    expect(predose / pk.steadyStateTrough).toBeCloseTo(8, 8);
+  });
+
+  it.each([0.01, Math.LN2 / 12, (Math.LN2 / 12) * (1 + 1e-10)])(
+    'keeps the periodic minimum stable with slow or equal absorption (%s)', (ka) => {
+      const pk = computePK(healthy, {
+        ...drug, absorptionByRoute: { oral: { kaPerHour: ka, lagHours: 30 } },
+      }, { ...acute, mode: 'daily' });
+      const k = Math.LN2 / pk.effectiveHalfLifeHours;
+      const reference = Array.from({ length: 5000 }, (_, index) => {
+        const time = (index + 1) * 24;
+        if (Math.abs(ka - k) < 1e-8 * k) return ka * time * Math.exp(-k * time);
+        return ka / (ka - k) * (Math.exp(-k * time) - Math.exp(-ka * time));
+      }).reduce((sum, concentration) => sum + concentration, 0) * 50 * drug.bioavailability / 70;
+      expect(pk.steadyStateTrough).toBeCloseTo(reference, 9);
+    },
+  );
+
+  it.each([4, 30, 48])('finds the periodic IV infusion minimum with %s-hour overlapping input', (duration) => {
+    const interval = 24;
+    const pk = computeEventPK(healthy, drug, [event({
+      route: 'IV', infusionDurationHours: duration,
+    })], [], interval);
+    const k = Math.LN2 / pk.effectiveHalfLifeHours;
+    const expected = Array.from({ length: 100 }, (_, index) => {
+      const time = (index + 1) * interval;
+      return (50 / 70) * -Math.expm1(-k * Math.min(time, duration)) / (k * duration) *
+        Math.exp(-k * Math.max(0, time - duration));
+    }).reduce((sum, concentration) => sum + concentration, 0);
+    expect(pk.steadyStateTrough).toBeCloseTo(expected, 10);
+  });
+
+  it.each([8, 40, 48])('searches actual periodic minima after delayed %s-hour controlled release', (duration) => {
+    const interval = 24;
+    const ka = 1;
+    const lagHours = 6;
+    const specific = {
+      ...drug, halfLifeHours: 2,
+      absorptionByRoute: { oral: { kaPerHour: ka, lagHours } },
+      releaseHoursByFormulation: { ER: duration },
+    };
+    const pk = computeEventPK(healthy, specific, [event({ formulation: 'ER' })], [], interval);
+    const k = Math.LN2 / pk.effectiveHalfLifeHours;
+    const reference = (phase: number) => Array.from({ length: 60 }, (_, index) => {
+      const time = phase - lagHours + index * interval;
+      if (time <= 0) return 0;
+      const elapsed = Math.min(time, duration);
+      const integral = (rate: number) =>
+        Math.exp(-rate * (time - elapsed)) * -Math.expm1(-rate * elapsed) / rate;
+      return (50 * drug.bioavailability / 70 / duration) * ka / (ka - k) * (integral(k) - integral(ka));
+    }).reduce((sum, concentration) => sum + concentration, 0);
+    let minimumPhase = 0;
+    for (let phase = 0; phase <= interval; phase += 0.01) {
+      if (reference(phase) < reference(minimumPhase)) minimumPhase = phase;
+    }
+    let left = Math.max(0, minimumPhase - 0.01);
+    let right = Math.min(interval, minimumPhase + 0.01);
+    for (let iteration = 0; iteration < 60; iteration++) {
+      const first = left + (right - left) / 3;
+      const second = right - (right - left) / 3;
+      if (reference(first) > reference(second)) left = first;
+      else right = second;
+    }
+    expect(pk.steadyStateTrough).toBeCloseTo(reference((left + right) / 2), 8);
+  });
 });
 
   describe('PK numerical robustness and explicit kinetics', () => {
@@ -491,7 +572,7 @@ describe('event-based pharmacokinetics', () => {
         parameterEvidence: {
           halfLifeHours: {
             sourceUrl: 'https://example.org/label', sourceTitle: 'Test label',
-            reviewedAt: '2026-01-01', quality: 'high', basis: 'measured', unit: 'h',
+            reviewedAt: '2026-01-01', quality: 'high', basis: 'measured', unit: PARAMETER_EVIDENCE_UNITS.halfLifeHours,
           },
         },
       }, [event()]);
@@ -508,9 +589,9 @@ describe('event-based pharmacokinetics', () => {
       const pk = computeEventPK(healthy, {
         ...drug,
         parameterEvidence: {
-          halfLifeHours: { ...evidence, unit: 'h' },
-          vdLKg: { ...evidence, unit: 'L/kg' },
-          bioavailability: { ...evidence, unit: 'fraction' },
+          halfLifeHours: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.halfLifeHours },
+          vdLKg: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.vdLKg },
+          bioavailability: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.bioavailability },
         },
       }, [event()]);
       expect(pk.warnings.join(' ')).not.toContain('provenance is');

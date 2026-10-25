@@ -451,9 +451,9 @@ function integrateCurve(curve: (hour: number) => number, start: number, end: num
     left: number, right: number, a: number, b: number, c: number,
     estimate: number, tolerance: number, depth: number,
   ): number => {
-    const middle = (left + right) / 2;
-    const d = curve((left + middle) / 2);
-    const e = curve((middle + right) / 2);
+    const middle = left + (right - left) / 2;
+    const d = curve(left + (middle - left) / 2);
+    const e = curve(middle + (right - middle) / 2);
     const first = (middle - left) * (a + 4 * d + b) / 6;
     const second = (right - middle) * (b + 4 * e + c) / 6;
     const delta = first + second - estimate;
@@ -464,7 +464,7 @@ function integrateCurve(curve: (hour: number) => number, start: number, end: num
       recurse(middle, right, b, e, c, second, tolerance / 2, depth - 1);
   };
   const a = curve(start);
-  const b = curve((start + end) / 2);
+  const b = curve(start + (end - start) / 2);
   const c = curve(end);
   const estimate = (end - start) * (a + 4 * b + c) / 6;
   return recurse(start, end, a, b, c, estimate, Math.max(1e-16, Math.abs(estimate) * 1e-9), 16);
@@ -481,18 +481,91 @@ function regularInterval(events: DoseEvent[]): number | undefined {
     : undefined;
 }
 
-function periodicTrough(
-  curve: (time: number) => number,
-  interval: number,
-  halfLife: number,
-  originHour: number,
-): number {
-  const periods = Math.min(20000, Math.ceil((40 * halfLife) / interval) + 2);
-  let concentration = 0;
-  for (let dose = 0; dose <= periods; dose++) {
-    concentration += curve(originHour + (dose + 1) * interval);
+function periodicAbsorption(phase: number, ka: number, k: number, interval: number): number {
+  const difference = Math.abs(ka - k);
+  if (difference < 1e-7 * Math.max(ka, k)) {
+    const rate = (ka + k) / 2;
+    const denominator = -Math.expm1(-rate * interval);
+    return ka * Math.exp(-rate * phase) / denominator *
+      (phase + interval * Math.exp(-rate * interval) / denominator);
   }
-  return concentration;
+  const slower = Math.min(ka, k);
+  const faster = Math.max(ka, k);
+  const denominator = -Math.expm1(-slower * interval);
+  const fasterDenominator = -Math.expm1(-faster * interval);
+  const correction = Math.exp(-slower * interval) *
+    -Math.expm1(-difference * interval) / fasterDenominator;
+  return (ka / difference) * Math.exp(-slower * phase) / denominator *
+    (-Math.expm1(-difference * phase) + Math.exp(-difference * phase) * correction);
+}
+
+/** Minimum over a periodic interval, not merely the pre-administration value. */
+function periodicTrough(
+  event: DoseEvent,
+  interval: number,
+  ka: number,
+  k: number,
+  doseMultiplier: number,
+  lagHours: number,
+  releaseHours?: number,
+): number {
+  if (doseMultiplier === 0) return 0;
+  const denominator = -Math.expm1(-k * interval);
+  if (event.route === 'IV' && event.kaOverride === undefined) {
+    const duration = event.infusionDurationHours;
+    if (duration === undefined) {
+      return doseMultiplier * Math.exp(-k * interval) / denominator;
+    }
+    const remainder = duration % interval;
+    const x = k * remainder;
+    const uptake = x === 0 ? 1 : -Math.expm1(-x) / x;
+    return doseMultiplier * (
+      (1 - remainder / duration) / (k * interval) +
+      (remainder / duration) * uptake * Math.exp(-k * (interval - remainder)) / denominator
+    );
+  }
+  // A first-order absorbed impulse has one maximum between input onsets, so
+  // its periodic minimum is at the (possibly delayed) absorption onset.
+  if (releaseHours === undefined) {
+    return doseMultiplier * periodicAbsorption(0, ka, k, interval);
+  }
+  const lagPhase = lagHours % interval;
+  const remainder = releaseHours % interval;
+  const periodicCurve = (hour: number): number => {
+    const shifted = (hour - lagPhase) % interval;
+    const phase = shifted < 0 ? shifted + interval : shifted;
+    const response = (time: number) => periodicAbsorption(time, ka, k, interval);
+    if (releaseHours * Math.max(ka, k) < 1e-6) {
+      const shiftedMidpoint = (phase - releaseHours / 2) % interval;
+      const midpoint = shiftedMidpoint < 0 ? shiftedMidpoint + interval : shiftedMidpoint;
+      return response(midpoint);
+    }
+    const fullPeriods = (1 - remainder / releaseHours) / (k * interval);
+    const partial = phase >= remainder
+      ? integrateCurve(response, phase - remainder, phase)
+      : integrateCurve(response, 0, phase) +
+        integrateCurve(response, interval - (remainder - phase), interval);
+    return fullPeriods + partial / releaseHours;
+  };
+  const boundaries = [...new Set([
+    0, interval, lagPhase,
+    lagPhase >= interval - remainder ? lagPhase - (interval - remainder) : lagPhase + remainder,
+  ])].sort((a, b) => a - b);
+  let minimum = Math.min(...boundaries.map(periodicCurve));
+  for (let index = 1; index < boundaries.length; index++) {
+    let left = boundaries[index - 1];
+    let right = boundaries[index];
+    // Between release on/off boundaries the derivative is a sum of two
+    // exponentials and has at most one interior extremum.
+    for (let iteration = 0; iteration < 70; iteration++) {
+      const first = left + (right - left) / 3;
+      const second = right - (right - left) / 3;
+      if (periodicCurve(first) > periodicCurve(second)) left = first;
+      else right = second;
+    }
+    minimum = Math.min(minimum, periodicCurve(left + (right - left) / 2));
+  }
+  return doseMultiplier * minimum;
 }
 
 /**
@@ -715,12 +788,11 @@ export function computeEventPK(
     steadyStateIntervalHours !== undefined && Number.isFinite(steadyStateIntervalHours) && steadyStateIntervalHours > 0
       ? steadyStateIntervalHours
       : repeatableSchedule ? inferredInterval : undefined;
-  const steadyStateTail = profiles.length > 0 ? Math.max(tHalf,
-    profiles[0].isBolusOrInfusion ? 0 : Math.LN2 / profiles[0].ka,
-    (profiles[0].lagHours + (profiles[0].releaseHours ?? validEvents[0].infusionDurationHours ?? 0)) / 40,
-  ) : tHalf;
-  if (steadyStateInterval !== undefined && (40 * steadyStateTail) / steadyStateInterval + 2 > 20000) {
-    warnings.add('Steady-state trough summation was truncated at 20000 periods; very slow kinetics or short intervals can underestimate the trough.');
+  const troughAvailable = steadyStateInterval !== undefined &&
+    Number.isFinite(1 / (k * steadyStateInterval)) &&
+    profiles.length > 0 && Number.isFinite(1 / (profiles[0].ka * steadyStateInterval));
+  if (steadyStateInterval !== undefined && !troughAvailable && profiles.length > 0) {
+    warnings.add('Steady-state trough is unavailable because the dosing interval exceeds numerical resolution.');
   }
   const inferredTau = inferredInterval ?? (validEvents.length > 1
     ? validEvents.slice(1).map((event, index) => event.administrationHour - validEvents[index].administrationHour)
@@ -758,6 +830,16 @@ export function computeEventPK(
     return total + profile.doseMultiplier * times.slice(1).reduce((area, time, i) =>
       area + integrateCurve(normalizedCurve, times[i], time), 0);
   }, 0);
+  let steadyStateTrough = troughAvailable && steadyStateInterval !== undefined
+    ? periodicTrough(
+        validEvents[0], steadyStateInterval, profiles[0].ka, k,
+        profiles[0].doseMultiplier, profiles[0].lagHours, profiles[0].releaseHours,
+      )
+    : 0;
+  if (!Number.isFinite(steadyStateTrough) || steadyStateTrough < 0) {
+    warnings.add('Steady-state trough is unavailable because the dosing interval exceeds numerical resolution.');
+    steadyStateTrough = 0;
+  }
 
   return {
     substanceId: substance.id,
@@ -770,15 +852,7 @@ export function computeEventPK(
     tauHours: inferredTau,
     series,
     peakConcentration: peak,
-    steadyStateTrough:
-      steadyStateInterval !== undefined && eventCurves.length > 0
-        ? periodicTrough(
-            eventCurves[0],
-            steadyStateInterval,
-            steadyStateTail,
-            validEvents[0].administrationHour,
-          )
-        : 0,
+    steadyStateTrough,
     toleranceScalar,
     aucMgHourL,
     peakHour,
