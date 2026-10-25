@@ -6,6 +6,9 @@ dist/
 dist-ssr/
 *.local
 
+# Coverage reports
+coverage/
+
 # Tauri
 src-tauri/target/
 src-tauri/gen/
