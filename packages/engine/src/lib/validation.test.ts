@@ -61,4 +61,36 @@ describe('runtime input validation', () => {
     expect(regimen.customEvents).toHaveLength(1);
     expect(validateRegimenConfig(regimen)).toEqual([]);
   });
+
+  it('preserves valid IV infusion durations through persisted-state sanitization', () => {
+    const regimen = sanitizeRegimenConfig(substances[0], {
+      customEvents: [{
+        id: 'infusion', substanceId: substances[0].id, doseMg: 10,
+        administrationHour: 2, route: 'IV', formulation: 'IR', infusionDurationHours: 4,
+      }],
+    });
+    expect(regimen.customEvents?.[0].infusionDurationHours).toBe(4);
+    expect(validateRegimenConfig(regimen)).toEqual([]);
+  });
+
+  it('discards malformed infusions rather than converting them to IV boluses', () => {
+    const base = {
+      id: 'infusion', substanceId: substances[0].id, doseMg: 10,
+      administrationHour: 2, route: 'IV' as const, formulation: 'IR' as const,
+    };
+    const events = [
+      { ...base, infusionDurationHours: 0 },
+      { ...base, infusionDurationHours: -1 },
+      { ...base, infusionDurationHours: Infinity },
+      { ...base, infusionDurationHours: NaN },
+      { ...base, route: 'oral' as const, infusionDurationHours: 2 },
+      { ...base, infusionDurationHours: 2, kaOverride: 0.5 },
+      base,
+    ];
+    const regimen = sanitizeRegimenConfig(substances[0], { customEvents: events });
+    expect(regimen.customEvents).toHaveLength(1);
+    expect(regimen.customEvents?.[0]).toMatchObject(base);
+    const invalid = { ...regimen, customEvents: events };
+    expect(validateRegimenConfig(invalid).filter((issue) => issue.field.endsWith('infusionDurationHours'))).toHaveLength(6);
+  });
 });

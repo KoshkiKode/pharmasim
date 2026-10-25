@@ -108,9 +108,10 @@ and any conversion or population assumptions in `notes`. A source URL is not
 proof that every parameter in an entry appears in that source.
 
 Canonical units are `h` for half-life/release windows, `fraction` for
-bioavailability and metabolite conversion, `L/kg` for distribution volume,
+bioavailability, `L/kg` for distribution volume,
 `mL/min/kg` for clearance, `%` for protein binding, `g/mol` for molecular mass,
-`1/h` for absorption-rate records, and `unitless` for tags. Preserve source
+`1/h` for absorption-rate records, and `dimensionless` for tags/metabolite
+records (conversion fractions are bounded from zero to one). Preserve source
 units in notes when converting. Missing metadata means unreviewed, not measured;
 unknown data must not be disguised as a sourced generic constant.
 

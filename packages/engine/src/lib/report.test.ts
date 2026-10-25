@@ -173,7 +173,7 @@ describe('generateMarkdownReport', () => {
       conditionWarnings: [],
       interactions: [{
         id: 'example',
-        substanceIds: ['a', 'b'],
+        substances: ['a', 'b'],
         substanceNames: ['A', 'B'],
         severity: 'moderate',
         title: 'Example interaction',
@@ -188,5 +188,10 @@ describe('generateMarkdownReport', () => {
   it('does not label an acute result as a steady-state trough', () => {
     expect(formatPKSummary({ ...pk, steadyStateTrough: 0 }).join('\n')).not.toContain('trough');
     expect(formatPKSummary({ ...pk, steadyStateTrough: 0 }, true).join('\n')).toContain('trough: 0.00 mg/L');
+  });
+
+  it('uses engine peak diagnostics rather than re-deriving a peak from chart points', () => {
+    const lines = formatPKSummary({ ...pk, peakConcentration: 2.25, peakHour: 1.75 });
+    expect(lines[0]).toContain('2.25 mg/L at T+1.75h');
   });
 });

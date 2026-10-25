@@ -1,5 +1,6 @@
 import { conditions } from '../data/conditions';
 import type { Substance } from '../data/types';
+import { PARAMETER_EVIDENCE_UNITS } from '../data/types';
 import type { ConditionWarning } from './conditionWarnings';
 import type { Interaction } from './interactions';
 import type { PatientProfile, PKResult, PlasmaPoint } from './pharmacokinetics';
@@ -32,13 +33,7 @@ export function formatPKSummary(pk: PKResult, showTrough = pk.steadyStateTrough 
 }
 
 const PARAMETER_UNITS: Record<string, string> = {
-  halfLifeHours: 'h',
-  bioavailability: 'fraction',
-  bioavailabilityByRoute: 'fraction',
-  vdLKg: 'L/kg',
-  clearanceMlMinKg: 'mL/min/kg',
-  proteinBindingPct: '%',
-  molarMassGPerMol: 'g/mol',
+  ...PARAMETER_EVIDENCE_UNITS,
   bindingAffinities: 'nM / intrinsic activity',
   toxicity: 'mg/L',
 };
@@ -51,7 +46,7 @@ export function getParameterEvidenceLines(substance: Substance): string[] {
   ]);
   const values = substance as unknown as Record<string, unknown>;
   return Array.from(fields, (field) => {
-    const evidence = substance.parameterEvidence?.[field];
+    const evidence = substance.parameterEvidence?.[field as keyof NonNullable<Substance['parameterEvidence']>];
     const value = field.split('.').reduce<unknown>((current, key) =>
       current && typeof current === 'object' ? (current as Record<string, unknown>)[key] : undefined,
     values);

@@ -19,19 +19,25 @@ import {
   REPORT_DISCLAIMER,
   SEVERITY_META 
 } from '@pharmasim/engine';
+import type { PKResult, PlasmaPoint } from '@pharmasim/engine';
 
-function Sparkline({ series, color }: { series: any[]; color: string }) {
-  const step = Math.max(1, Math.floor(series.length / 40));
-  const sampled = [];
-  for (let i = 0; i < series.length; i += step) {
-    sampled.push(series[i]);
-    if (sampled.length >= 40) break;
-  }
-
-  const maxVal = Math.max(...series.map(pt => pt.concentration), 0.001);
+function Sparkline({ series, color }: { series: PlasmaPoint[]; color: string }) {
+  const start = series[0]?.hour ?? 0;
+  const end = series[series.length - 1]?.hour ?? start;
+  let cursor = 0;
+  // Engine samples can be irregular around doses and peaks; space bars by time, not sample index.
+  const sampled = series.length === 0 ? [] : Array.from({ length: 40 }, (_, index) => {
+    const hour = start + (end - start) * index / 39;
+    while (cursor + 1 < series.length && series[cursor + 1].hour <= hour) cursor++;
+    const left = series[cursor];
+    const right = series[cursor + 1] ?? left;
+    const fraction = right.hour > left.hour ? (hour - left.hour) / (right.hour - left.hour) : 0;
+    return { hour, concentration: left.concentration + fraction * (right.concentration - left.concentration) };
+  });
+  const maxVal = series.reduce((max, point) => Math.max(max, point.concentration), 0.001);
 
   return (
-    <View style={styles.sparklineContainer}>
+    <View style={styles.sparklineContainer} accessible accessibilityLabel={`Modeled plasma concentration in mg/L from ${start} to ${end} hours. Substance-specific vertical scale.`}>
       {sampled.map((pt, idx) => {
         const heightPct = (pt.concentration / maxVal) * 100;
         return (
@@ -39,7 +45,7 @@ function Sparkline({ series, color }: { series: any[]; color: string }) {
             key={idx}
             style={{
               flex: 1,
-              height: `${Math.max(4, heightPct)}%`,
+              height: `${Math.max(0, heightPct)}%`,
               backgroundColor: pt.concentration > 0 ? color : 'rgba(255,255,255,0.05)',
               marginHorizontal: 1,
               borderRadius: 1,
@@ -79,7 +85,7 @@ export function ResultsScreen({ route }: any) {
     };
 
     return computePK(patient, substance, regimen, substances);
-  }).filter(Boolean) as any[];
+  }).filter((pk): pk is PKResult => pk !== null);
 
   if (pkResults.length === 0) return null;
 

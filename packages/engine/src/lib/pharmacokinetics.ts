@@ -385,6 +385,9 @@ function absorptionResponse(dt: number, ka: number, k: number): number {
 /** Integral of the Bateman response over [start, start + elapsed]. */
 function absorptionIntegral(start: number, elapsed: number, ka: number, k: number): number {
   if (elapsed <= 0) return 0;
+  if (elapsed * Math.max(ka, k) < 1e-6) {
+    return elapsed * absorptionResponse(start + elapsed / 2, ka, k);
+  }
   if (Math.abs(ka - k) <= 1e-5 * Math.max(ka, k)) {
     // The equal-rate limit avoids subtracting nearly identical exponentials.
     const rate = (ka + k) / 2;
@@ -427,8 +430,11 @@ function makeEventCurve(
     return (time) => {
       const dt = time - origin;
       if (dt <= 0) return 0;
+      if (dt >= releaseHours && releaseHours * Math.max(ka, k) < 1e-6) {
+        return doseMultiplier * absorptionResponse(dt - releaseHours / 2, ka, k);
+      }
       const elapsed = Math.min(dt, releaseHours);
-      return (doseMultiplier / releaseHours) * absorptionIntegral(dt - elapsed, elapsed, ka, k);
+      return doseMultiplier * (absorptionIntegral(dt - elapsed, elapsed, ka, k) / releaseHours);
     };
   }
 
@@ -636,7 +642,9 @@ export function computeEventPK(
         }
         sampleTimes.add((left + right) / 2);
       } else {
-        const tmax = ka === k ? 1 / k : Math.log(ka / k) / (ka - k);
+        const relativeDifference = (ka - k) / k;
+        const tmax = ka === k ? 1 / k :
+          (Math.abs(relativeDifference) < 0.5 ? Math.log1p(relativeDifference) : Math.log(ka / k)) / (ka - k);
         if (origin + tmax <= horizonHours) {
           sampleTimes.add(origin + tmax);
         }

@@ -9,6 +9,7 @@ import {
   effectiveHalfLife,
   flattenRegimensToEvents,
   formatHours,
+  generateMetaboliteEvents,
   rateConstant,
   tauHours,
   type PatientProfile,
@@ -290,5 +291,193 @@ describe('formatHours', () => {
     expect(formatHours(4)).toBe('4.0 h');
     expect(formatHours(72)).toBe('3.0 d');
     expect(formatHours(Infinity)).toBe('∞');
+  });
+
+  describe('PK numerical robustness and explicit kinetics', () => {
+    const event = (overrides: Partial<DoseEvent> = {}): DoseEvent => ({
+      id: 'dose', substanceId: drug.id, doseMg: 50, route: 'oral',
+      formulation: 'IR', administrationHour: 0, ...overrides,
+    });
+    const pointAt = (pk: ReturnType<typeof computeEventPK>, hour: number) =>
+      pk.series.find((point) => Math.abs(point.hour - hour) < 1e-8)!.concentration;
+
+    it.each([0.001, 0.01, Math.LN2 / 12, (Math.LN2 / 12) * (1 + 1e-10), 1000])(
+      'keeps flip-flop/equal/fast absorption finite and samples its analytical peak (ka=%s)', (ka) => {
+        const pk = computeEventPK(healthy, { ...drug, absorptionByRoute: { oral: { kaPerHour: ka } } }, [event()]);
+        const k = Math.LN2 / pk.effectiveHalfLifeHours;
+        const tmax = ka === k ? 1 / k : Math.log1p((ka - k) / k) / (ka - k);
+        const expectedPeak = (50 * drug.bioavailability / 70) * Math.exp(-k * tmax);
+        expect(pk.series.every((point) => Number.isFinite(point.concentration) && point.concentration >= 0)).toBe(true);
+        expect(pk.peakHour).toBeCloseTo(tmax, 5);
+        expect(pk.peakConcentration).toBeCloseTo(expectedPeak, 8);
+        expect(pk.aucMgHourL).toBeGreaterThan(0);
+      },
+    );
+
+    it('respects route-specific lag and lets event formation overrides take precedence', () => {
+      const specific: Substance = {
+        ...drug, absorptionByRoute: { oral: { kaPerHour: 0.2, lagHours: 3 } },
+        bioavailabilityByRoute: { oral: 0.5 },
+      };
+      const pk = computeEventPK(healthy, specific, [event()]);
+      expect(pointAt(pk, 3)).toBe(0);
+      expect(pk.series.filter((point) => point.hour <= 3).every((point) => point.concentration === 0)).toBe(true);
+      const k = Math.LN2 / pk.effectiveHalfLifeHours;
+      expect(pk.peakHour).toBeCloseTo(3 + Math.log(0.2 / k) / (0.2 - k), 7);
+      const override = computeEventPK(healthy, specific, [event({ kaOverride: 2 })]);
+      expect(override.peakHour).toBeLessThan(pk.peakHour);
+      expect(override.warnings.join(' ')).toContain('Metabolites');
+    });
+
+    it('uses substance-specific release durations and preserves finite-horizon exposure', () => {
+      const specific = { ...drug, releaseHoursByFormulation: { ER: 2 } };
+      const shorter = computeEventPK(healthy, specific, [event({ formulation: 'ER' })]);
+      const generic = computeEventPK(healthy, drug, [event({ formulation: 'ER' })]);
+      expect(shorter.peakHour).toBeLessThan(generic.peakHour);
+      expect(shorter.peakConcentration).toBeGreaterThan(generic.peakConcentration);
+      const totalAuc = 50 * drug.bioavailability / (70 * (Math.LN2 / 12));
+      expect(shorter.aucMgHourL / totalAuc).toBeCloseTo(1, 2);
+      expect(generic.aucMgHourL / totalAuc).toBeCloseTo(1, 2);
+      expect(shorter.warnings.join(' ')).not.toContain('Generic ER release');
+      expect(generic.warnings.join(' ')).toContain('Generic ER release');
+    });
+
+    it.each([Math.LN2 / 12, (Math.LN2 / 12) * (1 - 1e-8), 1e-8, 1e8])(
+      'keeps controlled release stable with extreme/equal absorption (ka=%s)', (ka) => {
+        const pk = computeEventPK(healthy, {
+          ...drug, absorptionByRoute: { oral: { kaPerHour: ka } },
+        }, [event({ formulation: 'CR' })]);
+        expect(pk.series.every((point) => Number.isFinite(point.concentration) && point.concentration >= 0)).toBe(true);
+        expect(Number.isFinite(pk.aucMgHourL)).toBe(true);
+        expect(pk.peakConcentration).toBeGreaterThan(0);
+        const totalAuc = 50 * drug.bioavailability / (70 * (Math.LN2 / 12));
+        expect(pk.aucMgHourL).toBeLessThanOrEqual(totalAuc * 1.00001);
+      },
+    );
+
+    it('models a constant-rate IV infusion with an exact end-of-infusion peak', () => {
+      const duration = 4;
+      const pk = computeEventPK(healthy, drug, [event({
+        route: 'IV', infusionDurationHours: duration, administrationHour: 2,
+      })]);
+      const k = Math.LN2 / pk.effectiveHalfLifeHours;
+      const peak = (50 / 70) * -Math.expm1(-k * duration) / (k * duration);
+      expect(pk.series[0].concentration).toBe(0);
+      expect(pointAt(pk, 2)).toBe(0);
+      expect(pk.peakHour).toBe(6);
+      expect(pk.peakConcentration).toBeCloseTo(peak, 10);
+      expect(pk.aucMgHourL).toBeCloseTo((50 / 70 - pointAt(pk, pk.horizonHours)) / k, 7);
+    });
+
+    it('converges to the IV bolus for a very short infusion', () => {
+      const bolus = computeEventPK(healthy, drug, [event({ route: 'IV' })]);
+      const infusion = computeEventPK(healthy, drug, [event({ route: 'IV', infusionDurationHours: 1e-9 })]);
+      expect(infusion.peakConcentration).toBeCloseTo(bolus.peakConcentration, 8);
+      expect(infusion.aucMgHourL).toBeCloseTo(bolus.aucMgHourL, 7);
+    });
+
+    it('reports partial exposure for an infusion continuing beyond the horizon', () => {
+      const duration = 1000;
+      const pk = computeEventPK(healthy, drug, [event({ route: 'IV', infusionDurationHours: duration })]);
+      const k = Math.LN2 / pk.effectiveHalfLifeHours;
+      const inputByHorizon = (50 / 70) * pk.horizonHours / duration;
+      expect(pk.horizonHours).toBe(720);
+      // The plateau becomes indistinguishable from the maximum at floating-point precision.
+      expect(pk.peakHour).toBeGreaterThan(600);
+      expect(pk.peakHour).toBeLessThanOrEqual(720);
+      expect(pk.aucMgHourL).toBeCloseTo((inputByHorizon - pk.peakConcentration) / k, 7);
+      expect(pk.warnings.join(' ')).toContain('Horizon truncation');
+    });
+
+    it('superposes overlapping infusions without changing the input events', () => {
+      const first = event({ route: 'IV', infusionDurationHours: 8 });
+      const second = event({ id: 'second', route: 'IV', infusionDurationHours: 4, administrationHour: 2 });
+      const events = [first, second];
+      const snapshot = JSON.stringify(events);
+      const pk = computeEventPK(healthy, drug, events);
+      const k = Math.LN2 / pk.effectiveHalfLifeHours;
+      const response = (time: number, duration: number) =>
+        (50 / 70) * -Math.expm1(-k * Math.min(time, duration)) / (k * duration) *
+        Math.exp(-k * Math.max(0, time - duration));
+      expect(pointAt(pk, 6)).toBeCloseTo(response(6, 8) + response(4, 4), 10);
+      expect(pk.aucMgHourL).toBeCloseTo((100 / 70 - pointAt(pk, pk.horizonHours)) / k, 7);
+      expect(JSON.stringify(events)).toBe(snapshot);
+    });
+
+    it('computes exact finite-horizon bolus AUC even for off-grid overlapping events', () => {
+      const events = [event({ route: 'IV', administrationHour: 1.001 }),
+        event({ route: 'IV', administrationHour: 1.002 }),
+        event({ route: 'IV', administrationHour: 2000 })];
+      const pk = computeEventPK(healthy, drug, events);
+      const k = Math.LN2 / pk.effectiveHalfLifeHours;
+      const expected = events.reduce((auc, ev) => auc + (ev.administrationHour < pk.horizonHours
+        ? (50 / 70) * -Math.expm1(-k * (pk.horizonHours - ev.administrationHour)) / k : 0), 0);
+      expect(pk.aucMgHourL).toBeCloseTo(expected, 10);
+      expect(pk.series.at(-1)!.hour).toBe(pk.horizonHours);
+      expect(pk.horizonHours).toBe(720);
+      expect(pk.peakHour).toBe(1.002);
+    });
+
+    it('warns about defaults, unsupported routes, discarded events and absent provenance', () => {
+      const pk = computeEventPK(healthy, drug, [event({ route: 'inhaled' }), event({ doseMg: -1 })]);
+      const warnings = pk.warnings.join(' ');
+      expect(warnings).toContain('Generic absorption');
+      expect(warnings).toContain('Generic route bioavailability');
+      expect(warnings).toContain('Unsupported route');
+      expect(warnings).toContain('Invalid dose events');
+      expect(warnings).toContain('provenance is absent');
+      expect(computePK(healthy, drug, { ...acute, customEvents: [event({ doseMg: -1 })] })
+        .warnings.join(' ')).toContain('Invalid dose events');
+    });
+
+    it('does not label present provenance as absent', () => {
+      const pk = computeEventPK(healthy, {
+        ...drug,
+        parameterEvidence: {
+          halfLifeHours: {
+            sourceUrl: 'https://example.org/label', sourceTitle: 'Test label',
+            reviewedAt: '2026-01-01', quality: 'high', basis: 'measured', unit: 'h',
+          },
+        },
+      }, [event()]);
+      expect(pk.warnings.join(' ')).not.toContain('provenance is absent');
+    });
+
+    it('rejects invalid infusions instead of silently turning them into boluses', () => {
+      const events = [
+        event({ route: 'IV', infusionDurationHours: 0 }),
+        event({ route: 'IV', infusionDurationHours: -1 }),
+        event({ route: 'IV', infusionDurationHours: Infinity }),
+        event({ route: 'IV', infusionDurationHours: NaN }),
+        event({ route: 'oral', infusionDurationHours: 2 }),
+        event({ route: 'IV', infusionDurationHours: 2, kaOverride: 0.5 }),
+      ];
+      const pk = computeEventPK(healthy, drug, events);
+      expect(pk.peakConcentration).toBe(0);
+      expect(pk.aucMgHourL).toBe(0);
+      expect(pk.peakHour).toBe(0);
+      expect(flattenRegimensToEvents({ ...acute, customEvents: events }, drug)).toEqual([]);
+    });
+
+    it('bounds malformed and extreme inputs without nonfinite PK results', () => {
+      const pk = computeEventPK({ ...healthy, weightKg: NaN, tolerance: Infinity }, {
+        ...drug, halfLifeHours: NaN, vdLKg: NaN, bioavailability: NaN,
+        absorptionByRoute: { oral: { kaPerHour: Infinity, lagHours: -1 } },
+        releaseHoursByFormulation: { CR: NaN },
+      }, [event({ doseMg: Number.MAX_VALUE, formulation: 'CR' })]);
+      expect(pk.series.every((point) => Number.isFinite(point.concentration) && point.concentration >= 0)).toBe(true);
+      expect([pk.aucMgHourL, pk.peakHour, pk.horizonHours, pk.toleranceScalar].every(Number.isFinite)).toBe(true);
+      expect(pk.warnings.join(' ')).toContain('Invalid elimination');
+      expect(pk.warnings.join(' ')).toContain('Invalid distribution');
+      expect(pk.warnings.join(' ')).toContain('Invalid bioavailability');
+    });
+
+    it('makes simplified metabolite assumptions explicit, including infused parents', () => {
+      const events = generateMetaboliteEvents([event({ route: 'IV', infusionDurationHours: 8 })], 0.01, drug.id, 0.5);
+      expect(events[0].infusionDurationHours).toBeUndefined();
+      const pk = computeEventPK(healthy, drug, events);
+      expect(pk.series[0].concentration).toBe(0);
+      expect(pk.warnings.join(' ')).toContain('not fully coupled');
+    });
   });
 });
