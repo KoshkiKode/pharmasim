@@ -1,17 +1,12 @@
 import * as React from 'react';
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer, DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationLightTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { darkTheme, lightTheme } from './src/theme';
-import { SettingsProvider, useSettings } from './src/context/SettingsContext';
+import { darkTheme, lightTheme, SettingsProvider, useSettings } from '@pharmasim/ui';
 
 // Screen Imports
-import { SubstanceSearchScreen } from './src/screens/SubstanceSearchScreen';
-import { TimelineScreen } from './src/screens/TimelineScreen';
-import { ResultsScreen } from './src/screens/ResultsScreen';
-import { PatientProfileScreen } from './src/screens/PatientProfileScreen';
-import { SettingsScreen } from './src/screens/SettingsScreen';
+import { SubstanceSearchScreen, TimelineScreen, ResultsScreen, PatientProfileScreen, SettingsScreen } from '@pharmasim/ui';
 
 const Stack = createNativeStackNavigator();
 
@@ -71,7 +66,7 @@ function AppContent() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-      <StatusBar style={isDarkTheme ? 'light' : 'dark'} />
+      <StatusBar barStyle={isDarkTheme ? 'light-content' : 'dark-content'} />
     </PaperProvider>
   );
 }
@@ -83,4 +78,3 @@ export default function App() {
     </SettingsProvider>
   );
 }
-

@@ -1,4 +1,4 @@
-import type { Substance, Route, OrganHealth, Formulation, DoseEvent } from '../data/types';
+import { ROUTES, type Substance, type Route, type OrganHealth, type Formulation, type DoseEvent } from '../data/types';
 import { conditions } from '../data/conditions';
 
 export type MetabolizerPhenotype = 'poor' | 'normal' | 'rapid' | 'ultrarapid';
@@ -300,12 +300,38 @@ export const ROA_MULTIPLIERS: Record<Route, RouteMultiplier> = {
   subcutaneous: { bioavailabilityScalar: 1.6, tmaxHours: 0.5 },
 };
 
+const FORMULATIONS: Formulation[] = ['IR', 'ER', 'XR', 'CR'];
+// Representative release windows; actual products vary by drug and product.
+const RELEASE_HOURS: Partial<Record<Formulation, number>> = { ER: 8, XR: 12, CR: 24 };
+
+function validDoseEvents(events: DoseEvent[], substanceId: string): DoseEvent[] {
+  return events
+    .filter(
+      (event): event is DoseEvent =>
+        !!event &&
+        typeof event === 'object' &&
+        Number.isFinite(event.administrationHour) &&
+        event.administrationHour >= 0 &&
+        Number.isFinite(event.doseMg) &&
+        event.doseMg >= 0 &&
+        ROUTES.includes(event.route) &&
+        FORMULATIONS.includes(event.formulation) &&
+        (event.kaOverride === undefined || (Number.isFinite(event.kaOverride) && event.kaOverride > 0)),
+    )
+    .map((event) => ({ ...event, substanceId }))
+    .sort((a, b) => a.administrationHour - b.administrationHour)
+    .slice(0, 2000);
+}
+
 /**
  * Flattens a static RegimenConfig into discrete DoseEvents over the given days.
  */
 export function flattenRegimensToEvents(regimen: RegimenConfig, substance: Substance): DoseEvent[] {
   if (regimen.customEvents && regimen.customEvents.length > 0) {
-    return regimen.customEvents;
+    // Callers may bypass sanitizeRegimenConfig (e.g. direct API use or
+    // restored state), so defensively clone, validate, sort, and cap the
+    // timeline here rather than trusting or mutating the caller's array.
+    return validDoseEvents(regimen.customEvents, substance.id);
   }
   
   const events: DoseEvent[] = [];
@@ -331,15 +357,86 @@ export function flattenRegimensToEvents(regimen: RegimenConfig, substance: Subst
   return events;
 }
 
+function absorptionResponse(dt: number, ka: number, k: number): number {
+  if (dt < 0) return 0;
+  if (Math.abs(ka - k) < 1e-8) return k * dt * Math.exp(-k * dt);
+  return (ka / (ka - k)) * Math.exp(-k * dt) * -Math.expm1(-(ka - k) * dt);
+}
+
+function makeEventCurve(
+  event: DoseEvent,
+  doseMultiplier: number,
+  ka: number,
+  k: number,
+): (time: number) => number {
+  const releaseHours = event.route === 'IV' ? undefined : RELEASE_HOURS[event.formulation];
+
+  if (event.route === 'IV' && event.kaOverride === undefined) {
+    return (time) => {
+      const dt = time - event.administrationHour;
+      return dt < 0 ? 0 : doseMultiplier * Math.exp(-k * dt);
+    };
+  }
+
+  if (releaseHours !== undefined) {
+    const releaseIntegral = (time: number, elapsed: number): number => {
+      const start = time - elapsed;
+      if (Math.abs(ka - k) < 1e-8) {
+        return (ka / (k * k)) *
+          ((1 + k * start) * Math.exp(-k * start) - (1 + k * time) * Math.exp(-k * time));
+      }
+      return (
+        (Math.exp(-k * start) * -Math.expm1(-k * elapsed)) / k -
+        (Math.exp(-ka * start) * -Math.expm1(-ka * elapsed)) / ka
+      ) * (ka / (ka - k));
+    };
+    return (time) => {
+      const dt = time - event.administrationHour;
+      if (dt <= 0) return 0;
+      const elapsed = Math.min(dt, releaseHours);
+      return (doseMultiplier / releaseHours) * releaseIntegral(dt, elapsed);
+    };
+  }
+
+  return (time) =>
+    doseMultiplier * absorptionResponse(time - event.administrationHour, ka, k);
+}
+
+function regularInterval(events: DoseEvent[]): number | undefined {
+  if (events.length < 2) return undefined;
+  const intervals = events.slice(1).map((event, index) =>
+    event.administrationHour - events[index].administrationHour,
+  );
+  const first = intervals[0];
+  return first > 0 && intervals.every((interval) => Math.abs(interval - first) < 1e-6)
+    ? first
+    : undefined;
+}
+
+function periodicTrough(
+  curve: (time: number) => number,
+  interval: number,
+  halfLife: number,
+  originHour: number,
+): number {
+  const periods = Math.min(20000, Math.ceil((40 * halfLife) / interval) + 2);
+  let concentration = 0;
+  for (let dose = 0; dose <= periods; dose++) {
+    concentration += curve(originHour + (dose + 1) * interval);
+  }
+  return concentration;
+}
+
 /**
  * Computes plasma concentration curve dynamically from an array of explicit dose events.
- * Handles ER/XR delayed absorption, variable routes, and overlapping drug states.
+ * Handles IV boluses, controlled-release formulations, variable routes, and overlapping doses.
  */
 export function computeEventPK(
   patient: PatientProfile,
   substance: Substance,
   events: DoseEvent[],
-  activeSubstances: Substance[] = []
+  activeSubstances: Substance[] = [],
+  steadyStateIntervalHours?: number,
 ): PKResult {
   const { multiplier, factors } = clearanceMultiplier(patient, substance, activeSubstances);
   
@@ -359,57 +456,102 @@ export function computeEventPK(
   }
   const Vd = Math.max(0.01, substance.vdLKg * Math.max(0.1, patient.weightKg) * conditionVdScalar);
 
-  // Map each event to a precalculated curve function
-  const eventCurves = events.map(ev => {
+  const validEvents = validDoseEvents(events, substance.id);
+  const eventCurves = validEvents.map((ev) => {
     const roa = ROA_MULTIPLIERS[ev.route] || ROA_MULTIPLIERS.oral;
-    
-    // Formulation modifies absorption rate. ER = much slower Ka
-    let tmaxMod = 1.0;
-    if (ev.formulation === 'ER') tmaxMod = 2.5; // Delays Tmax
-    if (ev.formulation === 'XR' || ev.formulation === 'CR') tmaxMod = 4.0;
-    
-    const ka = ev.kaOverride || Math.max(k * 1.1, 3.5 / (roa.tmaxHours * tmaxMod));
-    
-    let f = substance.bioavailability;
-    if (substance.bioavailabilityByRoute && substance.bioavailabilityByRoute[ev.route] !== undefined) {
+    const ka = ev.kaOverride ?? Math.max(k * 1.1, 3.5 / roa.tmaxHours);
+    let f = ev.route === 'IV' ? 1 : substance.bioavailability;
+    if (ev.route !== 'IV' && substance.bioavailabilityByRoute && substance.bioavailabilityByRoute[ev.route] !== undefined) {
       f = substance.bioavailabilityByRoute[ev.route]!;
     } else {
-      f = substance.bioavailability * roa.bioavailabilityScalar;
-      if (ev.route === 'IV') f = 1.0;
-      else if (f > 0.95) f = 0.95;
+      if (ev.route !== 'IV') {
+        f = substance.bioavailability * roa.bioavailabilityScalar;
+        if (f > 0.95) f = 0.95;
+      }
     }
 
-    const doseMultiplier = (ev.doseMg * f) / Vd;
-
-    return (t: number): number => {
-      const dt = t - ev.administrationHour;
-      if (dt < 0) return 0;
-      if (Math.abs(ka - k) < 1e-6) return doseMultiplier * k * dt * Math.exp(-k * dt);
-      return doseMultiplier * (ka / (ka - k)) * (Math.exp(-k * dt) - Math.exp(-ka * dt));
-    };
+    return makeEventCurve(ev, (ev.doseMg * f) / Vd, ka, k);
   });
 
   const series: PlasmaPoint[] = [];
-  const maxHour = events.length > 0 ? events.reduce((max, ev) => Math.max(max, ev.administrationHour), 0) : 0;
+  const maxHour = validEvents.length > 0 ? validEvents[validEvents.length - 1].administrationHour : 0;
   
-  // The user requested up to 14 days (336 hours) of sustained usage to be well supported
-  const horizonHours = Math.min(Math.max(tHalf * 6, maxHour + (tHalf * 6)), 24 * 30);
+  const maxReleaseHours = validEvents.reduce(
+    (max, event) => Math.max(max, event.route === 'IV' ? 0 : RELEASE_HOURS[event.formulation] ?? 0),
+    0,
+  );
+  const horizonHours = Math.min(
+    Math.max(tHalf * 10, maxHour + tHalf * 10 + maxReleaseHours),
+    24 * 30,
+  );
   
   const steps = 300;
   const dt = horizonHours / steps;
+  const sampleTimes = new Set<number>();
+  for (let i = 0; i <= steps; i++) sampleTimes.add(i * dt);
+  for (let index = 0; index < validEvents.length; index++) {
+    const event = validEvents[index];
+    sampleTimes.add(event.administrationHour);
+    const releaseHours = event.route === 'IV' ? undefined : RELEASE_HOURS[event.formulation];
+    if (releaseHours !== undefined && event.administrationHour + releaseHours <= horizonHours) {
+      sampleTimes.add(event.administrationHour + releaseHours);
+    }
+    const curve = eventCurves[index];
+    if (event.route !== 'IV' && event.kaOverride === undefined) {
+      if (releaseHours !== undefined) {
+        let left = event.administrationHour;
+        let right = Math.min(horizonHours, event.administrationHour + releaseHours + 6 * tHalf);
+        for (let iteration = 0; iteration < 40; iteration++) {
+          const first = left + (right - left) / 3;
+          const second = right - (right - left) / 3;
+          if (curve(first) < curve(second)) left = first;
+          else right = second;
+        }
+        sampleTimes.add((left + right) / 2);
+      } else {
+        const ka = Math.max(k * 1.1, 3.5 / ROA_MULTIPLIERS[event.route].tmaxHours);
+        const tmax = Math.abs(ka - k) < 1e-8 ? 1 / k : Math.log(ka / k) / (ka - k);
+        if (event.administrationHour + tmax <= horizonHours) {
+          sampleTimes.add(event.administrationHour + tmax);
+        }
+      }
+    }
+  }
   let peak = 0;
-  
-  for (let i = 0; i <= steps; i++) {
-    const t = i * dt;
+
+  let peakIndividualDose = 0;
+  for (const t of [...sampleTimes].filter((time) => time >= 0 && time <= horizonHours).sort((a, b) => a - b)) {
     let c = 0;
     for (const fn of eventCurves) {
       c += fn(t);
     }
-    if (c > peak) peak = c;
-    series.push({ hour: Math.round(t * 10) / 10, concentration: Math.round(c * 1000) / 1000 });
+    if (c > peak) {
+      peak = c;
+      peakIndividualDose = eventCurves.reduce((max, fn) => Math.max(max, fn(t)), 0);
+    }
+    series.push({ hour: t, concentration: c });
   }
 
   const dss = daysToSteadyState(tHalf);
+  const inferredInterval = regularInterval(validEvents);
+  const repeatableSchedule =
+    validEvents.length > 1 &&
+    validEvents.every(
+      (event) =>
+        event.doseMg === validEvents[0].doseMg &&
+        event.route === validEvents[0].route &&
+        event.formulation === validEvents[0].formulation &&
+        event.kaOverride === validEvents[0].kaOverride,
+    );
+  const steadyStateInterval =
+    steadyStateIntervalHours !== undefined && Number.isFinite(steadyStateIntervalHours) && steadyStateIntervalHours > 0
+      ? steadyStateIntervalHours
+      : repeatableSchedule ? inferredInterval : undefined;
+  const inferredTau = inferredInterval ?? (validEvents.length > 1
+    ? validEvents.slice(1).map((event, index) => event.administrationHour - validEvents[index].administrationHour)
+      .filter((interval) => interval > 0)
+      .sort((a, b) => a - b)[Math.floor((validEvents.length - 2) / 2)] ?? 0
+    : 0);
   
   // Tolerance calculation (perceived effect)
   // For now, if events array is massive (long history), we could scale tolerance up.
@@ -422,12 +564,20 @@ export function computeEventPK(
     baseHalfLifeHours: baseHalfLife,
     clearanceMultiplier: multiplier,
     clearanceFactors: factors,
-    accumulationRatio: 1, // Legacy
+    accumulationRatio: peakIndividualDose > 0 ? peak / peakIndividualDose : 1,
     daysToSteadyState: dss,
-    tauHours: 24, // Legacy
+    tauHours: inferredTau,
     series,
     peakConcentration: peak,
-    steadyStateTrough: 0,
+    steadyStateTrough:
+      steadyStateInterval !== undefined && eventCurves.length > 0
+        ? periodicTrough(
+            eventCurves[0],
+            steadyStateInterval,
+            tHalf,
+            validEvents[0].administrationHour,
+          )
+        : 0,
     toleranceScalar,
   };
 }
@@ -442,17 +592,19 @@ export function computePK(
   activeSubstances: Substance[] = []
 ): PKResult {
   const events = flattenRegimensToEvents(regimen, substance);
-  const result = computeEventPK(patient, substance, events, activeSubstances);
-  
-  // Restore legacy tau/accumulation fields to not break frontend immediately
-  const tHalf = result.effectiveHalfLifeHours;
   const tau = tauHours(regimen.frequency);
-  result.tauHours = tau;
-  result.accumulationRatio = accumulationRatio(tHalf, tau);
+  const isGeneratedDaily = regimen.mode === 'daily' && !(regimen.customEvents && regimen.customEvents.length > 0);
+  const result = computeEventPK(
+    patient,
+    substance,
+    events,
+    activeSubstances,
+    isGeneratedDaily ? tau : undefined,
+  );
   
-  if (regimen.mode === 'daily') {
-      const k = Math.log(2) / tHalf;
-      result.steadyStateTrough = Math.round(result.peakConcentration * Math.exp(-k * tau) * 1000) / 1000;
+  if (isGeneratedDaily) {
+    result.tauHours = tau;
+    result.accumulationRatio = accumulationRatio(result.effectiveHalfLifeHours, tau);
   }
   
   return result;

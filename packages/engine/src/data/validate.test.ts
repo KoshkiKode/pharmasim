@@ -44,6 +44,22 @@ describe('validateSubstances', () => {
     expect(issues.some((i) => i.field === 'id' && /duplicate/.test(i.message))).toBe(true);
   });
 
+  it('rejects NaN dose values and ranges that comparisons alone would pass', () => {
+    const issues = validateSubstances([
+      { ...base, id: 'nan-dose', typicalDoseMg: Number.NaN, doseRangeMg: [Number.NaN, 100] },
+    ]);
+    const fields = issues.map((i) => i.field);
+    expect(fields).toEqual(expect.arrayContaining(['doseRangeMg', 'typicalDoseMg']));
+  });
+
+  it('validates optional molarMassGPerMol when present', () => {
+    expect(validateSubstances([{ ...base, id: 'mm-ok', molarMassGPerMol: 350 }])).toEqual([]);
+    const issues = validateSubstances([{ ...base, id: 'mm-bad', molarMassGPerMol: Number.NaN }]);
+    expect(issues.some((i) => i.field === 'molarMassGPerMol')).toBe(true);
+    const zero = validateSubstances([{ ...base, id: 'mm-zero', molarMassGPerMol: 0 }]);
+    expect(zero.some((i) => i.field === 'molarMassGPerMol')).toBe(true);
+  });
+
   it('flags malformed ids', () => {
     const issues = validateSubstances([{ ...base, id: 'Bad Id!' }]);
     expect(issues.some((i) => i.field === 'id')).toBe(true);

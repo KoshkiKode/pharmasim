@@ -139,7 +139,7 @@ describe('session persistence', () => {
     ];
 
     saveSession(DEFAULT_PATIENT, added);
-    expect(localStorageMock.getItem('pharmasim:session:v1')).not.toBeNull();
+    expect(localStorageMock.getItem('pharmasim:session:v1')).toBeTypeOf('string');
 
     clearSession();
     expect(localStorageMock.getItem('pharmasim:session:v1')).toBeNull();

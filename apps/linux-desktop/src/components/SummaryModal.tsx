@@ -6,6 +6,7 @@ import { computePK, formatHours } from '@pharmasim/engine';
 import { computeInteractions, SEVERITY_META } from '@pharmasim/engine';
 import { computeConditionWarnings } from '@pharmasim/engine';
 import { conditions as ALL_CONDITIONS } from '@pharmasim/engine';
+import { generateMarkdownReport } from '@pharmasim/engine';
 
 interface Props {
   isOpen: boolean;
@@ -29,72 +30,31 @@ export function SummaryModal({ isOpen, onClose, patient, substances, addedRegime
     return { sub: item.substance, reg: item.regimen, pk };
   });
 
-  const generateMarkdownReport = () => {
-    let report = `# PHARMASIM CLINICAL SUMMARY REPORT\n`;
-    report += `Generated: ${new Date().toLocaleString()}\n\n`;
-
-    report += `## PATIENT PROFILE\n`;
-    report += `- Age: ${patient.ageYears} years\n`;
-    report += `- Weight: ${patient.weightKg} kg | Height: ${patient.heightCm} cm\n`;
-    report += `- Body Fat: ${patient.bodyFatPct}%\n`;
-    report += `- Hydration: ${patient.hydrationPct}%\n`;
-    report += `- Tolerance Level: ${patient.tolerance}%\n`;
-    report += `- Hepatic Clearance: ${patient.liver.toUpperCase()}\n`;
-    report += `- Renal Clearance: ${patient.kidney.toUpperCase()}\n`;
-    const geneticsStr = Object.entries(patient.genetics)
-      .map(([cyp, pheno]) => `${cyp}: ${pheno}`)
-      .join(', ');
-    report += `- CYP Metabolizer Status: ${geneticsStr || 'Normal'}\n`;
-    
-    const condNames = patient.conditions
-      .map((id) => ALL_CONDITIONS.find((c) => c.id === id)?.name)
-      .filter(Boolean);
-    report += `- Preexisting Conditions: ${condNames.length > 0 ? condNames.join(', ') : 'None'}\n\n`;
-
-    report += `## ACTIVE SUBSTANCES & REGIMENS\n`;
-    pKeys.forEach(({ sub, reg, pk }) => {
-      report += `### ${sub.name} (${sub.drugClass})\n`;
-      report += `- Mode: ${reg.mode === 'acute' ? 'Acute (Single Dose)' : 'Daily (Maintenance)'}\n`;
-      report += `- Dose: ${reg.mode === 'acute' ? `${reg.doseMg} mg` : `${reg.dailyDoseMg} mg/day (${reg.frequency})`}\n`;
-      report += `- Effective Half-life: ${formatHours(pk.effectiveHalfLifeHours)} (Base: ${formatHours(pk.baseHalfLifeHours)})\n`;
-      report += `- Accumulation Ratio: ${reg.mode === 'daily' ? `${pk.accumulationRatio.toFixed(2)}x` : 'N/A'}\n`;
-      report += `- Time to Steady State: ${pk.daysToSteadyState.toFixed(1)} days\n\n`;
+  const buildReport = () =>
+    generateMarkdownReport({
+      patient,
+      entries: pKeys.map(({ sub, reg, pk }) => ({
+        substance: sub,
+        pk,
+        regimenLines: [
+          `Mode: ${reg.mode === 'acute' ? 'Acute (Single Dose)' : 'Daily (Maintenance)'}`,
+          `Dose: ${reg.mode === 'acute' ? `${reg.doseMg} mg` : `${reg.dailyDoseMg} mg/day (${reg.frequency})`}`,
+          `Accumulation Ratio: ${reg.mode === 'daily' ? `${pk.accumulationRatio.toFixed(2)}x` : 'N/A'}`,
+        ],
+      })),
+      conditionWarnings,
+      interactions,
     });
 
-    report += `## CLINICAL CONTRAINDICATIONS & WARNINGS\n`;
-    if (conditionWarnings.length === 0) {
-      report += `No active condition contraindications detected.\n\n`;
-    } else {
-      conditionWarnings.forEach((w) => {
-        report += `### [${w.severity.toUpperCase()}] ${w.title}\n`;
-        report += `- Condition: ${w.conditionName}\n`;
-        if (w.substanceName) report += `- Substance: ${w.substanceName}\n`;
-        if (w.substanceNames) report += `- Combination: ${w.substanceNames.join(' + ')}\n`;
-        report += `- Mechanism: ${w.mechanism}\n`;
-        report += `- Recommendation: ${w.recommendation}\n\n`;
-      });
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(buildReport());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard may be unavailable (permissions, non-secure context);
+      // simply leave the button in its uncopied state.
     }
-
-    report += `## DRUG-DRUG INTERACTIONS\n`;
-    if (interactions.length === 0) {
-      report += `No drug-drug interactions detected.\n\n`;
-    } else {
-      interactions.forEach((i) => {
-        report += `### [${i.severity.toUpperCase()}] ${i.title}\n`;
-        report += `- Combination: ${i.substanceNames[0]} + ${i.substanceNames[1]}\n`;
-        report += `- Mechanism: ${i.mechanism}\n`;
-        report += `- Recommendation: ${i.recommendation}\n\n`;
-      });
-    }
-
-    report += `***\nDisclaimer: Educational simulation only. Not health or medical advice, diagnosis, treatment, prescribing, or dosing guidance. Do not use this report for real-world drug decisions.`;
-    return report;
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(generateMarkdownReport());
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
   };
 
   const handlePrint = () => {

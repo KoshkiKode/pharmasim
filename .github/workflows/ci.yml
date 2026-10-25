@@ -26,22 +26,83 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       # Builds the engine first (the apps import its compiled output), then
-      # type-checks engine, mobile and desktop.
+      # type-checks the engine, React Native apps, and Linux desktop client.
       - name: Type check
         run: npm run typecheck
 
       - name: Test
         run: npm test
 
+      - name: Engine coverage
+        run: npm run test:coverage -w packages/engine
+
+      - name: Upload engine coverage artifact
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report-engine
+          path: packages/engine/coverage/cobertura-coverage.xml
+
       - name: Desktop native test
         working-directory: apps/DesktopNative
         run: npm test
+
+      - name: Desktop native coverage
+        working-directory: apps/DesktopNative
+        run: npm run test:coverage
+
+      - name: Upload desktop native coverage artifact
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report-desktopnative
+          path: apps/DesktopNative/coverage/cobertura-coverage.xml
 
       - name: Build engine
         run: npm run build
 
       - name: Build desktop web bundle
         run: npm run build -w apps/linux-desktop
+
+  upload-coverage-engine:
+    name: Upload engine coverage (TypeScript)
+    needs: build
+    if: ${{ !cancelled() && needs.build.result == 'success' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      code-quality: write
+    steps:
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: coverage-report-engine
+
+      - uses: actions/upload-code-coverage@v1
+        with:
+          file: cobertura-coverage.xml
+          language: TypeScript
+          label: code-coverage-agent
+
+  upload-coverage-desktopnative:
+    name: Upload DesktopNative coverage (TypeScript)
+    needs: build
+    if: ${{ !cancelled() && needs.build.result == 'success' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      code-quality: write
+    steps:
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: coverage-report-desktopnative
+
+      - uses: actions/upload-code-coverage@v1
+        with:
+          file: cobertura-coverage.xml
+          language: TypeScript
+          label: code-coverage-agent
