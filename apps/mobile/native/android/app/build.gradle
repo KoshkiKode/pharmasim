@@ -2,6 +2,20 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
+// npm workspaces can hoist or nest React Native packages (here @react-native/codegen
+// lives under react-native/node_modules), so resolve them with Node instead of
+// hardcoding node_modules paths.
+def resolveWithNode = { String script ->
+    new File(
+        providers.exec {
+            workingDir(projectDir)
+            commandLine("node", "--print", script)
+        }.standardOutput.asText.get().trim()
+    )
+}
+def reactNativeDirResolved = resolveWithNode("require.resolve('react-native/package.json')").parentFile
+def codegenDirResolved = resolveWithNode("require.resolve('@react-native/codegen/package.json', { paths: [require.resolve('react-native/package.json')] })").parentFile
+
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -11,11 +25,11 @@ react {
     //   The root of your project, i.e. where "package.json" lives. Default is '../..'
     root = file("../../../")
     //   The folder where the react-native NPM package is. Default is ../../node_modules/react-native
-    reactNativeDir = file("../../../../../node_modules/react-native")
+    reactNativeDir = reactNativeDirResolved
     //   The folder where the react-native Codegen package is. Default is ../../node_modules/@react-native/codegen
-    codegenDir = file("../../../../../node_modules/@react-native/codegen")
+    codegenDir = codegenDirResolved
     //   The cli.js file which is the React Native CLI entrypoint. Default is ../../node_modules/react-native/cli.js
-    cliFile = file("../../../../../node_modules/react-native/cli.js")
+    cliFile = new File(reactNativeDirResolved, "cli.js")
 
     /* Variants */
     //   The list of variants to that are debuggable. For those we're going to
