@@ -17,6 +17,9 @@
 - **Body-system impact** summary and **plasma-concentration charts** (Recharts) per substance.
 - **Runtime safeguards** — shared validation and sanitization for patient profiles,
   regimens, custom events, advanced substance fields, and persisted local state.
+- **Evidence and model transparency** — optional field-level source/review metadata,
+  substance-specific absorption and release overrides, IV infusion events, and
+  modeled finite-horizon AUC/peak timing with approximation diagnostics.
 
 Every patient profile, dose, condition, interaction, warning, and report in the app is a **simulation input or estimate only**. Labels such as “patient,” “clinical,” “contraindication,” and “dose” describe the simulation domain and do not imply that PharmaSim provides healthcare, medical validation, or individualized recommendations.
 
@@ -51,6 +54,9 @@ PharmaSim is not health advice. Read the safety notice above before using the ap
 
 See [the roadmap](docs/roadmap.md) for the current capability boundary,
 robustness priorities, and the safety gate for future pill identification.
+Legacy substance parameters are not comprehensively source-reviewed. Missing
+interaction warnings do not establish safety; the simulator remains a simplified,
+linear one-compartment model rather than a clinical prediction system.
 
 ### Scripts
 

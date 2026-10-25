@@ -3,8 +3,11 @@ import type { Substance } from '../data/types';
 import type { PatientProfile, PKResult } from './pharmacokinetics';
 import {
   findSeriesPeak,
+  formatPKSummary,
   generateMarkdownReport,
+  getParameterEvidenceLines,
   getToxicityAlertLabel,
+  INTERACTION_COVERAGE_NOTICE,
   REPORT_DISCLAIMER,
 } from './report';
 
@@ -53,6 +56,10 @@ const pk: PKResult = {
   peakConcentration: 1.5,
   steadyStateTrough: 0.2,
   toleranceScalar: 1,
+  aucMgHourL: 7.25,
+  peakHour: 2,
+  horizonHours: 8,
+  warnings: [],
 };
 
 describe('findSeriesPeak', () => {
@@ -91,6 +98,8 @@ describe('generateMarkdownReport', () => {
     expect(report).toContain('### Test Substance (Test class)');
     expect(report).toContain('Mode: Acute (Single Dose)');
     expect(report).toContain('Peak Concentration: 1.50 mg/L at T+2h');
+    expect(report).toContain('Modeled AUC (0–8 h, finite horizon): 7.25 mg·h/L (not AUC to infinity)');
+    expect(report).toContain('Modeled steady-state trough: 0.20 mg/L');
   });
 
   it('always carries the educational disclaimer and never clinical framing', () => {
@@ -102,5 +111,82 @@ describe('generateMarkdownReport', () => {
   it('notes when no warnings or interactions are present', () => {
     expect(report).toContain('No active condition contraindications detected.');
     expect(report).toContain('No drug-drug interactions detected.');
+    expect(report).toContain(INTERACTION_COVERAGE_NOTICE);
+    expect(report).toContain('No interactions detected does not mean no risk or complete coverage.');
+  });
+
+  it('does not treat legacy parameter values as measured evidence', () => {
+    expect(report).toContain('halfLifeHours: 4 h — basis unknown; quality unknown; source unknown');
+    expect(report).toContain('bioavailability: 0.7 fraction — basis unknown');
+    expect(report).toContain('vdLKg: 1 L/kg — basis unknown');
+  });
+
+  it('includes measured, estimated and unknown parameter evidence without upgrading quality', () => {
+    const withEvidence: Substance = {
+      ...substance,
+      parameterEvidence: {
+        halfLifeHours: {
+          sourceTitle: 'Example reference',
+          sourceUrl: 'https://example.org/reference',
+          reviewedAt: '2026-01-01',
+          quality: 'high',
+          basis: 'measured',
+          unit: 'h',
+        },
+        vdLKg: {
+          sourceTitle: 'Model assumptions',
+          sourceUrl: 'https://example.org/assumptions',
+          reviewedAt: '2026-01-01',
+          quality: 'low',
+          basis: 'estimated',
+          unit: 'L/kg',
+          notes: 'Not a patient-specific measurement.',
+        },
+        bioavailability: {
+          sourceTitle: '',
+          sourceUrl: '',
+          reviewedAt: '',
+          quality: 'low',
+          basis: 'unknown',
+          unit: 'fraction',
+        },
+      },
+    };
+    const evidenceReport = generateMarkdownReport({
+      patient,
+      entries: [{ substance: withEvidence, pk: { ...pk, warnings: ['Absorption is estimated.'] } }],
+      conditionWarnings: [],
+      interactions: [],
+    });
+    expect(evidenceReport).toContain('basis measured; quality high; source: Example reference (https://example.org/reference); reviewed: 2026-01-01');
+    expect(evidenceReport).toContain('basis estimated; quality low; source: Model assumptions');
+    expect(evidenceReport).toContain('Not a patient-specific measurement.');
+    expect(evidenceReport).toContain('basis unknown; quality low; source: unknown (URL unknown); reviewed: unknown');
+    expect(evidenceReport).toContain('Absorption is estimated.');
+    expect(getParameterEvidenceLines(withEvidence)).toHaveLength(3);
+  });
+
+  it('retains the incomplete-coverage notice even when interactions are found', () => {
+    const positiveReport = generateMarkdownReport({
+      patient,
+      entries: [],
+      conditionWarnings: [],
+      interactions: [{
+        id: 'example',
+        substanceIds: ['a', 'b'],
+        substanceNames: ['A', 'B'],
+        severity: 'moderate',
+        title: 'Example interaction',
+        mechanism: 'Example mechanism',
+        recommendation: 'Educational warning.',
+      }],
+    });
+    expect(positiveReport).toContain('Example interaction');
+    expect(positiveReport).toContain(INTERACTION_COVERAGE_NOTICE);
+  });
+
+  it('does not label an acute result as a steady-state trough', () => {
+    expect(formatPKSummary({ ...pk, steadyStateTrough: 0 }).join('\n')).not.toContain('trough');
+    expect(formatPKSummary({ ...pk, steadyStateTrough: 0 }, true).join('\n')).toContain('trough: 0.00 mg/L');
   });
 });

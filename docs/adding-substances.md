@@ -1,9 +1,9 @@
 # Adding substances & chemicals
 
-The substance library is plain, type-checked TypeScript data. Adding a new
-chemical is a one-line append — the type system and a validation pass enforce
-correctness, and the interaction engine wires the new entry into every relevant
-rule automatically based on its tags.
+The substance library is plain, type-checked TypeScript data. Adding an entry
+requires source review as well as validation: types and runtime checks establish
+data shape, not scientific accuracy. Interaction rules consider the tags and
+enzyme fields provided; they do not establish complete interaction coverage.
 
 > **Safety boundary:** This repository models substances for educational
 > software only. It is not health or medical advice, and entries must not be
@@ -36,6 +36,11 @@ Add an object to the `substances` array in
   approximate: false,                    // true if PK values are estimates
 },
 ```
+
+The abbreviated example above shows core descriptive fields, not a complete
+reviewed entry. Also supply required `bioavailability` (fraction) and `vdLKg`
+(L/kg), and field-level evidence for new PK values. Do not copy its illustrative
+dose values as recommendations.
 
 The full field reference lives in
 [`src/data/types.ts`](../packages/engine/src/data/types.ts).
@@ -92,3 +97,33 @@ tag the relevant substances, and append a `Rule` to `RULES` in
 `interactions.ts`. Each rule is a pure `(a, b) => Interaction | null` function;
 both orderings are evaluated and results are de-duplicated and severity-sorted.
 Add a test in `src/lib/interactions.test.ts`.
+
+## 5. Evidence and PK review
+
+For new or revised entries, use authoritative product labels or primary
+literature. Record `parameterEvidence` separately for each supported parameter:
+source URL and title, review date (`YYYY-MM-DD`), evidence quality
+(`high`, `moderate`, `low`), basis (`measured`, `estimated`, `unknown`), unit,
+and any conversion or population assumptions in `notes`. A source URL is not
+proof that every parameter in an entry appears in that source.
+
+Canonical units are `h` for half-life/release windows, `fraction` for
+bioavailability and metabolite conversion, `L/kg` for distribution volume,
+`mL/min/kg` for clearance, `%` for protein binding, `g/mol` for molecular mass,
+`1/h` for absorption-rate records, and `unitless` for tags. Preserve source
+units in notes when converting. Missing metadata means unreviewed, not measured;
+unknown data must not be disguised as a sourced generic constant.
+
+Optional `absorptionByRoute` records contain `kaPerHour` and `lagHours`.
+`releaseHoursByFormulation` supplies substance-specific release durations in
+hours, not arbitrary release shapes. Without overrides, generic route and
+ER/XR/CR assumptions remain active and are disclosed in results. These fields
+do not implement two-compartment or nonlinear kinetics.
+
+Run `auditSubstanceConsistency` when reviewing entries with clearance:
+one-compartment half-life is approximately `ln(2) × Vd / CL` after unit
+conversion. This audit is deliberately non-fatal for legacy entries and flags
+discrepancies for human review; do not overwrite literature values simply to
+silence an audit. Mixture and metabolite references must resolve to existing
+entries. Add source-metadata, interaction-tag, and numerical regression tests
+for each reviewed batch.
