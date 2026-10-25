@@ -75,7 +75,9 @@ cross-platform feature parity.
 
 1. Backfill provenance across the legacy library in reviewed batches, prioritizing
    common pharmaceuticals, OTC substances, supplements, and active metabolites.
-   Keep estimated defaults distinct from measured values.
+   Keep estimated defaults distinct from measured values. Migrate the legacy
+   unchecked raw catalog to typed records as entries are reviewed; runtime
+   validation remains mandatory in the meantime.
 2. Extend evidence metadata to individual interaction rules/results; substance
    parameter provenance alone does not validate interaction severity.
 3. Reword remaining modeled outputs so labels such as “safe”, “contraindicated”, and

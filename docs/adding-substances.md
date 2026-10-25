@@ -1,6 +1,7 @@
 # Adding substances & chemicals
 
-The substance library is plain, type-checked TypeScript data. Adding an entry
+The substance library is plain TypeScript data with shared types and runtime
+validation. Adding an entry
 requires source review as well as validation: types and runtime checks establish
 data shape, not scientific accuracy. Interaction rules consider the tags and
 enzyme fields provided; they do not establish complete interaction coverage.
@@ -47,8 +48,10 @@ The full field reference lives in
 
 ## 2. Use the canonical vocabularies
 
-These fields are **typed unions** — your editor will autocomplete them and the
-build (`tsc -b`) fails on a typo:
+These fields are **typed unions** when constructing a typed `Substance`.
+The legacy generated catalog currently uses unchecked raw records, so a
+successful TypeScript build alone does not establish catalog correctness.
+Keep the runtime database-validation tests mandatory:
 
 - **`category`** — one of `SUBSTANCE_CATEGORIES`.
 - **`routes`** — values from `ROUTES` (`oral`, `IV`, `intranasal`, …).
