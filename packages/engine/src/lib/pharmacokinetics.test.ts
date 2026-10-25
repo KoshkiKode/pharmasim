@@ -3,6 +3,7 @@ import type { DoseEvent, Substance } from '../data/types';
 import {
   accumulationRatio,
   clearanceMultiplier,
+  computeEventPK,
   computePK,
   daysToSteadyState,
   effectiveHalfLife,
@@ -172,6 +173,114 @@ describe('flattenRegimensToEvents custom timeline hardening', () => {
     expect(result[0]).toMatchObject({ id: 'earliest', administrationHour: 1 });
     expect(result[result.length - 1].administrationHour).toBe(2998);
     expect(input[0].id).toBe('late-0');
+  });
+
+  it('rejects invalid route, formulation, and absorption overrides', () => {
+    const input = [
+      baseEvent,
+      { ...baseEvent, id: 'bad-route', route: 'unknown' },
+      { ...baseEvent, id: 'bad-form', formulation: 'delayed' },
+      { ...baseEvent, id: 'bad-ka', kaOverride: Number.NaN },
+    ] as unknown as DoseEvent[];
+    expect(flattenRegimensToEvents({ ...acute, customEvents: input }, drug).map((event) => event.id)).toEqual(['e1']);
+  });
+});
+
+describe('event-based pharmacokinetics', () => {
+  const event = (overrides: Partial<DoseEvent> = {}): DoseEvent => ({
+    id: 'dose',
+    substanceId: drug.id,
+    doseMg: 50,
+    route: 'oral',
+    formulation: 'IR',
+    administrationHour: 0,
+    ...overrides,
+  });
+
+  it('models an IV dose as an immediate bolus with complete bioavailability', () => {
+    const pk = computeEventPK(healthy, drug, [event({ route: 'IV' })]);
+    const expectedC0 = 50 / (drug.vdLKg * healthy.weightKg);
+    expect(pk.series[0].concentration).toBeCloseTo(expectedC0, 10);
+    expect(pk.peakConcentration).toBeCloseTo(expectedC0, 10);
+    expect(pk.series[1].concentration).toBeLessThan(expectedC0);
+  });
+
+  it('keeps metabolite formation first-order even when its route is IV', () => {
+    const formationRate = 0.5;
+    const pk = computeEventPK(healthy, drug, [
+      event({ route: 'IV', kaOverride: formationRate }),
+    ]);
+    expect(pk.series[0].concentration).toBe(0);
+    expect(pk.peakConcentration).toBeLessThan(50 / (drug.vdLKg * healthy.weightKg));
+    expect(pk.peakConcentration).toBeGreaterThan(0);
+  });
+
+  it('uses distinct controlled-release profiles for ER, XR, and CR', () => {
+    const profiles = (['IR', 'ER', 'XR', 'CR'] as const).map((formulation) => {
+      const pk = computeEventPK(healthy, drug, [event({ formulation })]);
+      const peak = pk.series.reduce((highest, point) =>
+        point.concentration > highest.concentration ? point : highest,
+      );
+      const auc = pk.series.slice(1).reduce((area, point, index) => {
+        const previous = pk.series[index];
+        return area + ((point.concentration + previous.concentration) * (point.hour - previous.hour)) / 2;
+      }, 0);
+      return { formulation, peak, auc };
+    });
+    expect(profiles[0].peak.hour).toBeLessThan(profiles[1].peak.hour);
+    expect(profiles[1].peak.hour).toBeLessThan(profiles[2].peak.hour);
+    expect(profiles[2].peak.hour).toBeLessThan(profiles[3].peak.hour);
+    expect(new Set(profiles.map(({ peak }) => peak.concentration)).size).toBe(4);
+    const expectedAuc = ((50 * drug.bioavailability) / (drug.vdLKg * healthy.weightKg)) /
+      (Math.LN2 / drug.halfLifeHours);
+    for (const profile of profiles) {
+      expect(profile.auc).toBeCloseTo(expectedAuc, 1);
+    }
+  });
+
+  it('derives a regular event interval and ignores invalid unsorted events', () => {
+    const pk = computeEventPK(healthy, drug, [
+      event({ id: 'later', administrationHour: 12 }),
+      event({ id: 'invalid', administrationHour: 4, doseMg: -1 }),
+      event({ id: 'earlier', administrationHour: 1 }),
+    ]);
+    expect(pk.tauHours).toBe(11);
+    expect(pk.accumulationRatio).toBeGreaterThan(1);
+    expect(pk.series.every((point, index, series) => index === 0 || point.hour > series[index - 1].hour)).toBe(true);
+  });
+
+  it('samples the analytical peak for a very short half-life', () => {
+    const shortLivedDrug = { ...drug, halfLifeHours: 0.01 };
+    const shortLivedPatient = { ...healthy };
+    const pk = computePK(shortLivedPatient, shortLivedDrug, {
+      ...acute,
+      route: 'inhaled',
+    });
+    const eliminationRate = Math.LN2 / pk.effectiveHalfLifeHours;
+    const absorptionRate = Math.max(eliminationRate * 1.1, 3.5 / 0.08);
+    const expectedTmax = Math.log(absorptionRate / eliminationRate) / (absorptionRate - eliminationRate);
+    expect(pk.series.some((point) => Math.abs(point.hour - expectedTmax) < 1e-9)).toBe(true);
+    expect(pk.peakConcentration).toBeGreaterThan(0);
+  });
+
+  it('calculates the steady-state IV trough from the repeated dose schedule', () => {
+    const pk = computePK(healthy, drug, { ...acute, mode: 'daily', route: 'IV' });
+    const k = Math.LN2 / pk.effectiveHalfLifeHours;
+    const expected = (50 / (drug.vdLKg * healthy.weightKg)) * Math.exp(-k * 24) / (1 - Math.exp(-k * 24));
+    expect(pk.steadyStateTrough).toBeCloseTo(expected, 8);
+  });
+
+  it('calculates an oral steady-state trough from absorbed repeated doses', () => {
+    const pk = computePK(healthy, drug, { ...acute, mode: 'daily' });
+    const k = Math.LN2 / pk.effectiveHalfLifeHours;
+    const ka = Math.max(k * 1.1, 3.5 / 1.5);
+    const doseMultiplier = (50 * drug.bioavailability) / (drug.vdLKg * healthy.weightKg);
+    const expected =
+      doseMultiplier *
+      (ka / (ka - k)) *
+      (Math.exp(-k * 24) / (1 - Math.exp(-k * 24)) -
+        Math.exp(-ka * 24) / (1 - Math.exp(-ka * 24)));
+    expect(pk.steadyStateTrough).toBeCloseTo(expected, 8);
   });
 });
 
