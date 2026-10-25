@@ -29,21 +29,41 @@ class SceneDelegate: RCTDefaultReactNativeFactoryDelegate, UIWindowSceneDelegate
     reactNativeFactory?.devMenuConfiguration = devMenuConfiguration
     #endif
     
+    // React Native 0.83 has no UIScene-aware startReactNative(connectionOptions:)
+    // overload, so translate the scene's connection options into the launch
+    // options RCTLinkingManager reads for Linking.getInitialURL().
+    var launchOptions: [UIApplication.LaunchOptionsKey: Any] = [:]
+    if let url = connectionOptions.urlContexts.first?.url {
+      launchOptions[.url] = url
+    }
+    if let userActivity = connectionOptions.userActivities.first {
+      launchOptions[.userActivityDictionary] = [
+        "UIApplicationLaunchOptionsUserActivityTypeKey": userActivity.activityType,
+        "UIApplicationLaunchOptionsUserActivityKey": userActivity,
+      ]
+    }
+
     reactNativeFactory?.startReactNative(
       withModuleName: "PharmaSimMobile",
       in: window,
-      connectionOptions: connectionOptions
+      launchOptions: launchOptions
     )
-
-   
   }
 
+  // RCTLinkingManager (0.83) exposes only the UIApplication-based entry points,
+  // so forward scene URL and universal-link callbacks to those.
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    RCTLinkingManager.scene(scene, openURLContexts: URLContexts)
+    for context in URLContexts {
+      _ = RCTLinkingManager.application(UIApplication.shared, open: context.url, options: [:])
+    }
   }
 
   func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-    RCTLinkingManager.scene(scene, continue: userActivity)
+    _ = RCTLinkingManager.application(
+      UIApplication.shared,
+      continue: userActivity,
+      restorationHandler: { _ in }
+    )
   }
 
   override func bundleURL() -> URL? {
