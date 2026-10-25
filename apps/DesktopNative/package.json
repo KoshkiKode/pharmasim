@@ -6,6 +6,7 @@
     "macos": "react-native run-macos",
     "lint": "eslint .",
     "start": "react-native start",
+    "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

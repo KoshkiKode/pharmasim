@@ -115,6 +115,13 @@ jobs:
         run: cd macos && pod install
         working-directory: ./apps/DesktopNative
 
+      - name: Verify macOS workspace
+        run: |
+          test -d DesktopNative.xcworkspace
+          test -f DesktopNative.xcworkspace/contents.xcworkspacedata
+          xcodebuild -list -workspace DesktopNative.xcworkspace
+        working-directory: ./apps/DesktopNative/macos
+
       - name: Build and Package macOS App
         run: ./build-macos.sh
         working-directory: ./apps/DesktopNative
@@ -148,6 +155,14 @@ jobs:
       # is git-ignored and must be built before Tauri bundles the frontend.
       - name: Build shared engine
         run: npm run build
+
+      - name: Preflight Windows build tooling
+        run: |
+          cargo --version
+          rustc --version
+          npm run tauri --workspace apps/linux-desktop -- --version
+          if (!(Test-Path apps/linux-desktop/src-tauri/tauri.conf.json)) { throw "Tauri configuration is missing" }
+        shell: pwsh
 
       - name: Build Windows installers
         run: npm run tauri:build -w apps/linux-desktop

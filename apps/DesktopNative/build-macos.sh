@@ -37,8 +37,9 @@ create-dmg \
   --hide-extension "DesktopNative.app" \
   --app-drop-link 600 185 \
   "dist/PharmaSim-macOS.dmg" \
-  "$STAGING_DIR" || true
+  "$STAGING_DIR"
 
 rm -rf "$STAGING_DIR"
 
+test -s "dist/PharmaSim-macOS.dmg"
 echo "Done! DMG is located at dist/PharmaSim-macOS.dmg"
