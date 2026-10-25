@@ -163,7 +163,7 @@ export function SubstanceCard({
               </FieldLabel>
               <div className="space-y-2 max-h-48 overflow-y-auto pr-2 scroll-thin">
                 {regimen.customEvents.map((evt, idx) => (
-                  <div key={idx} className="flex items-center gap-2 bg-bg-inset p-2 rounded-lg border border-border">
+                  <div key={evt.id} className="flex items-center gap-2 bg-bg-inset p-2 rounded-lg border border-border">
                     <span className="text-xs font-mono text-accent w-16">T+{evt.administrationHour}h</span>
                     <input
                       type="number"
@@ -453,8 +453,8 @@ export function SubstanceCard({
               <div className="rounded-lg bg-bg-panel/50 border border-border/50 p-2" data-testid="food-interactions">
                 <span className="block text-[10px] text-ink-muted font-medium mb-1">Food / Dietary Interactions:</span>
                 <ul className="list-disc pl-4 space-y-0.5 text-[11px] text-ink-muted">
-                  {s.foodInteractions.map((item: string, idx: number) => (
-                    <li key={idx}>{item}</li>
+                  {s.foodInteractions.map((item: string) => (
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
               </div>

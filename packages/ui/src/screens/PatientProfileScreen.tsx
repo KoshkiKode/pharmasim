@@ -4,6 +4,12 @@ import { TextInput, Button, Card, Text, IconButton, Chip, useTheme, Divider } fr
 import { conditions as ALL_CONDITIONS, type PatientProfile, type OrganHealth, type MetabolizerPhenotype, kgToLbs, lbsToKg, cmToInches, inchesToCm } from '@pharmasim/engine';
 import { useSettings } from '../context/SettingsContext';
 
+const clampNumericInput = (value: number, fallback: number, min: number, max: number) => {
+  const safeFallback = Number.isFinite(fallback) ? fallback : min;
+  const number = Number.isFinite(value) ? value : safeFallback;
+  return Math.min(max, Math.max(min, number));
+};
+
 export function PatientProfileScreen({ route, navigation }: any) {
   const theme = useTheme();
   const { currentPatient } = route.params;
@@ -53,20 +59,26 @@ export function PatientProfileScreen({ route, navigation }: any) {
   };
 
   const handleSave = () => {
-    let weight = parseFloat(weightStr) || patient.weightKg;
-    let height = parseFloat(heightStr) || patient.heightCm;
+    const parsedWeight = parseFloat(weightStr);
+    const parsedHeight = parseFloat(heightStr);
+    let weight = Number.isFinite(parsedWeight)
+      ? parsedWeight
+      : patient.weightKg;
+    let height = Number.isFinite(parsedHeight)
+      ? parsedHeight
+      : patient.heightCm;
 
     if (isImperial) {
-      weight = lbsToKg(weight);
-      height = inchesToCm(height);
+      if (Number.isFinite(parsedWeight)) weight = lbsToKg(weight);
+      if (Number.isFinite(parsedHeight)) height = inchesToCm(height);
     }
 
     const updated = {
       ...patient,
-      ageYears: parseInt(ageStr) || patient.ageYears,
-      weightKg: weight,
-      heightCm: height,
-      bodyFatPct: parseFloat(bodyFatStr) || patient.bodyFatPct,
+      ageYears: Math.round(clampNumericInput(parseInt(ageStr, 10), patient.ageYears, 1, 120)),
+      weightKg: clampNumericInput(weight, patient.weightKg, 0.1, 500),
+      heightCm: clampNumericInput(height, patient.heightCm, 1, 300),
+      bodyFatPct: clampNumericInput(parseFloat(bodyFatStr), patient.bodyFatPct, 1, 100),
     };
     navigation.navigate('Timeline', { updatedPatient: updated });
   };

@@ -18,14 +18,20 @@ const DEFAULT_PATIENT: PatientProfile = {
   conditions: [],
 };
 
+let doseEventCounter = 0;
+
+const createDoseEventId = () =>
+  `${Date.now()}-${doseEventCounter++}-${Math.random().toString(36).slice(2)}`;
+
 export function TimelineScreen({ route, navigation }: any) {
   const theme = useTheme();
   
   const [events, setEvents] = React.useState<DoseEvent[]>([]);
   const [patient, setPatient] = React.useState<PatientProfile>(DEFAULT_PATIENT);
   const [expandedEvents, setExpandedEvents] = React.useState<Record<string, boolean>>({});
+  const [doseInputs, setDoseInputs] = React.useState<Record<string, string>>({});
   const [paywallVisible, setPaywallVisible] = React.useState(false);
-  const [usageVersion, setUsageVersion] = React.useState(0);
+  const [, invalidateUsage] = React.useReducer((version: number) => version + 1, 0);
 
 
   // When returning from Search screen, add the selected substance
@@ -35,15 +41,21 @@ export function TimelineScreen({ route, navigation }: any) {
       const substance = substances.find(s => s.id === substanceId);
       
       if (substance) {
-        const lastHour = events.length > 0 ? events[events.length - 1].administrationHour : 0;
-        setEvents(prev => [...prev, {
-          id: Date.now().toString(),
+        const newEvent: DoseEvent = {
+          id: createDoseEventId(),
           substanceId,
           doseMg: substance.typicalDoseMg || 10,
-          administrationHour: lastHour > 0 ? lastHour + 2 : 0,
+          administrationHour: 0,
           route: substance.routes?.[0] || 'oral',
-          formulation: 'IR'
-        }]);
+          formulation: 'IR',
+        };
+        setEvents(prev => {
+          const lastHour = prev.length > 0 ? prev[prev.length - 1].administrationHour : 0;
+          return [...prev, {
+            ...newEvent,
+            administrationHour: lastHour > 0 ? lastHour + 2 : 0,
+          }];
+        });
       }
       
       // Clear the param
@@ -73,31 +85,48 @@ export function TimelineScreen({ route, navigation }: any) {
 
 
   const removeEvent = (id: string) => {
-    setEvents(events.filter(e => e.id !== id));
+    setEvents(prev => prev.filter(e => e.id !== id));
+    setDoseInputs(prev => {
+      const next = { ...prev };
+      delete next[id];
+      return next;
+    });
   };
 
   const loadPreset = (presetType: string) => {
     if (presetType === 'cns') {
       setEvents([
-        { id: '1', substanceId: 'fentanyl', doseMg: 0.1, administrationHour: 0, route: 'IV', formulation: 'IR' },
-        { id: '2', substanceId: 'alprazolam', doseMg: 1, administrationHour: 1, route: 'oral', formulation: 'IR' },
-        { id: '3', substanceId: 'ethanol', doseMg: 14000, administrationHour: 2, route: 'oral', formulation: 'IR' },
+        { id: createDoseEventId(), substanceId: 'fentanyl', doseMg: 0.1, administrationHour: 0, route: 'IV', formulation: 'IR' },
+        { id: createDoseEventId(), substanceId: 'alprazolam', doseMg: 1, administrationHour: 1, route: 'oral', formulation: 'IR' },
+        { id: createDoseEventId(), substanceId: 'ethanol', doseMg: 14000, administrationHour: 2, route: 'oral', formulation: 'IR' },
       ]);
     } else if (presetType === 'serotonin') {
       setEvents([
-        { id: '1', substanceId: 'mdma', doseMg: 100, administrationHour: 0, route: 'oral', formulation: 'IR' },
-        { id: '2', substanceId: 'phenelzine', doseMg: 15, administrationHour: 0, route: 'oral', formulation: 'IR' },
+        { id: createDoseEventId(), substanceId: 'mdma', doseMg: 100, administrationHour: 0, route: 'oral', formulation: 'IR' },
+        { id: createDoseEventId(), substanceId: 'phenelzine', doseMg: 15, administrationHour: 0, route: 'oral', formulation: 'IR' },
       ]);
     } else if (presetType === 'safe') {
       setEvents([
-        { id: '1', substanceId: 'ibuprofen', doseMg: 400, administrationHour: 0, route: 'oral', formulation: 'IR' },
-        { id: '2', substanceId: 'acetaminophen', doseMg: 500, administrationHour: 0, route: 'oral', formulation: 'IR' },
+        { id: createDoseEventId(), substanceId: 'ibuprofen', doseMg: 400, administrationHour: 0, route: 'oral', formulation: 'IR' },
+        { id: createDoseEventId(), substanceId: 'acetaminophen', doseMg: 500, administrationHour: 0, route: 'oral', formulation: 'IR' },
       ]);
     }
   };
 
   const updateEvent = (id: string, field: keyof DoseEvent, value: any) => {
-    setEvents(events.map(e => e.id === id ? { ...e, [field]: value } : e));
+    setEvents(prev => prev.map(e => e.id === id ? { ...e, [field]: value } : e));
+  };
+
+  const commitDose = (id: string, input: string) => {
+    const dose = input.trim() ? Number(input) : NaN;
+    if (Number.isFinite(dose) && dose >= 0) {
+      updateEvent(id, 'doseMg', dose);
+    }
+    setDoseInputs(prev => {
+      const next = { ...prev };
+      delete next[id];
+      return next;
+    });
   };
 
   // Helper for UI: separate Day and Hour
@@ -262,8 +291,9 @@ export function TimelineScreen({ route, navigation }: any) {
                       <TextInput
                         mode="flat"
                         keyboardType="numeric"
-                        value={evt.doseMg.toString()}
-                        onChangeText={(val) => updateEvent(evt.id, 'doseMg', parseFloat(val) || 0)}
+                        value={doseInputs[evt.id] ?? evt.doseMg.toString()}
+                        onChangeText={(val) => setDoseInputs(prev => ({ ...prev, [evt.id]: val }))}
+                        onEndEditing={(event) => commitDose(evt.id, event.nativeEvent.text)}
                         style={[styles.inlineInput, { width: 60 }]}
                         textColor={theme.colors.onSurface}
                       />
@@ -359,7 +389,7 @@ export function TimelineScreen({ route, navigation }: any) {
           onPress={() => {
             if (canRunSimulation()) {
               recordSimulationRun();
-              setUsageVersion(v => v + 1);
+              invalidateUsage();
               navigation.navigate('Results', { events, patient });
             } else {
               setPaywallVisible(true);
@@ -377,7 +407,7 @@ export function TimelineScreen({ route, navigation }: any) {
         onDismiss={() => setPaywallVisible(false)}
         onSuccess={() => {
           setPaywallVisible(false);
-          setUsageVersion(v => v + 1);
+          invalidateUsage();
         }}
       />
     </View>

@@ -29,9 +29,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       # Builds the engine first (the apps import its compiled output), then
-      # type-checks engine, React Native mobile, and the Linux desktop client.
-      # DesktopNative is excluded: it has no typecheck script and is covered
-      # by the separate Jest step below.
+      # type-checks the engine, React Native apps, and Linux desktop client.
       - name: Type check
         run: npm run typecheck
 

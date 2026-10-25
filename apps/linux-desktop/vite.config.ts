@@ -62,7 +62,7 @@ export default defineConfig({
   clearScreen: false,
   server: {
     port: 5173,
-    strictPort: false,
+    strictPort: true,
   },
   build: {
     target: 'es2020',
