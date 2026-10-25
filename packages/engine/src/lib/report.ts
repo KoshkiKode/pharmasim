@@ -22,9 +22,11 @@ export const INTERACTION_COVERAGE_NOTICE =
 
 /** Identical finite-horizon metrics for reports and client plot summaries. */
 export function formatPKSummary(pk: PKResult, showTrough = pk.steadyStateTrough > 0): string[] {
+  const peakHour = Number(pk.peakHour.toFixed(2));
+  const horizonHours = Number(pk.horizonHours.toFixed(2));
   const lines = [
-    `Modeled Peak Concentration: ${pk.peakConcentration.toFixed(2)} mg/L at T+${pk.peakHour}h`,
-    `Modeled AUC (0–${pk.horizonHours} h, finite horizon): ${pk.aucMgHourL.toFixed(2)} mg·h/L (not AUC to infinity)`,
+    `Modeled Peak Concentration: ${pk.peakConcentration.toFixed(2)} mg/L at T+${peakHour}h`,
+    `Modeled AUC (0–${horizonHours} h, finite horizon): ${pk.aucMgHourL.toFixed(2)} mg·h/L (not AUC to infinity)`,
   ];
   if (showTrough) {
     lines.push(`Modeled steady-state trough: ${pk.steadyStateTrough.toFixed(2)} mg/L (periodic-regimen estimate)`);
@@ -138,6 +140,10 @@ export function generateMarkdownReport(input: MarkdownReportInput): string {
     }
     for (const line of formatPKSummary(pk)) report += `- ${line}\n`;
     report += `- Effective Half-life: ${formatHours(pk.effectiveHalfLifeHours)} (Base: ${formatHours(pk.baseHalfLifeHours)})\n`;
+    report += `- Combined modeled clearance multiplier: ${pk.clearanceMultiplier.toFixed(2)}× baseline (model adjustment, not a measured clearance)\n`;
+    for (const factor of pk.clearanceFactors) {
+      report += `- Modeled clearance factor: ${factor.label} — ${factor.effect.toFixed(2)}×\n`;
+    }
     report += `- Modeled Time to Steady State: ${pk.daysToSteadyState.toFixed(1)} days (periodic regimen only)\n`;
     report += `#### Model warnings\n`;
     for (const warning of pk.warnings) report += `- ${warning}\n`;

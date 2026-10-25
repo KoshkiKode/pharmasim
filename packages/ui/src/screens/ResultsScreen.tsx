@@ -19,7 +19,7 @@ import {
   REPORT_DISCLAIMER,
   SEVERITY_META 
 } from '@pharmasim/engine';
-import type { PKResult, PlasmaPoint } from '@pharmasim/engine';
+import type { PKResult, PlasmaPoint, Substance } from '@pharmasim/engine';
 
 function Sparkline({ series, color }: { series: PlasmaPoint[]; color: string }) {
   const start = series[0]?.hour ?? 0;
@@ -37,7 +37,7 @@ function Sparkline({ series, color }: { series: PlasmaPoint[]; color: string }) 
   const maxVal = series.reduce((max, point) => Math.max(max, point.concentration), 0.001);
 
   return (
-    <View style={styles.sparklineContainer} accessible accessibilityLabel={`Modeled plasma concentration in mg/L from ${start} to ${end} hours. Substance-specific vertical scale.`}>
+    <View style={styles.sparklineContainer} accessible accessibilityLabel={`Modeled plasma concentration in mg/L from ${Number(start.toFixed(2))} to ${Number(end.toFixed(2))} hours. Substance-specific vertical scale.`}>
       {sampled.map((pt, idx) => {
         const heightPct = (pt.concentration / maxVal) * 100;
         return (
@@ -70,10 +70,11 @@ export function ResultsScreen({ route }: any) {
     eventsBySubstance[evt.substanceId].push(evt);
   }
 
-  const pkResults = Object.keys(eventsBySubstance).map(substanceId => {
-    const substance = substances.find(s => s.id === substanceId);
-    if (!substance) return null;
-    
+  const activeSubstances = Object.keys(eventsBySubstance)
+    .map(id => substances.find(s => s.id === id))
+    .filter((substance): substance is Substance => substance !== undefined);
+
+  const pkResults = activeSubstances.map(substance => {
     const regimen = {
       mode: 'acute' as const,
       doseMg: 0,
@@ -81,16 +82,13 @@ export function ResultsScreen({ route }: any) {
       daysOnRegimen: 1,
       frequency: 'QD' as const,
       toleranceOverride: null,
-      customEvents: eventsBySubstance[substanceId]
+      customEvents: eventsBySubstance[substance.id]
     };
 
-    return computePK(patient, substance, regimen, substances);
+    return computePK(patient, substance, regimen, activeSubstances);
   }).filter((pk): pk is PKResult => pk !== null);
 
   if (pkResults.length === 0) return null;
-
-  const activeSubstanceIds = Object.keys(eventsBySubstance);
-  const activeSubstances = activeSubstanceIds.map(id => substances.find(s => s.id === id)).filter(Boolean) as any[];
 
   const toxAlerts = evaluateToxicity(pkResults, substances);
   const conditionWarnings = computeConditionWarnings(activeSubstances, patient.conditions, patient.liver, patient.kidney);
@@ -347,7 +345,7 @@ export function ResultsScreen({ route }: any) {
                 {/* Sparkline chart */}
                 <Sparkline series={pk.series} color={theme.colors.primary} />
                 <Text variant="labelSmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                  Modeled concentration (mg/L), T+0–{pk.horizonHours} h; bars use a substance-specific scale.
+                  Modeled concentration (mg/L), T+0–{Number(pk.horizonHours.toFixed(2))} h; bars use a substance-specific scale.
                 </Text>
                 {pk.warnings.map((warning: string, index: number) => (
                   <Text key={index} variant="bodySmall" style={{ color: theme.colors.error, marginTop: 4 }}>

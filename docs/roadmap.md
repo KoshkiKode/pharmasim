@@ -63,6 +63,11 @@ cross-platform feature parity.
   consistency audit, separate from structural database validation.
 - Reviewed substance additions with parameter-level sources, numerical PK
   regressions, and additional malformed-storage coverage.
+- The first reviewed batch fills missing levocetirizine, ketoprofen, and oxaprozin
+  entries using DailyMed labels. Assumed absolute bioavailability and converted
+  apparent distribution volumes are explicitly labeled estimates, not silently
+  promoted to measurements. Oxaprozin remains a linear approximation despite
+  known nonlinear behavior; this batch does not add a nonlinear solver.
 - Explicit model diagnostics and finite-horizon PK metrics in shared reporting
   and client results.
 

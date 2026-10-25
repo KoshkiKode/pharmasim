@@ -25,7 +25,7 @@ const evidence: ParameterEvidence = {
   reviewedAt: '2024-02-29',
   quality: 'high',
   basis: 'measured',
-  unit: 'h',
+  unit: PARAMETER_EVIDENCE_UNITS.halfLifeHours,
 };
 
 describe('substance database', () => {
@@ -201,9 +201,9 @@ describe('validateSubstances', () => {
       tags: [],
       absorptionByRoute: {},
       parameterEvidence: {
-        clearanceMlMinKg: { ...evidence, basis: 'unknown', unit: 'mL/min/kg' },
-        tags: { ...evidence, unit: 'dimensionless' },
-        absorptionByRoute: { ...evidence, unit: '1/h' },
+        clearanceMlMinKg: { ...evidence, basis: 'unknown', unit: PARAMETER_EVIDENCE_UNITS.clearanceMlMinKg },
+        tags: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.tags },
+        absorptionByRoute: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.absorptionByRoute },
       },
     }]);
     expect(issues.map((i) => i.field)).toEqual(expect.arrayContaining([
@@ -215,9 +215,9 @@ describe('validateSubstances', () => {
     expect(validateSubstances([{
       ...base, bioavailability: 0, clearanceMlMinKg: 0, proteinBindingPct: 0,
       parameterEvidence: {
-        bioavailability: { ...evidence, unit: 'fraction' },
-        clearanceMlMinKg: { ...evidence, unit: 'mL/min/kg' },
-        proteinBindingPct: { ...evidence, unit: '%' },
+        bioavailability: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.bioavailability },
+        clearanceMlMinKg: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.clearanceMlMinKg },
+        proteinBindingPct: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.proteinBindingPct },
       },
     }])).toEqual([]);
   });

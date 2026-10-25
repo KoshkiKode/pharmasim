@@ -76,8 +76,8 @@ export const PARAMETER_EVIDENCE_UNITS = {
   absorptionByRoute: '1/h',
   releaseHoursByFormulation: 'h',
   molarMassGPerMol: 'g/mol',
-  tags: 'dimensionless',
-  metabolites: 'dimensionless',
+  tags: 'unitless',
+  metabolites: 'fraction',
 } as const;
 
 export type SubstanceParameter = keyof typeof PARAMETER_EVIDENCE_UNITS;

@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { Substance } from '../data/types';
+import { PARAMETER_EVIDENCE_UNITS } from '../data/types';
+import { substances } from '../data/substances';
 import type { PatientProfile, PKResult } from './pharmacokinetics';
+import { computePK } from './pharmacokinetics';
 import {
   findSeriesPeak,
   formatPKSummary,
@@ -121,6 +124,33 @@ describe('generateMarkdownReport', () => {
     expect(report).toContain('vdLKg: 1 L/kg — basis unknown');
   });
 
+  it('discloses all supplied modeled inputs even when their evidence is missing', () => {
+    const lines = getParameterEvidenceLines({
+      ...substance,
+      absorptionByRoute: { oral: { kaPerHour: 1.2, lagHours: 0.5 } },
+      releaseHoursByFormulation: { ER: 12 },
+      tags: ['cns-depressant'],
+      metabolites: [{ targetId: 'metabolite', conversionFraction: 0.1, enzyme: 'CYP2D6' }],
+    });
+    for (const field of ['absorptionByRoute', 'releaseHoursByFormulation', 'tags', 'metabolites']) {
+      expect(lines.find((line) => line.startsWith(`${field}:`))).toContain('basis unknown; quality unknown; source unknown');
+    }
+    expect(lines.find((line) => line.startsWith('tags:'))).toContain(PARAMETER_EVIDENCE_UNITS.tags);
+    expect(lines.find((line) => line.startsWith('metabolites:'))).toContain(PARAMETER_EVIDENCE_UNITS.metabolites);
+  });
+
+  it('explains clearance adjustments without presenting them as measured values', () => {
+    const adjusted = generateMarkdownReport({
+      patient,
+      entries: [{ substance, pk: { ...pk, clearanceFactors: [{ label: 'Example modifier', effect: 0.8 }] } }],
+      conditionWarnings: [],
+      interactions: [],
+    });
+    expect(adjusted).toContain('Combined modeled clearance multiplier: 0.80× baseline');
+    expect(adjusted).toContain('not a measured clearance');
+    expect(adjusted).toContain('Modeled clearance factor: Example modifier — 0.80×');
+  });
+
   it('includes measured, estimated and unknown parameter evidence without upgrading quality', () => {
     const withEvidence: Substance = {
       ...substance,
@@ -193,5 +223,59 @@ describe('generateMarkdownReport', () => {
   it('uses engine peak diagnostics rather than re-deriving a peak from chart points', () => {
     const lines = formatPKSummary({ ...pk, peakConcentration: 2.25, peakHour: 1.75 });
     expect(lines[0]).toContain('2.25 mg/L at T+1.75h');
+  });
+
+  it('avoids excessive precision for displayed peak times and horizons', () => {
+    const lines = formatPKSummary({ ...pk, peakHour: 1.23456789, horizonHours: 23.456789 });
+    expect(lines[0]).toContain('T+1.23h');
+    expect(lines[1]).toContain('0–23.46 h');
+  });
+
+  it.each(['acute', 'daily'] as const)('reports real %s engine output without losing diagnostics', (mode) => {
+    const modeled = computePK(patient, substance, {
+      mode,
+      doseMg: 10,
+      dailyDoseMg: 10,
+      frequency: 'QD',
+      daysOnRegimen: 2,
+      toleranceOverride: null,
+    });
+    const integrated = generateMarkdownReport({
+      patient,
+      entries: [{ substance, pk: modeled }],
+      conditionWarnings: [],
+      interactions: [],
+    });
+    for (const line of formatPKSummary(modeled)) expect(integrated).toContain(line);
+    for (const warning of modeled.warnings) expect(integrated).toContain(warning);
+    expect(Number.isFinite(modeled.aucMgHourL)).toBe(true);
+    expect(integrated).not.toMatch(/\b(?:NaN|Infinity)\b/);
+    expect(integrated).toContain('source unknown (legacy/unprovenanced value)');
+    expect(integrated).toContain(INTERACTION_COVERAGE_NOTICE);
+    if (mode === 'daily') expect(integrated).toContain('Modeled steady-state trough');
+  });
+
+  it('renders catalog parameters and finite engine diagnostics for every supplied substance', () => {
+    for (const entry of substances) {
+      const modeled = computePK(patient, entry, {
+        mode: 'acute',
+        doseMg: entry.typicalDoseMg ?? 10,
+        dailyDoseMg: 0,
+        frequency: 'QD',
+        daysOnRegimen: 1,
+        toleranceOverride: null,
+        route: entry.routes[0],
+      });
+      const integrated = generateMarkdownReport({
+        patient,
+        entries: [{ substance: entry, pk: modeled }],
+        conditionWarnings: [],
+        interactions: [],
+      });
+      expect(integrated, entry.id).not.toMatch(/\b(?:NaN|Infinity)\b/);
+      for (const line of getParameterEvidenceLines(entry)) expect(integrated, entry.id).toContain(line);
+      for (const line of formatPKSummary(modeled)) expect(integrated, entry.id).toContain(line);
+      for (const warning of modeled.warnings) expect(integrated, entry.id).toContain(warning);
+    }
   });
 });

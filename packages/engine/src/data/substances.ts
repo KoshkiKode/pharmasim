@@ -1,10 +1,151 @@
 // @ts-nocheck
 import type { Substance } from './types';
 
+const levocetirizineLabel = {
+  sourceUrl: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c5c62893-186d-4d1a-b900-52558b171dd7',
+  sourceTitle: 'DailyMed: Levocetirizine dihydrochloride tablets — sections 5.1 and 12.3',
+  reviewedAt: '2026-10-25',
+  quality: 'high',
+  basis: 'measured',
+};
+const ketoprofenLabel = {
+  sourceUrl: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d0f47ab6-29ff-df07-e053-2a95a90a2b51',
+  sourceTitle: 'DailyMed: Ketoprofen capsules — Clinical Pharmacology and Warnings',
+  reviewedAt: '2026-10-25',
+  quality: 'high',
+  basis: 'measured',
+};
+const oxaprozinLabel = {
+  sourceUrl: 'https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=e77d2b9e-84df-4733-b654-16e93618efce',
+  sourceTitle: 'DailyMed: Oxaprozin — Clinical Pharmacology and Warnings',
+  reviewedAt: '2026-10-25',
+  quality: 'high',
+  basis: 'measured',
+};
+
 // Auto-generated, hand-curated substance database for PharmaSim.
 // PK values are standard published clinical/pharmacology reference values;
 // research chemicals and some plants are marked `approximate: true`.
 const _rawSubstances: any[] = [
+  {
+    id: 'levocetirizine',
+    name: 'Levocetirizine',
+    brandNames: ['Xyzal'],
+    category: 'pharmaceutical',
+    drugClass: 'Second-generation H1 antihistamine',
+    routes: ['oral'],
+    halfLifeHours: 8.5,
+    bioavailability: 1,
+    vdLKg: 0.4,
+    proteinBindingPct: 91.5,
+    approximate: true,
+    mechanism: 'Selective peripheral histamine H1 receptor antagonist; active enantiomer of cetirizine.',
+    bodySystems: ['Immune', 'CNS', 'Renal'],
+    tags: ['antihistamine', 'cns-depressant'],
+    warnings: [
+      'Somnolence can occur; alcohol and other CNS depressants may further impair alertness.',
+      'Renal impairment reduces elimination; adult healthy-subject PK values are not generalizable to renal disease.',
+    ],
+    parameterEvidence: {
+      halfLifeHours: {
+        ...levocetirizineLabel, unit: 'h', basis: 'estimated', quality: 'moderate',
+        notes: 'Representative midpoint of the label adult healthy-subject plasma half-life range of 8–9 hours.',
+      },
+      bioavailability: {
+        ...levocetirizineLabel, unit: 'fraction', basis: 'estimated', quality: 'low',
+        notes: 'Complete oral availability is a modeling assumption, not a measured absolute F. The label describes rapid, extensive absorption but does not establish absolute bioavailability.',
+      },
+      vdLKg: {
+        ...levocetirizineLabel, unit: 'L/kg',
+        notes: 'Label distribution volume is 0.4 L/kg.',
+      },
+      proteinBindingPct: {
+        ...levocetirizineLabel, unit: '%', basis: 'estimated', quality: 'moderate',
+        notes: 'Midpoint of the label in-vitro plasma protein binding range of 91–92%.',
+      },
+      tags: {
+        ...levocetirizineLabel, unit: 'unitless', basis: 'estimated', quality: 'moderate',
+        notes: 'H1 antagonist classification and observed somnolence/alcohol/CNS-depressant warnings support these qualitative tags; they do not imply equal sedation to first-generation antihistamines.',
+      },
+    },
+    encyclopediaEntry: 'Levocetirizine is an antihistamine used for allergic rhinitis and urticaria. These educational PK values summarize healthy adults; oral bioavailability is explicitly assumed rather than measured.',
+  },
+  {
+    id: 'ketoprofen',
+    name: 'Ketoprofen',
+    brandNames: ['Orudis'],
+    category: 'pharmaceutical',
+    drugClass: 'Nonsteroidal anti-inflammatory drug',
+    routes: ['oral'],
+    halfLifeHours: 3,
+    bioavailability: 0.9,
+    vdLKg: 0.1,
+    approximate: true,
+    mechanism: 'Inhibits cyclooxygenase-mediated prostaglandin synthesis.',
+    bodySystems: ['Musculoskeletal', 'GI', 'Renal', 'Cardiovascular'],
+    tags: ['nsaid', 'nephrotoxic'],
+    warnings: [
+      'Serious gastrointestinal bleeding, ulceration, and cardiovascular thrombotic events can occur.',
+      'Renal injury risk increases with impaired renal perfusion; concurrent anticoagulants or other NSAIDs increase adverse-event risk.',
+    ],
+    parameterEvidence: {
+      halfLifeHours: {
+        ...ketoprofenLabel, unit: 'h', basis: 'estimated', quality: 'moderate',
+        notes: 'Representative midpoint of the 2–4 hour elimination half-life range for immediate-release capsules; not the absorption-limited extended-release half-life.',
+      },
+      bioavailability: {
+        ...ketoprofenLabel, unit: 'fraction',
+        notes: 'Label systemic availability of oral ketoprofen is approximately 90%; 90% converted to a fraction.',
+      },
+      vdLKg: {
+        ...ketoprofenLabel, unit: 'L/kg',
+        notes: 'Label apparent volume of distribution is approximately 0.1 L/kg.',
+      },
+      tags: {
+        ...ketoprofenLabel, unit: 'unitless', basis: 'estimated', quality: 'moderate',
+        notes: 'NSAID classification and label renal-toxicity warnings support the interaction tags. Bleeding risk is represented by the NSAID tag, not an anticoagulant tag.',
+      },
+    },
+    encyclopediaEntry: 'Ketoprofen is an NSAID used for inflammatory pain. This educational entry represents oral immediate-release pharmacokinetics, not extended-release or topical products.',
+  },
+  {
+    id: 'oxaprozin',
+    name: 'Oxaprozin',
+    brandNames: ['Daypro'],
+    category: 'pharmaceutical',
+    drugClass: 'Nonsteroidal anti-inflammatory drug',
+    routes: ['oral'],
+    halfLifeHours: 41.4,
+    bioavailability: 0.95,
+    vdLKg: 0.19,
+    approximate: true,
+    mechanism: 'Inhibits cyclooxygenase-mediated prostaglandin synthesis.',
+    bodySystems: ['Musculoskeletal', 'GI', 'Renal', 'Cardiovascular'],
+    tags: ['nsaid', 'nephrotoxic'],
+    warnings: [
+      'Serious gastrointestinal bleeding, ulceration, and cardiovascular thrombotic events can occur.',
+      'Renal toxicity and concentration-dependent protein binding limit simple linear PK modeling.',
+    ],
+    parameterEvidence: {
+      halfLifeHours: {
+        ...oxaprozinLabel, unit: 'h',
+        notes: 'Label multiple-dose mean terminal half-life is 41.4 hours; single-dose mean is 54.9 hours. A single half-life cannot represent its nonlinear kinetics in all settings.',
+      },
+      bioavailability: {
+        ...oxaprozinLabel, unit: 'fraction', basis: 'estimated', quality: 'moderate',
+        notes: 'Conservative representative value for label oral bioavailability of approximately 95% or greater; not a precise patient-specific fraction.',
+      },
+      vdLKg: {
+        ...oxaprozinLabel, unit: 'L/kg', basis: 'estimated', quality: 'moderate',
+        notes: 'Model estimate: midpoint of label apparent Vd/F range 11–17 L/70 kg gives 14 L/70 kg; multiplied by assumed F=0.95 yields Vd=0.19 L/kg. Apparent Vd/F is not treated as measured systemic Vd.',
+      },
+      tags: {
+        ...oxaprozinLabel, unit: 'unitless', basis: 'estimated', quality: 'moderate',
+        notes: 'NSAID classification and label renal-toxicity warnings support the interaction tags. Bleeding risk is represented by the NSAID tag, not an anticoagulant tag.',
+      },
+    },
+    encyclopediaEntry: 'Oxaprozin is a long-half-life NSAID used for arthritis. The educational model uses multiple-dose terminal half-life and an explicitly estimated distribution volume; concentration-dependent binding makes its kinetics nonlinear.',
+  },
   {
     "id": "fentanyl",
     "toxicity": {

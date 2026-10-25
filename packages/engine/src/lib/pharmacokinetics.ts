@@ -64,7 +64,8 @@ export const FREQUENCY_PER_DAY: Record<Frequency, number> = {
 };
 
 export function tauHours(frequency: Frequency): number {
-  return 24 / FREQUENCY_PER_DAY[frequency];
+  const perDay = FREQUENCY_PER_DAY[frequency];
+  return typeof perDay === 'number' && perDay > 0 ? 24 / perDay : 24;
 }
 
 /** Elimination rate constant (per hour). */
@@ -351,7 +352,8 @@ export function flattenRegimensToEvents(regimen: RegimenConfig, substance: Subst
   }
   
   const events: DoseEvent[] = [];
-  const totalDays = Math.max(1, regimen.mode === 'daily' ? regimen.daysOnRegimen : 1);
+  const totalDays = Math.min(365, Math.max(1,
+    regimen.mode === 'daily' ? positiveFinite(regimen.daysOnRegimen, 1) : 1));
   const tau = tauHours(regimen.frequency);
   const nDoses = regimen.mode === 'acute' ? 1 : Math.min(Math.ceil((totalDays * 24) / tau), 400);
   
@@ -384,7 +386,7 @@ function absorptionResponse(dt: number, ka: number, k: number): number {
 
 /** Integral of the Bateman response over [start, start + elapsed]. */
 function absorptionIntegral(start: number, elapsed: number, ka: number, k: number): number {
-  if (elapsed <= 0) return 0;
+  if (elapsed <= 0 || !Number.isFinite(start)) return 0;
   if (elapsed * Math.max(ka, k) < 1e-6) {
     return elapsed * absorptionResponse(start + elapsed / 2, ka, k);
   }
@@ -420,8 +422,9 @@ function makeEventCurve(
       const duration = event.infusionDurationHours;
       if (duration === undefined) return doseMultiplier * Math.exp(-k * dt);
       const elapsed = Math.min(dt, duration);
+      const elimination = k * elapsed;
       return doseMultiplier * (elapsed / duration) *
-        (-Math.expm1(-k * elapsed) / (k * elapsed || 1)) *
+        (elimination === 0 ? 1 : -Math.expm1(-elimination) / elimination) *
         Math.exp(-k * Math.max(0, dt - duration));
     };
   }
@@ -464,7 +467,7 @@ function integrateCurve(curve: (hour: number) => number, start: number, end: num
   const b = curve((start + end) / 2);
   const c = curve(end);
   const estimate = (end - start) * (a + 4 * b + c) / 6;
-  return recurse(start, end, a, b, c, estimate, Math.max(1e-12, Math.abs(estimate) * 1e-8), 16);
+  return recurse(start, end, a, b, c, estimate, Math.max(1e-16, Math.abs(estimate) * 1e-9), 16);
 }
 
 function regularInterval(events: DoseEvent[]): number | undefined {
@@ -541,7 +544,7 @@ export function computeEventPK(
     warnings.add('Invalid dose events were discarded or the 2000-event timeline limit was applied.');
   }
   if (substance.metabolites?.length || validEvents.some((event) => event.kaOverride !== undefined)) {
-    warnings.add('Metabolites use a simplified first-order formation approximation; parent absorption, infusion/release timing, molecular-mass conversion and enzyme-specific formation are not fully coupled.');
+    warnings.add('Metabolites use a simplified first-order formation approximation; parent absorption/bioavailability, infusion/release timing, molecular-mass conversion and enzyme-specific formation are not fully coupled.');
   }
   const profiles = validEvents.map((ev) => {
     if (!substance.routes.includes(ev.route)) {
@@ -577,7 +580,13 @@ export function computeEventPK(
       f = substance.bioavailabilityByRoute[ev.route]!;
     } else {
       if (ev.route !== 'IV') {
-        f = substance.bioavailability * roa.bioavailabilityScalar;
+        const baseline = substance.bioavailability;
+        if (!Number.isFinite(baseline) || baseline < 0 || baseline > 1) {
+          warnings.add('Invalid bioavailability; a bounded generic default was used.');
+          f = 0.7 * roa.bioavailabilityScalar;
+        } else {
+          f = baseline * roa.bioavailabilityScalar;
+        }
         if (f > 0.95) f = 0.95;
         warnings.add(`Generic route bioavailability scaling used for ${ev.route}.`);
       }
@@ -619,12 +628,14 @@ export function computeEventPK(
   const dt = horizonHours / steps;
   const sampleTimes = new Set<number>();
   for (let i = 0; i <= steps; i++) sampleTimes.add(i * dt);
+  sampleTimes.add(horizonHours);
   for (let index = 0; index < validEvents.length; index++) {
     const event = validEvents[index];
     const { releaseHours, lagHours, ka } = profiles[index];
     const origin = event.administrationHour + lagHours;
     sampleTimes.add(event.administrationHour);
     sampleTimes.add(origin);
+    if (origin > horizonHours) continue;
     const deliveryHours = event.infusionDurationHours ?? releaseHours;
     if (deliveryHours !== undefined && origin + deliveryHours <= horizonHours) {
       sampleTimes.add(origin + deliveryHours);
@@ -684,6 +695,13 @@ export function computeEventPK(
     steadyStateIntervalHours !== undefined && Number.isFinite(steadyStateIntervalHours) && steadyStateIntervalHours > 0
       ? steadyStateIntervalHours
       : repeatableSchedule ? inferredInterval : undefined;
+  const steadyStateTail = profiles.length > 0 ? Math.max(tHalf,
+    profiles[0].isBolusOrInfusion ? 0 : Math.LN2 / profiles[0].ka,
+    (profiles[0].lagHours + (profiles[0].releaseHours ?? validEvents[0].infusionDurationHours ?? 0)) / 40,
+  ) : tHalf;
+  if (steadyStateInterval !== undefined && (40 * steadyStateTail) / steadyStateInterval + 2 > 20000) {
+    warnings.add('Steady-state trough summation was truncated at 20000 periods; very slow kinetics or short intervals can underestimate the trough.');
+  }
   const inferredTau = inferredInterval ?? (validEvents.length > 1
     ? validEvents.slice(1).map((event, index) => event.administrationHour - validEvents[index].administrationHour)
       .filter((interval) => interval > 0)
@@ -707,12 +725,18 @@ export function computeEventPK(
     }
     // Split at delivery boundaries and both kinetic timescales so adaptive
     // quadrature cannot miss a narrow peak on an otherwise long horizon.
-    const times = [...new Set([origin, horizonHours,
-      origin + (event.infusionDurationHours ?? profile.releaseHours ?? 0),
-      origin + 1 / k, origin + 1 / profile.ka,
-    ].filter((time) => time >= origin && time <= horizonHours))].sort((a, b) => a - b);
-    return total + times.slice(1).reduce((area, time, i) =>
-      area + integrateCurve(profile.curve, times[i], time), 0);
+    const deliveryEnd = origin + (event.infusionDurationHours ?? profile.releaseHours ?? 0);
+    const breakpoints = [origin, horizonHours, deliveryEnd];
+    for (const boundary of [origin, deliveryEnd]) {
+      for (let delta = Math.min(1 / k, 1 / profile.ka); delta < horizonHours - boundary; delta *= 2) {
+        breakpoints.push(boundary + delta);
+      }
+    }
+    const times = [...new Set(breakpoints.filter((time) =>
+      time >= origin && time <= horizonHours))].sort((a, b) => a - b);
+    const normalizedCurve = makeEventCurve(event, 1, profile.ka, k, profile.releaseHours, profile.lagHours);
+    return total + profile.doseMultiplier * times.slice(1).reduce((area, time, i) =>
+      area + integrateCurve(normalizedCurve, times[i], time), 0);
   }, 0);
 
   return {
@@ -731,8 +755,7 @@ export function computeEventPK(
         ? periodicTrough(
             eventCurves[0],
             steadyStateInterval,
-            Math.max(tHalf, profiles[0].isBolusOrInfusion ? 0 : Math.LN2 / profiles[0].ka,
-              (profiles[0].lagHours + (profiles[0].releaseHours ?? validEvents[0].infusionDurationHours ?? 0)) / 40),
+            steadyStateTail,
             validEvents[0].administrationHour,
           )
         : 0,

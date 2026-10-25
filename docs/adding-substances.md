@@ -108,10 +108,9 @@ and any conversion or population assumptions in `notes`. A source URL is not
 proof that every parameter in an entry appears in that source.
 
 Canonical units are `h` for half-life/release windows, `fraction` for
-bioavailability, `L/kg` for distribution volume,
+bioavailability and metabolite conversion, `L/kg` for distribution volume,
 `mL/min/kg` for clearance, `%` for protein binding, `g/mol` for molecular mass,
-`1/h` for absorption-rate records, and `dimensionless` for tags/metabolite
-records (conversion fractions are bounded from zero to one). Preserve source
+`1/h` for absorption-rate records, and `unitless` for tags. Preserve source
 units in notes when converting. Missing metadata means unreviewed, not measured;
 unknown data must not be disguised as a sourced generic constant.
 
@@ -120,6 +119,12 @@ Optional `absorptionByRoute` records contain `kaPerHour` and `lagHours`.
 hours, not arbitrary release shapes. Without overrides, generic route and
 ER/XR/CR assumptions remain active and are disclosed in results. These fields
 do not implement two-compartment or nonlinear kinetics.
+
+For event timelines, optional `infusionDurationHours` must be positive and finite,
+and is accepted only for IV events without a `kaOverride`. Omitting it retains
+bolus behavior. Invalid infusion events are rejected rather than silently
+converted to boluses. This is an engine/custom-event contract; it does not imply
+every client has an infusion-duration editor.
 
 Run `auditSubstanceConsistency` when reviewing entries with clearance:
 one-compartment half-life is approximately `ln(2) × Vd / CL` after unit
