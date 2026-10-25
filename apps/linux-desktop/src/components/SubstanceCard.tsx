@@ -40,6 +40,8 @@ export function SubstanceCard({
 }: Props) {
   const { substance: s, regimen } = item;
   const pk = computePK(patient, s, regimen);
+  const showTrough = pk.steadyStateTrough > 0 ||
+    (regimen.mode === 'daily' && !regimen.customEvents?.length);
   const accent = CATEGORY_COLOR[s.category];
   const liverImpaired = patient.liver !== 'normal' || patient.conditions?.includes('liver-cirrhosis');
   const kidneyImpaired = patient.kidney !== 'normal' || patient.conditions?.includes('ckd');
@@ -394,7 +396,7 @@ export function SubstanceCard({
                 labelFormatter={(h) => `t = ${h} h`}
                 formatter={(v) => [typeof v === 'number' ? v.toFixed(3) : String(v ?? ''), 'mg/L']}
               />
-              {regimen.mode === 'daily' && !regimen.customEvents?.length && (
+              {showTrough && (
                 <ReferenceLine
                   y={pk.steadyStateTrough}
                   stroke="#fbbf24"
@@ -414,7 +416,7 @@ export function SubstanceCard({
           </ResponsiveContainer>
         </div>
         <div className="mt-2 space-y-1 text-[11px] text-ink-muted" data-testid={`pk-summary-${s.id}`}>
-          {formatPKSummary(pk, regimen.mode === 'daily' && !regimen.customEvents?.length).map((line) => (
+          {formatPKSummary(pk, showTrough).map((line) => (
             <p key={line}>{line}</p>
           ))}
           <p>Educational model estimates only; not measurements or dosing guidance.</p>

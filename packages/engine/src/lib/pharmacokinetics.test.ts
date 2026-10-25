@@ -334,6 +334,23 @@ describe('event-based pharmacokinetics', () => {
       expect(generic.warnings.join(' ')).toContain('Generic ER release');
     });
 
+    it('samples controlled-release peaks and release boundaries after a route-specific lag', () => {
+      const specific = {
+        ...drug, absorptionByRoute: { oral: { kaPerHour: 0.5, lagHours: 5 } },
+        releaseHoursByFormulation: { ER: 4 },
+      };
+      const delayed = computeEventPK(healthy, specific, [event({ formulation: 'ER' })]);
+      const immediate = computeEventPK(healthy, {
+        ...specific, absorptionByRoute: { oral: { kaPerHour: 0.5 } },
+      }, [event({ formulation: 'ER' })]);
+      expect(delayed.series.some((point) => point.hour === 5 && point.concentration === 0)).toBe(true);
+      expect(delayed.series.some((point) => point.hour === 9)).toBe(true);
+      expect(delayed.peakHour).toBeGreaterThan(9);
+      expect(delayed.peakHour - immediate.peakHour).toBeCloseTo(5, 6);
+      expect(delayed.peakConcentration).toBeCloseTo(immediate.peakConcentration, 9);
+      expect(delayed.aucMgHourL).toBeCloseTo(immediate.aucMgHourL, 8);
+    });
+
     it.each([Math.LN2 / 12, (Math.LN2 / 12) * (1 - 1e-8), 1e-8, 1e8])(
       'keeps controlled release stable with extreme/equal absorption (ka=%s)', (ka) => {
         const pk = computeEventPK(healthy, {
@@ -479,6 +496,40 @@ describe('event-based pharmacokinetics', () => {
         },
       }, [event()]);
       expect(pk.warnings.join(' ')).not.toContain('provenance is absent');
+      expect(pk.warnings.join(' ')).toContain('provenance is partial');
+      expect(pk.warnings.join(' ')).toContain('vdLKg');
+    });
+
+    it('does not warn about partial provenance when all provided PK parameters have evidence', () => {
+      const evidence = {
+        sourceUrl: 'https://example.org/label', sourceTitle: 'Test label',
+        reviewedAt: '2026-01-01', quality: 'high' as const, basis: 'measured' as const,
+      };
+      const pk = computeEventPK(healthy, {
+        ...drug,
+        parameterEvidence: {
+          halfLifeHours: { ...evidence, unit: 'h' },
+          vdLKg: { ...evidence, unit: 'L/kg' },
+          bioavailability: { ...evidence, unit: 'fraction' },
+        },
+      }, [event()]);
+      expect(pk.warnings.join(' ')).not.toContain('provenance is');
+    });
+
+    it('warns nonfatally about CL/Vd half-life discrepancies and uses the clearance-derived value', () => {
+      const clearance = Math.LN2 * drug.vdLKg / (24 * 0.06);
+      const pk = computeEventPK(healthy, { ...drug, clearanceMlMinKg: clearance }, [event()]);
+      expect(pk.baseHalfLifeHours).toBeCloseTo(24, 10);
+      expect(pk.warnings.join(' ')).toContain('CL/Vd-derived half-life differs');
+      const consistent = computeEventPK(healthy, {
+        ...drug, halfLifeHours: 24, clearanceMlMinKg: clearance,
+      }, [event()]);
+      expect(consistent.warnings.join(' ')).not.toContain('CL/Vd-derived half-life differs');
+      const invalid = computeEventPK(healthy, {
+        ...drug, clearanceMlMinKg: NaN,
+      }, [event()]);
+      expect(invalid.warnings.join(' ')).not.toContain('CL/Vd-derived half-life differs');
+      expect(invalid.baseHalfLifeHours).toBe(12);
     });
 
     it('rejects invalid infusions instead of silently turning them into boluses', () => {

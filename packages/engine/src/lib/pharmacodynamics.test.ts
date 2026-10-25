@@ -37,6 +37,10 @@ const pk: PKResult = {
   peakConcentration: 1,
   steadyStateTrough: 0,
   toleranceScalar: 1,
+  aucMgHourL: 5,
+  peakHour: 10,
+  horizonHours: 10,
+  warnings: [],
 };
 
 describe('computeReceptorState concentration lookup', () => {

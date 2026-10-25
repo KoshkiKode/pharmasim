@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { computeInteractions } from '../lib/interactions';
-import { computePK } from '../lib/pharmacokinetics';
-import { PARAMETER_EVIDENCE_UNITS } from './types';
+import { computeEventPK } from '../lib/pharmacokinetics';
+import { PARAMETER_EVIDENCE_UNITS, type Substance } from './types';
 import { substances } from './substances';
 import { validateSubstances } from './validate';
 
@@ -13,17 +13,23 @@ const get = (id: string) => {
 };
 
 describe('reviewed substance expansion', () => {
+  it('appends reviewed entries without changing the established first-substance default', () => {
+    expect(substances[0].id).toBe('fentanyl');
+    expect(substances.slice(-reviewedIds.length).map(({ id }) => id)).toEqual(reviewedIds);
+  });
+
   it.each(reviewedIds)('includes a unique, validated %s without dose guidance', (id) => {
     const entry = get(id);
     expect(substances.filter((substance) => substance.id === id)).toHaveLength(1);
     expect(validateSubstances([entry])).toEqual([]);
     expect(entry.typicalDoseMg).toBeUndefined();
     expect(entry.doseRangeMg).toBeUndefined();
+    expect(entry.bioavailabilityByRoute).toEqual({ oral: entry.bioavailability });
   });
 
   it.each(reviewedIds)('documents every supplied PK parameter and interaction tag for %s', (id) => {
     const entry = get(id);
-    for (const field of ['halfLifeHours', 'bioavailability', 'vdLKg', 'tags'] as const) {
+    for (const field of ['halfLifeHours', 'bioavailability', 'bioavailabilityByRoute', 'vdLKg', 'tags'] as const) {
       expect(entry.parameterEvidence?.[field], `${id}.${field}`).toBeDefined();
     }
     for (const field of Object.keys(PARAMETER_EVIDENCE_UNITS) as (keyof typeof PARAMETER_EVIDENCE_UNITS)[]) {
@@ -69,14 +75,16 @@ describe('reviewed substance expansion', () => {
   });
 
   it.each(reviewedIds)('integrates %s into finite, positive oral PK predictions', (id) => {
-    const result = computePK({
+    const simulate = (entry: Substance) => computeEventPK({
       biologicalSex: 'M', ageYears: 35, weightKg: 70, heightCm: 175,
       bodyFatPct: 22, tolerance: 0, liver: 'normal', kidney: 'normal',
       hydrationPct: 50, genetics: {}, conditions: [],
-    }, get(id), {
-      mode: 'acute', doseMg: 1, dailyDoseMg: 1, daysOnRegimen: 1,
-      frequency: 'QD', toleranceOverride: null,
-    });
+    }, entry, [{
+      id: `test-${id}`, substanceId: id, doseMg: 1,
+      route: 'oral', formulation: 'IR', administrationHour: 0,
+    }]);
+    const entry = get(id);
+    const result = simulate(entry);
     expect(result.series.length).toBeGreaterThan(0);
     expect(result.series.every(({ concentration }) =>
       Number.isFinite(concentration) && concentration >= 0,
@@ -84,5 +92,10 @@ describe('reviewed substance expansion', () => {
     expect(result.peakConcentration).toBeGreaterThan(0);
     expect(Number.isFinite(result.aucMgHourL)).toBe(true);
     expect(result.aucMgHourL).toBeGreaterThan(0);
+    const halfAvailability = simulate({
+      ...entry, bioavailabilityByRoute: { oral: entry.bioavailability / 2 },
+    });
+    expect(result.peakConcentration).toBeCloseTo(2 * halfAvailability.peakConcentration, 10);
+    expect(result.aucMgHourL).toBeCloseTo(2 * halfAvailability.aucMgHourL, 10);
   });
 });

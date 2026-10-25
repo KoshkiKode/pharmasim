@@ -278,4 +278,28 @@ describe('generateMarkdownReport', () => {
       for (const warning of modeled.warnings) expect(integrated, entry.id).toContain(warning);
     }
   });
+
+  it.each([
+    ['regular', [0, 12, 24], true],
+    ['irregular', [0, 10, 24], false],
+  ] as const)('shows a custom %s schedule trough only when modeled', (_label, hours, hasTrough) => {
+    const modeled = computePK(patient, substance, {
+      mode: 'acute',
+      doseMg: 0,
+      dailyDoseMg: 0,
+      frequency: 'QD',
+      daysOnRegimen: 1,
+      toleranceOverride: null,
+      customEvents: hours.map((hour, index) => ({
+        id: String(index),
+        substanceId: substance.id,
+        administrationHour: hour,
+        doseMg: 10,
+        route: 'oral',
+        formulation: 'IR',
+      })),
+    });
+    expect(modeled.steadyStateTrough > 0).toBe(hasTrough);
+    expect(formatPKSummary(modeled).some(line => line.includes('trough'))).toBe(hasTrough);
+  });
 });

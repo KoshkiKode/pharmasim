@@ -254,10 +254,10 @@ export function effectiveHalfLife(
 ): number {
   let baseHalfLife = substance.halfLifeHours;
   if (substance.clearanceMlMinKg != null) {
-    const clearanceLHrKg = (substance.clearanceMlMinKg * 60) / 1000;
+    const clearanceLHrKg = substance.clearanceMlMinKg * 0.06;
     // T1/2 = 0.693 * Vd / Cl
-    if (clearanceLHrKg > 0) {
-      baseHalfLife = (0.693 * substance.vdLKg) / clearanceLHrKg;
+    if (Number.isFinite(clearanceLHrKg) && clearanceLHrKg > 0) {
+      baseHalfLife = (Math.LN2 * substance.vdLKg) / clearanceLHrKg;
     }
   }
 
@@ -509,13 +509,33 @@ export function computeEventPK(
   const warnings = new Set<string>();
   if (!substance.parameterEvidence || Object.keys(substance.parameterEvidence).length === 0) {
     warnings.add('Parameter provenance is absent; PK estimates are not source-verified.');
+  } else {
+    const parameters: (keyof NonNullable<Substance['parameterEvidence']>)[] =
+      ['halfLifeHours', 'vdLKg', 'bioavailability'];
+    if (substance.clearanceMlMinKg !== undefined) parameters.push('clearanceMlMinKg');
+    if (substance.bioavailabilityByRoute !== undefined) parameters.push('bioavailabilityByRoute');
+    if (substance.absorptionByRoute !== undefined) parameters.push('absorptionByRoute');
+    if (substance.releaseHoursByFormulation !== undefined) parameters.push('releaseHoursByFormulation');
+    if (substance.metabolites?.length) parameters.push('metabolites');
+    const missing = parameters.filter((parameter) => !substance.parameterEvidence?.[parameter]);
+    if (missing.length > 0) {
+      warnings.add(`Parameter provenance is partial; evidence is missing for ${missing.join(', ')}.`);
+    }
   }
   const { multiplier, factors } = clearanceMultiplier(patient, substance, activeSubstances);
   
   let baseHalfLife = substance.halfLifeHours;
   if (substance.clearanceMlMinKg != null) {
-    const clearanceLHrKg = (substance.clearanceMlMinKg * 60) / 1000;
-    if (clearanceLHrKg > 0) baseHalfLife = (0.693 * substance.vdLKg) / clearanceLHrKg;
+    const clearanceLHrKg = substance.clearanceMlMinKg * 0.06;
+    if (Number.isFinite(clearanceLHrKg) && clearanceLHrKg > 0) {
+      const derivedHalfLife = (Math.LN2 * substance.vdLKg) / clearanceLHrKg;
+      if (Number.isFinite(derivedHalfLife) && derivedHalfLife > 0 &&
+          Number.isFinite(baseHalfLife) && baseHalfLife > 0 &&
+          Math.abs(derivedHalfLife - baseHalfLife) / baseHalfLife > 0.25) {
+        warnings.add('CL/Vd-derived half-life differs from the listed half-life by more than 25%; the clearance-derived value is used by this one-compartment model.');
+      }
+      baseHalfLife = derivedHalfLife;
+    }
   }
   
   if (!Number.isFinite(baseHalfLife) || baseHalfLife <= 0) {
