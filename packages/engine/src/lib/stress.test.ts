@@ -9,6 +9,11 @@ import {
 import type { Substance } from '../data/types';
 import { substances } from '../data/substances';
 
+// 10,000 generated cases per property. That takes ~10s plain but ~45s with V8
+// coverage instrumentation on a CI runner, which blew through the global 30s
+// testTimeout. Give these two tests explicit headroom instead of cutting numRuns.
+const PROPERTY_TEST_TIMEOUT_MS = 120_000;
+
 describe('PK Engine Property-Based Stress Tests', () => {
   const patientGen = fc.record({
     biologicalSex: fc.constantFrom('M', 'F') as fc.Arbitrary<'M' | 'F'>,
@@ -47,7 +52,7 @@ describe('PK Engine Property-Based Stress Tests', () => {
       }),
       { numRuns: 10000 }
     );
-  });
+  }, PROPERTY_TEST_TIMEOUT_MS);
 
   it('computePK never returns NaN or throws', () => {
     fc.assert(
@@ -65,5 +70,5 @@ describe('PK Engine Property-Based Stress Tests', () => {
       }),
       { numRuns: 10000 }
     );
-  });
+  }, PROPERTY_TEST_TIMEOUT_MS);
 });
