@@ -597,6 +597,29 @@ describe('event-based pharmacokinetics', () => {
       expect(pk.warnings.join(' ')).not.toContain('provenance is');
     });
 
+    it.each(['estimated', 'unknown'] as const)('warns when present PK provenance uses %s parameters', (basis) => {
+      const evidence = {
+        sourceUrl: 'https://example.org/label', sourceTitle: 'Test label',
+        reviewedAt: '2026-01-01', quality: 'low' as const, basis,
+      };
+      const pk = computeEventPK(healthy, {
+        ...drug,
+        parameterEvidence: {
+          halfLifeHours: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.halfLifeHours },
+          vdLKg: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.vdLKg },
+          bioavailability: { ...evidence, unit: PARAMETER_EVIDENCE_UNITS.bioavailability },
+        },
+      }, [event()]);
+      expect(pk.warnings.join(' ')).toContain('estimated or unknown parameters');
+      expect(pk.warnings.join(' ')).not.toContain('provenance is absent');
+    });
+
+    it('warns about approximate profiles without changing absent-provenance wording', () => {
+      const pk = computeEventPK(healthy, { ...drug, approximate: true }, [event()]);
+      expect(pk.warnings.join(' ')).toContain('Approximate substance profile');
+      expect(pk.warnings.join(' ')).toContain('Parameter provenance is absent');
+    });
+
     it('warns nonfatally about CL/Vd half-life discrepancies and uses the clearance-derived value', () => {
       const clearance = Math.LN2 * drug.vdLKg / (24 * 0.06);
       const pk = computeEventPK(healthy, { ...drug, clearanceMlMinKg: clearance }, [event()]);

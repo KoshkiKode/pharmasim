@@ -580,6 +580,9 @@ export function computeEventPK(
   steadyStateIntervalHours?: number,
 ): PKResult {
   const warnings = new Set<string>();
+  if (substance.approximate) {
+    warnings.add('Approximate substance profile: core PK parameters may be estimated; results are illustrative.');
+  }
   if (!substance.parameterEvidence || Object.keys(substance.parameterEvidence).length === 0) {
     warnings.add('Parameter provenance is absent; PK estimates are not source-verified.');
   } else {
@@ -593,6 +596,12 @@ export function computeEventPK(
     const missing = parameters.filter((parameter) => !substance.parameterEvidence?.[parameter]);
     if (missing.length > 0) {
       warnings.add(`Parameter provenance is partial; evidence is missing for ${missing.join(', ')}.`);
+    }
+    if (parameters.some((parameter) => {
+      const basis = substance.parameterEvidence?.[parameter]?.basis;
+      return basis === 'estimated' || basis === 'unknown';
+    })) {
+      warnings.add('PK provenance includes estimated or unknown parameters; exposure estimates are uncertain.');
     }
   }
   const { multiplier, factors } = clearanceMultiplier(patient, substance, activeSubstances);
