@@ -52,6 +52,19 @@ describe('computeReceptorState concentration lookup', () => {
     expect(pastEnd.totalOccupancy).toBeGreaterThan(0);
   });
 
+  it('clamps to the first sampled point before the curve begins', () => {
+    const laterCurve = {
+      ...pk,
+      series: [
+        { hour: 2, concentration: 1 },
+        { hour: 10, concentration: 0.5 },
+      ],
+    };
+    const atStart = computeReceptorState('5-HT2A', [laterCurve], [ligand], 2);
+    const beforeStart = computeReceptorState('5-HT2A', [laterCurve], [ligand], -10);
+    expect(beforeStart.totalOccupancy).toBeCloseTo(atStart.totalOccupancy, 10);
+  });
+
   it('uses a substance molar mass when provided instead of the 350 g/mol fallback', () => {
     const heavy: Substance = { ...ligand, molarMassGPerMol: 700 };
     const withFallback = computeReceptorState('5-HT2A', [pk], [ligand], 10);
