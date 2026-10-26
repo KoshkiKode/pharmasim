@@ -20,12 +20,20 @@ robustness roadmap.
 - `[x]` Replace duplicated report generation and alert formatting in web,
   mobile, and DesktopNative with shared engine/report helpers
   (`packages/engine/src/lib/report.ts`), including qualified toxicity wording.
+- `[x]` Add optional field-level parameter evidence, canonical unit validation,
+  mixture/metabolite reference checks, and a non-fatal PK consistency audit.
+- `[x]` Add configurable route absorption/lag, release windows, IV infusion events,
+  finite-horizon AUC, peak timing, and model diagnostics.
+- `[x]` Surface model limitations, evidence gaps, and incomplete interaction
+  coverage in shared reports and client results.
 
 ## Next
 - `[ ]` Reframe modeled outputs so “safe”, “contraindicated”, “discontinue”,
   and similar terms cannot be mistaken for clinical instructions.
-- `[ ]` Add evidence quality, provenance, approximation, and review-date
-  metadata to substance and interaction results.
+- `[ ]` Backfill source/review metadata across legacy substance fields and add
+  evidence metadata to individual interaction rules/results.
+- `[ ]` Continue reviewed substance batches and introduce coupled metabolite,
+  two-compartment, and nonlinear models only after reference validation.
 - `[ ]` Add end-to-end, accessibility, and corrupted-storage coverage for each
   client.
 - `[ ]` Replace the demo-only usage unlock with a server-verified entitlement

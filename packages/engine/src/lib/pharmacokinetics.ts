@@ -64,7 +64,8 @@ export const FREQUENCY_PER_DAY: Record<Frequency, number> = {
 };
 
 export function tauHours(frequency: Frequency): number {
-  return 24 / FREQUENCY_PER_DAY[frequency];
+  const perDay = FREQUENCY_PER_DAY[frequency];
+  return typeof perDay === 'number' && perDay > 0 ? 24 / perDay : 24;
 }
 
 /** Elimination rate constant (per hour). */
@@ -75,7 +76,7 @@ export function rateConstant(halfLifeHours: number): number {
 /** Multiple-dose accumulation ratio: R = 1 / (1 - e^(-k·τ)). */
 export function accumulationRatio(halfLifeHours: number, tau: number): number {
   const k = rateConstant(halfLifeHours);
-  const denom = 1 - Math.exp(-k * tau);
+  const denom = -Math.expm1(-k * tau);
   if (denom <= 0) return Infinity;
   return 1 / denom;
 }
@@ -96,6 +97,11 @@ export function clearanceMultiplier(
   substance: Substance,
   activeSubstances: Substance[] = []
 ): { multiplier: number; factors: { label: string; effect: number }[] } {
+  patient = {
+    ...patient,
+    weightKg: positiveFinite(patient.weightKg, 70),
+    ageYears: Number.isFinite(patient.ageYears) ? patient.ageYears : 35,
+  };
   const factors: { label: string; effect: number }[] = [];
 
   const hepaticallyCleared =
@@ -248,10 +254,10 @@ export function effectiveHalfLife(
 ): number {
   let baseHalfLife = substance.halfLifeHours;
   if (substance.clearanceMlMinKg != null) {
-    const clearanceLHrKg = (substance.clearanceMlMinKg * 60) / 1000;
+    const clearanceLHrKg = substance.clearanceMlMinKg * 0.06;
     // T1/2 = 0.693 * Vd / Cl
-    if (clearanceLHrKg > 0) {
-      baseHalfLife = (0.693 * substance.vdLKg) / clearanceLHrKg;
+    if (Number.isFinite(clearanceLHrKg) && clearanceLHrKg > 0) {
+      baseHalfLife = (Math.LN2 * substance.vdLKg) / clearanceLHrKg;
     }
   }
 
@@ -277,6 +283,10 @@ export interface PKResult {
   peakConcentration: number;
   steadyStateTrough: number;
   toleranceScalar: number; // perceived-effect scalar from tolerance (0..1)
+  aucMgHourL: number; // area under the curve over the finite simulation horizon
+  peakHour: number; // sampled peak, including event boundaries and individual analytical peaks
+  horizonHours: number;
+  warnings: string[];
 }
 
 export interface RouteMultiplier {
@@ -304,6 +314,10 @@ const FORMULATIONS: Formulation[] = ['IR', 'ER', 'XR', 'CR'];
 // Representative release windows; actual products vary by drug and product.
 const RELEASE_HOURS: Partial<Record<Formulation, number>> = { ER: 8, XR: 12, CR: 24 };
 
+function positiveFinite(value: number | undefined, fallback: number): number {
+  return value !== undefined && Number.isFinite(value) && value > 0 ? value : fallback;
+}
+
 function validDoseEvents(events: DoseEvent[], substanceId: string): DoseEvent[] {
   return events
     .filter(
@@ -316,7 +330,10 @@ function validDoseEvents(events: DoseEvent[], substanceId: string): DoseEvent[] 
         event.doseMg >= 0 &&
         ROUTES.includes(event.route) &&
         FORMULATIONS.includes(event.formulation) &&
-        (event.kaOverride === undefined || (Number.isFinite(event.kaOverride) && event.kaOverride > 0)),
+        (event.kaOverride === undefined || (Number.isFinite(event.kaOverride) && event.kaOverride > 0)) &&
+        (event.infusionDurationHours === undefined ||
+          (event.route === 'IV' && event.kaOverride === undefined &&
+            Number.isFinite(event.infusionDurationHours) && event.infusionDurationHours > 0)),
     )
     .map((event) => ({ ...event, substanceId }))
     .sort((a, b) => a.administrationHour - b.administrationHour)
@@ -335,7 +352,8 @@ export function flattenRegimensToEvents(regimen: RegimenConfig, substance: Subst
   }
   
   const events: DoseEvent[] = [];
-  const totalDays = Math.max(1, regimen.mode === 'daily' ? regimen.daysOnRegimen : 1);
+  const totalDays = Math.min(365, Math.max(1,
+    regimen.mode === 'daily' ? positiveFinite(regimen.daysOnRegimen, 1) : 1));
   const tau = tauHours(regimen.frequency);
   const nDoses = regimen.mode === 'acute' ? 1 : Math.min(Math.ceil((totalDays * 24) / tau), 400);
   
@@ -358,9 +376,33 @@ export function flattenRegimensToEvents(regimen: RegimenConfig, substance: Subst
 }
 
 function absorptionResponse(dt: number, ka: number, k: number): number {
-  if (dt < 0) return 0;
-  if (Math.abs(ka - k) < 1e-8) return k * dt * Math.exp(-k * dt);
-  return (ka / (ka - k)) * Math.exp(-k * dt) * -Math.expm1(-(ka - k) * dt);
+  if (dt <= 0) return 0;
+  const difference = Math.abs(ka - k);
+  const decay = Math.exp(-Math.min(ka, k) * dt);
+  if (decay === 0) return 0;
+  if (difference === 0) return ka * dt * decay;
+  return (ka * (-Math.expm1(-difference * dt) / difference)) * decay;
+}
+
+/** Integral of the Bateman response over [start, start + elapsed]. */
+function absorptionIntegral(start: number, elapsed: number, ka: number, k: number): number {
+  if (elapsed <= 0 || !Number.isFinite(start)) return 0;
+  if (elapsed * Math.max(ka, k) < 1e-6) {
+    return elapsed * absorptionResponse(start + elapsed / 2, ka, k);
+  }
+  if (Math.abs(ka - k) <= 1e-5 * Math.max(ka, k)) {
+    // The equal-rate limit avoids subtracting nearly identical exponentials.
+    const rate = (ka + k) / 2;
+    const x = rate * elapsed;
+    const gamma = x < 0.001
+      ? x * x * (0.5 + x * (-1 / 3 + x * (1 / 8 - x / 30)))
+      : -Math.expm1(-x) - x * Math.exp(-x);
+    return (ka / rate) * Math.exp(-rate * start) *
+      (rate * start * -Math.expm1(-x) + gamma) / rate;
+  }
+  const exponentialIntegral = (rate: number) =>
+    Math.exp(-rate * start) * -Math.expm1(-rate * elapsed) / rate;
+  return Math.max(0, (exponentialIntegral(k) - exponentialIntegral(ka)) * (ka / (ka - k)));
 }
 
 function makeEventCurve(
@@ -368,38 +410,64 @@ function makeEventCurve(
   doseMultiplier: number,
   ka: number,
   k: number,
+  releaseHours?: number,
+  lagHours = 0,
 ): (time: number) => number {
-  const releaseHours = event.route === 'IV' ? undefined : RELEASE_HOURS[event.formulation];
+  const origin = event.administrationHour + lagHours;
 
   if (event.route === 'IV' && event.kaOverride === undefined) {
     return (time) => {
       const dt = time - event.administrationHour;
-      return dt < 0 ? 0 : doseMultiplier * Math.exp(-k * dt);
+      if (dt < 0) return 0;
+      const duration = event.infusionDurationHours;
+      if (duration === undefined) return doseMultiplier * Math.exp(-k * dt);
+      const elapsed = Math.min(dt, duration);
+      const elimination = k * elapsed;
+      return doseMultiplier * (elapsed / duration) *
+        (elimination === 0 ? 1 : -Math.expm1(-elimination) / elimination) *
+        Math.exp(-k * Math.max(0, dt - duration));
     };
   }
 
   if (releaseHours !== undefined) {
-    const releaseIntegral = (time: number, elapsed: number): number => {
-      const start = time - elapsed;
-      if (Math.abs(ka - k) < 1e-8) {
-        return (ka / (k * k)) *
-          ((1 + k * start) * Math.exp(-k * start) - (1 + k * time) * Math.exp(-k * time));
-      }
-      return (
-        (Math.exp(-k * start) * -Math.expm1(-k * elapsed)) / k -
-        (Math.exp(-ka * start) * -Math.expm1(-ka * elapsed)) / ka
-      ) * (ka / (ka - k));
-    };
     return (time) => {
-      const dt = time - event.administrationHour;
+      const dt = time - origin;
       if (dt <= 0) return 0;
+      if (dt >= releaseHours && releaseHours * Math.max(ka, k) < 1e-6) {
+        return doseMultiplier * absorptionResponse(dt - releaseHours / 2, ka, k);
+      }
       const elapsed = Math.min(dt, releaseHours);
-      return (doseMultiplier / releaseHours) * releaseIntegral(dt, elapsed);
+      return doseMultiplier * (absorptionIntegral(dt - elapsed, elapsed, ka, k) / releaseHours);
     };
   }
 
   return (time) =>
-    doseMultiplier * absorptionResponse(time - event.administrationHour, ka, k);
+    doseMultiplier * absorptionResponse(time - origin, ka, k);
+}
+
+function integrateCurve(curve: (hour: number) => number, start: number, end: number): number {
+  if (end <= start) return 0;
+  const recurse = (
+    left: number, right: number, a: number, b: number, c: number,
+    estimate: number, tolerance: number, depth: number,
+  ): number => {
+    const middle = left + (right - left) / 2;
+    const d = curve(left + (middle - left) / 2);
+    const e = curve(middle + (right - middle) / 2);
+    const first = (middle - left) * (a + 4 * d + b) / 6;
+    const second = (right - middle) * (b + 4 * e + c) / 6;
+    const delta = first + second - estimate;
+    if (depth === 0 || Math.abs(delta) <= 15 * tolerance) {
+      return Math.max(0, first + second + delta / 15);
+    }
+    return recurse(left, middle, a, d, b, first, tolerance / 2, depth - 1) +
+      recurse(middle, right, b, e, c, second, tolerance / 2, depth - 1);
+  };
+  const a = curve(start);
+  const b = curve(start + (end - start) / 2);
+  const c = curve(end);
+  const estimate = (end - start) * (a + 4 * b + c) / 6;
+  return recurse(start, end, a, b, c, estimate, Math.max(1e-16, Math.abs(estimate) * 1e-9), 16);
 }
 
 function regularInterval(events: DoseEvent[]): number | undefined {
@@ -413,18 +481,91 @@ function regularInterval(events: DoseEvent[]): number | undefined {
     : undefined;
 }
 
-function periodicTrough(
-  curve: (time: number) => number,
-  interval: number,
-  halfLife: number,
-  originHour: number,
-): number {
-  const periods = Math.min(20000, Math.ceil((40 * halfLife) / interval) + 2);
-  let concentration = 0;
-  for (let dose = 0; dose <= periods; dose++) {
-    concentration += curve(originHour + (dose + 1) * interval);
+function periodicAbsorption(phase: number, ka: number, k: number, interval: number): number {
+  const difference = Math.abs(ka - k);
+  if (difference < 1e-7 * Math.max(ka, k)) {
+    const rate = (ka + k) / 2;
+    const denominator = -Math.expm1(-rate * interval);
+    return ka * Math.exp(-rate * phase) / denominator *
+      (phase + interval * Math.exp(-rate * interval) / denominator);
   }
-  return concentration;
+  const slower = Math.min(ka, k);
+  const faster = Math.max(ka, k);
+  const denominator = -Math.expm1(-slower * interval);
+  const fasterDenominator = -Math.expm1(-faster * interval);
+  const correction = Math.exp(-slower * interval) *
+    -Math.expm1(-difference * interval) / fasterDenominator;
+  return (ka / difference) * Math.exp(-slower * phase) / denominator *
+    (-Math.expm1(-difference * phase) + Math.exp(-difference * phase) * correction);
+}
+
+/** Minimum over a periodic interval, not merely the pre-administration value. */
+function periodicTrough(
+  event: DoseEvent,
+  interval: number,
+  ka: number,
+  k: number,
+  doseMultiplier: number,
+  lagHours: number,
+  releaseHours?: number,
+): number {
+  if (doseMultiplier === 0) return 0;
+  const denominator = -Math.expm1(-k * interval);
+  if (event.route === 'IV' && event.kaOverride === undefined) {
+    const duration = event.infusionDurationHours;
+    if (duration === undefined) {
+      return doseMultiplier * Math.exp(-k * interval) / denominator;
+    }
+    const remainder = duration % interval;
+    const x = k * remainder;
+    const uptake = x === 0 ? 1 : -Math.expm1(-x) / x;
+    return doseMultiplier * (
+      (1 - remainder / duration) / (k * interval) +
+      (remainder / duration) * uptake * Math.exp(-k * (interval - remainder)) / denominator
+    );
+  }
+  // A first-order absorbed impulse has one maximum between input onsets, so
+  // its periodic minimum is at the (possibly delayed) absorption onset.
+  if (releaseHours === undefined) {
+    return doseMultiplier * periodicAbsorption(0, ka, k, interval);
+  }
+  const lagPhase = lagHours % interval;
+  const remainder = releaseHours % interval;
+  const periodicCurve = (hour: number): number => {
+    const shifted = (hour - lagPhase) % interval;
+    const phase = shifted < 0 ? shifted + interval : shifted;
+    const response = (time: number) => periodicAbsorption(time, ka, k, interval);
+    if (releaseHours * Math.max(ka, k) < 1e-6) {
+      const shiftedMidpoint = (phase - releaseHours / 2) % interval;
+      const midpoint = shiftedMidpoint < 0 ? shiftedMidpoint + interval : shiftedMidpoint;
+      return response(midpoint);
+    }
+    const fullPeriods = (1 - remainder / releaseHours) / (k * interval);
+    const partial = phase >= remainder
+      ? integrateCurve(response, phase - remainder, phase)
+      : integrateCurve(response, 0, phase) +
+        integrateCurve(response, interval - (remainder - phase), interval);
+    return fullPeriods + partial / releaseHours;
+  };
+  const boundaries = [...new Set([
+    0, interval, lagPhase,
+    lagPhase >= interval - remainder ? lagPhase - (interval - remainder) : lagPhase + remainder,
+  ])].sort((a, b) => a - b);
+  let minimum = Math.min(...boundaries.map(periodicCurve));
+  for (let index = 1; index < boundaries.length; index++) {
+    let left = boundaries[index - 1];
+    let right = boundaries[index];
+    // Between release on/off boundaries the derivative is a sum of two
+    // exponentials and has at most one interior extremum.
+    for (let iteration = 0; iteration < 70; iteration++) {
+      const first = left + (right - left) / 3;
+      const second = right - (right - left) / 3;
+      if (periodicCurve(first) > periodicCurve(second)) left = first;
+      else right = second;
+    }
+    minimum = Math.min(minimum, periodicCurve(left + (right - left) / 2));
+  }
+  return doseMultiplier * minimum;
 }
 
 /**
@@ -438,15 +579,54 @@ export function computeEventPK(
   activeSubstances: Substance[] = [],
   steadyStateIntervalHours?: number,
 ): PKResult {
+  const warnings = new Set<string>();
+  if (substance.approximate) {
+    warnings.add('Approximate substance profile: core PK parameters may be estimated; results are illustrative.');
+  }
+  if (!substance.parameterEvidence || Object.keys(substance.parameterEvidence).length === 0) {
+    warnings.add('Parameter provenance is absent; PK estimates are not source-verified.');
+  } else {
+    const parameters: (keyof NonNullable<Substance['parameterEvidence']>)[] =
+      ['halfLifeHours', 'vdLKg', 'bioavailability'];
+    if (substance.clearanceMlMinKg !== undefined) parameters.push('clearanceMlMinKg');
+    if (substance.bioavailabilityByRoute !== undefined) parameters.push('bioavailabilityByRoute');
+    if (substance.absorptionByRoute !== undefined) parameters.push('absorptionByRoute');
+    if (substance.releaseHoursByFormulation !== undefined) parameters.push('releaseHoursByFormulation');
+    if (substance.metabolites?.length) parameters.push('metabolites');
+    const missing = parameters.filter((parameter) => !substance.parameterEvidence?.[parameter]);
+    if (missing.length > 0) {
+      warnings.add(`Parameter provenance is partial; evidence is missing for ${missing.join(', ')}.`);
+    }
+    if (parameters.some((parameter) => {
+      const basis = substance.parameterEvidence?.[parameter]?.basis;
+      return basis === 'estimated' || basis === 'unknown';
+    })) {
+      warnings.add('PK provenance includes estimated or unknown parameters; exposure estimates are uncertain.');
+    }
+  }
   const { multiplier, factors } = clearanceMultiplier(patient, substance, activeSubstances);
   
   let baseHalfLife = substance.halfLifeHours;
   if (substance.clearanceMlMinKg != null) {
-    const clearanceLHrKg = (substance.clearanceMlMinKg * 60) / 1000;
-    if (clearanceLHrKg > 0) baseHalfLife = (0.693 * substance.vdLKg) / clearanceLHrKg;
+    const clearanceLHrKg = substance.clearanceMlMinKg * 0.06;
+    if (Number.isFinite(clearanceLHrKg) && clearanceLHrKg > 0) {
+      const derivedHalfLife = (Math.LN2 * substance.vdLKg) / clearanceLHrKg;
+      if (Number.isFinite(derivedHalfLife) && derivedHalfLife > 0 &&
+          Number.isFinite(baseHalfLife) && baseHalfLife > 0 &&
+          Math.abs(derivedHalfLife - baseHalfLife) / baseHalfLife > 0.25) {
+        warnings.add('CL/Vd-derived half-life differs from the listed half-life by more than 25%; the clearance-derived value is used by this one-compartment model.');
+      }
+      baseHalfLife = derivedHalfLife;
+    }
   }
   
-  const tHalf = baseHalfLife / multiplier;
+  if (!Number.isFinite(baseHalfLife) || baseHalfLife <= 0) {
+    warnings.add('Invalid elimination parameters; a generic 12-hour half-life default was used.');
+    baseHalfLife = 12;
+  }
+  const rawHalfLife = baseHalfLife / multiplier;
+  const tHalf = Math.min(1e9, Math.max(1e-6, rawHalfLife));
+  if (tHalf !== rawHalfLife) warnings.add('Extreme half-life was bounded for numerical stability.');
   const k = Math.log(2) / tHalf;
 
   let conditionVdScalar = 1.0;
@@ -454,53 +634,119 @@ export function computeEventPK(
   for (const cond of patientConditions) {
       if (cond.pkModifiers?.vdScalar) conditionVdScalar *= cond.pkModifiers.vdScalar;
   }
-  const Vd = Math.max(0.01, substance.vdLKg * Math.max(0.1, patient.weightKg) * conditionVdScalar);
+  const volume = positiveFinite(substance.vdLKg, 1) * positiveFinite(patient.weightKg, 70) * conditionVdScalar;
+  const Vd = Math.min(1e12, Math.max(0.01, positiveFinite(volume, 70)));
+  if (!Number.isFinite(volume) || volume <= 0 || !Number.isFinite(patient.weightKg) ||
+      patient.weightKg <= 0 || !Number.isFinite(substance.vdLKg) || substance.vdLKg <= 0) {
+    warnings.add('Invalid distribution parameters; generic volume/weight defaults were used.');
+  }
 
   const validEvents = validDoseEvents(events, substance.id);
-  const eventCurves = validEvents.map((ev) => {
+  if (validEvents.length !== events.length) {
+    warnings.add('Invalid dose events were discarded or the 2000-event timeline limit was applied.');
+  }
+  if (substance.metabolites?.length || validEvents.some((event) => event.kaOverride !== undefined)) {
+    warnings.add('Metabolites use a simplified first-order formation approximation; parent absorption/bioavailability, infusion/release timing, molecular-mass conversion and enzyme-specific formation are not fully coupled.');
+  }
+  const profiles = validEvents.map((ev) => {
+    if (!substance.routes.includes(ev.route)) {
+      warnings.add(`Unsupported route for ${substance.id}: ${ev.route}; estimates are extrapolated.`);
+    }
     const roa = ROA_MULTIPLIERS[ev.route] || ROA_MULTIPLIERS.oral;
-    const ka = ev.kaOverride ?? Math.max(k * 1.1, 3.5 / roa.tmaxHours);
+    const absorption = substance.absorptionByRoute?.[ev.route];
+    const rawKa = ev.kaOverride ?? absorption?.kaPerHour;
+    const ka = Math.min(1e12, Math.max(1e-12,
+      positiveFinite(rawKa, Math.max(k * 1.1, 3.5 / roa.tmaxHours))));
+    const isBolusOrInfusion = ev.route === 'IV' && ev.kaOverride === undefined;
+    if (!isBolusOrInfusion && (rawKa === undefined || !Number.isFinite(rawKa) || rawKa <= 0)) {
+      warnings.add(`Generic absorption defaults used for ${ev.route}.`);
+    } else if (rawKa !== undefined && rawKa !== ka) {
+      warnings.add('Extreme absorption rate was bounded for numerical stability.');
+    }
+    const lagHours = ev.route !== 'IV' && absorption?.lagHours !== undefined &&
+      Number.isFinite(absorption.lagHours) && absorption.lagHours >= 0 ? absorption.lagHours : 0;
+    if (absorption?.lagHours !== undefined && (!Number.isFinite(absorption.lagHours) || absorption.lagHours < 0)) {
+      warnings.add('Invalid absorption lag discarded; zero lag was used.');
+    }
+    const configuredRelease = substance.releaseHoursByFormulation?.[ev.formulation];
+    const releaseHours = ev.route === 'IV' ? undefined :
+      configuredRelease !== undefined && Number.isFinite(configuredRelease) && configuredRelease > 0
+        ? configuredRelease : RELEASE_HOURS[ev.formulation];
+    if (releaseHours !== undefined && releaseHours !== configuredRelease) {
+      warnings.add(`Generic ${ev.formulation} release duration default used.`);
+    } else if (configuredRelease !== undefined && releaseHours === undefined && ev.route !== 'IV') {
+      warnings.add('Invalid release duration discarded.');
+    }
     let f = ev.route === 'IV' ? 1 : substance.bioavailability;
     if (ev.route !== 'IV' && substance.bioavailabilityByRoute && substance.bioavailabilityByRoute[ev.route] !== undefined) {
       f = substance.bioavailabilityByRoute[ev.route]!;
     } else {
       if (ev.route !== 'IV') {
-        f = substance.bioavailability * roa.bioavailabilityScalar;
+        const baseline = substance.bioavailability;
+        if (!Number.isFinite(baseline) || baseline < 0 || baseline > 1) {
+          warnings.add('Invalid bioavailability; a bounded generic default was used.');
+          f = 0.7 * roa.bioavailabilityScalar;
+        } else {
+          f = baseline * roa.bioavailabilityScalar;
+        }
         if (f > 0.95) f = 0.95;
+        warnings.add(`Generic route bioavailability scaling used for ${ev.route}.`);
       }
     }
-
-    return makeEventCurve(ev, (ev.doseMg * f) / Vd, ka, k);
+    if (!Number.isFinite(f) || f < 0 || f > 1) {
+      warnings.add('Invalid bioavailability; a bounded generic default was used.');
+      f = Number.isFinite(f) ? Math.min(1, Math.max(0, f)) : 0.7;
+    }
+    const dose = Math.min(ev.doseMg, 1e7);
+    if (dose !== ev.doseMg) warnings.add('Extreme dose was bounded to 10000000 mg for numerical stability.');
+    const doseMultiplier = (dose * f) / Vd;
+    const curve = makeEventCurve(ev, doseMultiplier, ka, k, releaseHours, lagHours);
+    return { curve, ka, lagHours, releaseHours, doseMultiplier, isBolusOrInfusion };
   });
+  const eventCurves = profiles.map((profile) => profile.curve);
 
   const series: PlasmaPoint[] = [];
   const maxHour = validEvents.length > 0 ? validEvents[validEvents.length - 1].administrationHour : 0;
   
-  const maxReleaseHours = validEvents.reduce(
-    (max, event) => Math.max(max, event.route === 'IV' ? 0 : RELEASE_HOURS[event.formulation] ?? 0),
+  const maxReleaseHours = profiles.reduce(
+    (max, profile, index) => Math.max(max, profile.lagHours +
+      (profile.releaseHours ?? validEvents[index].infusionDurationHours ?? 0)),
     0,
   );
+  const slowestAbsorptionTail = profiles.reduce(
+    (max, profile) => Math.max(max, profile.isBolusOrInfusion ? 0 : 10 * Math.LN2 / profile.ka),
+    0,
+  );
+  const desiredHorizon = maxHour + Math.max(tHalf * 10, slowestAbsorptionTail) + maxReleaseHours;
   const horizonHours = Math.min(
-    Math.max(tHalf * 10, maxHour + tHalf * 10 + maxReleaseHours),
+    desiredHorizon,
     24 * 30,
   );
+  if (desiredHorizon > horizonHours) {
+    warnings.add('Horizon truncation: the 720-hour limit excludes later doses or residual exposure; AUC is finite-horizon, not total exposure.');
+  }
   
   const steps = 300;
   const dt = horizonHours / steps;
   const sampleTimes = new Set<number>();
   for (let i = 0; i <= steps; i++) sampleTimes.add(i * dt);
+  sampleTimes.add(horizonHours);
   for (let index = 0; index < validEvents.length; index++) {
     const event = validEvents[index];
+    const { releaseHours, lagHours, ka } = profiles[index];
+    const origin = event.administrationHour + lagHours;
     sampleTimes.add(event.administrationHour);
-    const releaseHours = event.route === 'IV' ? undefined : RELEASE_HOURS[event.formulation];
-    if (releaseHours !== undefined && event.administrationHour + releaseHours <= horizonHours) {
-      sampleTimes.add(event.administrationHour + releaseHours);
+    sampleTimes.add(origin);
+    if (origin > horizonHours) continue;
+    const deliveryHours = event.infusionDurationHours ?? releaseHours;
+    if (deliveryHours !== undefined && origin + deliveryHours <= horizonHours) {
+      sampleTimes.add(origin + deliveryHours);
     }
     const curve = eventCurves[index];
-    if (event.route !== 'IV' && event.kaOverride === undefined) {
+    if (!profiles[index].isBolusOrInfusion) {
       if (releaseHours !== undefined) {
-        let left = event.administrationHour;
-        let right = Math.min(horizonHours, event.administrationHour + releaseHours + 6 * tHalf);
+        let left = origin;
+        let right = Math.min(horizonHours, origin + releaseHours + 6 * Math.max(tHalf, Math.LN2 / ka));
         for (let iteration = 0; iteration < 40; iteration++) {
           const first = left + (right - left) / 3;
           const second = right - (right - left) / 3;
@@ -509,15 +755,17 @@ export function computeEventPK(
         }
         sampleTimes.add((left + right) / 2);
       } else {
-        const ka = Math.max(k * 1.1, 3.5 / ROA_MULTIPLIERS[event.route].tmaxHours);
-        const tmax = Math.abs(ka - k) < 1e-8 ? 1 / k : Math.log(ka / k) / (ka - k);
-        if (event.administrationHour + tmax <= horizonHours) {
-          sampleTimes.add(event.administrationHour + tmax);
+        const relativeDifference = (ka - k) / k;
+        const tmax = ka === k ? 1 / k :
+          (Math.abs(relativeDifference) < 0.5 ? Math.log1p(relativeDifference) : Math.log(ka / k)) / (ka - k);
+        if (origin + tmax <= horizonHours) {
+          sampleTimes.add(origin + tmax);
         }
       }
     }
   }
   let peak = 0;
+  let peakHour = 0;
 
   let peakIndividualDose = 0;
   for (const t of [...sampleTimes].filter((time) => time >= 0 && time <= horizonHours).sort((a, b) => a - b)) {
@@ -527,6 +775,7 @@ export function computeEventPK(
     }
     if (c > peak) {
       peak = c;
+      peakHour = t;
       peakIndividualDose = eventCurves.reduce((max, fn) => Math.max(max, fn(t)), 0);
     }
     series.push({ hour: t, concentration: c });
@@ -541,12 +790,19 @@ export function computeEventPK(
         event.doseMg === validEvents[0].doseMg &&
         event.route === validEvents[0].route &&
         event.formulation === validEvents[0].formulation &&
-        event.kaOverride === validEvents[0].kaOverride,
+        event.kaOverride === validEvents[0].kaOverride &&
+        event.infusionDurationHours === validEvents[0].infusionDurationHours,
     );
   const steadyStateInterval =
     steadyStateIntervalHours !== undefined && Number.isFinite(steadyStateIntervalHours) && steadyStateIntervalHours > 0
       ? steadyStateIntervalHours
       : repeatableSchedule ? inferredInterval : undefined;
+  const troughAvailable = steadyStateInterval !== undefined &&
+    Number.isFinite(1 / (k * steadyStateInterval)) &&
+    profiles.length > 0 && Number.isFinite(1 / (profiles[0].ka * steadyStateInterval));
+  if (steadyStateInterval !== undefined && !troughAvailable && profiles.length > 0) {
+    warnings.add('Steady-state trough is unavailable because the dosing interval exceeds numerical resolution.');
+  }
   const inferredTau = inferredInterval ?? (validEvents.length > 1
     ? validEvents.slice(1).map((event, index) => event.administrationHour - validEvents[index].administrationHour)
       .filter((interval) => interval > 0)
@@ -555,8 +811,44 @@ export function computeEventPK(
   
   // Tolerance calculation (perceived effect)
   // For now, if events array is massive (long history), we could scale tolerance up.
-  const tol = patient.tolerance;
+  const tol = Number.isFinite(patient.tolerance) ? Math.max(0, Math.min(100, patient.tolerance)) : 0;
   const toleranceScalar = Math.max(0.2, 1 - (tol / 100) * 0.8);
+  const aucMgHourL = profiles.reduce((total, profile, index) => {
+    const event = validEvents[index];
+    const origin = event.administrationHour + profile.lagHours;
+    const elapsed = horizonHours - origin;
+    if (elapsed <= 0) return total;
+    if (profile.isBolusOrInfusion && event.infusionDurationHours === undefined) {
+      return total + profile.doseMultiplier * -Math.expm1(-k * elapsed) / k;
+    }
+    if (!profile.isBolusOrInfusion && profile.releaseHours === undefined) {
+      return total + profile.doseMultiplier * absorptionIntegral(0, elapsed, profile.ka, k);
+    }
+    // Split at delivery boundaries and both kinetic timescales so adaptive
+    // quadrature cannot miss a narrow peak on an otherwise long horizon.
+    const deliveryEnd = origin + (event.infusionDurationHours ?? profile.releaseHours ?? 0);
+    const breakpoints = [origin, horizonHours, deliveryEnd];
+    for (const boundary of [origin, deliveryEnd]) {
+      for (let delta = Math.min(1 / k, 1 / profile.ka); delta < horizonHours - boundary; delta *= 2) {
+        breakpoints.push(boundary + delta);
+      }
+    }
+    const times = [...new Set(breakpoints.filter((time) =>
+      time >= origin && time <= horizonHours))].sort((a, b) => a - b);
+    const normalizedCurve = makeEventCurve(event, 1, profile.ka, k, profile.releaseHours, profile.lagHours);
+    return total + profile.doseMultiplier * times.slice(1).reduce((area, time, i) =>
+      area + integrateCurve(normalizedCurve, times[i], time), 0);
+  }, 0);
+  let steadyStateTrough = troughAvailable && steadyStateInterval !== undefined
+    ? periodicTrough(
+        validEvents[0], steadyStateInterval, profiles[0].ka, k,
+        profiles[0].doseMultiplier, profiles[0].lagHours, profiles[0].releaseHours,
+      )
+    : 0;
+  if (!Number.isFinite(steadyStateTrough) || steadyStateTrough < 0) {
+    warnings.add('Steady-state trough is unavailable because the dosing interval exceeds numerical resolution.');
+    steadyStateTrough = 0;
+  }
 
   return {
     substanceId: substance.id,
@@ -569,16 +861,12 @@ export function computeEventPK(
     tauHours: inferredTau,
     series,
     peakConcentration: peak,
-    steadyStateTrough:
-      steadyStateInterval !== undefined && eventCurves.length > 0
-        ? periodicTrough(
-            eventCurves[0],
-            steadyStateInterval,
-            tHalf,
-            validEvents[0].administrationHour,
-          )
-        : 0,
+    steadyStateTrough,
     toleranceScalar,
+    aucMgHourL,
+    peakHour,
+    horizonHours,
+    warnings: [...warnings],
   };
 }
 
@@ -601,6 +889,9 @@ export function computePK(
     activeSubstances,
     isGeneratedDaily ? tau : undefined,
   );
+  if (regimen.customEvents && events.length !== regimen.customEvents.length) {
+    result.warnings.push('Invalid dose events were discarded or the 2000-event timeline limit was applied.');
+  }
   
   if (isGeneratedDaily) {
     result.tauHours = tau;

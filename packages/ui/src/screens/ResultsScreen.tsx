@@ -13,22 +13,31 @@ import {
   getRiskLevel,
   generateMarkdownReport,
   getToxicityAlertLabel,
-  findSeriesPeak,
+  formatPKSummary,
+  getParameterEvidenceLines,
+  INTERACTION_COVERAGE_NOTICE,
+  REPORT_DISCLAIMER,
   SEVERITY_META 
 } from '@pharmasim/engine';
+import type { PKResult, PlasmaPoint, Substance } from '@pharmasim/engine';
 
-function Sparkline({ series, color }: { series: any[]; color: string }) {
-  const step = Math.max(1, Math.floor(series.length / 40));
-  const sampled = [];
-  for (let i = 0; i < series.length; i += step) {
-    sampled.push(series[i]);
-    if (sampled.length >= 40) break;
-  }
-
-  const maxVal = Math.max(...series.map(pt => pt.concentration), 0.001);
+function Sparkline({ series, color }: { series: PlasmaPoint[]; color: string }) {
+  const start = series[0]?.hour ?? 0;
+  const end = series[series.length - 1]?.hour ?? start;
+  let cursor = 0;
+  // Engine samples can be irregular around doses and peaks; space bars by time, not sample index.
+  const sampled = series.length === 0 ? [] : Array.from({ length: 40 }, (_, index) => {
+    const hour = start + (end - start) * index / 39;
+    while (cursor + 1 < series.length && series[cursor + 1].hour <= hour) cursor++;
+    const left = series[cursor];
+    const right = series[cursor + 1] ?? left;
+    const fraction = right.hour > left.hour ? (hour - left.hour) / (right.hour - left.hour) : 0;
+    return { hour, concentration: left.concentration + fraction * (right.concentration - left.concentration) };
+  });
+  const maxVal = series.reduce((max, point) => Math.max(max, point.concentration), 0.001);
 
   return (
-    <View style={styles.sparklineContainer}>
+    <View style={styles.sparklineContainer} accessible accessibilityLabel={`Modeled plasma concentration in mg/L from ${Number(start.toFixed(2))} to ${Number(end.toFixed(2))} hours. Substance-specific vertical scale.`}>
       {sampled.map((pt, idx) => {
         const heightPct = (pt.concentration / maxVal) * 100;
         return (
@@ -36,7 +45,7 @@ function Sparkline({ series, color }: { series: any[]; color: string }) {
             key={idx}
             style={{
               flex: 1,
-              height: `${Math.max(4, heightPct)}%`,
+              height: `${Math.max(0, heightPct)}%`,
               backgroundColor: pt.concentration > 0 ? color : 'rgba(255,255,255,0.05)',
               marginHorizontal: 1,
               borderRadius: 1,
@@ -61,10 +70,11 @@ export function ResultsScreen({ route }: any) {
     eventsBySubstance[evt.substanceId].push(evt);
   }
 
-  const pkResults = Object.keys(eventsBySubstance).map(substanceId => {
-    const substance = substances.find(s => s.id === substanceId);
-    if (!substance) return null;
-    
+  const activeSubstances = Object.keys(eventsBySubstance)
+    .map(id => substances.find(s => s.id === id))
+    .filter((substance): substance is Substance => substance !== undefined);
+
+  const pkResults = activeSubstances.map(substance => {
     const regimen = {
       mode: 'acute' as const,
       doseMg: 0,
@@ -72,16 +82,13 @@ export function ResultsScreen({ route }: any) {
       daysOnRegimen: 1,
       frequency: 'QD' as const,
       toleranceOverride: null,
-      customEvents: eventsBySubstance[substanceId]
+      customEvents: eventsBySubstance[substance.id]
     };
 
-    return computePK(patient, substance, regimen, substances);
-  }).filter(Boolean) as any[];
+    return computePK(patient, substance, regimen, activeSubstances);
+  }).filter((pk): pk is PKResult => pk !== null);
 
   if (pkResults.length === 0) return null;
-
-  const activeSubstanceIds = Object.keys(eventsBySubstance);
-  const activeSubstances = activeSubstanceIds.map(id => substances.find(s => s.id === id)).filter(Boolean) as any[];
 
   const toxAlerts = evaluateToxicity(pkResults, substances);
   const conditionWarnings = computeConditionWarnings(activeSubstances, patient.conditions, patient.liver, patient.kidney);
@@ -126,6 +133,9 @@ export function ResultsScreen({ route }: any) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginBottom: 12 }}>
+        {REPORT_DISCLAIMER}
+      </Text>
       
       {/* Patient Settings Info card */}
       <Card style={[styles.card, { backgroundColor: theme.colors.surfaceVariant }]}>
@@ -175,7 +185,7 @@ export function ResultsScreen({ route }: any) {
       {conditionWarnings.length > 0 && (
         <Card style={styles.card}>
           <Card.Title 
-            title="Clinical Warnings" 
+            title="Simulation Warnings" 
             titleStyle={{ fontWeight: 'bold', color: theme.colors.error }}
             left={(props) => <IconButton icon="shield-alert" iconColor={theme.colors.error} />}
           />
@@ -254,9 +264,12 @@ export function ResultsScreen({ route }: any) {
             left={(props) => <IconButton icon="swap-horizontal" />}
           />
           <Card.Content>
+            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginBottom: 12 }}>
+              {INTERACTION_COVERAGE_NOTICE}
+            </Text>
             {interactions.length === 0 ? (
-              <Text variant="bodyMedium" style={{ color: '#34d399', textAlign: 'center' }}>
-                No interactions detected between selected drugs.
+              <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant, textAlign: 'center' }}>
+                No rule-based interactions detected between selected substances.
               </Text>
             ) : (
               interactions.map((i, idx) => {
@@ -290,9 +303,6 @@ export function ResultsScreen({ route }: any) {
           {pkResults.map(pk => {
             const sub = substances.find(s => s.id === pk.substanceId);
             if (!sub) return null;
-            const peak = findSeriesPeak(pk.series);
-            const peakC = peak.concentration;
-            const peakH = peak.hour;
             return (
               <View key={pk.substanceId} style={styles.pkRow}>
                 <View style={styles.pkHeader}>
@@ -304,15 +314,12 @@ export function ResultsScreen({ route }: any) {
                       {sub.drugClass}
                     </Text>
                   </View>
-                  <View style={{ alignItems: 'flex-end' }}>
-                    <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>
-                      {peakC.toFixed(2)} mg/L
-                    </Text>
-                    <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                      at T+{peakH}h
-                    </Text>
-                  </View>
                 </View>
+                {formatPKSummary(pk).map((line) => (
+                  <Text key={line} variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginBottom: 4 }}>
+                    {line}
+                  </Text>
+                ))}
 
                 {/* Patient vs Base half life */}
                 <View style={styles.halfLifeRow}>
@@ -337,6 +344,24 @@ export function ResultsScreen({ route }: any) {
 
                 {/* Sparkline chart */}
                 <Sparkline series={pk.series} color={theme.colors.primary} />
+                <Text variant="labelSmall" style={{ color: theme.colors.onSurfaceVariant }}>
+                  Modeled concentration (mg/L), T+0–{Number(pk.horizonHours.toFixed(2))} h; bars use a substance-specific scale.
+                </Text>
+                {pk.warnings.map((warning: string, index: number) => (
+                  <Text key={index} variant="bodySmall" style={{ color: theme.colors.error, marginTop: 4 }}>
+                    {warning}
+                  </Text>
+                ))}
+                <Text variant="labelMedium" style={{ marginTop: 8 }}>Parameter evidence / unknowns / estimates</Text>
+                <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+                  Input values, not patient-specific measurements.
+                </Text>
+                {sub.approximate && <Text variant="bodySmall">Approximate PK parameters; modeled results are uncertain.</Text>}
+                {getParameterEvidenceLines(sub).map((line) => (
+                  <Text key={line} selectable variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginTop: 4 }}>
+                    {line}
+                  </Text>
+                ))}
               </View>
             );
           })}
@@ -414,7 +439,7 @@ export function ResultsScreen({ route }: any) {
       {/* Clinical Summary Report Card */}
       <Card style={styles.card}>
         <Card.Title 
-          title="Clinical Summary Report" 
+          title="Simulation Summary Report" 
           titleStyle={{ fontWeight: 'bold' }}
           left={(props) => <IconButton icon="file-document-outline" />}
         />

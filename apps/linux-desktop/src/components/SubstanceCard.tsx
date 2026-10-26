@@ -12,7 +12,7 @@ import { ChevronDown, X, AlertTriangle, FlaskConical } from 'lucide-react';
 import type { AddedSubstance } from '@pharmasim/engine';
 import { CATEGORY_LABELS, CATEGORY_COLOR } from '@pharmasim/engine';
 import type { PatientProfile, RegimenConfig, Frequency } from '@pharmasim/engine';
-import { computePK, formatHours } from '@pharmasim/engine';
+import { computePK, formatHours, formatPKSummary, getParameterEvidenceLines } from '@pharmasim/engine';
 import { InfoTooltip } from './InfoTooltip';
 
 interface Props {
@@ -40,6 +40,8 @@ export function SubstanceCard({
 }: Props) {
   const { substance: s, regimen } = item;
   const pk = computePK(patient, s, regimen);
+  const showTrough = pk.steadyStateTrough > 0 ||
+    (regimen.mode === 'daily' && !regimen.customEvents?.length);
   const accent = CATEGORY_COLOR[s.category];
   const liverImpaired = patient.liver !== 'normal' || patient.conditions?.includes('liver-cirrhosis');
   const kidneyImpaired = patient.kidney !== 'normal' || patient.conditions?.includes('ckd');
@@ -347,7 +349,7 @@ export function SubstanceCard({
       <div className="border-t border-border px-3 pb-3 pt-3">
         <div className="mb-1 flex items-center justify-between px-1">
           <span className="text-[11px] font-medium uppercase tracking-wide text-ink-faint">
-            Plasma concentration
+            Modeled plasma concentration (mg/L)
           </span>
           <InfoTooltip
             label="Plasma concentration chart"
@@ -394,9 +396,9 @@ export function SubstanceCard({
                 labelFormatter={(h) => `t = ${h} h`}
                 formatter={(v) => [typeof v === 'number' ? v.toFixed(3) : String(v ?? ''), 'mg/L']}
               />
-              {regimen.mode === 'daily' && pk.steadyStateTrough > 0 && (
+              {showTrough && (
                 <ReferenceLine
-                  y={pk.accumulationRatio}
+                  y={pk.steadyStateTrough}
                   stroke="#fbbf24"
                   strokeDasharray="4 4"
                   strokeOpacity={0.5}
@@ -413,6 +415,23 @@ export function SubstanceCard({
             </AreaChart>
           </ResponsiveContainer>
         </div>
+        <div className="mt-2 space-y-1 text-[11px] text-ink-muted" data-testid={`pk-summary-${s.id}`}>
+          {formatPKSummary(pk, showTrough).map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+          <p>Educational model estimates only; not measurements or dosing guidance.</p>
+          {pk.warnings.map((warning, index) => (
+            <p key={index} className="text-sev-moderate" role="note">{warning}</p>
+          ))}
+        </div>
+        <details className="mt-3 text-[11px] text-ink-muted" data-testid={`parameter-evidence-${s.id}`}>
+          <summary className="cursor-pointer font-medium">Parameter evidence / unknowns / estimates</summary>
+          <p className="mt-1">Input values, not patient-specific measurements.</p>
+          {s.approximate && <p>Approximate PK parameters; modeled results are uncertain.</p>}
+          <ul className="mt-1 space-y-1 break-words">
+            {getParameterEvidenceLines(s).map((line) => <li key={line}>{line}</li>)}
+          </ul>
+        </details>
       </div>
 
       {/* Clinical & Safety Parameters */}

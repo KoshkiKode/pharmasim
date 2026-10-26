@@ -60,6 +60,42 @@ export type Route = (typeof ROUTES)[number];
 
 export type Formulation = 'IR' | 'ER' | 'XR' | 'CR';
 
+export interface AbsorptionParameters {
+  kaPerHour: number;
+  lagHours?: number;
+}
+
+/** Canonical units used by field-level evidence, including structured fields. */
+export const PARAMETER_EVIDENCE_UNITS = {
+  halfLifeHours: 'h',
+  bioavailability: 'fraction',
+  vdLKg: 'L/kg',
+  clearanceMlMinKg: 'mL/min/kg',
+  proteinBindingPct: '%',
+  bioavailabilityByRoute: 'fraction',
+  absorptionByRoute: '1/h',
+  releaseHoursByFormulation: 'h',
+  molarMassGPerMol: 'g/mol',
+  tags: 'unitless',
+  metabolites: 'fraction',
+} as const;
+
+export type SubstanceParameter = keyof typeof PARAMETER_EVIDENCE_UNITS;
+
+export interface ParameterEvidence {
+  sourceUrl: string;
+  sourceTitle: string;
+  /** A real calendar date in YYYY-MM-DD format. */
+  reviewedAt: string;
+  quality: 'high' | 'moderate' | 'low';
+  basis: 'measured' | 'estimated' | 'unknown';
+  /** Must match PARAMETER_EVIDENCE_UNITS for the corresponding field. */
+  unit: string;
+  notes?: string;
+}
+
+export type ParameterEvidenceMap = Partial<Record<SubstanceParameter, ParameterEvidence>>;
+
 export interface DoseEvent {
   id: string;
   substanceId: string;
@@ -68,6 +104,7 @@ export interface DoseEvent {
   formulation: Formulation;
   administrationHour: number; // T=0 is start of timeline
   kaOverride?: number; // Used for modeling metabolite formation
+  infusionDurationHours?: number;
 }
 
 export interface Substance {
@@ -106,9 +143,14 @@ export interface Substance {
   // Advanced PK properties
   bioavailability: number; // Fraction 0..1 (Baseline / Oral)
   bioavailabilityByRoute?: Partial<Record<Route, number>>; // Explicit clinical bioavailability per route
+  absorptionByRoute?: Partial<Record<Route, AbsorptionParameters>>;
+  releaseHoursByFormulation?: Partial<Record<Formulation, number>>;
   vdLKg: number; // Volume of distribution (L/kg)
   clearanceMlMinKg?: number; // Systemic clearance (mL/min/kg)
   proteinBindingPct?: number; // 0..100
+  /** Evidence requires a present, nonempty value, even when basis is unknown.
+   * absorptionByRoute uses 1/h for ka; its optional lag is always in hours. */
+  parameterEvidence?: ParameterEvidenceMap;
   
   // Relational Properties
   /** If this is a mixture/plant, the active ingredients and their typical mass ratio (0..1) */

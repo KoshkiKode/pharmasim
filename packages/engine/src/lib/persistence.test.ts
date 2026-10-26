@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { saveSession, loadSession, clearSession } from './persistence';
 import type { PatientProfile } from './pharmacokinetics';
 import type { AddedSubstance } from './state';
@@ -95,6 +95,53 @@ describe('session persistence', () => {
     const result = loadSession(DEFAULT_PATIENT);
     expect(result.patient).toEqual(DEFAULT_PATIENT);
     expect(result.added).toEqual([]);
+  });
+
+  it.each(['null', '42', '"session"', '[]', '{"added":{}}'])(
+    'restores defaults for malformed root payload %s',
+    (raw) => {
+      localStorageMock.setItem('pharmasim:session:v1', raw);
+      const restored = loadSession(DEFAULT_PATIENT);
+      expect(restored.patient).toEqual(DEFAULT_PATIENT);
+      expect(restored.added).toEqual([]);
+    },
+  );
+
+  it('bounds restored collections and sanitizes nested regimens', () => {
+    localStorageMock.setItem('pharmasim:session:v1', JSON.stringify({
+      version: 1,
+      patient: { ...DEFAULT_PATIENT, weightKg: -500, conditions: ['unknown-condition'] },
+      added: Array.from({ length: 150 }, () => ({
+        id: substances[0].id,
+        regimen: {
+          mode: 'acute',
+          doseMg: -50,
+          customEvents: [null, { doseMg: -1, route: 'unknown', administrationHour: -1 }],
+        },
+      })),
+    }));
+    const restored = loadSession(DEFAULT_PATIENT);
+    expect(restored.added).toHaveLength(100);
+    expect(restored.patient.weightKg).toBeGreaterThan(0);
+    expect(restored.patient.conditions).toEqual([]);
+    for (const entry of restored.added) {
+      expect(entry.substance).toBe(substances[0]);
+      expect(entry.regimen.doseMg).toBeGreaterThanOrEqual(0);
+      expect(entry.regimen.customEvents ?? []).toEqual([]);
+    }
+  });
+
+  it('survives unavailable storage without losing the fallback profile', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const read = vi.spyOn(localStorageMock, 'getItem').mockImplementation(() => {
+      throw new Error('Storage access denied');
+    });
+    try {
+      expect(loadSession(DEFAULT_PATIENT)).toEqual({ patient: DEFAULT_PATIENT, added: [] });
+    } finally {
+      read.mockRestore();
+      warn.mockRestore();
+    }
   });
 
   it('drops added substances if their IDs no longer exist in the database', () => {

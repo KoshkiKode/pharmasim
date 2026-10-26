@@ -128,6 +128,9 @@ function sanitizeDoseEvent(event: Partial<DoseEvent>, substance: Substance, inde
     ? event.formulation as Formulation
     : 'IR';
   if (!finite(event.administrationHour) || event.administrationHour < 0) return null;
+  if (event.infusionDurationHours !== undefined &&
+      (event.route !== 'IV' || !finite(event.infusionDurationHours) ||
+        event.infusionDurationHours <= 0 || event.kaOverride !== undefined)) return null;
   const doseMg = clamp(event.doseMg, 0, 0, MAX_DOSE_MG);
   const kaOverride = finite(event.kaOverride) && event.kaOverride > 0 ? event.kaOverride : undefined;
   return {
@@ -138,6 +141,7 @@ function sanitizeDoseEvent(event: Partial<DoseEvent>, substance: Substance, inde
     formulation,
     administrationHour: event.administrationHour,
     ...(kaOverride === undefined ? {} : { kaOverride }),
+    ...(event.infusionDurationHours === undefined ? {} : { infusionDurationHours: event.infusionDurationHours }),
   };
 }
 
@@ -190,6 +194,35 @@ export function validateRegimenConfig(regimen: RegimenConfig): InputIssue[] {
   if (!FREQUENCIES.has(regimen.frequency)) issues.push({ field: 'frequency', message: 'unknown dosing frequency' });
   if (regimen.toleranceOverride !== null && (!finite(regimen.toleranceOverride) || regimen.toleranceOverride < 0 || regimen.toleranceOverride > 100)) {
     issues.push({ field: 'toleranceOverride', message: 'must be null or between 0 and 100' });
+  }
+  if (regimen.customEvents !== undefined) {
+    if (!Array.isArray(regimen.customEvents)) {
+      issues.push({ field: 'customEvents', message: 'must be an array' });
+    } else {
+      regimen.customEvents.forEach((event, index) => {
+        const field = `customEvents.${index}`;
+        if (!event || typeof event !== 'object') {
+          issues.push({ field, message: 'must be a dose event' });
+          return;
+        }
+        if (!finite(event.administrationHour) || event.administrationHour < 0) {
+          issues.push({ field: `${field}.administrationHour`, message: 'must be finite and nonnegative' });
+        }
+        if (!finite(event.doseMg) || event.doseMg < 0 || event.doseMg > MAX_DOSE_MG) {
+          issues.push({ field: `${field}.doseMg`, message: 'is outside the supported range' });
+        }
+        if (!ROUTE_SET.has(event.route)) issues.push({ field: `${field}.route`, message: 'unknown route' });
+        if (!FORMULATIONS.has(event.formulation)) issues.push({ field: `${field}.formulation`, message: 'unknown formulation' });
+        if (event.kaOverride !== undefined && (!finite(event.kaOverride) || event.kaOverride <= 0)) {
+          issues.push({ field: `${field}.kaOverride`, message: 'must be finite and positive' });
+        }
+        if (event.infusionDurationHours !== undefined &&
+            (event.route !== 'IV' || !finite(event.infusionDurationHours) ||
+              event.infusionDurationHours <= 0 || event.kaOverride !== undefined)) {
+          issues.push({ field: `${field}.infusionDurationHours`, message: 'must be finite and positive, IV only, without a formation-rate override' });
+        }
+      });
+    }
   }
   return issues;
 }

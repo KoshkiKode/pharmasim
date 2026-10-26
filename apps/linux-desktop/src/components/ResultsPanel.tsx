@@ -10,7 +10,7 @@ import {
 } from '@pharmasim/engine';
 import { computeConditionWarnings } from '@pharmasim/engine';
 import { computeRiskScores, getRiskLevel } from '@pharmasim/engine';
-import { computePK, evaluateToxicity, computeReceptorState, canRunSimulation, recordSimulationRun, getRemainingFreeRuns, getUsageState, getToxicityAlertLabel } from '@pharmasim/engine';
+import { computePK, evaluateToxicity, computeReceptorState, canRunSimulation, recordSimulationRun, getRemainingFreeRuns, getUsageState, getToxicityAlertLabel, INTERACTION_COVERAGE_NOTICE, REPORT_DISCLAIMER } from '@pharmasim/engine';
 import { SummaryModal } from './SummaryModal';
 import { PaywallModal } from './PaywallModal';
 
@@ -70,7 +70,8 @@ export function ResultsPanel({
 
   return (
     <div className="space-y-4">
-      {/* Export Clinical Summary Button */}
+      <p className="text-[11px] text-ink-muted">{REPORT_DISCLAIMER}</p>
+      {/* Export simulation summary */}
       <div className="space-y-1">
         <button
           type="button"
@@ -86,7 +87,7 @@ export function ResultsPanel({
           className="w-full flex items-center justify-center gap-2 rounded-xl border border-border bg-bg-panel py-2.5 text-xs font-semibold text-accent hover:bg-accent/5 hover:text-ink transition-colors shadow-panel"
           data-testid="btn-export-summary"
         >
-          <FileText className="h-4 w-4" /> Export Clinical Summary
+          <FileText className="h-4 w-4" /> Export Simulation Summary
         </button>
         <p className="text-[10px] text-center text-ink-faint">
           {getUsageState().isProUnlocked
@@ -101,7 +102,7 @@ export function ResultsPanel({
         <section className="rounded-xl border border-red-500/30 bg-red-500/10 shadow-[0_0_15px_rgba(239,68,68,0.15)] animate-pulse" aria-label="Toxicity alerts">
           <header className="flex items-center gap-2 border-b border-red-500/20 px-4 py-3">
             <ShieldAlert className="h-5 w-5 text-red-500" />
-            <h2 className="text-sm font-bold text-red-500 uppercase tracking-widest">Lethal Toxicity Warning</h2>
+            <h2 className="text-sm font-bold text-red-500 uppercase tracking-widest">Modeled Toxicity Warning</h2>
           </header>
           <div className="p-4 space-y-3">
             {toxAlerts.filter(t => t.status === 'lethal' || t.status === 'toxic').map((tox) => (
@@ -150,6 +151,9 @@ export function ResultsPanel({
         </header>
 
         <div className="p-3">
+          <p className="mb-3 text-xs text-ink-muted" data-testid="interaction-coverage-notice">
+            {INTERACTION_COVERAGE_NOTICE}
+          </p>
           {substances.length === 0 ? (
             <Empty text="Add substances to check clinical warnings." />
           ) : conditionWarnings.length === 0 ? (
@@ -306,7 +310,7 @@ export function ResultsPanel({
             <Empty text="Add two or more substances to evaluate interactions." />
           ) : interactions.length === 0 ? (
             <div
-              className="flex items-center gap-2 rounded-lg bg-sev-minor/5 px-3 py-3 text-sm text-sev-minor"
+              className="flex items-center gap-2 rounded-lg bg-bg-inset px-3 py-3 text-sm text-ink-muted"
               data-testid="no-interactions"
             >
               <CheckCircle2 className="h-4 w-4" />
