@@ -61,12 +61,6 @@ jobs:
       - name: Build shared engine
         run: npm run build
 
-      # The Linux desktop client imports the compiled engine output
-      # (@pharmasim/engine main = dist/), which is git-ignored and therefore
-      # must be built before the Tauri beforeBuildCommand runs Vite.
-      - name: Build shared engine
-        run: npm run build -w packages/engine
-
       - name: Build and release Tauri app
         uses: tauri-apps/tauri-action@v1
         env:
