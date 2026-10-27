@@ -227,7 +227,7 @@ export function clearanceMultiplier(
   if (age !== 1) factors.push({ label: 'Age', effect: age });
 
   // Allometric scaling — clearance scales ~ weight^0.75 relative to 70 kg
-  const allo = Math.pow(patient.weightKg / 70, 0.75);
+  const allo = (patient.weightKg / 70) ** 0.75;
   const alloClamped = Math.max(0.6, Math.min(1.5, allo));
   if (Math.abs(alloClamped - 1) > 0.02)
     factors.push({ label: 'Body weight (allometric)', effect: alloClamped });
