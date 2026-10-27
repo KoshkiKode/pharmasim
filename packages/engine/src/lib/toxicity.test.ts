@@ -70,6 +70,8 @@ describe('toxicity evaluation', () => {
         clearanceFactors: [],
         accumulationRatio: 1.0,
         daysToSteadyState: 1.0,
+        peakConcentration: 3.5,
+        peakHour: 1,
       } as any as PKResult,
     ];
 
@@ -94,6 +96,8 @@ describe('toxicity evaluation', () => {
         clearanceFactors: [],
         accumulationRatio: 1.0,
         daysToSteadyState: 1.0,
+        peakConcentration: 6.5,
+        peakHour: 1,
       } as any as PKResult,
     ];
 
@@ -116,6 +120,8 @@ describe('toxicity evaluation', () => {
         clearanceFactors: [],
         accumulationRatio: 1.0,
         daysToSteadyState: 1.0,
+        peakConcentration: 12.0,
+        peakHour: 1,
       } as any as PKResult,
     ];
 
