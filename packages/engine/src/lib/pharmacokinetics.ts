@@ -344,7 +344,7 @@ function validDoseEvents(events: DoseEvent[], substanceId: string): DoseEvent[] 
  * Flattens a static RegimenConfig into discrete DoseEvents over the given days.
  */
 export function flattenRegimensToEvents(regimen: RegimenConfig, substance: Substance): DoseEvent[] {
-  if (regimen.customEvents && regimen.customEvents.length > 0) {
+  if (regimen.customEvents !== undefined) {
     // Callers may bypass sanitizeRegimenConfig (e.g. direct API use or
     // restored state), so defensively clone, validate, sort, and cap the
     // timeline here rather than trusting or mutating the caller's array.
@@ -547,14 +547,20 @@ function periodicTrough(
         integrateCurve(response, interval - (remainder - phase), interval);
     return fullPeriods + partial / releaseHours;
   };
-  const boundaries = [...new Set([
-    0, interval, lagPhase,
+  // Add boundaries at kinetic timescales to avoid missing narrow absorption peaks
+  const boundaries = [0, interval, lagPhase,
     lagPhase >= interval - remainder ? lagPhase - (interval - remainder) : lagPhase + remainder,
-  ])].sort((a, b) => a - b);
-  let minimum = Math.min(...boundaries.map(periodicCurve));
-  for (let index = 1; index < boundaries.length; index++) {
-    let left = boundaries[index - 1];
-    let right = boundaries[index];
+  ];
+  const minKineticScale = Math.min(1 / k, 1 / ka);
+  for (let delta = minKineticScale; delta < interval; delta *= 2) {
+    boundaries.push(lagPhase + delta);
+    boundaries.push((lagPhase + remainder + delta) % interval);
+  }
+  const uniqueBoundaries = [...new Set(boundaries.map(b => b >= 0 && b <= interval ? b : ((b % interval) + interval) % interval))].sort((a, b) => a - b);
+  let minimum = Math.min(...uniqueBoundaries.map(periodicCurve));
+  for (let index = 1; index < uniqueBoundaries.length; index++) {
+    let left = uniqueBoundaries[index - 1];
+    let right = uniqueBoundaries[index];
     // Between release on/off boundaries the derivative is a sum of two
     // exponentials and has at most one interior extremum.
     for (let iteration = 0; iteration < 70; iteration++) {
@@ -781,7 +787,19 @@ export function computeEventPK(
     series.push({ hour: t, concentration: c });
   }
 
-  const dss = daysToSteadyState(tHalf);
+  const dss = (() => {
+    // If absorption is much slower than elimination, the time to steady state
+    // is determined by absorption kinetics, not elimination.
+    let slowestKa = Infinity;
+    for (const profile of profiles) {
+      if (!profile.isBolusOrInfusion) {
+        slowestKa = Math.min(slowestKa, profile.ka);
+      }
+    }
+    const limitingRate = slowestKa === Infinity ? k : Math.min(k, slowestKa);
+    const limitingHalfLife = Math.LN2 / limitingRate;
+    return daysToSteadyState(limitingHalfLife);
+  })();
   const inferredInterval = regularInterval(validEvents);
   const repeatableSchedule =
     validEvents.length > 1 &&

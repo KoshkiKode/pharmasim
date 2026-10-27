@@ -15,6 +15,7 @@ import {
   type PatientProfile,
   type RegimenConfig,
 } from './pharmacokinetics';
+import { sanitizeRegimenConfig } from './validation';
 
 const drug: Substance = {
   id: 'drug',
@@ -671,6 +672,64 @@ describe('event-based pharmacokinetics', () => {
       const pk = computeEventPK(healthy, drug, events);
       expect(pk.series[0].concentration).toBe(0);
       expect(pk.warnings.join(' ')).toContain('not fully coupled');
+    });
+
+    it('captures narrow absorption peaks in periodic trough calculation', () => {
+      // Regression: With fast absorption (ka=1000/h) and fast elimination (0.01h half-life),
+      // the quadrature should find the true minimum, not a spurious value.
+      // This tests the fix for kinetic timescale boundaries.
+      const narrowPeakDrug = {
+        ...drug,
+        halfLifeHours: 0.01,
+        absorptionByRoute: { oral: { kaPerHour: 1000 } },
+        releaseHoursByFormulation: { CR: 23.99 },
+      };
+      // Use a repeating schedule to test steady-state trough calculation
+      const events: DoseEvent[] = [
+        { id: 'test1', substanceId: 'drug', doseMg: 1, route: 'oral', formulation: 'CR', administrationHour: 0 },
+        { id: 'test2', substanceId: 'drug', doseMg: 1, route: 'oral', formulation: 'CR', administrationHour: 24 },
+      ];
+      const pk = computeEventPK(healthy, narrowPeakDrug, events);
+      // The periodic minimum should be non-zero and finite, not near-zero due to missed peaks
+      expect(pk.steadyStateTrough).toBeGreaterThan(0);
+      expect(Number.isFinite(pk.steadyStateTrough)).toBe(true);
+    });
+
+    it('preserves empty custom events through sanitization and flattening', () => {
+      // Regression: When all custom events are rejected, the empty array should be
+      // preserved so that flattenRegimensToEvents returns [] instead of fallback defaults.
+      const regimen: Partial<RegimenConfig> = {
+        ...acute,
+        customEvents: [
+          { id: 'inf', substanceId: 'drug', doseMg: 10, route: 'IV', administrationHour: 0, formulation: 'IR', infusionDurationHours: 0 },
+        ],
+      };
+      const sanitized = sanitizeRegimenConfig(drug, regimen);
+      expect(sanitized.customEvents).toBeDefined();
+      expect(sanitized.customEvents).toEqual([]);
+      const events = flattenRegimensToEvents(sanitized, drug);
+      expect(events).toEqual([]);
+    });
+
+    it('accounts for slow absorption in steady-state timing diagnostic', () => {
+      // Regression: With slow absorption (ka << k), daysToSteadyState should account
+      // for absorption kinetics, not just elimination.
+      const slowAbsorptionDrug = {
+        ...drug,
+        halfLifeHours: 12,
+        absorptionByRoute: { oral: { kaPerHour: 0.001 } },
+      };
+      const pk = computeEventPK(
+        healthy,
+        slowAbsorptionDrug,
+        // Daily dosing schedule to test periodic steady state
+        flattenRegimensToEvents({ mode: 'daily', doseMg: 50, dailyDoseMg: 50, daysOnRegimen: 10, frequency: 'QD', toleranceOverride: null }, slowAbsorptionDrug),
+      );
+      // With slow absorption, daysToSteadyState should be much longer than just elimination
+      // (12 hours * 5 / 24 = 2.5 days)
+      const absorptionHalfLife = Math.LN2 / 0.001 / 24;
+      expect(pk.daysToSteadyState).toBeGreaterThan(2.5);
+      expect(pk.daysToSteadyState).toBeCloseTo(absorptionHalfLife * 5, 0);
     });
 
   describe('formatHours', () => {

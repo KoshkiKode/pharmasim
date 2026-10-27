@@ -181,7 +181,7 @@ export function sanitizeRegimenConfig(
         ? source.formulation as Formulation
         : fallback.formulation,
     ...(Object.keys(customConstituentRatios).length === 0 ? {} : { customConstituentRatios }),
-    ...(customEvents && customEvents.length > 0 ? { customEvents } : {}),
+    ...(customEvents !== undefined ? { customEvents: customEvents.length > 0 ? customEvents : [] } : {}),
   };
 }
 
