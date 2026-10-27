@@ -63,6 +63,9 @@ export const FREQUENCY_PER_DAY: Record<Frequency, number> = {
   QID: 4,
 };
 
+/** Tags that indicate heavy/serious pharmacological effects requiring dose de-duplication. */
+const HEAVY_EFFECT_TAGS = new Set(['opioid', 'cns-depressant', 'respiratory-depressant', 'serotonergic', 'stimulant', 'gaba-ergic']);
+
 export function tauHours(frequency: Frequency): number {
   const perDay = FREQUENCY_PER_DAY[frequency];
   return typeof perDay === 'number' && perDay > 0 ? 24 / perDay : 24;
@@ -966,10 +969,9 @@ export function unpackMixtures(
   const results: UnpackedDose[] = [];
 
   // 1. Add the holistic parent plant (Option B: Strip heavy tags to avoid double counting)
-  const heavyTags = new Set(['opioid', 'cns-depressant', 'respiratory-depressant', 'serotonergic', 'stimulant', 'gaba-ergic']);
   const holisticSubstance: Substance = {
     ...substance,
-    tags: substance.tags?.filter(t => !heavyTags.has(t)) || []
+    tags: substance.tags?.filter(t => !HEAVY_EFFECT_TAGS.has(t)) || []
   };
 
   results.push({
