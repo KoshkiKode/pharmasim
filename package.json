@@ -38,6 +38,6 @@
     "@react-native-community/cli-server-api": "20.2.0",
     "@react-native-community/cli-tools": "20.2.0",
     "@react-native-community/cli-types": "20.2.0",
-    "fast-xml-parser": "^5.11.2"
+    "fast-xml-parser": "^5.12.0"
   }
 }
