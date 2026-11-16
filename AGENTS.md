@@ -35,7 +35,7 @@ These tool-neutral instructions apply to coding agents working in this repositor
 - Keep patient profiles and other health-domain data synthetic and non-identifying. Preserve the documented local-only behavior; do not add accounts, telemetry, backend services, cloud sync, or data uploads without explicit approval.
 - This is an npm-workspaces monorepo. Put shared calculations, domain rules, and validation in `packages/engine`; put shared React Native UI in `packages/ui`; update the affected clients in `apps/mobile`, `apps/DesktopNative`, or `apps/linux-desktop` as needed.
 - Do not imply that one client has been validated because another client passed. Name platform/client coverage that was not exercised.
-- Model fit: use the cost-first Copilot model at the highest available effort, but never let model output stand in for sourced medical data, documented assumptions, or client-specific tests. Keep the local-only boundary intact.
+- Model fit: use the cost-first Copilot model at the highest available effort, but never let model output stand in for sourced medical data, documented assumptions, or client-specific tests.
 
 ## Validation
 
