@@ -39,6 +39,6 @@ These tool-neutral instructions apply to coding agents working in this repositor
 
 ## Validation
 
-- Before choosing commands, check the root `package.json`, affected workspace package scripts, and `.github/workflows/ci.yml` or `build-all.yml`.
+- Before choosing commands, check the root `package.json`, affected workspace package scripts, and `.github/workflows/ci.yml` or `.github/workflows/build-all.yml`.
 - The root scripts include `npm run typecheck` and `npm test`; CI also tests `apps/DesktopNative` separately. Run the affected engine/client checks and report any native platforms not built.
 - When changing engine behavior, test the engine and each affected client surface. Preserve existing validation and stress-test coverage.
