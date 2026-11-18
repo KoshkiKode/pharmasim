@@ -268,7 +268,7 @@ export function computeConditionWarnings(
 
     // 8. Liver Cirrhosis
     if (activeConditions.has('liver-cirrhosis')) {
-      if (has(s, 'hepatotoxic') || s.id === 'alcohol') {
+      if (has(s, 'hepatotoxic') || has(s, 'alcohol')) {
         addSingle(
           'liver-cirrhosis',
           'Liver Cirrhosis / Impairment',
@@ -276,7 +276,7 @@ export function computeConditionWarnings(
           'contraindicated',
           'Hepatotoxicity in Cirrhosis',
           `Hepatotoxic drugs or alcohol stress the liver. Impaired hepatocytes cannot clear toxins, risking drug-induced liver injury, variceal bleeding, or hepatic encephalopathy.`,
-          s.id === 'alcohol'
+          has(s, 'alcohol')
             ? 'Contraindicated. Completely avoid alcohol.'
             : 'Contraindicated. Avoid hepatotoxic drugs. If acetaminophen is necessary, restrict dose to <2g/day.',
           true
@@ -437,7 +437,7 @@ export function computeConditionWarnings(
 
     // 16. Sleep Apnea / COPD
     if (activeConditions.has('sleep-apnea-copd')) {
-      const isDepressant = has(s, 'cns-depressant') || has(s, 'respiratory-depressant') || has(s, 'opioid') || has(s, 'benzodiazepine') || s.id === 'alcohol';
+      const isDepressant = has(s, 'cns-depressant') || has(s, 'respiratory-depressant') || has(s, 'opioid') || has(s, 'benzodiazepine') || has(s, 'alcohol');
       if (isDepressant) {
         addSingle(
           'sleep-apnea-copd',
@@ -502,7 +502,7 @@ export function computeConditionWarnings(
   // 1. COPD / Sleep Apnea + Multiple Depressants
   if (activeConditions.has('sleep-apnea-copd')) {
     const depressants = substances.filter(
-      s => has(s, 'cns-depressant') || has(s, 'respiratory-depressant') || has(s, 'opioid') || has(s, 'benzodiazepine') || s.id === 'alcohol'
+      s => has(s, 'cns-depressant') || has(s, 'respiratory-depressant') || has(s, 'opioid') || has(s, 'benzodiazepine') || has(s, 'alcohol')
     );
     if (depressants.length >= 2) {
       addCombo(
@@ -575,7 +575,7 @@ export function computeConditionWarnings(
 
   // 5. Liver Cirrhosis + Multiple Hepatotoxic Agents
   if (activeConditions.has('liver-cirrhosis')) {
-    const hepatotoxins = substances.filter(s => has(s, 'hepatotoxic') || s.id === 'alcohol');
+    const hepatotoxins = substances.filter(s => has(s, 'hepatotoxic') || has(s, 'alcohol'));
     if (hepatotoxins.length >= 2) {
       addCombo(
         'liver-cirrhosis',

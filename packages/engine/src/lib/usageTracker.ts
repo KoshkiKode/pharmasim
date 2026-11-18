@@ -84,7 +84,3 @@ export function unlockPro(licenseKey: string): { success: boolean; message: stri
   }
   return { success: false, message: 'Invalid license key. Please check and try again.' };
 }
-
-export function resetUsageForTesting(): void {
-  saveStorage({ runsExecuted: 0, isProUnlocked: false });
-}
