@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Substance, SubstanceTag } from '../data/types';
-import { computeConditionWarnings } from './conditionWarnings';
+import { computeConditionWarnings, type ConditionWarning } from './conditionWarnings';
 
 let counter = 0;
 function mk(tags: SubstanceTag[], extra: Partial<Substance> = {}): Substance {
@@ -69,5 +69,49 @@ describe('computeConditionWarnings', () => {
     expect(res.length).toBe(1);
     expect(res[0].conditionId).toBe('ckd');
     expect(res[0].severity).toBe('contraindicated');
+  });
+
+  it('counts alcohol-tagged substances as depressants in sleep apnea/COPD combinations', () => {
+    const res = computeConditionWarnings([mk(['cns-depressant']), mk(['alcohol'])], ['sleep-apnea-copd'], 'normal', 'normal');
+    expect(res.some(r => r.id.startsWith('cond-combo:sleep-apnea-copd:'))).toBe(true);
+  });
+
+  describe('liver cirrhosis combination rule', () => {
+    const cirrhosisCombo = (res: ConditionWarning[]) =>
+      res.find(r => r.id.startsWith('cond-combo:liver-cirrhosis:'));
+
+    it('flags a life-threatening combination when two hepatotoxins are present', () => {
+      const a = mk(['hepatotoxic']);
+      const b = mk(['hepatotoxic']);
+      const combo = cirrhosisCombo(computeConditionWarnings([a, b], ['liver-cirrhosis'], 'normal', 'normal'));
+      expect(combo?.severity).toBe('contraindicated');
+      expect(combo?.isLifeThreatening).toBe(true);
+      expect(combo?.title).toBe('Life-Threatening Combination: Acute Liver Failure');
+      expect(combo?.substanceIds).toEqual([a.id, b.id]);
+    });
+
+    it('does not raise the combination for a single hepatotoxin', () => {
+      const res = computeConditionWarnings([mk(['hepatotoxic'])], ['liver-cirrhosis'], 'normal', 'normal');
+      expect(cirrhosisCombo(res)).toBeUndefined();
+    });
+
+    it('applies the combination when liver function is impaired without a cirrhosis condition', () => {
+      const res = computeConditionWarnings([mk(['hepatotoxic']), mk(['hepatotoxic'])], [], 'impaired', 'normal');
+      expect(cirrhosisCombo(res)).toBeDefined();
+    });
+
+    it('counts alcohol-tagged substances toward the combination', () => {
+      const drug = mk(['hepatotoxic']);
+      const alcohol = mk(['alcohol']);
+      const combo = cirrhosisCombo(computeConditionWarnings([drug, alcohol], ['liver-cirrhosis'], 'normal', 'normal'));
+      expect(combo?.substanceIds).toEqual([drug.id, alcohol.id]);
+    });
+
+    it('gives alcohol-specific advice for an alcohol-tagged substance', () => {
+      const ethanol = mk(['hepatotoxic', 'alcohol'], { id: 'ethanol', name: 'Ethanol' });
+      const res = computeConditionWarnings([ethanol], ['liver-cirrhosis'], 'normal', 'normal');
+      expect(res).toHaveLength(1);
+      expect(res[0].recommendation).toBe('Contraindicated. Completely avoid alcohol.');
+    });
   });
 });
