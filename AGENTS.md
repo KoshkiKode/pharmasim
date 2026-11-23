@@ -12,7 +12,7 @@ These tool-neutral instructions apply to coding agents working in this repositor
 - If an ambiguity materially changes health-related behavior, data handling, compatibility, security, or external effects, ask. Otherwise make the smallest safe assumption and state it.
 - Do not add dependencies, services, speculative abstractions, unrelated refactors, or unrequested subagents.
 - Do not stage, commit, push, open or update a pull request, merge, publish, release, deploy, or change live resources unless the user specifically asks. Leave changes local and uncommitted by default; the owner handles pushes.
-- Keep secrets and personal data out of files, prompts, logs, and fixtures. Use synthetic, fictional, non-identifying profiles.
+- Keep secrets and personal data out of files, prompts, logs, and fixtures.
 - Do not assume a particular editor, model provider, subscription, connector, or permission is available.
 - Run relevant checks from current workspace scripts/workflows. Report exact commands/results and platforms not exercised. Do not weaken tests or claim a check passed if it was not run. For documentation-only changes, skip software tests unless relevant.
 - When the user asks for analysis, review, or planning only, do not implement changes.
@@ -35,7 +35,6 @@ These tool-neutral instructions apply to coding agents working in this repositor
 - Keep patient profiles and other health-domain data synthetic and non-identifying. Preserve the documented local-only behavior; do not add accounts, telemetry, backend services, cloud sync, or data uploads without explicit approval.
 - This is an npm-workspaces monorepo. Put shared calculations, domain rules, and validation in `packages/engine`; put shared React Native UI in `packages/ui`; update the affected clients in `apps/mobile`, `apps/DesktopNative`, or `apps/linux-desktop` as needed.
 - Do not imply that one client has been validated because another client passed. Name platform/client coverage that was not exercised.
-- Model fit: use the cost-first Copilot model at the highest available effort, but never let model output stand in for sourced medical data, documented assumptions, or client-specific tests.
 
 ## Validation
 
